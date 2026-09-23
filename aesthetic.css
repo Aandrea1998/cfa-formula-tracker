@@ -1,0 +1,146 @@
+/* Visual polish layer — keeps the existing functionality, improves hierarchy and scanability */
+:root{
+  --warn:#f3b64c;
+  --surface-glow:rgba(124,156,255,.10);
+  --soft-border:rgba(154,177,209,.16);
+}
+
+body{
+  background:
+    radial-gradient(circle at 72% -16%,rgba(124,156,255,.09),transparent 30%),
+    radial-gradient(circle at 15% 115%,rgba(167,139,250,.06),transparent 28%),
+    linear-gradient(180deg,#090e14 0%,#0d1117 70%);
+}
+.main{max-width:1460px}
+h1{letter-spacing:-.028em;line-height:1.08}
+.subtitle{color:#8fa6c2;line-height:1.45}
+.section-title{letter-spacing:-.012em}
+
+.card,.library-group{
+  border-color:var(--soft-border);
+  background:linear-gradient(180deg,rgba(20,29,40,.96),rgba(15,22,31,.98));
+  box-shadow:0 14px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.018);
+}
+.card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+
+/* Metric cards */
+.grid4 .metric{position:relative;overflow:hidden;min-height:120px;padding-top:20px}
+.grid4 .metric::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),transparent 85%);opacity:.9}
+.grid4 .metric:nth-child(2)::before{background:linear-gradient(90deg,var(--accent2),transparent 85%)}
+.grid4 .metric:nth-child(3)::before{background:linear-gradient(90deg,var(--good),transparent 85%)}
+.grid4 .metric:nth-child(4)::before{background:linear-gradient(90deg,var(--bad),transparent 85%)}
+.grid4 .metric:hover{transform:translateY(-2px);border-color:rgba(124,156,255,.28);box-shadow:0 18px 42px rgba(0,0,0,.24)}
+.metric .label{font-weight:700;letter-spacing:.01em}
+.metric .value{letter-spacing:-.035em}
+.grid4 .metric:nth-child(3) .value{color:var(--good)}
+.grid4 .metric:nth-child(4) .value{color:var(--bad)}
+
+/* Progress */
+.track{height:8px;border:0;background:#0a1017;box-shadow:inset 0 0 0 1px rgba(154,177,209,.12)}
+.fill{box-shadow:0 0 14px rgba(124,156,255,.18)}
+.progress-row .row span:last-child{font-variant-numeric:tabular-nums;font-weight:700;color:#bdd0e8}
+
+/* Subject overview cards */
+.subject-overview{gap:9px}
+.subject-mini{display:block;position:relative;overflow:hidden;min-height:86px;padding:12px 13px;border-color:var(--soft-border);background:linear-gradient(180deg,rgba(17,25,35,.94),rgba(13,20,29,.94));transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.subject-mini::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--subject-accent,var(--accent));opacity:.85}
+.subject-mini:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--subject-accent,var(--accent)) 45%,var(--line));background:linear-gradient(180deg,rgba(21,31,43,.98),rgba(15,23,33,.98))}
+.subject-mini-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.subject-name{display:flex;align-items:center;gap:7px;font-weight:760;min-width:0}
+.subject-dot{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:var(--subject-accent,var(--accent));box-shadow:0 0 10px color-mix(in srgb,var(--subject-accent,var(--accent)) 55%,transparent)}
+.subject-acc{font-variant-numeric:tabular-nums;font-weight:800}
+.subject-acc.strong{color:var(--good)}
+.subject-acc.medium{color:var(--warn)}
+.subject-acc.weak{color:var(--bad)}
+.subject-acc.unreviewed{color:var(--muted)}
+.subject-meta{margin-top:7px;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subject-progress{height:4px;margin-top:10px;border-radius:999px;background:#090f16;overflow:hidden}
+.subject-progress>span{display:block;height:100%;border-radius:999px;background:var(--subject-accent,var(--accent));transition:width .25s ease}
+
+/* Recent trend sparkline */
+.recent-trend{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin:2px 0 16px;padding:12px 14px;border:1px solid var(--soft-border);border-radius:12px;background:linear-gradient(180deg,rgba(12,19,28,.82),rgba(10,16,24,.72))}
+.recent-trend-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+.recent-trend-value{margin-top:3px;font-size:20px;font-weight:850;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.recent-trend-sub{margin-top:2px;font-size:11px;color:var(--muted)}
+.recent-trend svg{width:210px;height:48px;overflow:visible}
+.recent-trend .spark-guide{stroke:rgba(154,177,209,.14);stroke-width:1}
+.recent-trend .spark-fill{fill:url(#sparkFill)}
+.recent-trend .spark-line{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(124,156,255,.28))}
+
+/* Weak formula cards */
+.weak{align-items:center;min-height:46px;border-color:var(--soft-border);transition:transform .14s ease,border-color .14s ease,background .14s ease}
+.weak:hover{transform:translateX(2px);border-color:rgba(124,156,255,.26);background:#131d29}
+.weak>span:first-child{line-height:1.28}
+.weak-score{min-width:92px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:800}
+.weak-score.score-low{color:var(--bad)}
+.weak-score.score-mid{color:var(--warn)}
+
+/* Library */
+.topic-chip{transition:transform .14s ease,border-color .14s ease,background .14s ease,color .14s ease}
+.topic-chip:hover{transform:translateY(-1px)}
+.library-group{border-color:var(--soft-border)}
+.library-head{background:linear-gradient(180deg,rgba(20,29,40,.98),rgba(16,24,34,.98))}
+.formula-library-table tbody td{transition:background .12s ease,color .12s ease}
+.formula-library-table tbody tr:hover td{background:rgba(124,156,255,.045)}
+.formula-library-table code{font-size:13.5px;line-height:1.45;color:#e6edff;font-weight:600;font-variant-ligatures:none}
+.rolling-status-cell.status-strong .rolling-accuracy{color:var(--good)}
+.rolling-status-cell.status-medium .rolling-accuracy{color:var(--warn)}
+.rolling-status-cell.status-weak .rolling-accuracy{color:var(--bad)}
+.rolling-status-cell.status-medium .status-dot{background:var(--warn);box-shadow:0 0 8px rgba(243,182,76,.25)}
+.rolling-status-cell.status-strong .status-dot{box-shadow:0 0 8px rgba(46,204,113,.22)}
+.rolling-status-cell.status-weak .status-dot{box-shadow:0 0 8px rgba(255,107,107,.20)}
+.library-sort-control select{transition:border-color .15s ease,box-shadow .15s ease}
+.library-sort-control select:focus{box-shadow:0 0 0 3px rgba(124,156,255,.10)}
+
+/* Buttons */
+.btn,.navbtn{transition:transform .14s ease,background .14s ease,border-color .14s ease,box-shadow .14s ease,color .14s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{box-shadow:0 8px 20px rgba(124,156,255,.16)}
+.btn.primary:hover{box-shadow:0 10px 26px rgba(124,156,255,.24)}
+.btn:active{transform:translateY(0)}
+
+/* Review card */
+#reviewView .review-card{border-color:rgba(124,156,255,.20);background:linear-gradient(180deg,rgba(20,29,40,.98),rgba(13,20,29,.98))}
+#reviewView .q{letter-spacing:-.02em}
+#reviewView .kicker{color:#9fb7d6}
+
+/* Condense the frozen library header after scrolling, preserving all controls */
+@media(min-width:901px){
+  #formulasView .library-sticky-top{transition:padding .18s ease,background .18s ease,box-shadow .18s ease}
+  #formulasView .library-sticky-top .topbar,
+  #formulasView .library-sticky-top .card,
+  #formulasView .library-sticky-top h1,
+  #formulasView .library-sticky-top .subtitle,
+  #formulasView .library-sticky-top .topic-chip{transition:all .18s ease}
+  #formulasView.library-condensed .library-sticky-top{padding-top:2px;padding-bottom:7px;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+  #formulasView.library-condensed .library-sticky-top .topbar{margin-bottom:8px}
+  #formulasView.library-condensed .library-sticky-top h1{font-size:24px}
+  #formulasView.library-condensed .library-sticky-top .subtitle{font-size:11px;margin-top:3px;opacity:.72}
+  #formulasView.library-condensed .library-sticky-top>.card{padding:11px 15px}
+  #formulasView.library-condensed .library-sticky-top .section-title{margin-bottom:8px;font-size:13px}
+  #formulasView.library-condensed .library-sticky-top .topic-chip{padding:5px 9px;font-size:10.5px}
+  #formulasView.library-condensed .library-sort-control{margin:7px 0 3px}
+  #formulasView.library-condensed .library-sticky-top .help{display:none}
+}
+
+/* Light theme compatibility */
+body.theme-light{
+  --warn:#b87512;
+  --soft-border:rgba(98,119,148,.18);
+  background:radial-gradient(circle at 72% -16%,rgba(111,140,255,.09),transparent 30%),linear-gradient(180deg,#f7f9fc,#eef3f8);
+}
+body.theme-light .card,body.theme-light .library-group{background:linear-gradient(180deg,#fff,#f8fafc);box-shadow:0 12px 34px rgba(49,65,88,.07)}
+body.theme-light .subject-mini{background:linear-gradient(180deg,#fff,#f7f9fc)}
+body.theme-light .subject-mini:hover{background:#fff}
+body.theme-light .subject-progress{background:#e9eef5}
+body.theme-light .recent-trend{background:linear-gradient(180deg,#fff,#f8fafc)}
+body.theme-light .formula-library-table code{color:#263753}
+body.theme-light .formula-library-table tbody tr:hover td{background:rgba(111,140,255,.055)}
+body.theme-light .weak:hover{background:#f3f7fb}
+body.theme-light .track{background:#e9eef5}
+
+@media(max-width:900px){
+  .recent-trend{grid-template-columns:1fr}
+  .recent-trend svg{width:100%}
+  .subject-mini{min-height:78px}
+}
