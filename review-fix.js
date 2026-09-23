@@ -155,3 +155,17 @@
   const reset=$('resetDemo');
   if(reset)reset.addEventListener('click',()=>{localStorage.removeItem(CURRENT_KEY);localStorage.removeItem(MODE_KEY);localStorage.removeItem(SUBJECT_KEY);reviewMode='random';});
 })();
+
+(function loadAppearanceControls(){
+  if(!document.querySelector('link[href="ui-settings.css"]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='ui-settings.css';
+    document.head.appendChild(link);
+  }
+  if(!document.querySelector('script[src="ui-settings.js"]')){
+    const script=document.createElement('script');
+    script.src='ui-settings.js';
+    document.body.appendChild(script);
+  }
+})();
