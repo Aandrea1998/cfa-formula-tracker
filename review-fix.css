@@ -1,0 +1,9 @@
+#reviewView .topbar{max-width:900px;margin:0 auto 18px}
+#reviewView .review-card{max-width:900px;margin:0 auto;padding:20px}
+#reviewView .flash{min-height:235px;padding:26px 34px}
+#reviewView .q{font-size:27px;line-height:1.35}
+#reviewView .answer{max-width:760px;width:100%;margin-top:20px}
+#reviewView .review-controls{justify-content:center;margin-top:0;padding-top:2px}
+#reviewView .prevnext{padding-top:16px;margin-top:16px;border-top:1px solid var(--line)}
+#reviewView .kicker{margin-bottom:16px}
+@media(max-width:900px){#reviewView .topbar{margin-bottom:14px}#reviewView .review-card{padding:14px}#reviewView .flash{min-height:210px;padding:22px 12px}#reviewView .q{font-size:23px}}
