@@ -11,19 +11,36 @@
     return out;
   }
 
+  function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+
+  function cardInfo(c){
+    if(window.cfaRollingInfo)return window.cfaRollingInfo(c);
+    let h=Array.isArray(c.history)?c.history.slice(-5):[];
+    if(!h.length&&c.status)h=[{result:c.status}];
+    if(!h.length)return {attempts:0,accuracy:null};
+    let points=0;
+    h.forEach(x=>{const r=typeof x==='string'?x:x.result;points+=r==='known'?1:r==='difficult'?.5:0;});
+    return {attempts:h.length,accuracy:Math.round(points/h.length*100)};
+  }
+
   function subjectCards(){return cards.filter(c=>c.subject===reviewSubject);}
 
-  function priorityQueue(pool){
-    return [
-      ...pool.filter(c=>c.status==='missed').map(c=>c.id),
-      ...pool.filter(c=>!c.status).map(c=>c.id),
-      ...pool.filter(c=>c.status==='known').map(c=>c.id)
-    ];
+  function adaptiveOrder(pool){
+    return pool.map(c=>{
+      const r=cardInfo(c);
+      let priority;
+      if(!r.attempts)priority=76;
+      else if(r.accuracy<60)priority=112;
+      else if(r.accuracy<80)priority=82;
+      else priority=Math.max(18,46-r.attempts*4);
+      priority+=Math.random()*34;
+      return {id:c.id,priority};
+    }).sort((a,b)=>b.priority-a.priority).map(x=>x.id);
   }
 
   function queue(){
-    if(reviewMode==='subject') return priorityQueue(subjectCards());
-    return shuffle(cards.map(c=>c.id));
+    const pool=reviewMode==='subject'?subjectCards():cards;
+    return adaptiveOrder(pool);
   }
 
   function persist(){
@@ -47,7 +64,7 @@
       $('answer').textContent='';
       $('reviewCounter').textContent='0 / 0';
       const kicker=document.querySelector('#reviewView .kicker');
-      if(kicker)kicker.textContent=reviewMode==='subject'?reviewSubject.toUpperCase():'RANDOM MIX';
+      if(kicker)kicker.textContent=reviewMode==='subject'?reviewSubject.toUpperCase():'ADAPTIVE MIX';
       return;
     }
     if(reviewPos<0||reviewPos>=reviewIds.length)reviewPos=0;
@@ -62,7 +79,11 @@
     persist();
   }
 
-  function move(step){if(!reviewIds.length)return;reviewPos=(reviewPos+step+reviewIds.length)%reviewIds.length;render();}
+  function move(step){
+    if(!reviewIds.length)return;
+    reviewPos=(reviewPos+step+reviewIds.length)%reviewIds.length;
+    render();
+  }
 
   function startNew(){
     reviewIds=queue();
@@ -73,12 +94,32 @@
     showView('review');
   }
 
+  function scheduleRepeat(c,status){
+    for(let i=reviewIds.length-1;i>reviewPos;i--){
+      if(reviewIds[i]===c.id)reviewIds.splice(i,1);
+    }
+    const r=cardInfo(c);
+    let delay=null;
+    if(status==='missed')delay=rand(3,5);
+    else if(status==='difficult')delay=rand(8,12);
+    else if(status==='known'){
+      if(r.accuracy!==null&&r.accuracy<60)delay=rand(14,18);
+      else if(r.accuracy!==null&&r.accuracy<80)delay=rand(20,28);
+      else if(r.attempts<3)delay=rand(28,40);
+    }
+    if(delay===null)return;
+    const insertAt=Math.min(reviewPos+1+delay,reviewIds.length);
+    reviewIds.splice(insertAt,0,c.id);
+  }
+
   function rateContinuous(status){
     if(!reviewIds.length)return;
     const c=cards.find(x=>x.id===reviewIds[reviewPos]);
     if(!c)return;
     c.status=status;
-    save();refresh();
+    save();
+    refresh();
+    scheduleRepeat(c,status);
     move(1);
   }
 
@@ -104,8 +145,8 @@
     panel.className='review-mode-panel';
     panel.innerHTML=`
       <div class="review-mode-copy">
-        <div class="review-mode-title">Training mode</div>
-        <div class="review-mode-sub">Choose a full random mix or focus on one CFA topic.</div>
+        <div class="review-mode-title">Training mode <span class="adaptive-badge">Adaptive</span></div>
+        <div class="review-mode-sub">Weak formulas return sooner; repeatedly known formulas are spaced further apart.</div>
       </div>
       <div class="review-mode-actions">
         <button type="button" class="mode-btn" id="randomModeBtn">↻ Random mix</button>
@@ -113,7 +154,7 @@
           <button type="button" class="mode-btn" id="subjectModeBtn">Focus topic</button>
           <select id="reviewSubjectSelect" aria-label="Choose CFA topic"></select>
         </div>
-        <button type="button" class="mode-restart" id="restartReviewBtn" title="Start this mode from a new first card">New session</button>
+        <button type="button" class="mode-restart" id="restartReviewBtn" title="Start this mode from a new adaptive queue">New session</button>
       </div>`;
     top.insertAdjacentElement('afterend',panel);
     const select=document.getElementById('reviewSubjectSelect');
@@ -148,6 +189,8 @@
   $('prevBtn').onclick=()=>move(-1);
   $('nextBtn').onclick=()=>move(1);
   $('markWrong').onclick=()=>rateContinuous('missed');
+  const difficult=$('markDifficult');
+  if(difficult)difficult.onclick=()=>rateContinuous('difficult');
   $('markKnown').onclick=()=>rateContinuous('known');
   document.querySelectorAll('.navbtn[data-view="review"]').forEach(b=>b.onclick=()=>{buildControls();restore();showView('review');render();});
   const add=$('addExtractedBtn');
