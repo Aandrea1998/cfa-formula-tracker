@@ -1,1 +1,23 @@
 .main{margin:0 auto!important;align-self:start!important}
+
+/* Keep weak-formula scores perfectly aligned */
+#weakList .weak{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 86px;
+  align-items:center;
+  column-gap:14px;
+}
+#weakList .weak>span:first-child{
+  min-width:0;
+}
+#weakList .weak .bad{
+  width:86px;
+  text-align:right;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+  justify-self:end;
+}
+@media(max-width:900px){
+  #weakList .weak{grid-template-columns:minmax(0,1fr) 78px;column-gap:10px}
+  #weakList .weak .bad{width:78px}
+}
