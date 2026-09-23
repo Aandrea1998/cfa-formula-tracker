@@ -29,9 +29,11 @@
   function info(c){
     const h=historyOf(c);
     const known=h.filter(x=>x.result==='known').length;
+    const difficult=h.filter(x=>x.result==='difficult').length;
     const missed=h.filter(x=>x.result==='missed').length;
-    const accuracy=h.length?Math.round(known/h.length*100):null;
-    return {attempts:h.length,known,missed,accuracy};
+    const points=known+difficult*.5;
+    const accuracy=h.length?Math.round(points/h.length*100):null;
+    return {attempts:h.length,known,difficult,missed,points,accuracy};
   }
 
   function appendAttempt(c,result){
@@ -46,7 +48,9 @@
     const reviewed=cards.filter(c=>info(c).attempts>0);
     const totalAttempts=reviewed.reduce((s,c)=>s+info(c).attempts,0);
     const knownAttempts=reviewed.reduce((s,c)=>s+info(c).known,0);
-    const missedAttempts=totalAttempts-knownAttempts;
+    const difficultAttempts=reviewed.reduce((s,c)=>s+info(c).difficult,0);
+    const missedAttempts=reviewed.reduce((s,c)=>s+info(c).missed,0);
+    const totalPoints=reviewed.reduce((s,c)=>s+info(c).points,0);
     const mastered=reviewed.filter(c=>info(c).accuracy>=80);
     const needReview=reviewed.filter(c=>info(c).accuracy<60);
     return {
@@ -57,9 +61,11 @@
       needReview,
       totalAttempts,
       knownAttempts,
+      difficultAttempts,
       missedAttempts,
+      totalPoints,
       coverage:cards.length?Math.round(reviewed.length/cards.length*100):0,
-      accuracy:totalAttempts?Math.round(knownAttempts/totalAttempts*100):0,
+      accuracy:totalAttempts?Math.round(totalPoints/totalAttempts*100):0,
       mastery:cards.length?Math.round(mastered.length/cards.length*100):0
     };
   }
@@ -68,7 +74,7 @@
     const r=info(c);
     if(!r.attempts)return {accuracy:'—',record:'Unreviewed',cls:'',attempts:0,numeric:null};
     const cls=r.accuracy>=80?'known':r.accuracy<60?'missed':'';
-    return {accuracy:r.accuracy+'%',record:`${r.known}/${r.attempts}`,cls,attempts:r.attempts,numeric:r.accuracy};
+    return {accuracy:r.accuracy+'%',record:`${r.known}✓ ${r.difficult}~ ${r.missed}×`,cls,attempts:r.attempts,numeric:r.accuracy};
   }
 
   function sortCards(list){
@@ -113,7 +119,7 @@
 
   function statusCell(c){
     const s=rollingStatus(c);
-    return `<td class="rolling-status-cell" title="Based on the last up to ${WINDOW} attempts">
+    return `<td class="rolling-status-cell" title="Rolling accuracy uses the last up to ${WINDOW} attempts. Known = 100%, Difficult = 50%, Missed = 0%.">
       <span class="status-dot ${s.cls}"></span>
       <span class="rolling-accuracy">${s.accuracy}</span>
       <span class="rolling-record">${s.record}</span>
@@ -148,7 +154,7 @@
     $('coverage').textContent=s.coverage+'%';
     $('coverageSmall').textContent=`${s.reviewed.length} of ${cards.length} reviewed`;
     $('accuracy').textContent=s.accuracy+'%';
-    $('accuracySmall').textContent=`${s.knownAttempts} correct · ${s.missedAttempts} missed · rolling`;
+    $('accuracySmall').textContent=`${s.knownAttempts} known · ${s.difficultAttempts} difficult · ${s.missedAttempts} missed`;
     $('knownCount').textContent=s.mastered.length;
     $('missedCount').textContent=s.needReview.length;
     const knownSmall=$('knownCount').parentElement.querySelector('.small');
@@ -173,17 +179,17 @@
       const title=document.querySelector('#dashboardView .two .card .section-title');
       if(title)title.insertAdjacentElement('afterend',note);
     }
-    if(note)note.textContent=`Rolling window: last ${WINDOW} attempts per formula (or all available attempts if fewer).`;
+    if(note)note.textContent=`Rolling window: last ${WINDOW} attempts per formula. Known = 100%, Difficult = 50%, Missed = 0%.`;
 
     const weak=cards.map(c=>({c,r:info(c)})).filter(x=>x.r.attempts&&x.r.accuracy<80).sort((a,b)=>a.r.accuracy-b.r.accuracy||b.r.attempts-a.r.attempts).slice(0,6);
-    $('weakList').innerHTML=weak.length?weak.map(({c,r})=>`<div class="weak"><span>${esc(c.question)}</span><span class="bad">${r.accuracy}% · ${r.known}/${r.attempts}</span></div>`).join(''):`<div class="help">No weak formulas in the current rolling window.</div>`;
+    $('weakList').innerHTML=weak.length?weak.map(({c,r})=>`<div class="weak"><span>${esc(c.question)}</span><span class="bad">${r.accuracy}% · ${r.known}✓ ${r.difficult}~ ${r.missed}×</span></div>`).join(''):`<div class="help">No weak formulas in the current rolling window.</div>`;
 
     $('subjectOverview').innerHTML=TOPICS.map(t=>{
       const subset=cards.filter(c=>c.subject===t);
       const attempted=subset.filter(c=>info(c).attempts>0);
       const attempts=attempted.reduce((n,c)=>n+info(c).attempts,0);
-      const correct=attempted.reduce((n,c)=>n+info(c).known,0);
-      const acc=attempts?Math.round(correct/attempts*100):null;
+      const points=attempted.reduce((n,c)=>n+info(c).points,0);
+      const acc=attempts?Math.round(points/attempts*100):null;
       return `<div class="subject-mini"><span>${esc(t)}</span><span>${acc===null?'—':acc+'%'} · ${attempted.length}/${subset.length}</span></div>`;
     }).join('');
 
@@ -213,6 +219,7 @@
   }
 
   wrapRatingButton('markWrong','missed');
+  wrapRatingButton('markDifficult','difficult');
   wrapRatingButton('markKnown','known');
   refreshRolling();
 })();
