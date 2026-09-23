@@ -143,7 +143,7 @@
     };
   }
 
-  const watched=['subjectOverview','weakList','libraryContent'];
+  const watched=['weakList','libraryContent'];
   watched.forEach(id=>{
     const node=document.getElementById(id);
     if(node)new MutationObserver(()=>requestAnimationFrame(enhanceAll)).observe(node,{childList:true,subtree:true});
