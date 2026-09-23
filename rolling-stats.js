@@ -182,7 +182,7 @@
     if(note)note.textContent=`Rolling window: last ${WINDOW} attempts per formula. Known = 100%, Difficult = 50%, Missed = 0%.`;
 
     const weak=cards.map(c=>({c,r:info(c)})).filter(x=>x.r.attempts&&x.r.accuracy<80).sort((a,b)=>a.r.accuracy-b.r.accuracy||b.r.attempts-a.r.attempts).slice(0,6);
-    $('weakList').innerHTML=weak.length?weak.map(({c,r})=>`<div class="weak"><span>${esc(c.question)}</span><span class="bad">${r.accuracy}% · ${r.known}✓ ${r.difficult}~ ${r.missed}×</span></div>`).join(''):`<div class="help">No weak formulas in the current rolling window.</div>`;
+    $('weakList').innerHTML=weak.length?weak.map(({c,r})=>`<div class="weak"><span class="weak-prompt">${esc(c.question)}</span><span class="weak-score bad" title="${r.known} Known · ${r.difficult} Difficult · ${r.missed} Missed"><span class="weak-score-main">${r.accuracy}%</span><span class="weak-score-breakdown"><span>✓${r.known}</span><span>~${r.difficult}</span><span>×${r.missed}</span></span></span></div>`).join(''):`<div class="help">No weak formulas in the current rolling window.</div>`;
 
     $('subjectOverview').innerHTML=TOPICS.map(t=>{
       const subset=cards.filter(c=>c.subject===t);
