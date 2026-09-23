@@ -1,9 +1,10 @@
 #reviewView{padding-top:clamp(42px,6vh,78px)}
 #reviewView .topbar{max-width:840px;margin:0 auto 14px;align-items:center}
 .review-mode-panel{max-width:840px;margin:0 auto 14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(19,26,35,.96),rgba(15,22,32,.96));display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 10px 28px rgba(0,0,0,.14)}
-.review-mode-copy{min-width:180px}
-.review-mode-title{font-size:13px;font-weight:800;color:var(--text)}
+.review-mode-copy{min-width:220px}
+.review-mode-title{font-size:13px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .review-mode-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35}
+.adaptive-badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;border:1px solid rgba(124,156,255,.26);background:rgba(124,156,255,.10);color:#b8c8ff;font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:850}
 .review-mode-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
 .mode-btn,.mode-restart,#reviewSubjectSelect{height:36px;border-radius:10px;border:1px solid var(--line);background:#101722;color:var(--muted);font:inherit;font-size:12px;font-weight:750;transition:.16s ease}
 .mode-btn,.mode-restart{padding:0 12px;cursor:pointer}
@@ -21,6 +22,10 @@
 #reviewView .answer{max-width:720px;width:100%;margin-top:22px}
 #reviewView .review-controls{justify-content:center;align-items:center;margin-top:2px;padding-top:4px}
 #reviewView .review-controls .btn{min-width:112px}
+#reviewView .btn.difficult{background:rgba(243,182,76,.10);color:var(--warn,#f3b64c);border:1px solid rgba(243,182,76,.30);box-shadow:0 7px 18px rgba(243,182,76,.08)}
+#reviewView .btn.difficult:hover{background:rgba(243,182,76,.16);border-color:rgba(243,182,76,.48);box-shadow:0 9px 22px rgba(243,182,76,.13)}
 #reviewView .prevnext{padding-top:16px;margin-top:16px;border-top:1px solid var(--line);align-items:center}
 #reviewView .prevnext .btn{min-width:108px}
+body.theme-light .adaptive-badge{color:#536db5;background:rgba(111,140,255,.10)}
+body.theme-light #reviewView .btn.difficult{background:#fff8e8;color:#a5660c;border-color:#ead19b}
 @media(max-width:900px){#reviewView{padding-top:18px}#reviewView .topbar{margin-bottom:12px}.review-mode-panel{margin-bottom:12px;padding:12px;align-items:flex-start;flex-direction:column}.review-mode-actions{justify-content:flex-start;width:100%}.subject-mode-wrap{width:100%;flex-wrap:wrap}#reviewSubjectSelect{flex:1;min-width:170px;max-width:none}#reviewView .review-card{padding:14px;border-radius:15px}#reviewView .flash{min-height:220px;padding:24px 12px 20px}#reviewView .q{font-size:23px}#reviewView .review-controls .btn{min-width:0}}
