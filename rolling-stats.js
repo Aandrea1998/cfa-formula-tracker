@@ -1,5 +1,7 @@
 (function(){
   const WINDOW=5;
+  const SORT_KEY='cfa_library_accuracy_sort';
+  let librarySort=localStorage.getItem(SORT_KEY)||'default';
 
   function normalizeEntry(x){
     if(typeof x==='string') return {result:x,ts:Date.now()};
@@ -64,24 +66,78 @@
 
   function rollingStatus(c){
     const r=info(c);
-    if(!r.attempts)return {label:'Unreviewed',cls:''};
+    if(!r.attempts)return {accuracy:'—',record:'Unreviewed',cls:'',attempts:0,numeric:null};
     const cls=r.accuracy>=80?'known':r.accuracy<60?'missed':'';
-    return {label:`${r.accuracy}% · ${r.known}/${r.attempts}`,cls};
+    return {accuracy:r.accuracy+'%',record:`${r.known}/${r.attempts}`,cls,attempts:r.attempts,numeric:r.accuracy};
+  }
+
+  function sortCards(list){
+    const out=[...list];
+    if(librarySort==='default')return out.sort((a,b)=>(+a.id||0)-(+b.id||0));
+    return out.sort((a,b)=>{
+      const ra=info(a),rb=info(b);
+      if(!ra.attempts&&!rb.attempts)return (+a.id||0)-(+b.id||0);
+      if(!ra.attempts)return 1;
+      if(!rb.attempts)return -1;
+      const diff=librarySort==='high'?rb.accuracy-ra.accuracy:ra.accuracy-rb.accuracy;
+      if(diff)return diff;
+      if(rb.attempts!==ra.attempts)return rb.attempts-ra.attempts;
+      return (+a.id||0)-(+b.id||0);
+    });
+  }
+
+  function ensureSortControls(){
+    if(document.getElementById('librarySortControl'))return;
+    const card=document.querySelector('#formulasView .card');
+    if(!card)return;
+    const help=card.querySelector('.help');
+    const panel=document.createElement('div');
+    panel.id='librarySortControl';
+    panel.className='library-sort-control';
+    panel.innerHTML=`
+      <label for="librarySortSelect">Sort formulas</label>
+      <select id="librarySortSelect" aria-label="Sort formulas by rolling accuracy">
+        <option value="default">Original order</option>
+        <option value="high">Accuracy: high → low</option>
+        <option value="low">Accuracy: low → high</option>
+      </select>`;
+    if(help)help.insertAdjacentElement('beforebegin',panel); else card.appendChild(panel);
+    const select=document.getElementById('librarySortSelect');
+    select.value=librarySort;
+    select.onchange=()=>{
+      librarySort=select.value;
+      localStorage.setItem(SORT_KEY,librarySort);
+      renderLibraryRolling();
+    };
+  }
+
+  function statusCell(c){
+    const s=rollingStatus(c);
+    return `<td class="rolling-status-cell" title="Based on the last up to ${WINDOW} attempts">
+      <span class="status-dot ${s.cls}"></span>
+      <span class="rolling-accuracy">${s.accuracy}</span>
+      <span class="rolling-record">${s.record}</span>
+    </td>`;
   }
 
   function renderLibraryRolling(){
+    ensureSortControls();
+    const sortSelect=document.getElementById('librarySortSelect');
+    if(sortSelect&&sortSelect.value!==librarySort)sortSelect.value=librarySort;
+
     const subjects=['All',...TOPICS];
     $('topicTabs').innerHTML=subjects.map(t=>{const n=t==='All'?cards.length:cards.filter(c=>c.subject===t).length;return `<button class="topic-chip ${librarySubject===t?'active':''}" data-subject="${attr(t)}">${esc(t)} · ${n}</button>`}).join('');
     document.querySelectorAll('.topic-chip').forEach(b=>b.onclick=()=>{librarySubject=b.dataset.subject;renderLibraryRolling()});
     const visible=librarySubject==='All'?cards:cards.filter(c=>c.subject===librarySubject);
     $('formulaCountPill').textContent=`${visible.length} formula${visible.length===1?'':'s'}`;
     if(!visible.length){$('libraryContent').innerHTML=`<div class="empty">No formulas in <strong>${esc(librarySubject)}</strong> yet. Use Upload chapter to add some.</div>`;return;}
+
     const groups={};
     visible.forEach(c=>{groups[c.subject]??={};groups[c.subject][c.topic]??=[];groups[c.subject][c.topic].push(c)});
     let html='';
     Object.keys(groups).sort((a,b)=>TOPICS.indexOf(a)-TOPICS.indexOf(b)).forEach(subject=>Object.keys(groups[subject]).sort().forEach(topic=>{
-      const g=groups[subject][topic];
-      html+=`<div class="library-group"><div class="library-head"><div><div class="library-title">${esc(subject)}</div><div class="library-meta">${esc(topic)}</div></div><div class="library-meta">${g.length} formula${g.length===1?'':'s'}</div></div><div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>Prompt</th><th>Formula</th><th>Rolling status</th></tr></thead><tbody>${g.map(c=>{const s=rollingStatus(c);return `<tr><td>${c.id}</td><td>${esc(c.question)}</td><td><code>${esc(c.answer)}</code></td><td title="Based on the last up to ${WINDOW} attempts"><span class="status-dot ${s.cls}"></span>${s.label}</td></tr>`}).join('')}</tbody></table></div></div>`;
+      const g=sortCards(groups[subject][topic]);
+      html+=`<div class="library-group"><div class="library-head"><div><div class="library-title">${esc(subject)}</div><div class="library-meta">${esc(topic)}</div></div><div class="library-meta">${g.length} formula${g.length===1?'':'s'}</div></div><div class="table-wrap"><table class="table formula-library-table"><colgroup><col class="col-id"><col class="col-prompt"><col class="col-formula"><col class="col-status"></colgroup><thead><tr><th>#</th><th>Prompt</th><th>Formula</th><th class="rolling-status-head">Rolling status</th></tr></thead><tbody>${g.map(c=>`<tr><td>${c.id}</td><td>${esc(c.question)}</td><td><code>${esc(c.answer)}</code></td>${statusCell(c)}</tr>`).join('')}</tbody></table></div></div>`;
     }));
     $('libraryContent').innerHTML=html;
   }
