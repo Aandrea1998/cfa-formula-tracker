@@ -1,7 +1,7 @@
 (function(){
   const accents=['#7c9cff','#5cc8ff','#a78bfa','#f2b34c','#e879f9','#34d399','#fb7185','#22d3ee','#f472b6'];
   const esc=s=>(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
-  const info=c=>window.cfaRollingInfo?window.cfaRollingInfo(c):{attempts:c.status?1:0,known:c.status==='known'?1:0,accuracy:c.status==='known'?100:c.status==='missed'?0:null};
+  const info=c=>window.cfaRollingInfo?window.cfaRollingInfo(c):{attempts:c.status?1:0,known:c.status==='known'?1:0,difficult:c.status==='difficult'?1:0,missed:c.status==='missed'?1:0,points:c.status==='known'?1:c.status==='difficult'?.5:0,accuracy:c.status==='known'?100:c.status==='difficult'?50:c.status==='missed'?0:null};
 
   function gradeClass(acc){
     if(acc===null||acc===undefined)return'unreviewed';
@@ -19,8 +19,8 @@
       const subset=cards.filter(c=>c.subject===subject);
       const reviewed=subset.filter(c=>info(c).attempts>0);
       const attempts=reviewed.reduce((n,c)=>n+info(c).attempts,0);
-      const correct=reviewed.reduce((n,c)=>n+info(c).known,0);
-      const accuracy=attempts?Math.round(correct/attempts*100):null;
+      const points=reviewed.reduce((n,c)=>n+info(c).points,0);
+      const accuracy=attempts?Math.round(points/attempts*100):null;
       const weak=reviewed.filter(c=>info(c).accuracy<60).length;
       const coverage=subset.length?Math.round(reviewed.length/subset.length*100):0;
       el.style.setProperty('--subject-accent',accents[i%accents.length]);
@@ -37,13 +37,15 @@
   function recentEvents(){
     const events=[];
     cards.forEach(c=>(c.history||[]).forEach(h=>events.push({result:h.result,ts:h.ts||0})));
-    return events.filter(x=>x.result==='known'||x.result==='missed').sort((a,b)=>a.ts-b.ts).slice(-24);
+    return events.filter(x=>x.result==='known'||x.result==='difficult'||x.result==='missed').sort((a,b)=>a.ts-b.ts).slice(-24);
   }
+
+  function scoreResult(result){return result==='known'?1:result==='difficult'?.5:0;}
 
   function sparkData(events){
     return events.map((_,i)=>{
       const w=events.slice(Math.max(0,i-4),i+1);
-      return Math.round(w.filter(x=>x.result==='known').length/w.length*100);
+      return Math.round(w.reduce((s,x)=>s+scoreResult(x.result),0)/w.length*100);
     });
   }
 
@@ -69,7 +71,7 @@
     }
     const vals=sparkData(events);
     const recent=events.slice(-10);
-    const recentAcc=Math.round(recent.filter(x=>x.result==='known').length/recent.length*100);
+    const recentAcc=Math.round(recent.reduce((s,x)=>s+scoreResult(x.result),0)/recent.length*100);
     const W=210,H=48,pad=3;
     const pts=vals.map((v,i)=>{
       const x=vals.length===1?W/2:pad+i*(W-2*pad)/(vals.length-1);
