@@ -68,12 +68,18 @@ h1{letter-spacing:-.028em;line-height:1.08}
 .recent-trend .spark-line{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(124,156,255,.28))}
 
 /* Weak formula cards */
-.weak{align-items:center;min-height:46px;border-color:var(--soft-border);transition:transform .14s ease,border-color .14s ease,background .14s ease}
+.weak{display:grid;grid-template-columns:minmax(0,1fr) 108px;align-items:center;gap:14px;min-height:52px;border-color:var(--soft-border);transition:transform .14s ease,border-color .14s ease,background .14s ease}
 .weak:hover{transform:translateX(2px);border-color:rgba(124,156,255,.26);background:#131d29}
-.weak>span:first-child{line-height:1.28}
-.weak-score{min-width:92px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:800}
+.weak-prompt{line-height:1.28;min-width:0}
+.weak-score{width:108px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:3px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:800}
+.weak-score-main{font-size:15px;line-height:1;color:var(--bad)}
+.weak-score-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;width:100%;font-size:10px;font-weight:700;color:var(--muted)}
+.weak-score-breakdown span{text-align:center}
+.weak-score-breakdown span:first-child{color:var(--good)}
+.weak-score-breakdown span:nth-child(2){color:var(--warn)}
+.weak-score-breakdown span:last-child{color:var(--bad)}
 .weak-score.score-low{color:var(--bad)}
-.weak-score.score-mid{color:var(--warn)}
+.weak-score.score-mid .weak-score-main{color:var(--warn)}
 
 /* Library */
 .topic-chip{transition:transform .14s ease,border-color .14s ease,background .14s ease,color .14s ease}
@@ -143,4 +149,6 @@ body.theme-light .track{background:#e9eef5}
   .recent-trend{grid-template-columns:1fr}
   .recent-trend svg{width:100%}
   .subject-mini{min-height:78px}
+  .weak{grid-template-columns:minmax(0,1fr) 96px;gap:10px}
+  .weak-score{width:96px}
 }
