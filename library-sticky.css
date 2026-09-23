@@ -1,0 +1,52 @@
+@media (min-width:901px){
+  #formulasView{
+    --library-sticky-top-height:0px;
+    --library-group-head-height:0px;
+  }
+
+  #formulasView .library-sticky-top{
+    position:sticky;
+    top:0;
+    z-index:40;
+    padding-top:4px;
+    padding-bottom:12px;
+    background:linear-gradient(180deg,#0a0f15 0%,#0d1117 88%,rgba(13,17,23,.98) 100%);
+  }
+
+  #formulasView .library-sticky-top .topbar{
+    margin-bottom:16px;
+  }
+
+  #formulasView .library-sticky-top > .card{
+    margin-bottom:0!important;
+  }
+
+  #formulasView .library-group{
+    overflow:visible;
+  }
+
+  #formulasView .library-head{
+    position:sticky;
+    top:var(--library-sticky-top-height);
+    z-index:32;
+    background:linear-gradient(180deg,var(--panel),#101722);
+    box-shadow:0 2px 0 var(--line),0 10px 18px rgba(0,0,0,.18);
+  }
+
+  #formulasView .formula-library-table thead th{
+    position:sticky;
+    top:calc(var(--library-sticky-top-height) + var(--library-group-head-height));
+    z-index:31;
+    background:#121a24;
+    box-shadow:0 2px 0 var(--line),0 8px 18px rgba(0,0,0,.22);
+  }
+}
+
+@media (max-width:900px){
+  #formulasView .library-sticky-top,
+  #formulasView .library-head,
+  #formulasView .formula-library-table thead th{
+    position:static;
+    box-shadow:none;
+  }
+}
