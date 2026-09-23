@@ -25,6 +25,8 @@
 
   function subjectCards(){return cards.filter(c=>c.subject===reviewSubject);}
 
+  function activePool(){return reviewMode==='subject'?subjectCards():cards;}
+
   function adaptiveOrder(pool){
     return pool.map(c=>{
       const r=cardInfo(c);
@@ -38,10 +40,7 @@
     }).sort((a,b)=>b.priority-a.priority).map(x=>x.id);
   }
 
-  function queue(){
-    const pool=reviewMode==='subject'?subjectCards():cards;
-    return adaptiveOrder(pool);
-  }
+  function queue(){return adaptiveOrder(activePool());}
 
   function persist(){
     localStorage.setItem(MODE_KEY,reviewMode);
@@ -108,6 +107,20 @@
       else if(r.attempts<3)delay=rand(28,40);
     }
     if(delay===null)return;
+
+    let available=reviewIds.length-reviewPos-1;
+    let needed=delay-available;
+    if(needed>0){
+      const fillers=adaptiveOrder(activePool().filter(x=>x.id!==c.id));
+      if(fillers.length){
+        while(needed>0){
+          const take=fillers.slice(0,Math.min(needed,fillers.length));
+          reviewIds.push(...take);
+          needed-=take.length;
+          if(!take.length)break;
+        }
+      }
+    }
     const insertAt=Math.min(reviewPos+1+delay,reviewIds.length);
     reviewIds.splice(insertAt,0,c.id);
   }
