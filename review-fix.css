@@ -1,9 +1,12 @@
-#reviewView .topbar{max-width:900px;margin:0 auto 18px}
-#reviewView .review-card{max-width:900px;margin:0 auto;padding:20px}
-#reviewView .flash{min-height:235px;padding:26px 34px}
-#reviewView .q{font-size:27px;line-height:1.35}
-#reviewView .answer{max-width:760px;width:100%;margin-top:20px}
-#reviewView .review-controls{justify-content:center;margin-top:0;padding-top:2px}
-#reviewView .prevnext{padding-top:16px;margin-top:16px;border-top:1px solid var(--line)}
-#reviewView .kicker{margin-bottom:16px}
-@media(max-width:900px){#reviewView .topbar{margin-bottom:14px}#reviewView .review-card{padding:14px}#reviewView .flash{min-height:210px;padding:22px 12px}#reviewView .q{font-size:23px}}
+#reviewView{padding-top:clamp(54px,8vh,105px)}
+#reviewView .topbar{max-width:840px;margin:0 auto 20px;align-items:center}
+#reviewView .review-card{max-width:840px;margin:0 auto;padding:22px 20px 18px;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.24)}
+#reviewView .flash{min-height:250px;padding:34px 38px 26px}
+#reviewView .kicker{margin-bottom:18px;letter-spacing:.14em}
+#reviewView .q{font-size:28px;line-height:1.35;max-width:680px}
+#reviewView .answer{max-width:720px;width:100%;margin-top:22px}
+#reviewView .review-controls{justify-content:center;align-items:center;margin-top:2px;padding-top:4px}
+#reviewView .review-controls .btn{min-width:112px}
+#reviewView .prevnext{padding-top:16px;margin-top:16px;border-top:1px solid var(--line);align-items:center}
+#reviewView .prevnext .btn{min-width:108px}
+@media(max-width:900px){#reviewView{padding-top:24px}#reviewView .topbar{margin-bottom:14px}#reviewView .review-card{padding:14px;border-radius:15px}#reviewView .flash{min-height:220px;padding:24px 12px 20px}#reviewView .q{font-size:23px}#reviewView .review-controls .btn{min-width:0}}
