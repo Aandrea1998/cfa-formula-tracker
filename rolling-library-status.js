@@ -45,8 +45,6 @@
         const cell=cells[3];
         const sig=[label,cls,pct,attempts,known,difficult,missed].join('|');
 
-        // Idempotent update: do not rewrite the DOM when nothing changed.
-        // This prevents the MutationObserver from triggering itself forever.
         if(cell.dataset.rollingSignature===sig)return;
         cell.dataset.rollingSignature=sig;
         cell.classList.add('rolling-status-cell');
@@ -72,8 +70,6 @@
     requestAnimationFrame(()=>{queued=false;enhance();});
   };
 
-  // The library renderer replaces direct children of #libraryContent.
-  // Observing the entire subtree caused status-cell edits to retrigger this observer.
   new MutationObserver(schedule).observe(root,{childList:true});
 
   if(typeof renderLibrary==='function'){
@@ -86,4 +82,12 @@
   }
 
   schedule();
+})();
+
+(function loadEquityChapter456(){
+  if(document.querySelector('script[src="equity-chapter-456.js"]'))return;
+  const script=document.createElement('script');
+  script.src='equity-chapter-456.js';
+  script.defer=true;
+  document.body.appendChild(script);
 })();
