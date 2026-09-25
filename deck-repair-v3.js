@@ -10,6 +10,8 @@
     presentvalueofexpectedcashflows:'V_0=\\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}',
     residualincomevaluationmodel:'V_0=BV_0+\\sum_{t=1}^{\\infty}\\frac{RI_t}{(1+r)^t}',
     ddmmultipleholdingperiods:'V_0=\\sum_{t=1}^{n}\\frac{D_t}{(1+r)^t}+\\frac{P_n}{(1+r)^n}',
+    constantdividendgrowth:'\\begin{aligned}D_t&=D_0(1+g)^t\\\\D_1&=D_0(1+g)\\end{aligned}',
+    justifiedleadingandtrailingpe:'\\begin{aligned}\\frac{P_0}{E_1}&=\\frac{1-b}{r-g}\\\\\\frac{P_0}{E_0}&=\\frac{(1-b)(1+g)}{r-g}\\end{aligned}',
     twostagedividenddiscountmodel:'V_0=\\sum_{t=1}^{n}\\frac{D_0(1+g_S)^t}{(1+r)^t}+\\frac{D_0(1+g_S)^n(1+g_L)}{(1+r)^n(r-g_L)}',
     twostagedividenddiscountmodelterminalvalue:'V_n=\\frac{D_{n+1}}{r-g_L}=\\frac{D_0(1+g_S)^n(1+g_L)}{r-g_L}',
     twostagedividenddiscountmodelvaluetoday:'V_0=\\sum_{t=1}^{n}\\frac{D_0(1+g_S)^t}{(1+r)^t}+\\frac{D_0(1+g_S)^n(1+g_L)}{(1+r)^n(r-g_L)}',
@@ -25,8 +27,12 @@
     fcffalternativecomputationformulasfromnetincomeavailabletocommon:'\\mathrm{FCFF}=\\mathrm{NI}_{common}+\\mathrm{NCC}+\\mathrm{Int}(1-T)+\\mathrm{PrefDiv}-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcfealternativecomputationformulasfromfcff:'\\mathrm{FCFE}=\\mathrm{FCFF}-\\mathrm{Interest}(1-T)+\\text{Net Borrowing}',
     fcfealternativecomputationformulasfromnetincome:'\\mathrm{FCFE}=\\mathrm{NI}_{common}+\\mathrm{NCC}-\\mathrm{FCInv}-\\mathrm{WCInv}+\\text{Net Financing}',
+    weightedaveragecostofcapital:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
     weightedaveragecostofcapitaldebtcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_e r_e',
-    weightedaveragecostofcapitaldebtpreferredcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e'
+    weightedaveragecostofcapitaldebtpreferredcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
+    adjustedpresentvalueapv:'\\mathrm{APV}=\\text{Unlevered Firm Value}+\\mathrm{PV}(\\text{Financing Effects})',
+    constantgrowthfcffvaluation:'\\begin{aligned}\\mathrm{FCFF}_1&=\\mathrm{FCFF}_0(1+g)\\\\\\text{Firm Value}&=\\frac{\\mathrm{FCFF}_1}{\\mathrm{WACC}-g}=\\frac{\\mathrm{FCFF}_0(1+g)}{\\mathrm{WACC}-g}\\end{aligned}',
+    constantgrowthfcfevaluation:'\\begin{aligned}\\mathrm{FCFE}_1&=\\mathrm{FCFE}_0(1+g)\\\\\\text{Equity Value}&=\\frac{\\mathrm{FCFE}_1}{r_e-g}=\\frac{\\mathrm{FCFE}_0(1+g)}{r_e-g}\\end{aligned}'
   };
 
   function isSuspicious(c){
