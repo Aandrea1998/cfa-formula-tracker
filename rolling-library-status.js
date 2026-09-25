@@ -85,11 +85,24 @@
 })();
 
 (function loadEquityChapter456(){
+  function loadRepairV2(){
+    if(document.querySelector('script[src="equity-chapter-456-repair-v2.js"]'))return;
+    const repair2=document.createElement('script');
+    repair2.src='equity-chapter-456-repair-v2.js';
+    repair2.defer=true;
+    document.body.appendChild(repair2);
+  }
+
   function loadRepair(){
-    if(document.querySelector('script[src="equity-chapter-456-repair.js"]'))return;
+    const existingRepair=document.querySelector('script[src="equity-chapter-456-repair.js"]');
+    if(existingRepair){
+      setTimeout(loadRepairV2,0);
+      return;
+    }
     const repair=document.createElement('script');
     repair.src='equity-chapter-456-repair.js';
     repair.defer=true;
+    repair.onload=loadRepairV2;
     document.body.appendChild(repair);
   }
 
