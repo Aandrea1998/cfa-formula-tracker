@@ -7,9 +7,15 @@
   const style=document.createElement('style');
   style.textContent=`
     #reviewView #answer{
-      display:block!important;
-      min-height:132px;
+      display:flex!important;
+      height:140px!important;
+      min-height:140px!important;
+      max-height:140px!important;
       box-sizing:border-box;
+      overflow:hidden!important;
+      align-items:center;
+      justify-content:center;
+      margin-top:0!important;
     }
     #reviewView #answer.review-answer-hidden{
       visibility:hidden!important;
@@ -17,6 +23,13 @@
     }
     #reviewView #answer.review-answer-visible{
       visibility:visible!important;
+    }
+    @media(max-width:900px){
+      #reviewView #answer{
+        height:130px!important;
+        min-height:130px!important;
+        max-height:130px!important;
+      }
     }
   `;
   document.head.appendChild(style);
@@ -49,19 +62,16 @@
     const token=++revealToken;
     hideOnly();
 
-    // Keep the answer hidden until KaTeX has rendered and the final font size is
-    // already settled. Visibility is the only property changed at reveal time.
+    // Fit while hidden inside a fixed-height slot. Nothing outside the answer
+    // box can move, and visibility is the only property changed at reveal time.
     requestAnimationFrame(()=>{
       fitNow();
       requestAnimationFrame(()=>{
         fitNow();
-        requestAnimationFrame(()=>{
-          if(!revealRequested||token!==revealToken)return;
-          fitNow();
-          answer.classList.remove('review-answer-hidden');
-          answer.classList.add('review-answer-visible');
-          answer.setAttribute('aria-hidden','false');
-        });
+        if(!revealRequested||token!==revealToken)return;
+        answer.classList.remove('review-answer-hidden');
+        answer.classList.add('review-answer-visible');
+        answer.setAttribute('aria-hidden','false');
       });
     });
   }
