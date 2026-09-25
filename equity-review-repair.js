@@ -4,19 +4,31 @@
   if(typeof cards==='undefined'||!Array.isArray(cards))return;
 
   const norm=s=>String(s??'').replace(/\s+/g,' ').trim().toLowerCase().replace(/[^a-z0-9]+/g,'');
-  const target=cards.find(c=>
+  let changed=false;
+
+  const commonEquity=cards.find(c=>
     c.subject==='Equity Valuation' &&
     norm(c.question).includes('commonequityvaluefromfirmvalue')
   );
 
-  if(!target)return;
+  if(commonEquity){
+    const latex='\\begin{aligned}\\text{Common Equity Value}&=\\text{Firm Value}-\\text{Debt}-\\text{Preferred}\\\\&\\quad+\\text{Excess Cash}\\end{aligned}';
+    if(commonEquity.latex!==latex){commonEquity.latex=latex;changed=true;}
+    if(commonEquity.answer!==latex){commonEquity.answer=latex;changed=true;}
+    if(commonEquity.formulaImage){delete commonEquity.formulaImage;changed=true;}
+  }
 
-  const latex='\\begin{aligned}\\text{Common Equity Value}&=\\text{Firm Value}-\\text{Debt}-\\text{Preferred}\\\\&\\quad+\\text{Excess Cash}\\end{aligned}';
-  let changed=false;
+  const netPayments=cards.find(c=>
+    c.subject==='Equity Valuation' &&
+    norm(c.question)==='netpaymentstoequity'
+  );
 
-  if(target.latex!==latex){target.latex=latex;changed=true;}
-  if(target.answer!==latex){target.answer=latex;changed=true;}
-  if(target.formulaImage){delete target.formulaImage;changed=true;}
+  if(netPayments){
+    const latex='\\begin{aligned}\\text{Net Payments to Equity}&=\\text{Dividends}+\\text{Share Repurchases}\\\\&\\quad-\\text{Share Issuance}\\end{aligned}';
+    if(netPayments.latex!==latex){netPayments.latex=latex;changed=true;}
+    if(netPayments.answer!==latex){netPayments.answer=latex;changed=true;}
+    if(netPayments.formulaImage){delete netPayments.formulaImage;changed=true;}
+  }
 
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
