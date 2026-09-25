@@ -40,7 +40,45 @@
     }).sort((a,b)=>b.priority-a.priority).map(x=>x.id);
   }
 
-  function queue(){return adaptiveOrder(activePool());}
+  // Random Mix should look and behave like a real cross-topic shuffle.
+  // Shuffle inside each topic, then randomly draw from topic buckets while
+  // avoiding the same topic twice in a row whenever another topic is available.
+  function diversifiedRandomOrder(pool){
+    const buckets=new Map();
+    pool.forEach(c=>{
+      const subject=c.subject||'Unassigned';
+      if(!buckets.has(subject))buckets.set(subject,[]);
+      buckets.get(subject).push(c.id);
+    });
+    buckets.forEach((ids,subject)=>buckets.set(subject,shuffle(ids)));
+
+    const out=[];
+    let lastSubject=null;
+    while(out.length<pool.length){
+      let available=[...buckets.entries()].filter(([,ids])=>ids.length);
+      if(!available.length)break;
+      const alternatives=available.filter(([subject])=>subject!==lastSubject);
+      if(alternatives.length)available=alternatives;
+
+      // Weight selection by remaining cards so large topics still appear
+      // proportionally, without allowing long same-topic runs.
+      const total=available.reduce((sum,[,ids])=>sum+ids.length,0);
+      let draw=Math.random()*total;
+      let chosen=available[available.length-1];
+      for(const entry of available){
+        draw-=entry[1].length;
+        if(draw<0){chosen=entry;break;}
+      }
+      const [subject,ids]=chosen;
+      out.push(ids.pop());
+      lastSubject=subject;
+    }
+    return out;
+  }
+
+  function queue(){
+    return reviewMode==='random'?diversifiedRandomOrder(cards):adaptiveOrder(subjectCards());
+  }
 
   function persist(){
     localStorage.setItem(MODE_KEY,reviewMode);
@@ -49,11 +87,16 @@
   }
 
   function restore(){
-    reviewIds=queue();
+    // Keep the current session order when simply navigating away and back.
+    // Rebuild only if there is no usable queue for the current mode.
+    const allowed=new Set(activePool().map(c=>c.id));
+    const usable=reviewIds.filter(id=>allowed.has(id));
+    if(usable.length!==reviewIds.length)reviewIds=usable;
+    if(!reviewIds.length)reviewIds=queue();
     if(!reviewIds.length){reviewPos=0;return;}
     const saved=Number(localStorage.getItem(CURRENT_KEY));
     const i=reviewIds.indexOf(saved);
-    reviewPos=i>=0?i:0;
+    reviewPos=i>=0?i:Math.min(reviewPos,reviewIds.length-1);
   }
 
   function render(){
@@ -68,7 +111,7 @@
     }
     if(reviewPos<0||reviewPos>=reviewIds.length)reviewPos=0;
     let c=cards.find(x=>x.id===reviewIds[reviewPos]);
-    if(!c){restore();c=cards.find(x=>x.id===reviewIds[reviewPos]);if(!c)return;}
+    if(!c){reviewIds=[];restore();c=cards.find(x=>x.id===reviewIds[reviewPos]);if(!c)return;}
     $('question').textContent=c.question;
     $('answer').textContent=c.answer;
     $('answer').style.display='none';
@@ -111,7 +154,8 @@
     let available=reviewIds.length-reviewPos-1;
     let needed=delay-available;
     if(needed>0){
-      const fillers=adaptiveOrder(activePool().filter(x=>x.id!==c.id));
+      const fillerPool=activePool().filter(x=>x.id!==c.id);
+      const fillers=reviewMode==='random'?diversifiedRandomOrder(fillerPool):adaptiveOrder(fillerPool);
       if(fillers.length){
         while(needed>0){
           const take=fillers.slice(0,Math.min(needed,fillers.length));
@@ -138,6 +182,7 @@
 
   function setMode(mode){
     reviewMode=mode;
+    reviewIds=[];
     persist();
     startNew();
   }
@@ -145,6 +190,7 @@
   function setSubject(subject){
     reviewSubject=subject;
     reviewMode='subject';
+    reviewIds=[];
     persist();
     startNew();
   }
@@ -159,7 +205,7 @@
     panel.innerHTML=`
       <div class="review-mode-copy">
         <div class="review-mode-title">Training mode <span class="adaptive-badge">Adaptive</span></div>
-        <div class="review-mode-sub">Weak formulas return sooner; repeatedly known formulas are spaced further apart.</div>
+        <div class="review-mode-sub">Random Mix shuffles across topics; weak formulas still return sooner after you rate them.</div>
       </div>
       <div class="review-mode-actions">
         <button type="button" class="mode-btn" id="randomModeBtn">↻ Random mix</button>
@@ -167,7 +213,7 @@
           <button type="button" class="mode-btn" id="subjectModeBtn">Focus topic</button>
           <select id="reviewSubjectSelect" aria-label="Choose CFA topic"></select>
         </div>
-        <button type="button" class="mode-restart" id="restartReviewBtn" title="Start this mode from a new adaptive queue">New session</button>
+        <button type="button" class="mode-restart" id="restartReviewBtn" title="Start this mode from a newly shuffled queue">New session</button>
       </div>`;
     top.insertAdjacentElement('afterend',panel);
     const select=document.getElementById('reviewSubjectSelect');
@@ -209,7 +255,7 @@
   const add=$('addExtractedBtn');
   if(add)add.addEventListener('click',()=>setTimeout(()=>{reviewIds=[];buildControls();},0));
   const reset=$('resetDemo');
-  if(reset)reset.addEventListener('click',()=>{localStorage.removeItem(CURRENT_KEY);localStorage.removeItem(MODE_KEY);localStorage.removeItem(SUBJECT_KEY);reviewMode='random';});
+  if(reset)reset.addEventListener('click',()=>{localStorage.removeItem(CURRENT_KEY);localStorage.removeItem(MODE_KEY);localStorage.removeItem(SUBJECT_KEY);reviewMode='random';reviewIds=[];});
 })();
 
 (function loadAppearanceControls(){
