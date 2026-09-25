@@ -27,6 +27,7 @@
     fcffalternativecomputationformulasfromnetincomeavailabletocommon:'\\mathrm{FCFF}=\\mathrm{NI}_{common}+\\mathrm{NCC}+\\mathrm{Int}(1-T)+\\mathrm{PrefDiv}-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcfealternativecomputationformulasfromfcff:'\\mathrm{FCFE}=\\mathrm{FCFF}-\\mathrm{Interest}(1-T)+\\text{Net Borrowing}',
     fcfealternativecomputationformulasfromnetincome:'\\mathrm{FCFE}=\\mathrm{NI}_{common}+\\mathrm{NCC}-\\mathrm{FCInv}-\\mathrm{WCInv}+\\text{Net Financing}',
+    fcffvsfcfefinancingclaims:'\\begin{aligned}\\mathrm{FCFE}&=\\text{Cash flow after debt and preferred claims}\\\\&\\quad\\text{available to common equity}\\end{aligned}',
     weightedaveragecostofcapital:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
     weightedaveragecostofcapitaldebtcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_e r_e',
     weightedaveragecostofcapitaldebtpreferredcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
