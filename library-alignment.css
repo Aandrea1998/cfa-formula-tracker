@@ -1,0 +1,82 @@
+/* One visual grid for every Formula Library section. */
+.formula-library-table{
+  width:100%;
+  table-layout:fixed;
+  border-collapse:separate;
+  border-spacing:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:13px;
+}
+
+.formula-library-table .col-id{width:44px}
+.formula-library-table .col-prompt{width:43%}
+.formula-library-table .col-formula{width:auto}
+.formula-library-table .col-status{width:150px}
+
+.formula-library-table th,
+.formula-library-table td{
+  padding:12px 8px;
+  vertical-align:middle;
+}
+
+.formula-library-table th.col-prompt,
+.formula-library-table td.col-prompt{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+.formula-library-table td.col-prompt{
+  font-size:13px;
+  font-weight:500;
+  line-height:1.35;
+  letter-spacing:0;
+  color:var(--text);
+}
+
+.formula-library-table th{
+  font-size:12px;
+  font-weight:600;
+  line-height:1.2;
+}
+
+.formula-library-table td.col-id{
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+
+.formula-library-table td.col-formula{
+  text-align:center;
+  overflow:hidden;
+}
+
+.formula-library-table td.col-formula .formula-math-library{
+  width:100%;
+  justify-content:center;
+  min-height:42px;
+  padding:0;
+}
+
+.formula-library-table td.col-formula .formula-math-library .katex-display{
+  width:100%;
+  margin:0;
+  text-align:center;
+}
+
+.formula-library-table td.col-formula .formula-math-library .katex{
+  font-size:1.02em;
+}
+
+.formula-library-table td.col-status,
+.formula-library-table th.col-status{
+  white-space:nowrap;
+  text-align:left;
+}
+
+/* Keep every subject card on the exact same inner grid. */
+.library-group .table-wrap{
+  padding-left:14px;
+  padding-right:14px;
+}
+
+@media(max-width:900px){
+  .formula-library-table{min-width:860px}
+}
