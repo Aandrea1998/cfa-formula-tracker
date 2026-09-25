@@ -85,9 +85,23 @@
 })();
 
 (function loadEquityChapter456(){
-  if(document.querySelector('script[src="equity-chapter-456.js"]'))return;
+  function loadRepair(){
+    if(document.querySelector('script[src="equity-chapter-456-repair.js"]'))return;
+    const repair=document.createElement('script');
+    repair.src='equity-chapter-456-repair.js';
+    repair.defer=true;
+    document.body.appendChild(repair);
+  }
+
+  const existing=document.querySelector('script[src="equity-chapter-456.js"]');
+  if(existing){
+    setTimeout(loadRepair,0);
+    return;
+  }
+
   const script=document.createElement('script');
   script.src='equity-chapter-456.js';
   script.defer=true;
+  script.onload=loadRepair;
   document.body.appendChild(script);
 })();
