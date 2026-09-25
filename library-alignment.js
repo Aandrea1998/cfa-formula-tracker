@@ -25,24 +25,42 @@
     });
   }
 
+  function subjectFor(box){
+    const group=box.closest('.library-group');
+    return group?.querySelector('.library-title')?.textContent?.trim()||'';
+  }
+
   function fitFormula(box){
     if(!box)return;
     const katex=box.querySelector('.katex');
     if(!katex)return;
 
-    // Reset every pass to the shared Equity-style base size first.
-    box.style.fontSize='1.08rem';
+    const subject=subjectFor(box);
+
+    // Start from the shared Equity reference size.
+    let baseRem=1.08;
+    box.style.fontSize=`${baseRem}rem`;
 
     const available=Math.max(20,box.clientWidth-10);
-    const natural=katex.getBoundingClientRect().width;
-    if(!natural||natural<=available)return;
+    let rect=katex.getBoundingClientRect();
 
-    // Shrink only as much as necessary. This avoids horizontal scrolling while
-    // keeping short/normal formulas at the full Equity size.
-    const ratio=Math.min(1,(available/natural)*0.985);
-    box.style.fontSize=`${Math.max(0.52,1.08*ratio)}rem`;
+    // Economics contains several very short one-line growth identities at the
+    // bottom of the chapter. At the same CSS size their lowercase notation has
+    // a noticeably smaller visual footprint than the Equity formulas. Give
+    // compact Economics identities a controlled boost so their perceived size
+    // matches Equity, without enlarging fractions/sums or long formulas.
+    if(subject==='Economics' && rect.width<available*0.72 && rect.height<30){
+      baseRem=1.20;
+      box.style.fontSize=`${baseRem}rem`;
+      rect=katex.getBoundingClientRect();
+    }
 
-    // If the first pass is still fractionally too wide, do one precision pass.
+    if(!rect.width||rect.width<=available)return;
+
+    // Long formulas shrink only as much as necessary; never create a scrollbar.
+    const ratio=Math.min(1,(available/rect.width)*0.985);
+    box.style.fontSize=`${Math.max(0.52,baseRem*ratio)}rem`;
+
     requestAnimationFrame(()=>{
       const width=katex.getBoundingClientRect().width;
       const avail=Math.max(20,box.clientWidth-10);
