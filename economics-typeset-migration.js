@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  // Canonical display-only LaTeX for the existing Economics / Economic Growth deck.
-  // The underlying prompts, answer text, ids, statuses and review histories are preserved.
+  // Canonical display LaTeX + concise Equity-style labels for Economics / Economic Growth.
+  // IDs, statuses, review histories, subjects and topics are preserved.
   const LATEX={
     1:'E(R_e)=dy+\\Delta(P/E)+i+g-\\Delta S',
     2:'\\text{EPS growth}=i+g-\\Delta S',
@@ -35,18 +35,46 @@
     29:'g_y=g_k=sc-\\delta-n'
   };
 
+  const PROMPT={
+    1:'Grinold–Kroner Expected Equity Return',
+    2:'Grinold–Kroner — EPS Growth',
+    3:'Change in Shares Outstanding',
+    4:'Cobb–Douglas Production Function',
+    5:'Marginal Product of Capital (MPK)',
+    6:'Marginal Product of Labor (MPL)',
+    7:'Capital and Labor Income Shares',
+    8:'Cobb–Douglas — Output per Worker',
+    9:'Growth Accounting Equation',
+    10:'Potential GDP Growth',
+    11:'Aggregate Capital Growth',
+    12:'Capital per Worker Growth — Link to Aggregate Capital',
+    13:'Capital per Worker Growth — Expanded',
+    14:'Output per Worker Growth',
+    15:'Output per Worker Growth — Expanded',
+    16:'Steady-State Growth per Worker',
+    17:'Steady-State Required Investment per Worker',
+    18:'Steady-State Threshold Ratio (Ψ)',
+    19:'Steady-State Capital–Output Ratio',
+    20:'Convergence — Capital per Worker Growth',
+    21:'Convergence — Output per Worker Growth',
+    22:'Steady-State Per-Worker Growth',
+    23:'Aggregate vs Per-Worker Capital Growth',
+    24:'Aggregate vs Per-Worker Output Growth',
+    25:'Steady-State Aggregate Growth',
+    26:'No Technological Progress — Per-Worker Growth',
+    27:'No Technological Progress — Aggregate Growth',
+    28:'Endogenous Growth — Capital per Worker',
+    29:'Endogenous Growth — Output per Worker'
+  };
+
   let changed=0;
   try{
     if(typeof cards==='undefined'||!Array.isArray(cards))return;
     cards.forEach(c=>{
       if(c.subject!=='Economics'||c.topic!=='Economic Growth')return;
-      const latex=LATEX[Number(c.id)];
-      if(!latex)return;
-      if(c.latex!==latex){
-        c.latex=latex;
-        if(c.formulaImage)delete c.formulaImage;
-        changed++;
-      }
+      const id=Number(c.id),latex=LATEX[id],prompt=PROMPT[id];
+      if(latex&&c.latex!==latex){c.latex=latex;if(c.formulaImage)delete c.formulaImage;changed++;}
+      if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
     if(changed){
