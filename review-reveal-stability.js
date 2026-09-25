@@ -4,9 +4,6 @@
   const answer=document.getElementById('answer');
   if(!answer)return;
 
-  // Keep the answer in the document flow at all times. Review renderers may set
-  // display:none inline; !important here deliberately overrides that so KaTeX can
-  // render and auto-fit before the user reveals the formula.
   const style=document.createElement('style');
   style.textContent=`
     #reviewView #answer{
@@ -24,39 +21,69 @@
   `;
   document.head.appendChild(style);
 
-  function fitHidden(){
-    if(window.CFAReviewFormulaFit&&typeof window.CFAReviewFormulaFit.fit==='function'){
-      requestAnimationFrame(()=>window.CFAReviewFormulaFit.fit());
+  let revealRequested=false;
+  let revealToken=0;
+
+  function fitNow(){
+    if(window.CFAReviewFormulaFit&&typeof window.CFAReviewFormulaFit.fitNow==='function'){
+      window.CFAReviewFormulaFit.fitNow();
+    }else if(window.CFAReviewFormulaFit&&typeof window.CFAReviewFormulaFit.fit==='function'){
+      window.CFAReviewFormulaFit.fit();
     }
   }
 
-  function conceal(){
+  function hideOnly(){
     answer.classList.remove('review-answer-visible');
     answer.classList.add('review-answer-hidden');
     answer.setAttribute('aria-hidden','true');
-    fitHidden();
+  }
+
+  function conceal(){
+    revealRequested=false;
+    revealToken++;
+    hideOnly();
+    requestAnimationFrame(fitNow);
+  }
+
+  function settleAndReveal(){
+    const token=++revealToken;
+    hideOnly();
+
+    // Keep the answer hidden until KaTeX has rendered and the final font size is
+    // already settled. Visibility is the only property changed at reveal time.
+    requestAnimationFrame(()=>{
+      fitNow();
+      requestAnimationFrame(()=>{
+        fitNow();
+        requestAnimationFrame(()=>{
+          if(!revealRequested||token!==revealToken)return;
+          fitNow();
+          answer.classList.remove('review-answer-hidden');
+          answer.classList.add('review-answer-visible');
+          answer.setAttribute('aria-hidden','false');
+        });
+      });
+    });
   }
 
   function reveal(){
-    // The formula has already been rendered and fitted while hidden, so revealing
-    // it changes visibility only — no layout shift and no visible font resize.
-    answer.classList.remove('review-answer-hidden');
-    answer.classList.add('review-answer-visible');
-    answer.setAttribute('aria-hidden','false');
+    revealRequested=true;
+    settleAndReveal();
   }
 
-  // Hide immediately on load and whenever Review replaces the current answer.
   conceal();
+
   new MutationObserver(()=>{
-    conceal();
-    requestAnimationFrame(fitHidden);
+    hideOnly();
+    requestAnimationFrame(()=>{
+      fitNow();
+      if(revealRequested)settleAndReveal();
+    });
   }).observe(answer,{childList:true,subtree:true,characterData:true});
 
   const revealBtn=document.getElementById('reveal');
   if(revealBtn)revealBtn.onclick=reveal;
 
-  // Conceal before any control can change the current card. Capture phase is used
-  // so the old answer cannot flash while the next Review render is running.
   [
     'prevBtn','nextBtn','markWrong','markDifficult','markKnown',
     'restartReviewBtn','randomModeBtn','subjectModeBtn','startReview'
