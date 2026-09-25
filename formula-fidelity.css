@@ -5,7 +5,7 @@
 .formula-preview-img{max-height:120px;max-width:100%;margin:0 auto}
 .formula-fidelity-text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:normal;overflow-wrap:anywhere}
 .fidelity-extract .fields{min-width:0}
-.fidelity-preview{margin-top:10px;padding:12px 14px;border:1px solid var(--border,#dfe4ea);border-radius:12px;background:#fff;overflow:auto}
+.fidelity-preview{margin-top:10px;padding:12px 14px;border:1px solid var(--line,#253041);border-radius:12px;background:var(--panel2,#18212d);color:var(--text,#f4f7fb);overflow:auto}
 .fidelity-meta{margin-top:8px;font-size:12px;color:var(--muted,#8893a2);font-weight:650;letter-spacing:.01em}
 .fidelity-details{margin-top:8px}
 .fidelity-details summary{cursor:pointer;color:var(--muted,#6b7280);font-size:12px;font-weight:600}
@@ -13,9 +13,9 @@
 #answer:has(.formula-review-img){background:#fff;padding:18px;border-radius:14px}
 
 /* True typeset math */
-.formula-math{width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;color:inherit}
+.formula-math{width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;color:var(--text,#f4f7fb)}
 .formula-math .katex-display{margin:.25em 0;text-align:center;overflow:visible}
-.formula-math .katex{font-size:1.08em}
+.formula-math .katex{font-size:1.08em;color:var(--text,#f4f7fb)}
 .formula-math-library{display:flex;align-items:center;justify-content:flex-start;min-height:44px;padding:2px 0}
 .formula-math-library .katex-display{width:100%;text-align:left;margin:0}
 .formula-math-library .katex{font-size:1.02em}
@@ -24,7 +24,34 @@
 .formula-math-preview{display:flex;align-items:center;justify-content:center;min-height:92px;padding:14px 18px}
 .formula-math-preview .katex{font-size:1.45em}
 
-.math-preview-shell{margin-top:12px;border:1px solid var(--border,#263343);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));min-height:96px;display:flex;align-items:center;justify-content:center;overflow:auto;padding:6px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+/* Curated import preview: never use the old white snapshot panel. */
+.fidelity-preview.math-preview,
+.math-preview-shell{
+  margin-top:12px;
+  border:1px solid var(--line,#253041);
+  border-radius:14px;
+  background:linear-gradient(180deg,var(--panel2,#18212d),var(--panel,#131a23));
+  color:var(--text,#f4f7fb);
+  min-height:96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:auto;
+  padding:16px 18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+.fidelity-preview.math-preview .katex,
+.fidelity-preview.math-preview .katex *,
+.math-preview-shell .katex,
+.math-preview-shell .katex *,
+.formula-math .katex,
+.formula-math .katex *{
+  color:var(--text,#f4f7fb)!important;
+}
+.fidelity-preview.math-preview .katex-display,
+.math-preview-shell .katex-display{margin:.35em 0;width:100%;text-align:center}
+.fidelity-preview.math-preview .katex{font-size:1.38em}
+
 .math-extract .fields{min-width:0}
 .math-edit{margin-top:10px;border-top:1px solid rgba(128,144,160,.18);padding-top:8px}
 .math-edit summary{cursor:pointer;color:var(--muted,#8893a2);font-size:12px;font-weight:650;user-select:none}
@@ -39,4 +66,5 @@
   .formula-math-review{min-height:100px;padding:12px 2px}
   .formula-math-review .katex{font-size:1.35em}
   .formula-math-preview .katex{font-size:1.22em}
+  .fidelity-preview.math-preview .katex{font-size:1.2em}
 }
