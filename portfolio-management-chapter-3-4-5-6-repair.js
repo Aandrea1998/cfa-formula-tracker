@@ -38,12 +38,9 @@
 
     if(legacyCards.length||currentTotal){
       let totalCard=currentTotal||legacyCards[0];
-      const totalLatex='\\text{Total ETF Costs}=\\text{One-Time Trading Costs}+\\text{Ongoing Holding Costs}';
+      const totalLatex='\\begin{aligned}\\text{Total ETF Costs}&=\\text{One-Time Trading Costs}\\\\&\\quad+\\text{Ongoing Holding Costs}\\end{aligned}';
       if(setCard(totalCard,'Total ETF Ownership Costs',totalLatex))changed++;
 
-      // Remove every surviving copy of the old combined card. This is deliberately
-      // re-run while the PM chapter scripts finish loading, because the importer can
-      // otherwise recreate the legacy card after an early migration pass.
       for(const card of [...cards]){
         if(card===totalCard)continue;
         if(card.subject===SUBJECT&&card.topic===TOPIC&&norm(card.question)===OLD_TOTAL){
@@ -64,9 +61,6 @@
     const spreadLatex='\\begin{aligned}\\text{ETF Spread}\\approx{}&\\text{Creation/Redemption Costs}\\\\&+\\text{Underlying Securities Spreads}\\\\&+\\text{Hedging/Inventory Compensation}\\\\&+\\text{Market Maker Profit Spread}\\\\&-\\text{Offsetting-Order Discount}\\end{aligned}';
     if(setCard(spreadCard,'ETF Bid-Ask Spread — Components',spreadLatex))changed++;
 
-    // Backfill canonical KaTeX for cards that may already exist in localStorage
-    // from an older import. Without the latex field Review mode falls back to raw
-    // text and displays commands such as "\\sum" literally.
     const portfolioReturnCard=refreshedChapterCards.find(c=>[
       'portfolioexpectedreturnweightedaverage',
       'portfolioexpectedreturn'
@@ -87,9 +81,6 @@
     return true;
   }
 
-  // Keep enforcing the migration for 10 seconds. Existing saved chapter cards can
-  // make the first pass succeed before the chapter importer itself has executed;
-  // repeated passes ensure any late-created legacy combined card is removed too.
   let attempts=0;
   (function enforceRepair(){
     applyRepair();
