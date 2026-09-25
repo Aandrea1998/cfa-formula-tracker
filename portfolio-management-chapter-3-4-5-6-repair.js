@@ -33,17 +33,17 @@
     const legacyCards=chapterCards.filter(c=>norm(c.question)===OLD_TOTAL);
     const currentTotal=chapterCards.find(c=>norm(c.question)===NEW_TOTAL);
 
-    // The repair script is loaded before the PM chapter scripts. Wait until Chapter 3-4-5-6 exists.
     if(!chapterCards.length||(!legacyCards.length&&!currentTotal))return false;
 
     let changed=0;
     let totalCard=currentTotal||legacyCards[0];
 
-    // Preserve the original card ID/history (including card 162) but shorten it to the top-level relationship only.
     const totalLatex='\\text{Total ETF Costs}=\\text{One-Time Trading Costs}+\\text{Ongoing Holding Costs}';
     if(setCard(totalCard,'Total ETF Ownership Costs',totalLatex))changed++;
 
-    // Remove any leftover duplicate legacy combined cards so the long, clipped formula cannot survive.
+    // Remove every surviving copy of the old combined card. This is deliberately
+    // re-run while the PM chapter scripts finish loading, because the importer can
+    // otherwise recreate the legacy card after an early migration pass.
     for(const card of [...cards]){
       if(card===totalCard)continue;
       if(card.subject===SUBJECT&&card.topic===TOPIC&&norm(card.question)===OLD_TOTAL){
@@ -58,7 +58,8 @@
     const holdingLatex='\\begin{aligned}\\text{Holding Costs}&=\\text{Management Fees}+\\text{Turnover Costs}\\\\&\\quad+\\text{Tracking Error}+\\text{Taxes}\\\\&\\quad+\\text{Security Lending Effects}\\end{aligned}';
     changed+=addCard('ETF Ongoing Holding Costs — Components',holdingLatex);
 
-    const spreadCard=chapterCards.find(c=>['etfbidaskspreadmaincomponents','etfbidaskspreadcomponents'].includes(norm(c.question)));
+    const refreshedChapterCards=cards.filter(c=>c.subject===SUBJECT&&c.topic===TOPIC);
+    const spreadCard=refreshedChapterCards.find(c=>['etfbidaskspreadmaincomponents','etfbidaskspreadcomponents'].includes(norm(c.question)));
     const spreadLatex='\\begin{aligned}\\text{ETF Spread}\\approx{}&\\text{Creation/Redemption Costs}\\\\&+\\text{Underlying Securities Spreads}\\\\&+\\text{Hedging/Inventory Compensation}\\\\&+\\text{Market Maker Profit Spread}\\\\&-\\text{Offsetting-Order Discount}\\end{aligned}';
     if(setCard(spreadCard,'ETF Bid-Ask Spread — Components',spreadLatex))changed++;
 
@@ -75,9 +76,12 @@
     return true;
   }
 
+  // Keep enforcing the migration for 10 seconds. Existing saved chapter cards can
+  // make the first pass succeed before the chapter importer itself has executed;
+  // repeated passes ensure any late-created legacy combined card is removed too.
   let attempts=0;
-  (function waitForChapter(){
-    if(applyRepair())return;
-    if(attempts++<50)setTimeout(waitForChapter,100);
+  (function enforceRepair(){
+    applyRepair();
+    if(attempts++<100)setTimeout(enforceRepair,100);
   })();
 })();
