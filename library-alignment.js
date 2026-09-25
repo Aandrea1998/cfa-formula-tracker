@@ -25,17 +25,53 @@
     });
   }
 
+  function fitFormula(box){
+    if(!box)return;
+    const katex=box.querySelector('.katex');
+    if(!katex)return;
+
+    // Reset every pass to the shared Equity-style base size first.
+    box.style.fontSize='1.08rem';
+
+    const available=Math.max(20,box.clientWidth-10);
+    const natural=katex.getBoundingClientRect().width;
+    if(!natural||natural<=available)return;
+
+    // Shrink only as much as necessary. This avoids horizontal scrolling while
+    // keeping short/normal formulas at the full Equity size.
+    const ratio=Math.min(1,(available/natural)*0.985);
+    box.style.fontSize=`${Math.max(0.52,1.08*ratio)}rem`;
+
+    // If the first pass is still fractionally too wide, do one precision pass.
+    requestAnimationFrame(()=>{
+      const width=katex.getBoundingClientRect().width;
+      const avail=Math.max(20,box.clientWidth-10);
+      if(width>avail){
+        const current=parseFloat(getComputedStyle(box).fontSize)||17.28;
+        const nextPx=Math.max(8.5,current*(avail/width)*0.98);
+        box.style.fontSize=`${nextPx}px`;
+      }
+    });
+  }
+
   function normalize(){
     root.querySelectorAll('table').forEach(alignTable);
+    root.querySelectorAll('.formula-math-library').forEach(fitFormula);
   }
 
   let queued=false;
   const schedule=()=>{
     if(queued)return;
     queued=true;
-    requestAnimationFrame(()=>{queued=false;normalize();});
+    requestAnimationFrame(()=>{
+      queued=false;
+      normalize();
+      setTimeout(normalize,60);
+    });
   };
 
   new MutationObserver(schedule).observe(root,{childList:true,subtree:true});
+  window.addEventListener('resize',schedule,{passive:true});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(schedule).catch(()=>{});
   normalize();
 })();
