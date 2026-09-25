@@ -11,20 +11,30 @@
     'basicfcfe'
   ]);
 
-  // Canonical prompt cleanups for cards imported with overly broad or misleading headings.
+  // Canonical prompt cleanups. Every prompt must make sense by itself in Review mode.
   const PROMPT_FIX={
     usesoffcffandfcfe:'Net Payments to Equity',
     estimatedvalueintrinsicvalueandmarketprice:'Mispricing vs Valuation Error',
     peratioandpvgo:'P/E Ratio Decomposition — PVGO',
-    constantdividendgrowth:'Constant-Growth Dividend Discount Model (Gordon Growth)'
+    constantdividendgrowth:'Constant-Growth Dividend Discount Model (Gordon Growth)',
+    formulafromnetincome:'FCFF — From Net Income',
+    longrungrowthrate:'Long-Run Growth Rate — GDP Approximation'
+  };
+
+  // A few legacy cards were imported with generic prompts that cannot be safely
+  // repaired by prompt text alone (e.g. a card literally named "Formula").
+  const ID_PROMPT_FIX={
+    56:'FCFF — From CFO',
+    57:'FCFF — From Net Income',
+    39:'Long-Run Growth Rate — GDP Approximation'
   };
 
   // Canonical repairs for cards created by the earlier fragment parser or whose
-  // extracted expression did not capture the study-useful valuation relationship.
+  // extracted expression did not capture the study-useful relationship.
   // id, status, history, subject and topic stay intact.
   const FIX={
     presentvalueofexpectedcashflows:'V_0=\\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}',
-    residualincome:'\\begin{aligned}RI_t&=NI_t-\\text{Equity Charge}_t\\\\\\text{Equity Charge}_t&=r\\,B_{t-1}\\\\\\therefore\quad RI_t&=NI_t-r\\,B_{t-1}\\end{aligned}',
+    residualincome:'\\begin{aligned}\\mathrm{RI}_t&=\\mathrm{NI}_t-rB_{t-1}\\\\\\text{Equity Charge}_t&=rB_{t-1}\\end{aligned}',
     residualincomevaluationmodel:'V_0=BV_0+\\sum_{t=1}^{\\infty}\\frac{RI_t}{(1+r)^t}',
     ddmmultipleholdingperiods:'V_0=\\sum_{t=1}^{n}\\frac{D_t}{(1+r)^t}+\\frac{P_n}{(1+r)^n}',
     estimatedvalueintrinsicvalueandmarketprice:'\\begin{aligned}\\text{Mispricing}&=V-P\\\\\\text{Valuation Error}&=V_E-V\\end{aligned}',
@@ -45,16 +55,27 @@
     fcffalternativecomputationformulasfromebit:'\\mathrm{FCFF}=\\mathrm{EBIT}(1-T)+\\text{D\\&A}-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcffalternativecomputationformulasfromebitda:'\\mathrm{FCFF}=\\mathrm{EBITDA}(1-T)+(\\text{D\\&A})T-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcffalternativecomputationformulasfromcfo:'\\mathrm{FCFF}=\\mathrm{CFO}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}',
+    fcfffromcfo:'\\mathrm{FCFF}=\\mathrm{CFO}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}',
     fcffalternativecomputationformulasfromnetincome:'\\mathrm{FCFF}=\\mathrm{NI}+\\mathrm{NCC}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}-\\mathrm{WCInv}',
+    fcfffromnetincome:'\\mathrm{FCFF}=\\mathrm{NI}+\\mathrm{NCC}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcffalternativecomputationformulasfromnetincomeavailabletocommon:'\\mathrm{FCFF}=\\mathrm{NI}_{common}+\\mathrm{NCC}+\\mathrm{Int}(1-T)+\\mathrm{PrefDiv}-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcfealternativecomputationformulasfromfcff:'\\mathrm{FCFE}=\\mathrm{FCFF}-\\mathrm{Interest}(1-T)+\\text{Net Borrowing}',
     fcfealternativecomputationformulasfromnetincome:'\\mathrm{FCFE}=\\mathrm{NI}_{common}+\\mathrm{NCC}-\\mathrm{FCInv}-\\mathrm{WCInv}+\\text{Net Financing}',
+    longrungrowthrate:'g_{\\text{long-run}}\\approx g_{\\text{GDP,long-run}}',
+    longrungrowthrategdpapproximation:'g_{\\text{long-run}}\\approx g_{\\text{GDP,long-run}}',
     weightedaveragecostofcapital:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
     weightedaveragecostofcapitaldebtcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_e r_e',
     weightedaveragecostofcapitaldebtpreferredcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
     adjustedpresentvalueapv:'\\mathrm{APV}=\\text{Unlevered Firm Value}+\\mathrm{PV}(\\text{Financing Effects})',
     constantgrowthfcffvaluation:'\\begin{aligned}\\mathrm{FCFF}_1&=\\mathrm{FCFF}_0(1+g)\\\\\\text{Firm Value}&=\\frac{\\mathrm{FCFF}_1}{\\mathrm{WACC}-g}=\\frac{\\mathrm{FCFF}_0(1+g)}{\\mathrm{WACC}-g}\\end{aligned}',
     constantgrowthfcfevaluation:'\\begin{aligned}\\mathrm{FCFE}_1&=\\mathrm{FCFE}_0(1+g)\\\\\\text{Equity Value}&=\\frac{\\mathrm{FCFE}_1}{r_e-g}=\\frac{\\mathrm{FCFE}_0(1+g)}{r_e-g}\\end{aligned}'
+  };
+
+  const ID_FORMULA_FIX={
+    56:'\\mathrm{FCFF}=\\mathrm{CFO}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}',
+    57:'\\mathrm{FCFF}=\\mathrm{NI}+\\mathrm{NCC}+\\mathrm{Int}(1-T)-\\mathrm{FCInv}-\\mathrm{WCInv}',
+    39:'g_{\\text{long-run}}\\approx g_{\\text{GDP,long-run}}',
+    32:'\\begin{aligned}\\mathrm{RI}_t&=\\mathrm{NI}_t-rB_{t-1}\\\\\\text{Equity Charge}_t&=rB_{t-1}\\end{aligned}'
   };
 
   function isSuspicious(c){
@@ -81,16 +102,15 @@
 
     cards.forEach(c=>{
       const originalKey=qnorm(c.question);
-      const newPrompt=PROMPT_FIX[originalKey];
+      const newPrompt=ID_PROMPT_FIX[+c.id]||PROMPT_FIX[originalKey];
       if(newPrompt&&c.question!==newPrompt){
         c.question=newPrompt;
         promptChanged++;
       }
 
       const key=qnorm(c.question);
-      const latex=FIX[key]||FIX[originalKey];
+      const latex=ID_FORMULA_FIX[+c.id]||FIX[key]||FIX[originalKey];
       if(!latex)return;
-      // Canonicalize all matching legacy cards; this also fixes acronym spacing.
       if(tidy(c.latex)!==latex||isSuspicious(c)){
         c.latex=latex;
         c.answer=latex;
@@ -104,7 +124,6 @@
       if(typeof refresh==='function')refresh();
     }
 
-    // Re-render after all late-loading UI overrides are in place.
     setTimeout(()=>{
       try{if(typeof renderLibrary==='function')renderLibrary();}catch(_e){}
       try{if(typeof renderReview==='function'&&typeof reviewIds!=='undefined'&&reviewIds.length)renderReview();}catch(_e){}
