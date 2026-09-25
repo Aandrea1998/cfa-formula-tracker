@@ -105,3 +105,11 @@
 
   window.CFAPortfolioManagementChapter1={added,skipped,total:SPECS.length};
 })();
+
+(function loadPortfolioManagementChapter2(){
+  if(document.querySelector('script[src="portfolio-management-chapter-2.js"]'))return;
+  const script=document.createElement('script');
+  script.src='portfolio-management-chapter-2.js';
+  script.defer=true;
+  document.body.appendChild(script);
+})();
