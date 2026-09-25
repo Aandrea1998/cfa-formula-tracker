@@ -15,10 +15,19 @@
 .formula-library-table .col-formula{width:auto}
 .formula-library-table .col-status{width:150px}
 
+/* One row rhythm from the first row to the last row of every subject. */
+.formula-library-table tbody tr{
+  min-height:68px;
+}
+
 .formula-library-table th,
 .formula-library-table td{
   padding:14px 8px;
   vertical-align:middle;
+}
+
+.formula-library-table tbody td{
+  height:68px;
 }
 
 .formula-library-table th.col-prompt,
@@ -32,6 +41,7 @@
   line-height:1.35;
   letter-spacing:0;
   color:var(--text);
+  vertical-align:middle;
 }
 
 .formula-library-table th{
@@ -43,6 +53,7 @@
 .formula-library-table td.col-id{
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
+  vertical-align:middle;
 }
 
 /* Formula column: Equity-style size by default. Long formulas are auto-fitted by library-alignment.js. */
@@ -55,7 +66,7 @@
 .formula-library-table td.col-formula .formula-math-library{
   width:100%;
   min-width:0;
-  min-height:46px;
+  min-height:40px;
   padding:0 4px;
   display:flex;
   align-items:center;
@@ -92,9 +103,16 @@
   vertical-align:middle;
 }
 
+/* Match the clean Equity ending: no extra separator glued to the card edge. */
+.formula-library-table tbody tr:last-child td{
+  border-bottom:0;
+}
+
+/* Same inner spacing at the bottom of every subject card. */
 .library-group .table-wrap{
   padding-left:14px;
   padding-right:14px;
+  padding-bottom:10px;
 }
 
 @media(max-width:900px){
