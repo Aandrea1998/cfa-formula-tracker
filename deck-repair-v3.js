@@ -9,18 +9,27 @@
     'fcffvsfcfefinancingclaims'
   ]);
 
-  // Canonical prompt cleanups for cards imported with overly broad section headings.
+  // Canonical prompt cleanups for cards imported with overly broad or misleading headings.
   const PROMPT_FIX={
-    usesoffcffandfcfe:'Net Payments to Equity'
+    usesoffcffandfcfe:'Net Payments to Equity',
+    estimatedvalueintrinsicvalueandmarketprice:'Mispricing vs Valuation Error',
+    peratioandpvgo:'P/E Ratio Decomposition — PVGO',
+    constantdividendgrowth:'Constant-Growth Dividend Discount Model (Gordon Growth)'
   };
 
-  // One-time canonical repairs for cards created by the earlier fragment parser.
-  // Only the formula fields are changed: id, status, history, subject and topic stay intact.
+  // Canonical repairs for cards created by the earlier fragment parser or whose
+  // extracted expression did not capture the study-useful valuation relationship.
+  // id, status, history, subject and topic stay intact.
   const FIX={
     presentvalueofexpectedcashflows:'V_0=\\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}',
     residualincomevaluationmodel:'V_0=BV_0+\\sum_{t=1}^{\\infty}\\frac{RI_t}{(1+r)^t}',
     ddmmultipleholdingperiods:'V_0=\\sum_{t=1}^{n}\\frac{D_t}{(1+r)^t}+\\frac{P_n}{(1+r)^n}',
-    constantdividendgrowth:'\\begin{aligned}D_t&=D_0(1+g)^t\\\\D_1&=D_0(1+g)\\end{aligned}',
+    estimatedvalueintrinsicvalueandmarketprice:'\\begin{aligned}\\text{Mispricing}&=V-P\\\\\\text{Valuation Error}&=V_E-V\\end{aligned}',
+    mispricingvsvaluationerror:'\\begin{aligned}\\text{Mispricing}&=V-P\\\\\\text{Valuation Error}&=V_E-V\\end{aligned}',
+    constantdividendgrowth:'\\begin{aligned}V_0&=\\frac{D_1}{r-g}\\\\&=\\frac{D_0(1+g)}{r-g},\\quad r>g\\end{aligned}',
+    constantgrowthdividenddiscountmodelgordongrowth:'\\begin{aligned}V_0&=\\frac{D_1}{r-g}\\\\&=\\frac{D_0(1+g)}{r-g},\\quad r>g\\end{aligned}',
+    peratioandpvgo:'\\frac{P_0}{E_1}=\\frac{1}{r}+\\frac{\\mathrm{PVGO}}{E_1}',
+    peratiodecompositionpvgo:'\\frac{P_0}{E_1}=\\frac{1}{r}+\\frac{\\mathrm{PVGO}}{E_1}',
     justifiedleadingandtrailingpe:'\\begin{aligned}\\frac{P_0}{E_1}&=\\frac{1-b}{r-g}\\\\\\frac{P_0}{E_0}&=\\frac{(1-b)(1+g)}{r-g}\\end{aligned}',
     twostagedividenddiscountmodel:'V_0=\\sum_{t=1}^{n}\\frac{D_0(1+g_S)^t}{(1+r)^t}+\\frac{D_0(1+g_S)^n(1+g_L)}{(1+r)^n(r-g_L)}',
     twostagedividenddiscountmodelterminalvalue:'V_n=\\frac{D_{n+1}}{r-g_L}=\\frac{D_0(1+g_S)^n(1+g_L)}{r-g_L}',
