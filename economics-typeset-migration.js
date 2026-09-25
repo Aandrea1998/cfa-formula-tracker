@@ -58,7 +58,7 @@
     20:'Convergence — Capital per Worker Growth',
     21:'Convergence — Output per Worker Growth',
     22:'Steady-State Per-Worker Growth',
-    23:'Aggregate vs Per-Worker Capital Growth',
+    23:'Aggregate Capital Growth — Per-Worker Capital Growth + Labor Growth',
     24:'Aggregate vs Per-Worker Output Growth',
     25:'Steady-State Aggregate Growth',
     26:'No Technological Progress — Per-Worker Growth',
