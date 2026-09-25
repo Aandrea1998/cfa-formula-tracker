@@ -1,4 +1,4 @@
-.formula-cell{min-width:240px;vertical-align:middle}
+.formula-cell{min-width:260px;vertical-align:middle}
 .formula-fidelity-img{display:block;max-width:100%;height:auto;object-fit:contain;filter:none}
 .formula-library-img{max-height:88px;max-width:520px;margin:2px 0}
 .formula-review-img{max-height:190px;max-width:min(100%,760px);margin:8px auto}
@@ -6,9 +6,37 @@
 .formula-fidelity-text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:normal;overflow-wrap:anywhere}
 .fidelity-extract .fields{min-width:0}
 .fidelity-preview{margin-top:10px;padding:12px 14px;border:1px solid var(--border,#dfe4ea);border-radius:12px;background:#fff;overflow:auto}
-.fidelity-meta{margin-top:6px;font-size:12px;color:var(--muted,#6b7280);font-weight:600}
+.fidelity-meta{margin-top:8px;font-size:12px;color:var(--muted,#8893a2);font-weight:650;letter-spacing:.01em}
 .fidelity-details{margin-top:8px}
 .fidelity-details summary{cursor:pointer;color:var(--muted,#6b7280);font-size:12px;font-weight:600}
 .fidelity-details textarea{margin-top:8px;min-height:58px;width:100%}
 #answer:has(.formula-review-img){background:#fff;padding:18px;border-radius:14px}
-@media (max-width:760px){.formula-cell{min-width:190px}.formula-library-img{max-width:360px;max-height:76px}.formula-review-img{max-height:155px}}
+
+/* True typeset math */
+.formula-math{width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;color:inherit}
+.formula-math .katex-display{margin:.25em 0;text-align:center;overflow:visible}
+.formula-math .katex{font-size:1.08em}
+.formula-math-library{display:flex;align-items:center;justify-content:flex-start;min-height:44px;padding:2px 0}
+.formula-math-library .katex-display{width:100%;text-align:left;margin:0}
+.formula-math-library .katex{font-size:1.02em}
+.formula-math-review{display:flex;align-items:center;justify-content:center;min-height:120px;padding:18px 10px}
+.formula-math-review .katex{font-size:1.7em}
+.formula-math-preview{display:flex;align-items:center;justify-content:center;min-height:92px;padding:14px 18px}
+.formula-math-preview .katex{font-size:1.45em}
+
+.math-preview-shell{margin-top:12px;border:1px solid var(--border,#263343);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));min-height:96px;display:flex;align-items:center;justify-content:center;overflow:auto;padding:6px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+.math-extract .fields{min-width:0}
+.math-edit{margin-top:10px;border-top:1px solid rgba(128,144,160,.18);padding-top:8px}
+.math-edit summary{cursor:pointer;color:var(--muted,#8893a2);font-size:12px;font-weight:650;user-select:none}
+.math-edit label{display:block;margin:10px 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted,#8893a2);font-weight:700}
+.math-edit textarea{width:100%;min-height:68px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.45}
+#answer:has(.formula-math-review){background:transparent;padding:0;border-radius:0}
+
+@media (max-width:760px){
+  .formula-cell{min-width:190px}
+  .formula-library-img{max-width:360px;max-height:76px}
+  .formula-review-img{max-height:155px}
+  .formula-math-review{min-height:100px;padding:12px 2px}
+  .formula-math-review .katex{font-size:1.35em}
+  .formula-math-preview .katex{font-size:1.22em}
+}
