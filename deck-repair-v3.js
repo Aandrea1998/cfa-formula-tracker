@@ -4,9 +4,11 @@
   const tidy=s=>String(s??'').replace(/\s+/g,' ').trim();
   const qnorm=s=>tidy(s).toLowerCase().replace(/[^a-z0-9]+/g,'');
 
-  // Cards that are conceptual definitions rather than formulas and should not live in the formula sheet.
+  // Cards that are conceptual definitions or redundant with a stronger formula card.
   const REMOVE=new Set([
-    'fcffvsfcfefinancingclaims'
+    'fcffvsfcfefinancingclaims',
+    'basicfcff',
+    'basicfcfe'
   ]);
 
   // Canonical prompt cleanups for cards imported with overly broad or misleading headings.
@@ -22,6 +24,7 @@
   // id, status, history, subject and topic stay intact.
   const FIX={
     presentvalueofexpectedcashflows:'V_0=\\sum_{t=1}^{n}\\frac{CF_t}{(1+r)^t}',
+    residualincome:'\\begin{aligned}RI_t&=NI_t-\\text{Equity Charge}_t\\\\\\text{Equity Charge}_t&=r\\,B_{t-1}\\\\\\therefore\quad RI_t&=NI_t-r\\,B_{t-1}\\end{aligned}',
     residualincomevaluationmodel:'V_0=BV_0+\\sum_{t=1}^{\\infty}\\frac{RI_t}{(1+r)^t}',
     ddmmultipleholdingperiods:'V_0=\\sum_{t=1}^{n}\\frac{D_t}{(1+r)^t}+\\frac{P_n}{(1+r)^n}',
     estimatedvalueintrinsicvalueandmarketprice:'\\begin{aligned}\\text{Mispricing}&=V-P\\\\\\text{Valuation Error}&=V_E-V\\end{aligned}',
@@ -68,7 +71,7 @@
   try{
     if(typeof cards==='undefined'||!Array.isArray(cards))return;
 
-    // Remove conceptual, non-formula cards from any already-saved browser deck.
+    // Remove conceptual/redundant cards from any already-saved browser deck.
     for(let i=cards.length-1;i>=0;i--){
       if(REMOVE.has(qnorm(cards[i].question))){
         cards.splice(i,1);
