@@ -20,37 +20,37 @@
 
   function fitReviewFormula(){
     const box=answer.querySelector('.formula-math-review');
-    if(!box)return;
-    if(getComputedStyle(answer).display==='none')return;
+    if(!box)return false;
+    if(getComputedStyle(answer).display==='none')return false;
 
     const katex=box.querySelector('.katex');
-    if(!katex)return;
+    if(!katex)return false;
 
-    // Start from the normal review size so short formulas remain large.
+    // Always restart from the normal Review size, then shrink only if needed.
     box.style.fontSize='';
 
     const style=getComputedStyle(box);
     const pad=(parseFloat(style.paddingLeft)||0)+(parseFloat(style.paddingRight)||0);
-    const available=Math.max(40,box.clientWidth-pad-12);
-    if(available<=40)return;
+    const available=Math.max(40,box.clientWidth-pad-16);
+    if(available<=40)return false;
 
-    let basePx=parseFloat(getComputedStyle(box).fontSize)||23.2;
+    const basePx=parseFloat(getComputedStyle(box).fontSize)||23.2;
     let width=measuredWidth(katex);
-    if(!width)return;
+    if(!width)return false;
 
-    if(width<=available)return;
+    if(width<=available)return true;
 
-    const minPx=window.innerWidth<=760?10.5:11.5;
-    let target=Math.max(minPx,basePx*(available/width)*0.96);
+    const minPx=window.innerWidth<=760?10:11;
+    let target=Math.max(minPx,basePx*(available/width)*0.94);
     box.style.fontSize=target+'px';
 
-    // Re-measure the actual KaTeX contents after every reduction.
-    for(let i=0;i<8;i++){
+    for(let i=0;i<10;i++){
       width=measuredWidth(katex);
       if(width<=available||target<=minPx)break;
-      target=Math.max(minPx,target*(available/width)*0.96);
+      target=Math.max(minPx,target*(available/width)*0.94);
       box.style.fontSize=target+'px';
     }
+    return true;
   }
 
   function scheduleFit(){
@@ -61,16 +61,11 @@
     });
   }
 
-  // Observe only content replacement. Do NOT observe style changes: the fitter
-  // changes font-size itself, and observing that caused a reset/shrink loop.
   new MutationObserver(scheduleFit).observe(answer,{
     childList:true,
     subtree:true,
     characterData:true
   });
-
-  const reveal=document.getElementById('reveal');
-  if(reveal)reveal.addEventListener('click',()=>setTimeout(scheduleFit,0));
 
   ['prevBtn','nextBtn','markWrong','markDifficult','markKnown','restartReviewBtn','randomModeBtn','subjectModeBtn']
     .forEach(id=>{
@@ -89,5 +84,5 @@
   });
 
   scheduleFit();
-  window.CFAReviewFormulaFit={fit:scheduleFit};
+  window.CFAReviewFormulaFit={fit:scheduleFit,fitNow:fitReviewFormula};
 })();
