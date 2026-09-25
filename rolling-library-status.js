@@ -118,3 +118,11 @@
   script.onload=loadRepair;
   document.body.appendChild(script);
 })();
+
+(function loadPortfolioManagementChapter1(){
+  if(document.querySelector('script[src="portfolio-management-chapter-1.js"]'))return;
+  const script=document.createElement('script');
+  script.src='portfolio-management-chapter-1.js';
+  script.defer=true;
+  document.body.appendChild(script);
+})();
