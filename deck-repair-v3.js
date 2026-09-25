@@ -9,6 +9,11 @@
     'fcffvsfcfefinancingclaims'
   ]);
 
+  // Canonical prompt cleanups for cards imported with overly broad section headings.
+  const PROMPT_FIX={
+    usesoffcffandfcfe:'Net Payments to Equity'
+  };
+
   // One-time canonical repairs for cards created by the earlier fragment parser.
   // Only the formula fields are changed: id, status, history, subject and topic stay intact.
   const FIX={
@@ -50,7 +55,7 @@
     return false;
   }
 
-  let changed=0,removed=0;
+  let changed=0,removed=0,promptChanged=0;
   try{
     if(typeof cards==='undefined'||!Array.isArray(cards))return;
 
@@ -63,8 +68,15 @@
     }
 
     cards.forEach(c=>{
+      const originalKey=qnorm(c.question);
+      const newPrompt=PROMPT_FIX[originalKey];
+      if(newPrompt&&c.question!==newPrompt){
+        c.question=newPrompt;
+        promptChanged++;
+      }
+
       const key=qnorm(c.question);
-      const latex=FIX[key];
+      const latex=FIX[key]||FIX[originalKey];
       if(!latex)return;
       // Canonicalize all matching legacy cards; this also fixes acronym spacing.
       if(tidy(c.latex)!==latex||isSuspicious(c)){
@@ -75,7 +87,7 @@
       }
     });
 
-    if(changed||removed){
+    if(changed||removed||promptChanged){
       if(typeof save==='function')save();
       if(typeof refresh==='function')refresh();
     }
@@ -86,6 +98,6 @@
       try{if(typeof renderReview==='function'&&typeof reviewIds!=='undefined'&&reviewIds.length)renderReview();}catch(_e){}
     },0);
 
-    window.CFADeckRepair={changed,removed};
+    window.CFADeckRepair={changed,removed,promptChanged};
   }catch(_e){}
 })();
