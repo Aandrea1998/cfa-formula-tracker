@@ -23,4 +23,13 @@
   }
   new MutationObserver(()=>requestAnimationFrame(polish)).observe(box,{childList:true,subtree:true});
   polish();
+
+  // Load the complete-block reconstruction layer last so it can replace
+  // fragment-level PDF parsing when this CFA formula sheet is recognized.
+  if(!document.querySelector('script[data-formula-reconstruction-v2]')){
+    const s=document.createElement('script');
+    s.src='formula-reconstruction-v2.js?v=2';
+    s.dataset.formulaReconstructionV2='true';
+    document.body.appendChild(s);
+  }
 })();
