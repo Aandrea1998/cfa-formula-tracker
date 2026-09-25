@@ -4,6 +4,11 @@
   const tidy=s=>String(s??'').replace(/\s+/g,' ').trim();
   const qnorm=s=>tidy(s).toLowerCase().replace(/[^a-z0-9]+/g,'');
 
+  // Cards that are conceptual definitions rather than formulas and should not live in the formula sheet.
+  const REMOVE=new Set([
+    'fcffvsfcfefinancingclaims'
+  ]);
+
   // One-time canonical repairs for cards created by the earlier fragment parser.
   // Only the formula fields are changed: id, status, history, subject and topic stay intact.
   const FIX={
@@ -27,7 +32,6 @@
     fcffalternativecomputationformulasfromnetincomeavailabletocommon:'\\mathrm{FCFF}=\\mathrm{NI}_{common}+\\mathrm{NCC}+\\mathrm{Int}(1-T)+\\mathrm{PrefDiv}-\\mathrm{FCInv}-\\mathrm{WCInv}',
     fcfealternativecomputationformulasfromfcff:'\\mathrm{FCFE}=\\mathrm{FCFF}-\\mathrm{Interest}(1-T)+\\text{Net Borrowing}',
     fcfealternativecomputationformulasfromnetincome:'\\mathrm{FCFE}=\\mathrm{NI}_{common}+\\mathrm{NCC}-\\mathrm{FCInv}-\\mathrm{WCInv}+\\text{Net Financing}',
-    fcffvsfcfefinancingclaims:'\\begin{aligned}\\mathrm{FCFE}&=\\text{Cash flow after debt and preferred claims}\\\\&\\quad\\text{available to common equity}\\end{aligned}',
     weightedaveragecostofcapital:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
     weightedaveragecostofcapitaldebtcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_e r_e',
     weightedaveragecostofcapitaldebtpreferredcommonequity:'\\mathrm{WACC}=w_d r_d(1-T)+w_p r_p+w_e r_e',
@@ -46,9 +50,18 @@
     return false;
   }
 
-  let changed=0;
+  let changed=0,removed=0;
   try{
     if(typeof cards==='undefined'||!Array.isArray(cards))return;
+
+    // Remove conceptual, non-formula cards from any already-saved browser deck.
+    for(let i=cards.length-1;i>=0;i--){
+      if(REMOVE.has(qnorm(cards[i].question))){
+        cards.splice(i,1);
+        removed++;
+      }
+    }
+
     cards.forEach(c=>{
       const key=qnorm(c.question);
       const latex=FIX[key];
@@ -62,7 +75,7 @@
       }
     });
 
-    if(changed){
+    if(changed||removed){
       if(typeof save==='function')save();
       if(typeof refresh==='function')refresh();
     }
@@ -73,6 +86,6 @@
       try{if(typeof renderReview==='function'&&typeof reviewIds!=='undefined'&&reviewIds.length)renderReview();}catch(_e){}
     },0);
 
-    window.CFADeckRepair={changed};
+    window.CFADeckRepair={changed,removed};
   }catch(_e){}
 })();
