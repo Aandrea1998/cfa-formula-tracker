@@ -19,8 +19,35 @@
 .formula-math-library{display:flex;align-items:center;justify-content:flex-start;min-height:44px;padding:2px 0}
 .formula-math-library .katex-display{width:100%;text-align:left;margin:0}
 .formula-math-library .katex{font-size:1.02em}
-.formula-math-review{display:flex;align-items:center;justify-content:center;min-height:120px;padding:18px 10px}
-.formula-math-review .katex{font-size:1.7em}
+
+/* Review mode: large enough to study, but never wider than the card. JS auto-fits long formulas. */
+.formula-math-review{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  min-height:112px;
+  padding:16px 14px;
+  box-sizing:border-box;
+  font-size:1.45rem;
+  overflow:hidden!important;
+  scrollbar-width:none;
+}
+.formula-math-review::-webkit-scrollbar{display:none}
+.formula-math-review .katex-display{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  text-align:center;
+  overflow:hidden!important;
+}
+.formula-math-review .katex{
+  font-size:1em;
+  white-space:nowrap;
+}
+
 .formula-math-preview{display:flex;align-items:center;justify-content:center;min-height:92px;padding:14px 18px}
 .formula-math-preview .katex{font-size:1.45em}
 
@@ -57,14 +84,13 @@
 .math-edit summary{cursor:pointer;color:var(--muted,#8893a2);font-size:12px;font-weight:650;user-select:none}
 .math-edit label{display:block;margin:10px 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted,#8893a2);font-weight:700}
 .math-edit textarea{width:100%;min-height:68px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.45}
-#answer:has(.formula-math-review){background:transparent;padding:0;border-radius:0}
+#answer:has(.formula-math-review){background:transparent;padding:0;border-radius:0;overflow:hidden}
 
 @media (max-width:760px){
   .formula-cell{min-width:190px}
   .formula-library-img{max-width:360px;max-height:76px}
   .formula-review-img{max-height:155px}
-  .formula-math-review{min-height:100px;padding:12px 2px}
-  .formula-math-review .katex{font-size:1.35em}
+  .formula-math-review{min-height:96px;padding:12px 8px;font-size:1.25rem}
   .formula-math-preview .katex{font-size:1.22em}
   .fidelity-preview.math-preview .katex{font-size:1.2em}
 }
