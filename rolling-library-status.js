@@ -15,7 +15,9 @@
   function enhance(){
     root.querySelectorAll('.formula-library-table, .library-group table').forEach(table=>{
       const head=table.querySelector('thead tr');
-      if(head&&head.children[3])head.children[3].textContent='Rolling status';
+      if(head&&head.children[3]&&head.children[3].textContent!=='Rolling status'){
+        head.children[3].textContent='Rolling status';
+      }
 
       table.querySelectorAll('tbody tr').forEach(row=>{
         const cells=row.children;
@@ -41,6 +43,12 @@
         const cls=accuracy!==null?(accuracy>=80?'known':accuracy<60?'missed':'difficult'):(card.status||'');
         const pct=accuracy===null?'—':`${accuracy}%`;
         const cell=cells[3];
+        const sig=[label,cls,pct,attempts,known,difficult,missed].join('|');
+
+        // Idempotent update: do not rewrite the DOM when nothing changed.
+        // This prevents the MutationObserver from triggering itself forever.
+        if(cell.dataset.rollingSignature===sig)return;
+        cell.dataset.rollingSignature=sig;
         cell.classList.add('rolling-status-cell');
         cell.title=attempts?`Last ${Math.min(attempts,5)} attempt${attempts===1?'':'s'}: ${known} Known · ${difficult} Difficult · ${missed} Missed`:'No review attempts yet';
         cell.innerHTML=`<span class="status-dot ${cls}"></span><span class="rolling-status-main"><span class="rolling-status-label">${label}</span><span class="rolling-status-pct">${pct}</span></span>`;
@@ -64,7 +72,9 @@
     requestAnimationFrame(()=>{queued=false;enhance();});
   };
 
-  new MutationObserver(schedule).observe(root,{childList:true,subtree:true});
+  // The library renderer replaces direct children of #libraryContent.
+  // Observing the entire subtree caused status-cell edits to retrigger this observer.
+  new MutationObserver(schedule).observe(root,{childList:true});
 
   if(typeof renderLibrary==='function'){
     const baseRender=renderLibrary;
