@@ -48,5 +48,15 @@
     },0);
   }
 
+  // Load the final library presentation enhancement after all static library
+  // render/decorator scripts have initialized. This applies to every CFA topic,
+  // not only Alternative Investments.
+  setTimeout(()=>{
+    if(document.querySelector('script[src="library-unified-topic-view.js"]'))return;
+    const script=document.createElement('script');
+    script.src='library-unified-topic-view.js';
+    document.body.appendChild(script);
+  },0);
+
   window.CFAAlternativeInvestmentsUnifiedSection={changed};
 })();
