@@ -41,3 +41,15 @@
 
   window.CFAEquityReviewRepair={changed};
 })();
+
+// Deck migration loader. Kept here so existing deployments pick up the new
+// Alternative Investments cards without changing the stable Review renderer.
+(function(){
+  'use strict';
+  const src='alternative-investments-pages-1-4.js';
+  if(document.querySelector(`script[src="${src}"]`))return;
+  const script=document.createElement('script');
+  script.src=src;
+  script.async=false;
+  document.body.appendChild(script);
+})();
