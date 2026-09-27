@@ -121,11 +121,13 @@
     });
   }
 
-  function setLibraryCondensed(){
+  function stabilizeLibraryHeader(){
     const view=document.getElementById('formulasView');
     if(!view)return;
-    const visible=getComputedStyle(view).display!=='none';
-    view.classList.toggle('library-condensed',visible&&view.getBoundingClientRect().top<-36);
+    // The sticky library header must keep one constant geometry while scrolling.
+    // Changing its height based on scroll position causes the nested sticky
+    // group/table headers to repeatedly recalculate their top offsets and jitter.
+    view.classList.remove('library-condensed');
   }
 
   function enhanceAll(){
@@ -133,7 +135,7 @@
     enhanceTrend();
     enhanceWeak();
     enhanceLibrary();
-    setLibraryCondensed();
+    stabilizeLibraryHeader();
   }
 
   if(typeof refresh==='function'){
@@ -150,7 +152,9 @@
     const node=document.getElementById(id);
     if(node)new MutationObserver(()=>requestAnimationFrame(enhanceAll)).observe(node,{childList:true,subtree:true});
   });
-  window.addEventListener('scroll',setLibraryCondensed,{passive:true});
-  window.addEventListener('resize',setLibraryCondensed);
+
+  // Deliberately no scroll listener here. Sticky geometry is fixed while scrolling;
+  // it is allowed to change only because of real content/layout changes.
+  window.addEventListener('resize',stabilizeLibraryHeader,{passive:true});
   requestAnimationFrame(enhanceAll);
 })();
