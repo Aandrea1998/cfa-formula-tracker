@@ -30,6 +30,48 @@
     if(netPayments.formulaImage){delete netPayments.formulaImage;changed=true;}
   }
 
+  // Keep the existing PVGO card rather than creating a duplicate. The prompt
+  // explicitly identifies P0/E1 as a leading P/E ratio for standalone Review.
+  const leadingPEPrompt='Leading P/E Ratio — PVGO Decomposition';
+  const leadingPELatex='\\frac{P_0}{E_1}=\\frac{1}{r}+\\frac{\\mathrm{PVGO}}{E_1}';
+  const leadingPEAliases=new Set([
+    'peratioandpvgo',
+    'peratiodecompositionpvgo',
+    'leadingperatiopvgodecomposition'
+  ]);
+
+  let leadingPE=cards.find(c=>
+    c.subject==='Equity Valuation' &&
+    leadingPEAliases.has(norm(c.question))
+  );
+
+  if(!leadingPE){
+    leadingPE=cards.find(c=>
+      c.subject==='Equity Valuation' &&
+      norm(c.latex||c.answer).includes('pvgo')
+    );
+  }
+
+  if(!leadingPE){
+    const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+    cards.push({
+      id:nextId,
+      question:leadingPEPrompt,
+      answer:leadingPELatex,
+      latex:leadingPELatex,
+      subject:'Equity Valuation',
+      topic:'Chapter 1-2-3',
+      status:null,
+      history:[]
+    });
+    changed=true;
+  }else{
+    if(leadingPE.question!==leadingPEPrompt){leadingPE.question=leadingPEPrompt;changed=true;}
+    if(leadingPE.latex!==leadingPELatex){leadingPE.latex=leadingPELatex;changed=true;}
+    if(leadingPE.answer!==leadingPELatex){leadingPE.answer=leadingPELatex;changed=true;}
+    if(leadingPE.formulaImage){delete leadingPE.formulaImage;changed=true;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
