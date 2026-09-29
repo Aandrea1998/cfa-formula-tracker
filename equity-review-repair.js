@@ -72,6 +72,42 @@
     if(leadingPE.formulaImage){delete leadingPE.formulaImage;changed=true;}
   }
 
+  // Sustainable dividend payout ratio. Keep this as a standalone review card
+  // because the growth/retention relationship may appear elsewhere only as an
+  // intermediate step in another valuation formula.
+  const payoutPrompt='Sustainable Dividend Payout Ratio — From Growth and ROE';
+  const payoutLatex='\\begin{aligned}g&=b\\times ROE\\\\b&=1-\\text{Dividend Payout Ratio}\\\\\\text{Dividend Payout Ratio}&=1-\\frac{g}{ROE}\\end{aligned}';
+  const payoutAliases=new Set([
+    'sustainabledividendpayoutratiofromgrowthandroe',
+    'sustainabledividendpayoutratio',
+    'dividendpayoutratiofromgrowthandroe'
+  ]);
+
+  let payoutCard=cards.find(c=>
+    c.subject==='Equity Valuation' &&
+    payoutAliases.has(norm(c.question))
+  );
+
+  if(!payoutCard){
+    const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+    cards.push({
+      id:nextId,
+      question:payoutPrompt,
+      answer:payoutLatex,
+      latex:payoutLatex,
+      subject:'Equity Valuation',
+      topic:'Chapter 1-2-3',
+      status:null,
+      history:[]
+    });
+    changed=true;
+  }else{
+    if(payoutCard.question!==payoutPrompt){payoutCard.question=payoutPrompt;changed=true;}
+    if(payoutCard.latex!==payoutLatex){payoutCard.latex=payoutLatex;changed=true;}
+    if(payoutCard.answer!==payoutLatex){payoutCard.answer=payoutLatex;changed=true;}
+    if(payoutCard.formulaImage){delete payoutCard.formulaImage;changed=true;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
