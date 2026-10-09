@@ -212,7 +212,7 @@
       topic:'Term Structure Models',
       question:'Cox-Ingersoll-Ross (CIR) Model — Mean Reversion & Level-Dependent Volatility',
       aliases:['Cox-Ingersoll-Ross (CIR) Model','CIR Model'],
-      latex:'\\begin{aligned}dr_t&=\\kappa(\\theta-r_t)\\,dt+\\sigma\\sqrt{r_t}\\,dZ\\\\\\text{Equilibrium};&\\quad\\text{Mean Reversion};&\\quad\\sigma_r\\propto\\sqrt{r_t}\\end{aligned}',
+      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\sqrt{r_t}\\,dZ',
       notation:[
         ['r_t','Short-term interest rate at time t'],
         ['\\theta','Long-run mean rate'],
@@ -229,7 +229,7 @@
       topic:'Term Structure Models',
       question:'Vasicek Model — Mean Reversion & Constant Volatility',
       aliases:['Vasicek Model'],
-      latex:'\\begin{aligned}dr_t&=\\kappa(\\theta-r_t)\\,dt+\\sigma\\,dZ\\\\\\text{Equilibrium};&\\quad\\text{Mean Reversion};&\\quad\\sigma=\\text{Constant}\\end{aligned}',
+      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\,dZ',
       notation:[
         ['r_t','Short rate'],
         ['\\theta','Long-run mean'],
@@ -245,7 +245,7 @@
       topic:'Term Structure Models',
       question:'Ho-Lee Model — Time-Dependent Drift, No Mean Reversion',
       aliases:['Ho-Lee Model'],
-      latex:'\\begin{aligned}dr_t&=\\theta_t\\,dt+\\sigma\\,dZ\\\\\\text{Arbitrage-Free};&\\quad\\text{No Mean Reversion};&\\quad\\theta_t=\\text{Time Dependent},\\;\\sigma=\\text{Constant}\\end{aligned}',
+      latex:'dr_t=\\theta_t\\,dt+\\sigma\\,dZ',
       notation:[
         ['r_t','Short rate'],
         ['\\theta_t','Time-dependent drift'],
@@ -260,7 +260,7 @@
       topic:'Term Structure Models',
       question:'Kalotay-Williams-Fabozzi (KWF) Model — Lognormal Short Rate',
       aliases:['Kalotay-Williams-Fabozzi (KWF) Model','KWF Model'],
-      latex:'\\begin{aligned}d\\ln(r_t)&=\\theta_t\\,dt+\\sigma\\,dZ\\\\\\text{Arbitrage-Free};&\\quad\\text{No Mean Reversion};&\\quad\\ln(r_t)\\sim N\\Rightarrow r_t\\sim\\text{Lognormal}\\end{aligned}',
+      latex:'d\\ln(r_t)=\\theta_t\\,dt+\\sigma\\,dZ',
       notation:[
         ['r_t','Short rate'],
         ['\\ln(r_t)','Log of the short rate'],
