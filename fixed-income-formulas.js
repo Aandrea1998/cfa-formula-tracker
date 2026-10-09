@@ -99,26 +99,12 @@
     },
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
-      question:'Future Spot Equals Forward',
-      latex:'\\begin{aligned}\\text{Future Spot}&=\\text{Forward}\\\\&\\Rightarrow\\text{No Extra Return vs. Priced}\\end{aligned}',
-      interpretation:'If the future spot rate realizes exactly the forward rate, there is no abnormal roll-down gain beyond what was already priced.',
-      memoryRule:'Future spot = forward ⇒ no abnormal roll-down gain beyond what is already priced.',
-      sourcePage:2
-    },
-    {
-      topic:'Yield-Curve Expectations & Riding the Yield Curve',
-      question:'Future Spot Below Forward',
-      latex:'\\begin{aligned}\\text{Future Spot}&<\\text{Forward}\\\\&\\Rightarrow y_{\\text{realized}}<y_{\\text{priced}}\\\\&\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Return}\\end{aligned}',
+      question:'Riding the Yield Curve — Future Spot vs Forward (3 Cases)',
+      aliases:['Future Spot Equals Forward','Future Spot Below Forward','Future Spot Above Forward'],
+      latex:'\\begin{aligned}\\text{Future Spot}<\\text{Forward}&\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Return}\\\\\\text{Future Spot}=\\text{Forward}&\\Rightarrow\\text{No Extra Return vs. Priced}\\\\\\text{Future Spot}>\\text{Forward}&\\Rightarrow P\\downarrow\\Rightarrow\\text{Lower Return}\\end{aligned}',
       notation:[['P','Bond price']],
-      interpretation:'A realized future spot rate below the forward rate gives a lower yield and a higher bond price than priced.',
-      sourcePage:2
-    },
-    {
-      topic:'Yield-Curve Expectations & Riding the Yield Curve',
-      question:'Future Spot Above Forward',
-      latex:'\\begin{aligned}\\text{Future Spot}&>\\text{Forward}\\\\&\\Rightarrow y_{\\text{realized}}>y_{\\text{priced}}\\\\&\\Rightarrow P\\downarrow\\Rightarrow\\text{Lower Return}\\end{aligned}',
-      notation:[['P','Bond price']],
-      interpretation:'A realized future spot rate above the forward rate gives a higher yield and a lower bond price than priced.',
+      interpretation:'Below forward implies a better-than-priced outcome; equal to forward implies no extra return versus what was already priced; above forward implies a worse-than-priced outcome.',
+      memoryRule:'Spot < Forward ⇒ extra return; Spot = Forward ⇒ no extra return vs. priced; Spot > Forward ⇒ lower return.',
       sourcePage:2
     },
 
@@ -343,6 +329,23 @@
       if(local){changed++;}
     }
     existingQuestionKeys.set(qkey(def.question),card);
+  }
+
+  // Consolidate the three earlier future-spot/forward cards into one 3-case riding-the-yield-curve card.
+  // Preserve existing review state/history on the surviving card.
+  const ridingCasesTarget=qkey('Riding the Yield Curve — Future Spot vs Forward (3 Cases)');
+  const legacyRidingCases=new Set([
+    qkey('Future Spot Equals Forward'),
+    qkey('Future Spot Below Forward'),
+    qkey('Future Spot Above Forward')
+  ]);
+  for(const card of [...cards]){
+    if(card.subject!==SUBJECT||!legacyRidingCases.has(qkey(card.question)))continue;
+    const keep=cards.find(c=>c!==card&&c.subject===SUBJECT&&qkey(c.question)===ridingCasesTarget);
+    if(!keep)continue;
+    mergeState(keep,card);
+    const i=cards.indexOf(card);
+    if(i>=0){cards.splice(i,1);removed++;changed++;}
   }
 
   // Consolidate the earlier split model cards into the four canonical model rows.
