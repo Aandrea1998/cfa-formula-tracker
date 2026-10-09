@@ -76,16 +76,11 @@
 
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
-      question:'Projected Spot Curve Above Forward Curve',
-      latex:'\\begin{aligned}\\text{Projected Spot}&>\\text{Forward}\\\\&\\Rightarrow R_{\\text{realized}}<R_f^{(1)}\\end{aligned}',
-      interpretation:'If the projected future spot curve is above the forward curve and the projection is realized, return is below the one-period risk-free rate.',
-      sourcePage:2
-    },
-    {
-      topic:'Yield-Curve Expectations & Riding the Yield Curve',
-      question:'Projected Spot Curve Below Forward Curve',
-      latex:'\\begin{aligned}\\text{Projected Spot}&<\\text{Forward}\\\\&\\Rightarrow R_{\\text{realized}}>R_f^{(1)}\\end{aligned}',
-      interpretation:'If the projected future spot curve is below the forward curve and the projection is realized, return is above the one-period risk-free rate.',
+      question:'Projected Spot vs Forward Curve — Effect on Realized Return',
+      aliases:['Projected Spot Curve Above Forward Curve','Projected Spot Curve Below Forward Curve'],
+      latex:'\\begin{aligned}\\text{Projected Spot}>\\text{Forward}&\\Rightarrow R_{\\text{realized}}<R_f^{(1)}\\\\\\text{Projected Spot}<\\text{Forward}&\\Rightarrow R_{\\text{realized}}>R_f^{(1)}\\end{aligned}',
+      interpretation:'If the projected future spot curve is above the forward curve and the projection is realized, return is below the one-period risk-free rate; if it is below the forward curve, return is above the one-period risk-free rate.',
+      memoryRule:'Projected Spot > Forward ⇒ realized return < one-period risk-free rate; Projected Spot < Forward ⇒ realized return > one-period risk-free rate.',
       sourcePage:2
     },
     {
@@ -329,6 +324,22 @@
       if(local){changed++;}
     }
     existingQuestionKeys.set(qkey(def.question),card);
+  }
+
+  // Consolidate the two earlier projected-spot/forward cards into one comparison card.
+  // Preserve existing review state/history on the surviving card.
+  const projectedSpotTarget=qkey('Projected Spot vs Forward Curve — Effect on Realized Return');
+  const legacyProjectedSpotCases=new Set([
+    qkey('Projected Spot Curve Above Forward Curve'),
+    qkey('Projected Spot Curve Below Forward Curve')
+  ]);
+  for(const card of [...cards]){
+    if(card.subject!==SUBJECT||!legacyProjectedSpotCases.has(qkey(card.question)))continue;
+    const keep=cards.find(c=>c!==card&&c.subject===SUBJECT&&qkey(c.question)===projectedSpotTarget);
+    if(!keep)continue;
+    mergeState(keep,card);
+    const i=cards.indexOf(card);
+    if(i>=0){cards.splice(i,1);removed++;changed++;}
   }
 
   // Consolidate the three earlier future-spot/forward cards into one 3-case riding-the-yield-curve card.
