@@ -210,9 +210,9 @@
 
     {
       topic:'Term Structure Models',
-      question:'Cox-Ingersoll-Ross (CIR) Model',
-      aliases:['CIR Model'],
-      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\sqrt{r_t}\\,dZ',
+      question:'Cox-Ingersoll-Ross (CIR) Model — Mean Reversion & Level-Dependent Volatility',
+      aliases:['Cox-Ingersoll-Ross (CIR) Model','CIR Model'],
+      latex:'\\begin{aligned}dr_t&=\\kappa(\\theta-r_t)\\,dt+\\sigma\\sqrt{r_t}\\,dZ\\\\\\text{Equilibrium};&\\quad\\text{Mean Reversion};&\\quad\\sigma_r\\propto\\sqrt{r_t}\\end{aligned}',
       notation:[
         ['r_t','Short-term interest rate at time t'],
         ['\\theta','Long-run mean rate'],
@@ -221,29 +221,15 @@
         ['dt','Small change in time'],
         ['dZ','Stochastic shock']
       ],
-      interpretation:'The CIR short rate is mean reverting and its volatility varies with the square root of the rate level.',
+      interpretation:'CIR is an equilibrium mean-reverting model with volatility that varies with the square root of the short rate.',
+      memoryRule:'CIR = mean reversion + level-dependent volatility.',
       sourcePage:3
     },
     {
       topic:'Term Structure Models',
-      question:'CIR Mean-Reversion Direction',
-      latex:'\\begin{aligned}r_t<\\theta&\\Rightarrow\\text{Positive Drift}\\\\r_t>\\theta&\\Rightarrow\\text{Negative Drift}\\\\r_t=\\theta&\\Rightarrow\\text{Drift}=0\\end{aligned}',
-      notation:[['r_t','Short rate at time t'],['\\theta','Long-run mean rate']],
-      interpretation:'The drift pulls the short rate back toward its long-run mean.',
-      sourcePage:3
-    },
-    {
-      topic:'Term Structure Models',
-      question:'CIR Level-Dependent Volatility',
-      latex:'\\text{Volatility}\\propto\\sqrt{r_t}',
-      notation:[['r_t','Short rate at time t']],
-      interpretation:'In the CIR model, the variance of rate changes depends on the level of interest rates.',
-      sourcePage:3
-    },
-    {
-      topic:'Term Structure Models',
-      question:'Vasicek Model',
-      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\,dZ',
+      question:'Vasicek Model — Mean Reversion & Constant Volatility',
+      aliases:['Vasicek Model'],
+      latex:'\\begin{aligned}dr_t&=\\kappa(\\theta-r_t)\\,dt+\\sigma\\,dZ\\\\\\text{Equilibrium};&\\quad\\text{Mean Reversion};&\\quad\\sigma=\\text{Constant}\\end{aligned}',
       notation:[
         ['r_t','Short rate'],
         ['\\theta','Long-run mean'],
@@ -251,29 +237,30 @@
         ['\\sigma','Constant volatility'],
         ['dZ','Stochastic shock']
       ],
-      interpretation:'Vasicek combines mean reversion with constant volatility; the source classifies it as an equilibrium term-structure model.',
+      interpretation:'Vasicek is an equilibrium mean-reverting model with constant volatility.',
       memoryRule:'Vasicek = mean reversion + constant volatility.',
       sourcePage:4
     },
     {
       topic:'Term Structure Models',
-      question:'Ho-Lee Model',
-      latex:'dr_t=\\theta_t\\,dt+\\sigma\\,dZ',
+      question:'Ho-Lee Model — Time-Dependent Drift, No Mean Reversion',
+      aliases:['Ho-Lee Model'],
+      latex:'\\begin{aligned}dr_t&=\\theta_t\\,dt+\\sigma\\,dZ\\\\\\text{Arbitrage-Free};&\\quad\\text{No Mean Reversion};&\\quad\\theta_t=\\text{Time Dependent},\\;\\sigma=\\text{Constant}\\end{aligned}',
       notation:[
         ['r_t','Short rate'],
         ['\\theta_t','Time-dependent drift'],
         ['\\sigma','Constant volatility'],
         ['dZ','Stochastic shock']
       ],
-      interpretation:'Ho-Lee has no mean reversion, a time-dependent drift and constant volatility; the source classifies it as arbitrage-free.',
-      memoryRule:'Ho-Lee = no mean reversion + time-dependent drift + constant volatility.',
+      interpretation:'Ho-Lee is an arbitrage-free model with no mean reversion, time-dependent drift and constant volatility.',
+      memoryRule:'Ho-Lee = time-dependent drift + no mean reversion + constant volatility.',
       sourcePage:4
     },
     {
       topic:'Term Structure Models',
-      question:'Kalotay-Williams-Fabozzi (KWF) Model',
-      aliases:['KWF Model'],
-      latex:'d\\ln(r_t)=\\theta_t\\,dt+\\sigma\\,dZ',
+      question:'Kalotay-Williams-Fabozzi (KWF) Model — Lognormal Short Rate',
+      aliases:['Kalotay-Williams-Fabozzi (KWF) Model','KWF Model'],
+      latex:'\\begin{aligned}d\\ln(r_t)&=\\theta_t\\,dt+\\sigma\\,dZ\\\\\\text{Arbitrage-Free};&\\quad\\text{No Mean Reversion};&\\quad\\ln(r_t)\\sim N\\Rightarrow r_t\\sim\\text{Lognormal}\\end{aligned}',
       notation:[
         ['r_t','Short rate'],
         ['\\ln(r_t)','Log of the short rate'],
@@ -281,16 +268,8 @@
         ['\\sigma','Constant volatility'],
         ['dZ','Stochastic shock']
       ],
-      interpretation:'KWF models the log of the short rate with no mean reversion and constant volatility.',
-      memoryRule:'KWF = Ho-Lee applied to ln(r_t).',
-      sourcePage:4
-    },
-    {
-      topic:'Term Structure Models',
-      question:'KWF Distributional Implication',
-      latex:'\\ln(r_t)\\sim\\text{Normal}\\Rightarrow r_t\\sim\\text{Lognormal}',
-      notation:[['r_t','Short rate'],['\\ln(r_t)','Log of the short rate']],
-      interpretation:'The source notes that modeling the log of the short rate makes the short rate lognormal and prevents negative rates.',
+      interpretation:'KWF is an arbitrage-free model with no mean reversion and constant volatility; modeling the log short rate makes the short rate lognormal.',
+      memoryRule:'KWF = Ho-Lee applied to ln(r_t) ⇒ lognormal short rate.',
       sourcePage:4
     }
   ];
@@ -364,6 +343,24 @@
       if(local){changed++;}
     }
     existingQuestionKeys.set(qkey(def.question),card);
+  }
+
+  // Consolidate the earlier split model cards into the four canonical model rows.
+  // Preserve any existing rating/history on the surviving model card.
+  const legacyModelMerge={
+    [qkey('CIR Mean-Reversion Direction')]:qkey('Cox-Ingersoll-Ross (CIR) Model — Mean Reversion & Level-Dependent Volatility'),
+    [qkey('CIR Level-Dependent Volatility')]:qkey('Cox-Ingersoll-Ross (CIR) Model — Mean Reversion & Level-Dependent Volatility'),
+    [qkey('KWF Distributional Implication')]:qkey('Kalotay-Williams-Fabozzi (KWF) Model — Lognormal Short Rate')
+  };
+  for(const card of [...cards]){
+    if(card.subject!==SUBJECT)continue;
+    const targetKey=legacyModelMerge[qkey(card.question)];
+    if(!targetKey)continue;
+    const keep=cards.find(c=>c!==card&&c.subject===SUBJECT&&qkey(c.question)===targetKey);
+    if(!keep)continue;
+    mergeState(keep,card);
+    const i=cards.indexOf(card);
+    if(i>=0){cards.splice(i,1);removed++;changed++;}
   }
 
   // Remove only exact Fixed Income duplicates created by earlier imports.
