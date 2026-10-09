@@ -1,0 +1,406 @@
+(function(){
+  'use strict';
+
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+
+  const SUBJECT='Fixed Income';
+  const SOURCE='CFA Level II Fixed Income Formula Sheet';
+
+  const tidy=s=>String(s??'').replace(/\s+/g,' ').trim();
+  const qkey=s=>tidy(s).toLowerCase().replace(/[^a-z0-9]+/g,'');
+  const fkey=s=>tidy(s)
+    .replace(/\\(?:left|right|,|;|!|quad|qquad)/g,'')
+    .replace(/\\(?:mathrm|text)\{([^{}]*)\}/g,'$1')
+    .replace(/\\begin\{aligned\}|\\end\{aligned\}|\\\\/g,'')
+    .replace(/[{}\s]/g,'')
+    .toLowerCase();
+
+  const defs=[
+    {
+      topic:'Spot & Forward Rates',
+      question:'Discount-Factor Forward Relation',
+      latex:'DF_B=DF_A\\times F_{A,B-A}',
+      notation:[
+        ['DF_A','Discount factor to time A'],
+        ['DF_B','Discount factor to time B'],
+        ['F_{A,B-A}','Forward discount factor from time A to time B'],
+        ['A','Start of the forward period'],
+        ['B','End of the forward period'],
+        ['B-A','Length of the forward period']
+      ],
+      interpretation:'The discount factor to B equals discounting to A and then applying the forward discount factor from A to B.',
+      sourcePage:1
+    },
+    {
+      topic:'Spot & Forward Rates',
+      question:'Forward Rate Model',
+      latex:'(1+z_B)^B=(1+z_A)^A(1+f_{A,B-A})^{B-A}',
+      notation:[
+        ['z_A','A-period spot rate'],
+        ['z_B','B-period spot rate'],
+        ['f_{A,B-A}','Forward rate starting at time A for B-A periods'],
+        ['A','Number of periods from today to the start of the forward period'],
+        ['B','Number of periods from today to the end of the forward period'],
+        ['B-A','Length of the forward period']
+      ],
+      interpretation:'Long spot accumulation equals short spot accumulation times forward-period accumulation.',
+      memoryRule:'Long spot accumulation = short spot accumulation × forward-period accumulation.',
+      sourcePage:1
+    },
+    {
+      topic:'Spot & Forward Rates',
+      question:'Spot Rate and Successive One-Period Forward Rates',
+      latex:'(1+z_T)^T=(1+z_1)(1+f_{1,1})(1+f_{2,1})(1+f_{3,1})\\cdots(1+f_{T-1,1})',
+      notation:[
+        ['z_T','T-period spot rate'],
+        ['z_1','One-period spot rate'],
+        ['f_{1,1},f_{2,1},\\ldots,f_{T-1,1}','Successive one-period forward rates'],
+        ['T','Maturity, in periods, of the spot rate']
+      ],
+      interpretation:'A T-period spot accumulation can be decomposed into the one-period spot rate followed by successive one-period forward rates.',
+      sourcePage:1
+    },
+    {
+      topic:'Spot & Forward Rates',
+      question:'Spot Rate from One-Period Forward Rates',
+      latex:'z_T=\\left[(1+z_1)(1+f_{1,1})(1+f_{2,1})(1+f_{3,1})\\cdots(1+f_{T-1,1})\\right]^{1/T}-1',
+      notation:[
+        ['z_T','T-period spot rate being calculated'],
+        ['z_1','One-period spot rate'],
+        ['f_{1,1},f_{2,1},\\ldots,f_{T-1,1}','Successive one-period forward rates'],
+        ['T','Maturity, in periods']
+      ],
+      interpretation:'The T-period spot rate is the geometric average rate implied by the one-period spot and successive one-period forwards.',
+      sourcePage:1
+    },
+
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Projected Spot Curve Above Forward Curve',
+      latex:'\\text{Projected Spot Curve}>\\text{Forward Curve}\\Rightarrow\\text{Realized Return}<\\text{One-Period Risk-Free Rate}',
+      interpretation:'If the projected future spot curve is above the forward curve and the projection is realized, return is below the one-period risk-free rate.',
+      sourcePage:2
+    },
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Projected Spot Curve Below Forward Curve',
+      latex:'\\text{Projected Spot Curve}<\\text{Forward Curve}\\Rightarrow\\text{Realized Return}>\\text{One-Period Risk-Free Rate}',
+      interpretation:'If the projected future spot curve is below the forward curve and the projection is realized, return is above the one-period risk-free rate.',
+      sourcePage:2
+    },
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Riding the Yield Curve — Yield Curve Unchanged',
+      latex:'\\text{Yield Curve Unchanged}\\Rightarrow\\text{Bond Rolls Down to Lower Yield}\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Price Return}',
+      notation:[['P','Bond price']],
+      interpretation:'Classic positive roll-down assumes the yield curve remains approximately unchanged.',
+      memoryRule:'Classic positive roll-down ⇔ yield curve remains approximately unchanged.',
+      sourcePage:2
+    },
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Future Spot Equals Forward',
+      latex:'\\text{Future Spot}=\\text{Forward}\\Rightarrow\\text{Curve Evolves as Priced}\\Rightarrow\\text{No Extra Return vs What Was Already Priced}',
+      interpretation:'If the future spot rate realizes exactly the forward rate, there is no abnormal roll-down gain beyond what was already priced.',
+      memoryRule:'Future spot = forward ⇒ no abnormal roll-down gain beyond what is already priced.',
+      sourcePage:2
+    },
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Future Spot Below Forward',
+      latex:'\\text{Future Spot}<\\text{Forward}\\Rightarrow\\text{Realized Yield Lower than Priced}\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Return}',
+      notation:[['P','Bond price']],
+      interpretation:'A realized future spot rate below the forward rate gives a lower yield and a higher bond price than priced.',
+      sourcePage:2
+    },
+    {
+      topic:'Yield-Curve Expectations & Riding the Yield Curve',
+      question:'Future Spot Above Forward',
+      latex:'\\text{Future Spot}>\\text{Forward}\\Rightarrow\\text{Realized Yield Higher than Priced}\\Rightarrow P\\downarrow\\Rightarrow\\text{Lower Return}',
+      notation:[['P','Bond price']],
+      interpretation:'A realized future spot rate above the forward rate gives a higher yield and a lower bond price than priced.',
+      sourcePage:2
+    },
+
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'Treasury Benchmark Spread',
+      latex:'\\begin{aligned}\\text{Bond Yield}&=\\text{Treasury Yield}+\\text{Spread}\\\\\\text{Spread}&=\\text{Bond Yield}-\\text{Treasury Yield}\\end{aligned}',
+      interpretation:'The spread is measured relative to the government/Treasury benchmark.',
+      sourcePage:2
+    },
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'Swap Benchmark / I-Spread',
+      aliases:['I-Spread'],
+      latex:'\\begin{aligned}\\text{Bond Yield}&=\\text{Swap Rate}+\\text{I-Spread}\\\\\\text{I-Spread}&=\\text{Bond Yield}-\\text{Swap Rate}\\end{aligned}',
+      interpretation:'The I-spread is measured relative to the swap market.',
+      sourcePage:2
+    },
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'Swap Spread',
+      latex:'\\text{Swap Spread}=\\text{Swap Rate}-\\text{Treasury Yield}',
+      sourcePage:2
+    },
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'TED Spread',
+      latex:'\\text{TED Spread}=\\text{LIBOR}-\\text{T-bill Rate}',
+      sourcePage:2
+    },
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'MRR-OIS Spread',
+      latex:'\\text{MRR-OIS Spread}=\\text{MRR}-\\text{OIS Rate}',
+      interpretation:'The source describes the MRR-OIS spread as a measure of stress/risk in the banking system.',
+      sourcePage:2
+    },
+
+    {
+      topic:'Term Premium, Supply, Demand & Flight to Quality',
+      question:'Term Bond Risk Premium',
+      aliases:['Term Premium'],
+      latex:'\\text{Term Premium}=E(R_{\\text{long bond}})-E(R_{\\text{short bond}})',
+      notation:[
+        ['E(R_{long bond})','Expected return on a long-term bond'],
+        ['E(R_{short bond})','Expected return on a short-term bond']
+      ],
+      interpretation:'The term premium is the extra expected return required for holding the longer-term bond.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Premium, Supply, Demand & Flight to Quality',
+      question:'Fiscal Policy and Government Bond Supply',
+      latex:'\\text{Government Deficit}\\uparrow\\Rightarrow\\text{Borrowing}\\uparrow\\Rightarrow\\text{Bond Supply}\\uparrow\\Rightarrow P\\downarrow\\Rightarrow y\\uparrow',
+      notation:[['P','Bond price'],['y','Bond yield']],
+      interpretation:'Larger government deficits can require more borrowing; more bond supply pushes price down and yield up.',
+      memoryRule:'Supply ↑ ⇒ P ↓ ⇒ y ↑.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Premium, Supply, Demand & Flight to Quality',
+      question:'Investor Demand for Bonds',
+      latex:'\\text{Bond Demand}\\uparrow\\Rightarrow P\\uparrow\\Rightarrow y\\downarrow\\Rightarrow\\text{Risk Premium}\\downarrow',
+      notation:[['P','Bond price'],['y','Bond yield']],
+      interpretation:'The source specifically mentions pension funds, insurers and foreign investors as sources of long-term bond demand.',
+      memoryRule:'Demand ↑ ⇒ P ↑ ⇒ y ↓.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Premium, Supply, Demand & Flight to Quality',
+      question:'Flight to Quality',
+      latex:'\\text{Market Stress}\\Rightarrow\\text{Government Bond Demand}\\uparrow\\Rightarrow P\\uparrow\\Rightarrow y\\downarrow',
+      notation:[['P','Government bond price'],['y','Government bond yield']],
+      interpretation:'During market stress, demand for safe government bonds rises, increasing price and lowering yield.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Premium, Supply, Demand & Flight to Quality',
+      question:'Bullish Flattening',
+      latex:'y_{\\text{long}}\\downarrow\\text{ more than }y_{\\text{short}}\\downarrow\\Rightarrow\\text{Bullish Flattening}',
+      notation:[['y_{long}','Long-term yield'],['y_{short}','Short-term yield']],
+      interpretation:'Bullish flattening occurs when long-term yields fall more than short-term yields.',
+      sourcePage:3
+    },
+
+    {
+      topic:'Term Structure Models',
+      question:'Cox-Ingersoll-Ross (CIR) Model',
+      aliases:['CIR Model'],
+      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\sqrt{r_t}\\,dZ',
+      notation:[
+        ['r_t','Short-term interest rate at time t'],
+        ['\\theta','Long-run mean rate'],
+        ['\\kappa','Speed of mean reversion'],
+        ['\\sigma','Volatility parameter'],
+        ['dt','Small change in time'],
+        ['dZ','Stochastic shock']
+      ],
+      interpretation:'The CIR short rate is mean reverting and its volatility varies with the square root of the rate level.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Structure Models',
+      question:'CIR Mean-Reversion Direction',
+      latex:'\\begin{aligned}r_t<\\theta&\\Rightarrow\\text{Positive Drift}\\\\r_t>\\theta&\\Rightarrow\\text{Negative Drift}\\\\r_t=\\theta&\\Rightarrow\\text{Drift}=0\\end{aligned}',
+      notation:[['r_t','Short rate at time t'],['\\theta','Long-run mean rate']],
+      interpretation:'The drift pulls the short rate back toward its long-run mean.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Structure Models',
+      question:'CIR Level-Dependent Volatility',
+      latex:'\\text{Volatility}\\propto\\sqrt{r_t}',
+      notation:[['r_t','Short rate at time t']],
+      interpretation:'In the CIR model, the variance of rate changes depends on the level of interest rates.',
+      sourcePage:3
+    },
+    {
+      topic:'Term Structure Models',
+      question:'Vasicek Model',
+      latex:'dr_t=\\kappa(\\theta-r_t)\\,dt+\\sigma\\,dZ',
+      notation:[
+        ['r_t','Short rate'],
+        ['\\theta','Long-run mean'],
+        ['\\kappa','Speed of mean reversion'],
+        ['\\sigma','Constant volatility'],
+        ['dZ','Stochastic shock']
+      ],
+      interpretation:'Vasicek combines mean reversion with constant volatility; the source classifies it as an equilibrium term-structure model.',
+      memoryRule:'Vasicek = mean reversion + constant volatility.',
+      sourcePage:4
+    },
+    {
+      topic:'Term Structure Models',
+      question:'Ho-Lee Model',
+      latex:'dr_t=\\theta_t\\,dt+\\sigma\\,dZ',
+      notation:[
+        ['r_t','Short rate'],
+        ['\\theta_t','Time-dependent drift'],
+        ['\\sigma','Constant volatility'],
+        ['dZ','Stochastic shock']
+      ],
+      interpretation:'Ho-Lee has no mean reversion, a time-dependent drift and constant volatility; the source classifies it as arbitrage-free.',
+      memoryRule:'Ho-Lee = no mean reversion + time-dependent drift + constant volatility.',
+      sourcePage:4
+    },
+    {
+      topic:'Term Structure Models',
+      question:'Kalotay-Williams-Fabozzi (KWF) Model',
+      aliases:['KWF Model'],
+      latex:'d\\ln(r_t)=\\theta_t\\,dt+\\sigma\\,dZ',
+      notation:[
+        ['r_t','Short rate'],
+        ['\\ln(r_t)','Log of the short rate'],
+        ['\\theta_t','Time-dependent drift'],
+        ['\\sigma','Constant volatility'],
+        ['dZ','Stochastic shock']
+      ],
+      interpretation:'KWF models the log of the short rate with no mean reversion and constant volatility.',
+      memoryRule:'KWF = Ho-Lee applied to ln(r_t).',
+      sourcePage:4
+    },
+    {
+      topic:'Term Structure Models',
+      question:'KWF Distributional Implication',
+      latex:'\\ln(r_t)\\sim\\text{Normal}\\Rightarrow r_t\\sim\\text{Lognormal}',
+      notation:[['r_t','Short rate'],['\\ln(r_t)','Log of the short rate']],
+      interpretation:'The source notes that modeling the log of the short rate makes the short rate lognormal and prevents negative rates.',
+      sourcePage:4
+    }
+  ];
+
+  function mergeState(target,source){
+    if(!target.status&&source.status)target.status=source.status;
+    const a=Array.isArray(target.history)?target.history:[];
+    const b=Array.isArray(source.history)?source.history:[];
+    if(b.length)target.history=[...a,...b];
+  }
+
+  let changed=0,added=0,removed=0;
+  const existingQuestionKeys=new Map();
+
+  cards.forEach(c=>{
+    if(c.subject!==SUBJECT)return;
+    existingQuestionKeys.set(qkey(c.question),c);
+  });
+
+  for(const def of defs){
+    const aliases=[def.question,...(def.aliases||[])];
+    let card=null;
+    for(const name of aliases){
+      const found=existingQuestionKeys.get(qkey(name));
+      if(found){card=found;break;}
+    }
+
+    if(!card){
+      const targetFormula=fkey(def.latex);
+      card=cards.find(c=>c.subject===SUBJECT&&fkey(c.latex||c.answer)===targetFormula)||null;
+    }
+
+    if(!card){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      card={
+        id:nextId,
+        question:def.question,
+        answer:def.latex,
+        latex:def.latex,
+        subject:SUBJECT,
+        topic:def.topic,
+        source:SOURCE,
+        sourcePage:def.sourcePage,
+        notation:def.notation||[],
+        interpretation:def.interpretation||'',
+        memoryRule:def.memoryRule||'',
+        status:null,
+        history:[]
+      };
+      cards.push(card);
+      added++;changed++;
+    }else{
+      let local=false;
+      const updates={
+        question:def.question,
+        answer:def.latex,
+        latex:def.latex,
+        subject:SUBJECT,
+        topic:def.topic,
+        source:SOURCE,
+        sourcePage:def.sourcePage,
+        notation:def.notation||[],
+        interpretation:def.interpretation||'',
+        memoryRule:def.memoryRule||''
+      };
+      for(const [k,v] of Object.entries(updates)){
+        if(JSON.stringify(card[k])!==JSON.stringify(v)){card[k]=v;local=true;}
+      }
+      if(card.formulaImage){delete card.formulaImage;local=true;}
+      if(!Array.isArray(card.history)){card.history=[];local=true;}
+      if(local){changed++;}
+    }
+    existingQuestionKeys.set(qkey(def.question),card);
+  }
+
+  // Remove only exact Fixed Income duplicates created by earlier imports.
+  // Keep review history/status on the surviving canonical card.
+  const seen=new Map();
+  for(const card of [...cards]){
+    if(card.subject!==SUBJECT)continue;
+    const k=fkey(card.latex||card.answer);
+    if(!k)continue;
+    if(!seen.has(k)){seen.set(k,card);continue;}
+    const keep=seen.get(k);
+    mergeState(keep,card);
+    const i=cards.indexOf(card);
+    if(i>=0){cards.splice(i,1);removed++;changed++;}
+  }
+
+  if(changed){
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+
+    // Preserve all ratings/history, but rebuild the review queue so newly added
+    // Fixed Income cards are included in the next full-coverage pass.
+    try{
+      ['cfa_review_current_id','cfa_review_position','cfa_review_queue','cfa_review_queue_signature'].forEach(k=>localStorage.removeItem(k));
+      localStorage.setItem('cfa_review_coverage_complete','0');
+      if(typeof reviewIds!=='undefined')reviewIds=[];
+      if(typeof reviewPos!=='undefined')reviewPos=0;
+    }catch(_e){}
+
+    setTimeout(()=>{
+      try{if(typeof renderLibrary==='function')renderLibrary();}catch(_e){}
+      try{if(typeof renderReview==='function'&&typeof reviewIds!=='undefined'&&reviewIds.length)renderReview();}catch(_e){}
+    },0);
+  }
+
+  window.CFAFixedIncomeFormulaSheet={
+    version:'2026-10-09',
+    source:SOURCE,
+    added,
+    removed,
+    changed,
+    total:defs.length
+  };
+})();
