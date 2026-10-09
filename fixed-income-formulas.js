@@ -77,21 +77,21 @@
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Projected Spot Curve Above Forward Curve',
-      latex:'\\text{Projected Spot Curve}>\\text{Forward Curve}\\Rightarrow\\text{Realized Return}<\\text{One-Period Risk-Free Rate}',
+      latex:'\\begin{aligned}\\text{Projected Spot}&>\\text{Forward}\\\\&\\Rightarrow R_{\\text{realized}}<R_f^{(1)}\\end{aligned}',
       interpretation:'If the projected future spot curve is above the forward curve and the projection is realized, return is below the one-period risk-free rate.',
       sourcePage:2
     },
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Projected Spot Curve Below Forward Curve',
-      latex:'\\text{Projected Spot Curve}<\\text{Forward Curve}\\Rightarrow\\text{Realized Return}>\\text{One-Period Risk-Free Rate}',
+      latex:'\\begin{aligned}\\text{Projected Spot}&<\\text{Forward}\\\\&\\Rightarrow R_{\\text{realized}}>R_f^{(1)}\\end{aligned}',
       interpretation:'If the projected future spot curve is below the forward curve and the projection is realized, return is above the one-period risk-free rate.',
       sourcePage:2
     },
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Riding the Yield Curve — Yield Curve Unchanged',
-      latex:'\\text{Yield Curve Unchanged}\\Rightarrow\\text{Bond Rolls Down to Lower Yield}\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Price Return}',
+      latex:'\\begin{aligned}\\text{Yield Curve Unchanged}&\\Rightarrow y_{\\text{roll-down}}\\downarrow\\\\&\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Price Return}\\end{aligned}',
       notation:[['P','Bond price']],
       interpretation:'Classic positive roll-down assumes the yield curve remains approximately unchanged.',
       memoryRule:'Classic positive roll-down ⇔ yield curve remains approximately unchanged.',
@@ -100,7 +100,7 @@
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Future Spot Equals Forward',
-      latex:'\\text{Future Spot}=\\text{Forward}\\Rightarrow\\text{Curve Evolves as Priced}\\Rightarrow\\text{No Extra Return vs What Was Already Priced}',
+      latex:'\\begin{aligned}\\text{Future Spot}&=\\text{Forward}\\\\&\\Rightarrow\\text{No Extra Return vs. Priced}\\end{aligned}',
       interpretation:'If the future spot rate realizes exactly the forward rate, there is no abnormal roll-down gain beyond what was already priced.',
       memoryRule:'Future spot = forward ⇒ no abnormal roll-down gain beyond what is already priced.',
       sourcePage:2
@@ -108,7 +108,7 @@
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Future Spot Below Forward',
-      latex:'\\text{Future Spot}<\\text{Forward}\\Rightarrow\\text{Realized Yield Lower than Priced}\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Return}',
+      latex:'\\begin{aligned}\\text{Future Spot}&<\\text{Forward}\\\\&\\Rightarrow y_{\\text{realized}}<y_{\\text{priced}}\\\\&\\Rightarrow P\\uparrow\\Rightarrow\\text{Extra Return}\\end{aligned}',
       notation:[['P','Bond price']],
       interpretation:'A realized future spot rate below the forward rate gives a lower yield and a higher bond price than priced.',
       sourcePage:2
@@ -116,7 +116,7 @@
     {
       topic:'Yield-Curve Expectations & Riding the Yield Curve',
       question:'Future Spot Above Forward',
-      latex:'\\text{Future Spot}>\\text{Forward}\\Rightarrow\\text{Realized Yield Higher than Priced}\\Rightarrow P\\downarrow\\Rightarrow\\text{Lower Return}',
+      latex:'\\begin{aligned}\\text{Future Spot}&>\\text{Forward}\\\\&\\Rightarrow y_{\\text{realized}}>y_{\\text{priced}}\\\\&\\Rightarrow P\\downarrow\\Rightarrow\\text{Lower Return}\\end{aligned}',
       notation:[['P','Bond price']],
       interpretation:'A realized future spot rate above the forward rate gives a higher yield and a lower bond price than priced.',
       sourcePage:2
