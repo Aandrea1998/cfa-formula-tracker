@@ -171,7 +171,8 @@
     },
     {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
-      question:'Fiscal Policy and Government Bond Supply',
+      question:'Government Deficit Increase — Effect on Bond Supply, Price, and Yield',
+      aliases:['Fiscal Policy and Government Bond Supply'],
       latex:'\\text{Government Deficit}\\uparrow\\Rightarrow\\text{Borrowing}\\uparrow\\Rightarrow\\text{Bond Supply}\\uparrow\\Rightarrow P\\downarrow\\Rightarrow y\\uparrow',
       notation:[['P','Bond price'],['y','Bond yield']],
       interpretation:'Larger government deficits can require more borrowing; more bond supply pushes price down and yield up.',
@@ -180,7 +181,8 @@
     },
     {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
-      question:'Investor Demand for Bonds',
+      question:'Higher Bond Demand — Effect on Price, Yield, and Risk Premium',
+      aliases:['Investor Demand for Bonds'],
       latex:'\\text{Bond Demand}\\uparrow\\Rightarrow P\\uparrow\\Rightarrow y\\downarrow\\Rightarrow\\text{Risk Premium}\\downarrow',
       notation:[['P','Bond price'],['y','Bond yield']],
       interpretation:'The source specifically mentions pension funds, insurers and foreign investors as sources of long-term bond demand.',
@@ -189,7 +191,8 @@
     },
     {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
-      question:'Flight to Quality',
+      question:'Flight to Quality — Effect on Government Bond Demand, Price, and Yield',
+      aliases:['Flight to Quality'],
       latex:'\\text{Market Stress}\\Rightarrow\\text{Government Bond Demand}\\uparrow\\Rightarrow P\\uparrow\\Rightarrow y\\downarrow',
       notation:[['P','Government bond price'],['y','Government bond yield']],
       interpretation:'During market stress, demand for safe government bonds rises, increasing price and lowering yield.',
@@ -197,7 +200,8 @@
     },
     {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
-      question:'Bullish Flattening',
+      question:'Bullish Flattening — Long-Term Yields Fall More Than Short-Term Yields',
+      aliases:['Bullish Flattening'],
       latex:'y_{\\text{long}}\\downarrow\\text{ more than }y_{\\text{short}}\\downarrow\\Rightarrow\\text{Bullish Flattening}',
       notation:[['y_{long}','Long-term yield'],['y_{short}','Short-term yield']],
       interpretation:'Bullish flattening occurs when long-term yields fall more than short-term yields.',
