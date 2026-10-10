@@ -366,6 +366,15 @@
 
     {
       topic:'Credit Risk & CVA',
+      question:'EAD vs CVA — Which Rates to Use?',
+      aliases:['Rates for EAD vs CVA Discounting','Forward Rates vs Spot Curve in CVA'],
+      latex:'\\begin{aligned}\\text{Forward rates / Tree}&\\rightarrow EAD_t\\\\\\text{Spot curve}&\\rightarrow\\text{ Discount CVA to }t=0\\end{aligned}',
+      interpretation:'Use forward rates or the interest-rate tree to value the exposure at the future default date. Use the spot curve to discount expected losses back to today.',
+      memoryRule:'Forward/tree → exposure. Spot → present value.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
       question:'Credit Risk Models — 3 Types',
       aliases:['Structural vs Reduced-Form vs Term Structure','Credit Risk Model Comparison'],
       latex:'\\begin{aligned}\\text{Structural}&\\rightarrow\\text{ Asset value vs default barrier}\\\\\\text{Reduced-form}&\\rightarrow\\text{ Hazard / default intensity}\\\\\\text{Term structure}&\\rightarrow\\text{ Spreads / PD across maturities}\\end{aligned}',
