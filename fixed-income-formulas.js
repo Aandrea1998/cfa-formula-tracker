@@ -168,6 +168,73 @@
     },
 
     {
+      topic:'Convertible Bonds',
+      question:'Convertible Bond — Conversion Price, Ratio & Initial Premium',
+      aliases:['Convertible Bond Conversion Price and Ratio'],
+      latex:'\\begin{aligned}\\text{Conversion Ratio}&=\\frac{\\text{Par Value}}{\\text{Conversion Price}}\\\\\\text{Conversion Price}&=\\frac{\\text{Par Value}}{\\text{Conversion Ratio}}\\\\\\text{Initial Conversion Price}&=S_0(1+\\text{Initial Premium Ratio})\\end{aligned}',
+      notation:[
+        ['S_0','Stock price at issuance'],
+        ['Conversion Ratio','Number of shares received on conversion'],
+        ['Conversion Price','Effective share price embedded in the bond terms']
+      ],
+      interpretation:'Conversion price and conversion ratio are reciprocally linked through par value. If the initial conversion premium is given, apply it to the stock price at issuance to obtain the initial conversion price.',
+      memoryRule:'Par links price and ratio: Ratio = Par / Price; Price = Par / Ratio.'
+    },
+    {
+      topic:'Convertible Bonds',
+      question:'Convertible Bond — Conversion Value & Minimum Value',
+      aliases:['Convertible Bond Conversion Value and Floor'],
+      latex:'\\begin{aligned}\\text{Conversion Value}&=S\\times\\text{Conversion Ratio}\\\\\\text{Minimum Convertible Value}&=\\max(\\text{Straight Value},\\text{Conversion Value})\\end{aligned}',
+      notation:[
+        ['S','Current stock price'],
+        ['Straight Value','Value of the otherwise identical option-free bond'],
+        ['Minimum Convertible Value','Bond floor from debt value or immediate conversion value']
+      ],
+      interpretation:'Conversion value is what the shares received on conversion are worth today. The convertible should not be worth less than the greater of straight-bond value and conversion value.',
+      memoryRule:'Convertible floor = max(straight value, conversion value).'
+    },
+    {
+      topic:'Convertible Bonds',
+      question:'Convertible Bond — Market Conversion Price & Premium',
+      aliases:['Convertible Bond Market Conversion Premium'],
+      latex:'\\begin{aligned}\\text{Market Conversion Price}&=\\frac{\\text{Convertible Price}}{\\text{Conversion Ratio}}\\\\\\text{Premium/share}&=\\text{Market Conversion Price}-S\\\\\\text{Premium Ratio}&=\\frac{\\text{Market Conversion Price}-S}{S}\\end{aligned}',
+      notation:[
+        ['S','Current stock price'],
+        ['Market Conversion Price','Effective price per share paid through the convertible'],
+        ['Premium Ratio','Premium relative to buying the stock directly']
+      ],
+      interpretation:'The market conversion price converts the bond market price into an effective per-share price. The premium compares that effective price with the current stock price.',
+      memoryRule:'Premium ratio denominator = current stock price.'
+    },
+    {
+      topic:'Convertible Bonds',
+      question:'Convertible Bond — Value Decomposition',
+      aliases:['Convertible Bond Value Components'],
+      latex:'\\begin{aligned}V_{\\text{conv}}&\\approx V_{\\text{straight}}+V_{\\text{conversion option}}\\\\V_{\\text{conv, callable}}&\\approx V_{\\text{straight}}+V_{\\text{conversion option}}-V_{\\text{issuer call}}\\end{aligned}',
+      notation:[
+        ['V_{conv}','Convertible bond value'],
+        ['V_{straight}','Otherwise identical option-free bond value'],
+        ['V_{conversion option}','Value of the investor conversion option'],
+        ['V_{issuer call}','Value of any issuer call feature']
+      ],
+      interpretation:'The holder is long the conversion option, so it adds value. If the issuer also owns a call, that issuer option reduces the holder’s value.',
+      memoryRule:'Holder option adds; issuer option subtracts.'
+    },
+    {
+      topic:'Convertible Bonds',
+      question:'Convertible Bond — Premium over Straight Value & Equity Sensitivity',
+      aliases:['Convertible Bond Premium over Straight Value'],
+      latex:'\\begin{aligned}\\text{Premium over Straight Value}&=\\frac{V_{\\text{conv}}}{V_{\\text{straight}}}-1\\\\S\\uparrow&\\Rightarrow\\text{Conversion Value}\\uparrow\\Rightarrow V_{\\text{conv}}\\uparrow\\\\\\sigma_S\\uparrow&\\Rightarrow V_{\\text{conversion option}}\\uparrow\\Rightarrow V_{\\text{conv}}\\uparrow\\end{aligned}',
+      notation:[
+        ['S','Stock price'],
+        ['\\sigma_S','Stock-price volatility'],
+        ['V_{straight}','Straight-bond value / bond floor']
+      ],
+      interpretation:'A larger premium over straight value means more of the convertible’s value comes from equity optionality. Higher stock price or stock volatility generally increases the value of the conversion option and therefore the convertible.',
+      memoryRule:'More equity upside or stock volatility → more conversion-option value.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
