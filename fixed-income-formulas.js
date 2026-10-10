@@ -155,6 +155,19 @@
     },
 
     {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'Interest-Rate Volatility vs OAS — Callable & Putable',
+      aliases:['Volatility and OAS Relationship','Interest Rate Volatility and OAS'],
+      latex:'\\begin{aligned}\\text{Callable: }&\\sigma\\uparrow\\Rightarrow\\text{OAS}\\downarrow,\\quad \\sigma\\downarrow\\Rightarrow\\text{OAS}\\uparrow\\\\\\text{Putable: }&\\sigma\\uparrow\\Rightarrow\\text{OAS}\\uparrow,\\quad \\sigma\\downarrow\\Rightarrow\\text{OAS}\\downarrow\\end{aligned}',
+      notation:[
+        ['\\sigma','Interest-rate volatility'],
+        ['OAS','Option-adjusted spread fitted so model value equals the observed market price']
+      ],
+      interpretation:'Holding the observed market price constant, callable-bond OAS moves opposite to interest-rate volatility, while putable-bond OAS moves in the same direction as volatility.',
+      memoryRule:'Callable: volatility and OAS move opposite. Putable: volatility and OAS move together.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
