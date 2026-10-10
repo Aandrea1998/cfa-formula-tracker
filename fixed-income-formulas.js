@@ -138,6 +138,21 @@
       sourcePage:2
     },
 
+
+    {
+      topic:'Credit Spread Benchmarks & Spread Measures',
+      question:'OAS vs Z-Spread — Signed Embedded-Option Effect',
+      aliases:['OAS and Z-Spread Relationship'],
+      latex:'\\text{OAS}\\approx\\text{Z-spread}+\\text{Option Effect}_{\\text{holder, in spread terms}}',
+      notation:[
+        ['OAS','Option-adjusted spread after modeling the embedded option'],
+        ['Z-spread','Spread that prices the bond without explicitly modeling the embedded option'],
+        ['Option Effect_{holder}','Signed spread-equivalent effect from the bondholder perspective: negative for an issuer call, positive for an investor put']
+      ],
+      interpretation:'Use this as a memory relationship, not as an exact equality with a monetary option value. The embedded option effect is signed from the bondholder perspective: a callable bond is short the call, while a putable bond is long the put.',
+      memoryRule:'Callable: OAS < Z-spread. Putable: OAS > Z-spread. Option-free: OAS ≈ Z-spread.'
+    },
+
     {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
