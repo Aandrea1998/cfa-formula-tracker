@@ -365,6 +365,15 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Credit Risk Models — 3 Types',
+      aliases:['Structural vs Reduced-Form vs Term Structure','Credit Risk Model Comparison'],
+      latex:'\\begin{aligned}\\text{Structural}&\\rightarrow\\text{ Asset value vs default barrier}\\\\\\text{Reduced-form}&\\rightarrow\\text{ Hazard / default intensity}\\\\\\text{Term structure}&\\rightarrow\\text{ Spreads / PD across maturities}\\end{aligned}',
+      interpretation:'Structural explains default through firm value; reduced-form models default intensity; term-structure models focus on maturity-dependent credit risk.',
+      memoryRule:'Structural = barrier. Reduced-form = intensity. Term structure = maturity.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
