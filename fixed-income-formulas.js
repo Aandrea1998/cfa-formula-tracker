@@ -264,6 +264,20 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Loss Given Default (LGD)',
+      aliases:['LGD Formula','Loss Given Default — Formula'],
+      latex:'\\begin{aligned}LGD\\%&=1-RR\\\\LGD&=EAD(1-RR)\\end{aligned}',
+      notation:[
+        ['RR','Recovery rate'],
+        ['EAD','Exposure at default'],
+        ['LGD%','Percentage of exposure lost if default occurs']
+      ],
+      interpretation:'LGD% is the fraction of the exposure not recovered. Dollar LGD equals EAD multiplied by the loss rate.',
+      memoryRule:'Recovery rate + LGD% = 100%.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
