@@ -350,6 +350,21 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Expected Return from Spread Migration',
+      aliases:['Credit Spread Migration Return','Expected Return after Rating Migration'],
+      latex:'\\begin{aligned}E(R)&\\approx \\text{Coupon Rate}-D\\times\\Delta s\\\\\\Delta s&=s_{\\mathrm{new}}-s_{\\mathrm{initial}}\\end{aligned}',
+      notation:[
+        ['D','Bond duration'],
+        ['\\Delta s','Change in credit spread'],
+        ['s_{new}','Credit spread after migration'],
+        ['s_{initial}','Initial credit spread']
+      ],
+      interpretation:'Expected return is approximately coupon-rate income plus the price effect from spread migration. A downgrade widens spreads and reduces return; an upgrade tightens spreads and increases return.',
+      memoryRule:'Downgrade → spread ↑ → price ↓. Upgrade → spread ↓ → price ↑.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
