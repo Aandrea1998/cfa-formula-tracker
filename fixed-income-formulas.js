@@ -235,6 +235,21 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'EAD — Maturity & Backward Recursion',
+      aliases:['Exposure at Default — Maturity and Backward Recursion','EAD Backward Recursion'],
+      latex:'\\begin{aligned}EAD_T&=F+C_T\\\\EAD_t&=C_t+\\frac{EAD_{t+1}}{1+f_{t,t+1}}\\end{aligned}',
+      notation:[
+        ['EAD_T','Exposure at maturity'],
+        ['F','Principal / face value'],
+        ['C_t','Coupon due at date t'],
+        ['f_{t,t+1}','One-period forward rate from t to t+1']
+      ],
+      interpretation:'Start at maturity, where exposure equals principal plus the final coupon. Then move backward one period at a time: discount the next-period EAD using the relevant forward rate and add the coupon due at the current date.',
+      memoryRule:'Start at maturity → discount next EAD → add current coupon.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
