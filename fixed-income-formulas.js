@@ -545,6 +545,18 @@
     if(i>=0){cards.splice(i,1);removed++;changed++;}
   }
 
+  // Remove the legacy risk-neutral PD card after replacing it with the market-price equation version.
+  // Preserve any existing review state/history on the surviving card.
+  const legacyRiskNeutralPD=qkey('Risk-Neutral PD from Market Price');
+  const riskNeutralPDTarget=qkey('Risk-Neutral PD — Market Price Equation');
+  for(const card of [...cards]){
+    if(card.subject!==SUBJECT||qkey(card.question)!==legacyRiskNeutralPD)continue;
+    const keep=cards.find(c=>c!==card&&c.subject===SUBJECT&&qkey(c.question)===riskNeutralPDTarget);
+    if(keep)mergeState(keep,card);
+    const i=cards.indexOf(card);
+    if(i>=0){cards.splice(i,1);removed++;changed++;}
+  }
+
   // Remove only exact Fixed Income duplicates created by earlier imports.
   // Keep review history/status on the surviving canonical card.
   const seen=new Map();
