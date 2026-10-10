@@ -293,6 +293,20 @@
 
     {
       topic:'Credit Risk & CVA',
+      question:'Historical vs Risk-Neutral PD — Market Premia',
+      aliases:['Actual vs Risk-Neutral Default Probability','Historical PD vs Risk-Neutral PD'],
+      latex:'\\begin{aligned}PD_{\\mathrm{hist}}&=\\text{real-world default forecast}\\\\PD^*&=\\text{market-implied pricing probability}\\\\s_{\\mathrm{obs}}&=\\text{default component}+\\text{risk premium}\\\\&\\quad+\\text{liquidity}+\\text{tax/other}\\end{aligned}',
+      notation:[
+        ['PD_{hist}','Historical / actual probability of default'],
+        ['PD^*','Risk-neutral probability of default'],
+        ['s_{obs}','Observed market credit spread']
+      ],
+      interpretation:'Historical PD is used for forecasting and excludes market risk premia. Risk-neutral PD is inferred from market prices or spreads and is used for pricing/CVA. Because observed spreads also contain default-risk, liquidity, tax and other premia, a PD inferred from the total spread may absorb those components as well.',
+      memoryRule:'Historical = forecast. Risk-neutral = pricing. Market spread is not pure default risk.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
       question:'Risk-Neutral PD — Market Price Equation',
       aliases:['Implied Risk-Neutral Default Probability','Risk-Neutral PD from Bond Price'],
       latex:'\\begin{aligned}P_0&=\\frac{(1-q^*)CF_{ND}+q^*CF_D}{1+r_f}\\\\&=\\frac{(1-q^*)EAD+q^*(EAD\\cdot RR)}{1+r_f}\\end{aligned}',
