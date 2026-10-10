@@ -407,6 +407,15 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'ABS Credit Analysis — Which Approach?',
+      aliases:['ABS Credit Analysis Approach','Loan-by-Loan vs Portfolio vs Statistics-Based'],
+      latex:'\\begin{aligned}\\text{Large + Heterogeneous}&\\rightarrow\\text{ Loan-by-Loan}\\\\\\text{Small + Homogeneous + Dynamic}&\\rightarrow\\text{ Portfolio-Based}\\\\\\text{Static Pool}&\\rightarrow\\text{ Statistics-Based}\\end{aligned}',
+      interpretation:'Choose the approach based on pool structure: discrete heterogeneous loans favor loan-by-loan analysis; granular dynamic pools favor portfolio analysis; static pools favor statistics-based analysis.',
+      memoryRule:'Large/heterogeneous → loan-by-loan. Small/homogeneous/dynamic → portfolio. Static → statistics.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
