@@ -292,6 +292,21 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Risk-Neutral PD from Market Price',
+      aliases:['Implied Risk-Neutral Default Probability','Risk-Neutral PD from Bond Price'],
+      latex:'\\begin{aligned}q^*&=\\frac{CF_{ND}-P_0(1+r_f)}{CF_{ND}-CF_D}\\\\&=\\frac{EAD-P_0(1+r_f)}{EAD(1-RR)}\\end{aligned}',
+      notation:[
+        ['P_0','Observed market price of the bond'],
+        ['CF_{ND}','Payoff if no default occurs'],
+        ['CF_D','Payoff in default = recovery'],
+        ['q^*','Market-implied risk-neutral default probability']
+      ],
+      interpretation:'Discount the risk-neutral expected payoff at the risk-free rate and solve for q*. In the one-period bond setup, CF_ND = EAD and CF_D = EAD × RR.',
+      memoryRule:'Lower market price → higher implied risk-neutral PD, all else equal.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
