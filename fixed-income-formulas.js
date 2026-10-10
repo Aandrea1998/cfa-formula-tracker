@@ -283,7 +283,7 @@
       aliases:['Default Probability by Year','Marginal PD by Year','PD Each Year'],
       latex:'\\begin{aligned}S_{t-1}&=\\prod_{j=1}^{t-1}(1-q_j)\\\\PD_t^{\\mathrm{marg}}&=S_{t-1}q_t\\\\q\\text{ constant: }PD_t^{\\mathrm{marg}}&=(1-q)^{t-1}q\\end{aligned}',
       notation:[
-        ['q_t','Conditional probability of default during year t, given survival to t'],
+        ['q_t','Conditional probability of default during year t, given survival through year t−1'],
         ['S_{t-1}','Probability of surviving through the end of year t−1'],
         ['PD_t^{marg}','Probability that default occurs specifically during year t']
       ],
