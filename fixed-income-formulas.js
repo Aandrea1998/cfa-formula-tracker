@@ -278,6 +278,20 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'PD — Year-by-Year Marginal Default Probability',
+      aliases:['Default Probability by Year','Marginal PD by Year','PD Each Year'],
+      latex:'\\begin{aligned}S_{t-1}&=\\prod_{j=1}^{t-1}(1-q_j)\\\\PD_t^{\\mathrm{marg}}&=S_{t-1}q_t\\\\q\\text{ constant: }PD_t^{\\mathrm{marg}}&=(1-q)^{t-1}q\\end{aligned}',
+      notation:[
+        ['q_t','Conditional probability of default during year t, given survival to t'],
+        ['S_{t-1}','Probability of surviving through the end of year t−1'],
+        ['PD_t^{marg}','Probability that default occurs specifically during year t']
+      ],
+      interpretation:'Year 1 PD equals q₁. For each later year, first survive all prior years, then default during year t. CVA uses marginal risk-neutral PDs, not cumulative PDs.',
+      memoryRule:'Survive first → then default in year t.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
