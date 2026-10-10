@@ -307,6 +307,35 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CVA — Standard Formula',
+      aliases:['Credit Valuation Adjustment Formula','CVA Formula'],
+      latex:'CVA=\\sum_t DF(0,t)\\times EAD_t\\times LGD\\%\\times PD_t^{\\mathrm{marg},*}',
+      notation:[
+        ['DF(0,t)','Risk-free discount factor from date t to today'],
+        ['EAD_t','Exposure at default at date t'],
+        ['LGD%','Loss given default rate'],
+        ['PD_t^{marg,*}','Risk-neutral marginal default probability in period t']
+      ],
+      interpretation:'CVA is the present value of expected credit losses across all possible default periods.',
+      memoryRule:'CVA = discounted EAD × LGD × marginal risk-neutral PD.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'Risky Bond Value — CVA Relation',
+      aliases:['Credit-Risky Bond Value and CVA','Bond Value after CVA'],
+      latex:'\\begin{aligned}V_{\\mathrm{risky}}&=V_{\\mathrm{no\\text{-}default}}-CVA\\\\CVA&=V_{\\mathrm{no\\text{-}default}}-V_{\\mathrm{risky}}\\end{aligned}',
+      notation:[
+        ['V_{risky}','Value of the bond including credit risk'],
+        ['V_{no-default}','Default-free / no-default bond value'],
+        ['CVA','Credit valuation adjustment']
+      ],
+      interpretation:'CVA is the amount deducted from the no-default value to obtain the credit-risky bond value.',
+      memoryRule:'Credit risk reduces value: risky bond = no-default value − CVA.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
