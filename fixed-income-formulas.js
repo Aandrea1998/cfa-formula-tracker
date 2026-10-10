@@ -250,6 +250,20 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'EAD — Interest-Rate Tree',
+      aliases:['Exposure at Default — Interest-Rate Tree','EAD with a Binomial Tree'],
+      latex:'\\begin{aligned}EAD_t&=C_t+\\sum_n \\pi_{t,n}V_{t,n}\\\\V_{t,n}&=\\text{risk-free ex-coupon value at node }n\\end{aligned}',
+      notation:[
+        ['C_t','Coupon due at date t'],
+        ['\\pi_{t,n}','Risk-neutral probability of reaching node n at date t'],
+        ['V_{t,n}','Risk-free ex-coupon bond value at node n, obtained by backward induction']
+      ],
+      interpretation:'With a rate tree, first value the remaining bond cash flows at every node using the node short rates. Then take the risk-neutral probability-weighted average of those node values and add the coupon due at the default date.',
+      memoryRule:'Tree EAD = current coupon + probability-weighted node values.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
