@@ -392,6 +392,21 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Bond Return after Default',
+      aliases:['Return if Default Occurs before Maturity','Defaulted Bond IRR'],
+      latex:'P_0=\\sum_{t=1}^{d-1}\\frac{CF_t}{(1+IRR)^t}+\\frac{Recovery_d}{(1+IRR)^d}',
+      notation:[
+        ['P_0','Initial bond purchase price'],
+        ['CF_t','Cash flows actually received before default'],
+        ['Recovery_d','Recovery received at the default date'],
+        ['d','Default date']
+      ],
+      interpretation:'Realized return is the IRR of the cash flows actually received. After default, remaining contractual cash flows are replaced by the recovery amount.',
+      memoryRule:'Before default: actual CFs. At default: recovery. After default: no contractual CFs.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
