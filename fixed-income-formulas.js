@@ -374,6 +374,15 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'Credit Score vs Credit Rating',
+      aliases:['Credit Scores vs Credit Ratings','Credit Score, Rating and Notching'],
+      latex:'\\begin{aligned}\\text{Credit Score}&\\rightarrow\\text{ Consumer / small business PD}\\\\\\text{Credit Rating}&\\rightarrow\\text{ Issuer / issue credit quality}\\\\\\text{Notching}&\\rightarrow\\text{ Seniority / recovery adjustment}\\end{aligned}',
+      interpretation:'Credit scores mainly assess borrower default risk. Credit ratings apply to corporate, sovereign and structured debt; issue ratings may be notched for priority and recovery prospects.',
+      memoryRule:'Score = borrower PD. Rating = credit quality. Notching = recovery / seniority.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
