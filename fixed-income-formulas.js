@@ -532,6 +532,21 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CDS P&L — Protection Buyer vs Seller',
+      aliases:['CDS Profit from Spread Change','CDS Spread Change P&L'],
+      latex:'\\begin{aligned}\\text{Buyer P\\&L}&\\approx(s_{\\mathrm{close}}-s_{\\mathrm{initial}})\\times D\\times N\\\\\\text{Seller P\\&L}&\\approx(s_{\\mathrm{initial}}-s_{\\mathrm{close}})\\times D\\times N\\end{aligned}',
+      notation:[
+        ['D','CDS duration'],
+        ['N','CDS notional'],
+        ['s_{initial}','Initial CDS spread'],
+        ['s_{close}','CDS spread when the position is closed']
+      ],
+      interpretation:'A protection buyer profits when spreads widen; a protection seller profits when spreads tighten. Use spreads in decimal form.',
+      memoryRule:'Buy protection → spread up = profit. Sell protection → spread down = profit.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
