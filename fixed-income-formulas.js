@@ -169,16 +169,16 @@
 
     {
       topic:'Convertible Bonds',
-      question:'Convertible Bond — Conversion Price, Ratio & Initial Premium',
-      aliases:['Convertible Bond Conversion Price and Ratio'],
-      latex:'\\begin{aligned}\\text{Conversion Ratio}&=\\frac{\\text{Par Value}}{\\text{Conversion Price}}\\\\\\text{Conversion Price}&=\\frac{\\text{Par Value}}{\\text{Conversion Ratio}}\\\\\\text{Initial Conversion Price}&=S_0(1+\\text{Initial Premium Ratio})\\end{aligned}',
+      question:'Convertible Bond — Initial Conversion Price & Ratio',
+      aliases:['Convertible Bond — Conversion Price, Ratio & Initial Premium','Convertible Bond Conversion Price and Ratio'],
+      latex:'\\begin{aligned}\\text{Initial Conversion Price}&=S_0(1+\\text{Initial Premium Ratio})\\\\\\text{Conversion Ratio}&=\\frac{\\text{Par Value}}{\\text{Initial Conversion Price}}\\\\\\text{Contractual Conversion Price}&=\\frac{\\text{Par Value}}{\\text{Conversion Ratio}}\\end{aligned}',
       notation:[
         ['S_0','Stock price at issuance'],
-        ['Conversion Ratio','Number of shares received on conversion'],
-        ['Conversion Price','Effective share price embedded in the bond terms']
+        ['Conversion Ratio','Number of shares received on conversion; normally fixed'],
+        ['Initial / Contractual Conversion Price','Conversion price set by the bond terms; normally fixed']
       ],
-      interpretation:'Conversion price and conversion ratio are reciprocally linked through par value. If the initial conversion premium is given, apply it to the stock price at issuance to obtain the initial conversion price.',
-      memoryRule:'Par links price and ratio: Ratio = Par / Price; Price = Par / Ratio.'
+      interpretation:'Use the initial conversion premium to determine the contractual conversion price, then derive the conversion ratio. Do not confuse this fixed contractual price with the Market Conversion Price, which equals Convertible Market Price ÷ Conversion Ratio and changes with the bond market price.',
+      memoryRule:'Initial price sets CR. Market conversion price = CB market price ÷ CR.'
     },
     {
       topic:'Convertible Bonds',
