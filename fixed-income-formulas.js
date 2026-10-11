@@ -443,6 +443,83 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CDS Upfront Premium',
+      aliases:['CDS Upfront Premium Formula','Upfront Payment on CDS'],
+      latex:'\\text{Upfront Premium \\%}\\approx(\\text{Credit Spread}-\\text{Coupon Rate})\\times D',
+      notation:[
+        ['D','CDS duration']
+      ],
+      interpretation:'Use duration, not maturity. If market spread exceeds the fixed coupon, the protection buyer pays upfront; if spread is lower, the buyer receives upfront.',
+      memoryRule:'Spread − coupon, then × duration.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'Constant Credit Risk — Hazard vs Marginal PD',
+      aliases:['Constant Hazard Rate vs Marginal PD','q Constant but Marginal PD Changes'],
+      latex:'\\begin{aligned}q&=h=\\text{constant}\\\\PD_t^{\\mathrm{marg},*}&=(1-q)^{t-1}q\\end{aligned}',
+      notation:[
+        ['q','Risk-neutral hazard rate / conditional PD'],
+        ['PD_t^{marg,*}','Risk-neutral marginal PD in period t']
+      ],
+      interpretation:'With constant credit risk, the hazard rate stays constant, but marginal PD declines because survival probability falls over time.',
+      memoryRule:'Constant q ≠ constant marginal PD.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'CDS Spread — Hazard Rate Approximation',
+      aliases:['CDS Spread Approximation','Hazard Rate and CDS Spread'],
+      latex:'s_{CDS}\\approx h(1-RR)=h\\times LGD',
+      notation:[
+        ['h','Risk-neutral hazard rate'],
+        ['RR','Recovery rate'],
+        ['LGD','Loss given default rate']
+      ],
+      interpretation:'The fair CDS spread is approximately expected default intensity times loss severity.',
+      memoryRule:'Higher hazard or lower recovery → wider CDS spread.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'CDS Fair Spread — Premium vs Protection Leg',
+      aliases:['Fair CDS Spread Formula','Premium Leg Equals Protection Leg'],
+      latex:'\\begin{aligned}PV(\\text{Premium Leg})&=PV(\\text{Protection Leg})\\\\s&=\\frac{PV(\\text{Expected Default Losses})}{PV(\\text{Risky Premium Annuity})}\\end{aligned}',
+      interpretation:'At inception, the fair CDS spread equates the present value of premium payments with the present value of expected protection payments.',
+      memoryRule:'Fair spread = protection leg ÷ risky premium annuity.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'CDS Premium Leg',
+      aliases:['Premium Leg Formula','CDS Premium Payments PV'],
+      latex:'PV_{\\mathrm{Prem}}\\approx sN\\sum_t DF_tS_t\\Delta t',
+      notation:[
+        ['s','CDS spread'],
+        ['N','CDS notional'],
+        ['S_t','Survival probability to payment date t'],
+        ['\\Delta t','Accrual fraction']
+      ],
+      interpretation:'The premium leg is the present value of spread payments made while the reference entity survives.',
+      memoryRule:'Premium leg = spread × notional × risky annuity.'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'CDS Protection Leg',
+      aliases:['Protection Leg Formula','CDS Expected Default Loss PV'],
+      latex:'PV_{\\mathrm{Prot}}\\approx N(1-RR)\\sum_t DF_tPD_t^{\\mathrm{marg},*}',
+      notation:[
+        ['N','CDS notional'],
+        ['RR','Recovery rate'],
+        ['PD_t^{marg,*}','Risk-neutral marginal default probability']
+      ],
+      interpretation:'The protection leg is the present value of expected loss payments if default occurs.',
+      memoryRule:'Protection leg = discounted risk-neutral expected default loss.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
