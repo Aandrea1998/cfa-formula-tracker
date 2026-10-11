@@ -547,6 +547,20 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CVA vs CDS Protection Leg — EAD vs Notional',
+      aliases:['CVA vs CDS Protection Leg','EAD vs CDS Notional'],
+      latex:'\\begin{aligned}CVA&=\\sum_t DF_t\\times EAD_t\\times LGD\\times PD_t^{\\mathrm{marg},*}\\\\PV_{\\mathrm{Prot}}&=\\sum_t DF_t\\times N\\times LGD\\times PD_t^{\\mathrm{marg},*}\\end{aligned}',
+      notation:[
+        ['EAD_t','Exposure at default; can vary over time'],
+        ['N','Fixed CDS notional'],
+        ['PD_t^{marg,*}','Risk-neutral marginal default probability']
+      ],
+      interpretation:'Both use the same discount factors, LGD, and marginal risk-neutral PDs. The key difference is exposure: CVA uses time-varying EAD, while the CDS protection leg uses the fixed notional.',
+      memoryRule:'CVA → EAD_t. CDS protection leg → fixed N.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
