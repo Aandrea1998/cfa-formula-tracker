@@ -520,6 +520,18 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CDS Price Quote — Upfront Premium %',
+      aliases:['CDS Price Convention','Upfront Premium from CDS Price'],
+      latex:'\\text{Upfront Premium \\%}=100-\\text{CDS Price}',
+      notation:[
+        ['CDS Price','Quoted price per 100 par']
+      ],
+      interpretation:'CDS may be quoted as a price per 100 par. A price below 100 implies a positive upfront payment by the protection buyer; a price above 100 implies the buyer receives upfront.',
+      memoryRule:'CDS price below 100 → positive upfront premium.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
