@@ -416,6 +416,33 @@
     },
 
     {
+      topic:'Credit Risk & CVA',
+      question:'CDS Cash Settlement',
+      aliases:['Cash Settlement after CDS Credit Event','CDS Cash Settlement Formula'],
+      latex:'\\text{Cash Settlement}=N(1-RR_{CTD})',
+      notation:[
+        ['N','CDS notional'],
+        ['RR_{CTD}','Recovery rate implied by the cheapest-to-deliver obligation']
+      ],
+      interpretation:'After a credit event, cash settlement compensates the protection buyer for the loss implied by the CTD recovery value.',
+      memoryRule:'Cash settlement = notional × (1 − CTD recovery rate).'
+    },
+
+    {
+      topic:'Credit Risk & CVA',
+      question:'Cash Settlement Advantage — Owned Bond vs CTD',
+      aliases:['Owned Bond Recovery vs CTD','CDS Cash Settlement Advantage'],
+      latex:'\\text{Cash Advantage}=N(RR_{\\mathrm{Owned}}-RR_{CTD})',
+      notation:[
+        ['N','CDS notional'],
+        ['RR_{Owned}','Recovery / market value rate of the bond owned'],
+        ['RR_{CTD}','Recovery rate implied by the cheapest-to-deliver obligation']
+      ],
+      interpretation:'If the owned bond has a higher recovery value than the CTD, cash settlement lets the investor receive the CTD-based CDS payout while retaining the more valuable bond.',
+      memoryRule:'RR Owned > RR CTD → cash settlement is more valuable.'
+    },
+
+    {
       topic:'Term Premium, Supply, Demand & Flight to Quality',
       question:'Term Bond Risk Premium',
       aliases:['Term Premium'],
