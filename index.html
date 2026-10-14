@@ -102,4 +102,14 @@ additions.forEach(item=>{
 });
 save();refresh();
 })();
+</script><script id="fsa-receivables-turnover-practices">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question": "Impact of earnings management practices on receivables turnover", "latex": "\\begin{aligned}\\text{Channel stuffing}&\\to\\text{Receivables}\\uparrow\\to\\text{Turnover}\\downarrow\\\\\\text{Sale of receivables}&\\to\\text{Receivables}\\downarrow\\to\\text{Turnover}\\uparrow\\\\\\text{Bill-and-hold}&\\to\\text{Receivables}\\uparrow\\to\\text{Turnover}\\downarrow\\end{aligned}", "answer": "Channel stuffing → Receivables ↑ → Receivables turnover ↓. Sale of receivables → Receivables ↓ → Receivables turnover ↑. Bill-and-hold → Receivables ↑ → Receivables turnover ↓. Expected effects: channel stuffing and bill-and-hold assume credit sales with receivables growing proportionally faster than revenue; sale of receivables assumes derecognition."};
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Earnings Quality',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
