@@ -37,4 +37,33 @@
   save();
   refresh();
 })();
+</script><script id="fsa-net-operating-assets">
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const subject='Financial Statement Analysis';
+  const question='Net Operating Assets (NOA)';
+  const latex='\\begin{aligned}\\mathrm{NOA}&=\\text{Operating assets}-\\text{Operating liabilities}\\\\&=(\\mathrm{TA}-\\mathrm{FA})-(\\mathrm{TL}-\\mathrm{FL})\\\\\\text{Average NOA}&=\\frac{\\mathrm{NOA}_{\\text{begin}}+\\mathrm{NOA}_{\\text{end}}}{2}\\end{aligned}';
+  const answer='NOA = Operating assets − Operating liabilities = (Total assets − Financial assets) − (Total liabilities − Financial liabilities). Average NOA = (Beginning NOA + Ending NOA) / 2.';
+  let card=cards.find(c=>c.subject===subject&&/^net operating assets(?:\s*\(noa\))?$/i.test((c.question||'').trim()));
+  if(!card){
+    card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic:subject,status:null,history:[]};
+    cards.push(card);
+  }
+  Object.assign(card,{question,latex,answer});
+  delete card.formulaImage;
+  const noteHtml='<details class="fsa-noa-note" style="margin-top:10px;font-weight:400;line-height:1.6"><summary style="cursor:pointer">Definitions, example &amp; exam trap</summary><div style="margin-top:8px"><p><strong>NOA</strong> measures net investment in operating activities. TA = total assets; FA = financial assets; TL = total liabilities; FL = financial liabilities.</p><p><strong>Operating assets:</strong> for example, receivables, inventory and PP&amp;E. Exclude financial assets such as cash and marketable securities under the standard CFA accrual-ratio convention.<br><strong>Operating liabilities:</strong> for example, accounts payable and accrued operating expenses. Exclude financing liabilities such as short- and long-term interest-bearing debt. Follow any specific classifications supplied in the question.</p><p><strong>Example:</strong> TA = 1,000; FA = 150; TL = 600; FL = 400.<br>Operating assets = 850; operating liabilities = 200.<br>NOA = 850 − 200 = <strong>650</strong>.<br>If beginning NOA = 550, average NOA = (550 + 650) / 2 = <strong>600</strong>.</p><p><strong>Exam trap:</strong> NOA is not total assets minus total liabilities (equity). Remove financial assets and financial liabilities first. The accrual ratio uses <strong>average</strong> NOA.</p><p><strong>Equivalent identity:</strong> NOA = equity + financial liabilities − financial assets, using consistent classifications.</p></div></details>';
+  function addNotes(){
+    const root=document.getElementById('libraryContent');
+    if(!root)return;
+    root.querySelectorAll('tbody tr').forEach(row=>{
+      if(Number(row.children[0]?.textContent)!==card.id||!row.children[1]||row.querySelector('.fsa-noa-note'))return;
+      row.children[1].insertAdjacentHTML('beforeend',noteHtml);
+    });
+  }
+  const baseRender=renderLibrary;
+  renderLibrary=function(){const result=baseRender.apply(this,arguments);addNotes();return result;};
+  save();
+  refresh();
+})();
 </script></body></html>
