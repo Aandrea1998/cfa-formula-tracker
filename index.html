@@ -90,4 +90,16 @@
   };
   save();refresh();
 })();
+</script><script id="fsa-working-capital-days">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const additions=[{"question":"Cash Conversion Cycle (CCC)","latex":"\\begin{aligned}CCC&=DSO+DIO-DPO\\\\CCC\\uparrow&\\Rightarrow\\text{cash tied up longer}\\\\CCC\\downarrow&\\Rightarrow\\text{cash released sooner}\\end{aligned}","answer":"CCC = DSO + DIO − DPO. Measures days between paying suppliers and collecting cash from customers. Lower generally means better operating liquidity. Example: 60 + 90 − 65 = 85 days. Compare changes in days, not raw turnover changes."},{"question":"Days Sales Outstanding (DSO)","latex":"\\begin{aligned}DSO&=\\frac{365}{\\text{Receivables turnover}}\\\\&=\\frac{\\text{Average accounts receivable}}{\\text{Annual credit sales}}\\times365\\\\DSO\\uparrow&\\Rightarrow CCC\\uparrow\\end{aligned}","answer":"DSO = 365 / Accounts receivable turnover = Average accounts receivable / Annual credit sales × 365. Use revenue as a proxy if credit sales are unavailable. Measures collection time: higher DSO means slower collection and a longer CCC. Example: 365 / 5.82 = 62.7 days."},{"question":"Days Inventory Outstanding (DIO)","latex":"\\begin{aligned}DIO&=\\frac{365}{\\text{Inventory turnover}}\\\\&=\\frac{\\text{Average inventory}}{COGS}\\times365\\\\DIO\\uparrow&\\Rightarrow CCC\\uparrow\\end{aligned}","answer":"DIO = 365 / Inventory turnover = Average inventory / Annual COGS × 365. Measures time inventory is held before sale. Higher DIO ties cash up longer and increases CCC. Use COGS, not revenue. Example: 365 / 3.78 = 96.6 days."},{"question":"Days Payables Outstanding (DPO)","latex":"\\begin{aligned}DPO&=\\frac{365}{\\text{Payables turnover}}\\\\&=\\frac{\\text{Average accounts payable}}{\\text{Annual purchases}}\\times365\\\\DPO\\uparrow&\\Rightarrow CCC\\downarrow\\end{aligned}","answer":"DPO = 365 / Accounts payable turnover = Average accounts payable / Annual purchases × 365. Use COGS as a proxy only if purchases are unavailable. Measures supplier payment time. Higher DPO reduces CCC; unusually high DPO may signal payment difficulties. Purchases = COGS + Ending inventory − Beginning inventory. Example: 365 / 5.71 = 63.9 days."}];
+additions.forEach(item=>{
+  let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+  if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Financial Statement Analysis',status:null,history:[]};cards.push(card);}
+  Object.assign(card,item);delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
