@@ -249,4 +249,16 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-loan-loss-coverage-flashcards">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const items=[{"question":"Loan loss provisioning — reserve build or drawdown?","latex":"\\begin{gathered}\\frac{\\text{Provision for loan losses}}{\\text{Net charge-offs}}\\\\[6pt]\\text{Above 1: reserve builds; below 1: reserve is drawn down.}\\\\\\text{Assumes no other reserve adjustments.}\\end{gathered}","answer":"Provision / Net charge-offs compares the current-year expense with realized net losses. Above 1 builds the allowance; below 1 draws it down, assuming no other adjustments."},{"question":"Loan loss reserve cushion — coverage of realized losses","latex":"\\begin{gathered}\\frac{\\text{Allowance for loan losses}}{\\text{Net charge-offs}}\\\\[6pt]\\text{Reserve cushion relative to annual realized net losses.}\\\\\\text{A declining ratio indicates lower coverage.}\\end{gathered}","answer":"Allowance / Annual net charge-offs measures the accumulated reserve cushion relative to the current annual loss rate. A declining ratio means lower coverage; it does not alone establish reserve inadequacy."}];
+items.forEach(item=>{
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Financial Institutions',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
