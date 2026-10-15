@@ -112,4 +112,28 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financ
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-camels-framework">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={
+  question:'CAMELS — Bank Analysis Framework',
+  latex:'\\begin{aligned}C&=\\text{Capital adequacy}\\\\A&=\\text{Asset quality}\\\\M&=\\text{Management}\\\\E&=\\text{Earnings}\\\\L&=\\text{Liquidity}\\\\S&=\\text{Sensitivity to market risk}\\end{aligned}',
+  answer:'CAMELS: Capital adequacy; Asset quality; Management; Earnings; Liquidity; Sensitivity to market risk. Used as a framework for evaluating banks and other financial institutions.'
+};
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){
+  card={
+    id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+    subject:'Financial Statement Analysis',
+    topic:'Financial Institutions',
+    status:null,
+    history:[]
+  };
+  cards.push(card);
+}
+Object.assign(card,item);
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
