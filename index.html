@@ -283,4 +283,14 @@ Object.assign(card,item);delete card.formulaImage;
 });
 save();refresh();
 })();
+</script><script id="fsa-npl-coverage-ratio">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Loan Loss Allowance — Coverage of Non-Performing Loans (NPLs)","latex":"\\begin{gathered}\\text{NPL coverage ratio}=\\frac{\\text{Allowance for loan losses}}{\\text{Non-performing loans}}\\times100\\%\\\\[6pt]\\text{Measures reserves relative to non-performing loans.}\\\\\\text{Higher ratio: greater reserve coverage.}\\end{gathered}","answer":"NPL coverage ratio = Allowance for loan losses / Non-performing loans × 100%. Measures reserve coverage of the non-performing loan balance. A higher ratio indicates greater coverage; it does not alone establish reserve adequacy."};
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Financial Institutions',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
