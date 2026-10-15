@@ -293,4 +293,14 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financ
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-us-insurance-regulation">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"US Insurance Regulation — Capital Adequacy and Statutory Accounting","latex":"\\begin{gathered}\\text{Capital adequacy: national requirements; US: NAIC standards.}\\\\\\text{No global Basel III equivalent in this reading's framework.}\\\\[6pt]\\text{Regulatory reporting: Statutory Accounting Principles (SAP).}\\\\\\text{SAP differ from both US GAAP and IFRS.}\\end{gathered}","answer":"In the framework described by this CFA reading, insurers follow national capital adequacy requirements rather than a global Basel III equivalent; the NAIC establishes US minimum capital standards. US insurers prepare regulatory reports under Statutory Accounting Principles (SAP), which differ from US GAAP and IFRS. Capital rules protect solvency; SAP govern regulatory reporting."};
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Insurance Companies',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
