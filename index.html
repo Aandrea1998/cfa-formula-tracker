@@ -271,4 +271,16 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financ
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-bank-liquidity-lcr-nsfr">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const items=[{"question":"Liquidity Coverage Ratio (LCR) — 30-Day Liquidity Stress","latex":"\\begin{gathered}LCR=\\frac{\\text{High-quality liquid assets (HQLA)}}{\\text{Net cash outflows over the next 30 days}}\\times100\\%\\\\[6pt]\\text{Liquid assets cover 30 days of stressed net cash outflows.}\\end{gathered}","answer":"LCR = High-quality liquid assets / Net cash outflows over the next 30 days × 100%. Measures short-term liquidity resilience under stress; horizon: 30 days."},{"question":"Net Stable Funding Ratio (NSFR) — One-Year Funding Stability","latex":"\\begin{gathered}NSFR=\\frac{\\text{Available stable funding}}{\\text{Required stable funding}}\\times100\\%\\\\[6pt]\\text{Assesses funding stability over a one-year horizon.}\\end{gathered}","answer":"NSFR = Available stable funding / Required stable funding × 100%. Measures structural funding stability over a one-year horizon."}];
+items.forEach(item=>{
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Financial Institutions',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
