@@ -229,4 +229,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-bank-credit-quality-ratios">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={
+  question:'Bank Credit Quality Ratios — NCO, Allowance & Provision',
+  latex:'\\begin{aligned}\\text{NCO Ratio}&=\\frac{\\text{Net Charge-offs}}{\\text{Average Gross Loans}}\\\\\\text{Allowance Ratio}&=\\frac{\\text{Allowance for Loan Losses}}{\\text{Gross Loans}}\\\\\\text{Provision Ratio}&=\\frac{\\text{Provision for Loan Losses}}{\\text{Average Gross Loans}}\\end{aligned}',
+  answer:'Net charge-offs = Charge-offs − Recoveries. NCO ratio = realized credit losses; Allowance ratio = reserve buffer against expected losses; Provision ratio = current-period expected-loss expense relative to the loan book.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
