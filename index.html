@@ -175,4 +175,38 @@ additions.forEach(item=>{
 });
 save();refresh();
 })();
+</script><script id="fsa-bank-capital-ratios">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const additions=[
+  {
+    question:'Common Equity Tier 1 (CET1) Capital Ratio',
+    latex:'\\text{CET1 Ratio}=\\frac{\\text{Common Equity Tier 1 Capital}}{\\text{Risk-Weighted Assets}}',
+    answer:'CET1 Ratio = Common Equity Tier 1 Capital / Risk-Weighted Assets. Measures the bank’s highest-quality loss-absorbing capital relative to RWA.'
+  },
+  {
+    question:'Tier 1 Capital Ratio',
+    latex:'\\text{Tier 1 Ratio}=\\frac{\\text{CET1 Capital}+\\text{Additional Tier 1 Capital}}{\\text{Risk-Weighted Assets}}',
+    answer:'Tier 1 Ratio = (CET1 Capital + Additional Tier 1 Capital) / Risk-Weighted Assets.'
+  },
+  {
+    question:'Total Capital Ratio',
+    latex:'\\text{Total Capital Ratio}=\\frac{\\text{Tier 1 Capital}+\\text{Tier 2 Capital}}{\\text{Risk-Weighted Assets}}',
+    answer:'Total Capital Ratio = (Tier 1 Capital + Tier 2 Capital) / Risk-Weighted Assets. Therefore CET1 Ratio ≤ Tier 1 Ratio ≤ Total Capital Ratio.'
+  }
+];
+additions.forEach(item=>{
+  let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+  if(!card){
+    card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+    cards.push(card);
+  }
+  Object.assign(card,item,{subject,topic});
+  delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
