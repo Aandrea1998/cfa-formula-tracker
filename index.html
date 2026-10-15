@@ -209,4 +209,24 @@ additions.forEach(item=>{
 });
 save();refresh();
 })();
+</script><script id="fsa-impairment-allowance-drivers">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={
+  question:'Impairment Allowance — Current vs Expected Deterioration',
+  latex:'\\begin{aligned}\\text{Impaired Assets}\\uparrow\\;\\text{and/or}\\;\\text{Past Due Not Impaired}\\uparrow&\\Rightarrow\\text{Allowance}\\uparrow\\\\\\text{Allowance}&\\rightarrow\\text{Current Impairment + Expected Deterioration}\\end{aligned}',
+  answer:'Impairment allowance can rise with more impaired assets and/or more past-due-but-not-impaired assets. It reflects both current impairment and expected deterioration.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
