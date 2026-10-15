@@ -261,4 +261,14 @@ Object.assign(card,item);delete card.formulaImage;
 });
 save();refresh();
 })();
+</script><script id="fsa-policyholder-dividend-ratio">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Policyholder Dividend Ratio — P&C Insurance (Dividends to Policyholders)","latex":"\\begin{gathered}\\text{Policyholder dividend ratio}=\\frac{\\text{Dividends to policyholders}}{\\text{Net premiums earned}}\\times100\\%\\\\[6pt]\\text{Premium refunds to policyholders, not shareholder dividends.}\\end{gathered}","answer":"Policyholder dividend ratio = Dividends to policyholders / Net premiums earned × 100%. These distributions return part of the premium to eligible policyholders. Combined ratio after dividends = Combined ratio + Policyholder dividend ratio."};
+let card=cards.find(c=>c.subject==='Financial Statement Analysis'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financial Statement Analysis',topic:'Insurance Companies',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
