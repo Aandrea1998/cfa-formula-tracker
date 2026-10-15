@@ -136,4 +136,43 @@ Object.assign(card,item);
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-pc-insurance-ratios">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Insurance Companies';
+const additions=[
+  {
+    question:'Underwriting Loss Ratio',
+    latex:'\\text{Loss Ratio}=\\frac{\\text{Claims Paid}+\\Delta\\text{Loss Reserves}}{\\text{Net Premiums Earned}}',
+    answer:'Loss Ratio = (Claims Paid + Change in Loss Reserves) / Net Premiums Earned. Higher generally means worse underwriting claims performance.'
+  },
+  {
+    question:'Loss Reserves — Change & Future Claims',
+    latex:'\\begin{aligned}\\Delta LR&=LR_{\\text{end}}-LR_{\\text{begin}}\\\\\\Delta LR\\uparrow&\\Rightarrow\\text{Expected Future Claim Payments}\\uparrow\\end{aligned}',
+    answer:'Δ Loss Reserves = Ending − Beginning reserves. Increase → higher expected future claim payments and incurred losses; decrease → reserve release.'
+  },
+  {
+    question:'Underwriting Expense Ratio',
+    latex:'\\text{Expense Ratio}=\\frac{\\text{Underwriting Expenses}}{\\text{Net Premiums Written}}',
+    answer:'Expense Ratio = Underwriting Expenses / Net Premiums Written. Measures operating efficiency of the underwriting business.'
+  },
+  {
+    question:'Combined Ratio — P&C Insurance',
+    latex:'\\begin{aligned}\\text{Combined Ratio}&=\\text{Loss Ratio}+\\text{Expense Ratio}\\\\<100\\%&\\Rightarrow\\text{Underwriting Profit}\\\\>100\\%&\\Rightarrow\\text{Underwriting Loss}\\end{aligned}',
+    answer:'Combined Ratio = Loss Ratio + Expense Ratio. Below 100% = underwriting profit; above 100% = underwriting loss.'
+  }
+];
+additions.forEach(item=>{
+  let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+  if(!card){
+    card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+    cards.push(card);
+  }
+  Object.assign(card,item,{subject,topic});
+  delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
