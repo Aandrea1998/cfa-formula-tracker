@@ -162,6 +162,35 @@
     }
   }
 
+
+  const expectedReturnPlanAssetsQuestion='Expected Return on Plan Assets — IFRS vs US GAAP';
+  const expectedReturnPlanAssetsLatex='\\begin{aligned}\\text{IFRS: Expected Return on Plan Assets}&=\\text{Discount Rate}\\\\\\text{US GAAP: Expected Return on Plan Assets}&=\\text{Management Expected Return}\\end{aligned}';
+  const expectedReturnPlanAssetsAnswer='IFRS uses the discount rate. US GAAP uses management’s expected return on plan assets.';
+  let expectedReturnPlanAssetsCard=cards.find(c=>c.subject===SUBJECT&&c.question===expectedReturnPlanAssetsQuestion);
+  if(!expectedReturnPlanAssetsCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:expectedReturnPlanAssetsQuestion,
+      answer:expectedReturnPlanAssetsAnswer,
+      latex:expectedReturnPlanAssetsLatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:expectedReturnPlanAssetsAnswer,
+      latex:expectedReturnPlanAssetsLatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(expectedReturnPlanAssetsCard[k]!==v){expectedReturnPlanAssetsCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
