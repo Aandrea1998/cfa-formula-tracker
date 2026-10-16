@@ -371,4 +371,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-equity-method-ending-carrying-amount">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Intercorporate Investments';
+const item={
+  question:'Equity Method — Ending Carrying Amount',
+  latex:'\\text{Ending Investment}=\\text{Initial Investment}+\\text{Share of NI}-\\text{Dividends}-\\text{Amortization of (FV-BV)}',
+  answer:'Ending carrying amount = initial investment + share of investee NI − dividends received − amortization of the FV−BV excess.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
