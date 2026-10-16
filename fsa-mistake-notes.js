@@ -59,6 +59,22 @@
     if(!Array.isArray(card.history)){card.history=[];changed=1;}
   }
 
+  const bargainQuestion='Bargain Purchase — Consolidation Entry';
+  if(!cards.some(c=>c.subject===SUBJECT&&c.question===bargainQuestion)){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:bargainQuestion,
+      answer:'FV Net Assets > Purchase Price. Dr Identifiable Net Assets (FV); Cr Investment / Consideration; Cr Bargain Purchase Gain → P&L.',
+      latex:'\\begin{aligned}\\text{FV Net Assets}&>\\text{Purchase Price}\\\\\\text{Dr Identifiable Net Assets}&\\;(FV)\\\\\\text{Cr Investment / Consideration}\\\\\\text{Cr Bargain Purchase Gain}&\\rightarrow\\text{P\\&L}\\end{aligned}',
+      subject:SUBJECT,
+      topic:'Intercorporate Investments',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
