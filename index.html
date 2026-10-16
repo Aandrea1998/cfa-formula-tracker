@@ -391,4 +391,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-consolidation-total-assets">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Intercorporate Investments';
+const item={
+  question:'Consolidation — Total Assets',
+  latex:'\\begin{aligned}\\text{Consolidated Assets}&=\\text{Parent Assets}\\\\&\\quad+100\\%\\times\\text{Subsidiary Assets}\\\\&\\quad+\\text{Excess of FV over Net Identifiable Assets}\\end{aligned}',
+  answer:'Consolidated assets = parent assets + 100% of subsidiary assets + excess of FV over net identifiable assets.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
