@@ -502,4 +502,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-diluted-eps-options">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Earnings per Share';
+const item={
+  question:'Diluted EPS — Options & Treasury Stock Method',
+  latex:'\\begin{aligned}\\text{Incremental Shares}&=\\text{Options}-\\text{Shares Hypothetically Repurchased}\\\\\\text{Shares Repurchased}&=\\frac{\\text{Exercise Proceeds}+\\text{Unrecognized Compensation}}{\\text{Average Market Price}}\\\\\\text{Diluted Shares}&=\\text{Basic Shares}+\\text{Net Incremental Shares}\\end{aligned}',
+  answer:'For stock options, apply the treasury stock method: assumed proceeds are used to repurchase shares at the average market price.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
