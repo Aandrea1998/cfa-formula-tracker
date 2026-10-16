@@ -522,4 +522,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-option-exercise-journal-entry">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Share-Based Compensation';
+const item={
+  question:'Exercise of Options — Journal Entry',
+  latex:'\\begin{aligned}\\text{Dr Cash}&=\\text{Options Exercised}\\times\\text{Strike Price}\\\\\\text{Dr SBC Reserve}&=\\text{Options Exercised}\\times\\text{Grant-Date FV}\\\\\\text{Cr Common Stock / APIC}&=\\text{Cash}+\\text{Reserve Transfer}\\end{aligned}',
+  answer:'On exercise: debit cash for strike proceeds, debit the share-based compensation reserve, and credit common stock/APIC for the total.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
