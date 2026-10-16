@@ -191,6 +191,35 @@
     }
   }
 
+
+  const ifrsPensionOCIQuestion='IFRS Pensions — OCI Remeasurements';
+  const ifrsPensionOCILatex='\\begin{aligned}\\text{Actuarial Gain/Loss}&\\rightarrow\\text{OCI}\\\\\\text{Actual Return}-\\text{Expected Return}&\\rightarrow\\text{OCI}\\end{aligned}';
+  const ifrsPensionOCIAnswer='Under IFRS, actuarial gains/losses and the difference between actual and expected return on plan assets are recognized in OCI.';
+  let ifrsPensionOCICard=cards.find(c=>c.subject===SUBJECT&&c.question===ifrsPensionOCIQuestion);
+  if(!ifrsPensionOCICard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:ifrsPensionOCIQuestion,
+      answer:ifrsPensionOCIAnswer,
+      latex:ifrsPensionOCILatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:ifrsPensionOCIAnswer,
+      latex:ifrsPensionOCILatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(ifrsPensionOCICard[k]!==v){ifrsPensionOCICard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
