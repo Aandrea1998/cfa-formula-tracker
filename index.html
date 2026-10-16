@@ -411,4 +411,26 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-equity-method-consolidation-roe">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Intercorporate Investments';
+const item={
+  question:'Equity Method vs Consolidation — ROE',
+  latex:'\\frac{D}{E}',
+  answer:'';
+};
+item.latex='\\begin{aligned}E_{\\text{Equity Method}}&<E_{\\text{Consolidation}}\\\\&\\Rightarrow ROE_{\\text{Equity Method}}>ROE_{\\text{Consolidation}}\\end{aligned}';
+item.answer='With the same parent-attributable net income, consolidation includes NCI in equity, increasing the ROE denominator.';
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
