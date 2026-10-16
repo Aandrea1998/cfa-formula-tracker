@@ -133,6 +133,35 @@
     }
   }
 
+
+  const dboNetInterestQuestion='DBO — Net Interest on Net Pension Asset/Liability';
+  const dboNetInterestLatex='\\text{Net Interest}=\\text{Beginning Net Pension Asset/Liability}\\times\\text{Discount Rate}';
+  const dboNetInterestAnswer='For defined benefit pension accounting, net interest equals the beginning net pension asset or liability multiplied by the discount rate.';
+  let dboNetInterestCard=cards.find(c=>c.subject===SUBJECT&&c.question===dboNetInterestQuestion);
+  if(!dboNetInterestCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:dboNetInterestQuestion,
+      answer:dboNetInterestAnswer,
+      latex:dboNetInterestLatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:dboNetInterestAnswer,
+      latex:dboNetInterestLatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(dboNetInterestCard[k]!==v){dboNetInterestCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
