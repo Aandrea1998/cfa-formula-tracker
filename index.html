@@ -303,4 +303,24 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financ
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-bank-credit-loss-classification">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={
+  question:'Bank Credit Loss Classification',
+  latex:'\\begin{aligned}\\text{Provision}&=\\text{Current-period expected-loss expense}\\\\\\text{Allowance}&=\\text{Accumulated loss reserve}\\\\\\text{Net Charge-offs}&=\\text{Charge-offs}-\\text{Recoveries}=\\text{Realized losses}\\end{aligned}',
+  answer:'Provision = flow through P&L. Allowance = balance-sheet reserve. Net charge-offs = realized credit losses after recoveries.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
