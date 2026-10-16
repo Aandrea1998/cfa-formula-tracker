@@ -462,4 +462,24 @@ additions.forEach(item=>{
 });
 save();refresh();
 })();
+</script><script id="fsa-accounting-mismatch">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Assets';
+const item={
+  question:'Accounting Mismatch — What is it?',
+  latex:'\\begin{aligned}\\text{Accounting Mismatch}&=\\text{Assets and Liabilities}\\\\&\\quad\\text{measured on different bases}\\\\\\text{Example: }&\\text{Amortized Cost vs Fair Value}\\end{aligned}',
+  answer:'FVPL may be elected to reduce or eliminate an accounting mismatch.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
