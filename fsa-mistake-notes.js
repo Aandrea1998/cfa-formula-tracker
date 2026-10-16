@@ -220,6 +220,35 @@
     }
   }
 
+
+  const ifrsPensionISQuestion='IFRS Pensions — Income Statement Components';
+  const ifrsPensionISLatex='\\begin{aligned}\\text{Current Service Cost}&\\rightarrow\\text{IS: Operating Expense}\\\\\\text{Past Service Cost}&\\rightarrow\\text{IS: Operating Expense}\\\\\\text{Interest on Pension Liability}&\\rightarrow\\text{IS: Non-operating Expense}\\\\\\text{Expected Income on Plan Assets}&\\rightarrow\\text{IS: Non-operating Income}\\end{aligned}';
+  const ifrsPensionISAnswer='Under IFRS, service costs are operating. Interest on the pension liability is non-operating expense, while expected income on plan assets is non-operating income.';
+  let ifrsPensionISCard=cards.find(c=>c.subject===SUBJECT&&c.question===ifrsPensionISQuestion);
+  if(!ifrsPensionISCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:ifrsPensionISQuestion,
+      answer:ifrsPensionISAnswer,
+      latex:ifrsPensionISLatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:ifrsPensionISAnswer,
+      latex:ifrsPensionISLatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(ifrsPensionISCard[k]!==v){ifrsPensionISCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
