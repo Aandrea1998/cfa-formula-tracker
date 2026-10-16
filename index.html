@@ -433,4 +433,33 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-roa-asset-turnover-full-partial-goodwill">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Intercorporate Investments';
+const additions=[
+  {
+    question:'ROA — Full vs Partial Goodwill',
+    latex:'\\text{ROA}=\\frac{\\text{NI}}{\\text{Average Assets}}\\Rightarrow ROA_{\\text{Full}}<ROA_{\\text{Partial}}',
+    answer:'Full goodwill reports higher assets, so with the same NI it produces lower ROA than partial goodwill.'
+  },
+  {
+    question:'Asset Turnover — Full vs Partial Goodwill',
+    latex:'\\text{Asset Turnover}=\\frac{\\text{Revenue}}{\\text{Average Assets}}\\Rightarrow AT_{\\text{Full}}<AT_{\\text{Partial}}',
+    answer:'Full goodwill reports higher assets, so with the same revenue it produces lower asset turnover than partial goodwill.'
+  }
+];
+additions.forEach(item=>{
+  let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+  if(!card){
+    card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+    cards.push(card);
+  }
+  Object.assign(card,item,{subject,topic});
+  delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
