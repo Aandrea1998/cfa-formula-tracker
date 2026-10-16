@@ -355,8 +355,8 @@ const subject='Financial Statement Analysis';
 const topic='Financial Assets';
 const item={
   question:'Effective Interest Rate (EIR) — YTM at Acquisition',
-  latex:'\\begin{aligned}\\text{EIR}&=\\text{YTM at acquisition}\\\\\\text{Price}>\\text{Par}&\\Rightarrow \\text{EIR}<\\text{Coupon Rate}\\\\\\text{Price}<\\text{Par}&\\Rightarrow \\text{EIR}>\\text{Coupon Rate}\\\\\\text{Price}=\\text{Par}&\\Rightarrow \\text{EIR}=\\text{Coupon Rate}\\\\\\text{Interest Income}&=\\text{Beginning Carrying Amount}\\times\\text{EIR}\\end{aligned}',
-  answer:'EIR is the market yield/YTM when the bond is purchased. It is not the coupon rate or the current market yield after purchase.'
+  latex:'\\begin{aligned}\\text{EIR}&=\\text{YTM at acquisition}\\\\\\text{Price}>\\text{Par}&\\Rightarrow \\text{EIR}<\\text{Coupon Rate}\\\\\\text{Price}<\\text{Par}&\\Rightarrow \\text{EIR}>\\text{Coupon Rate}\\\\\\text{Price}=\\text{Par}&\\Rightarrow \\text{EIR}=\\text{Coupon Rate}\\end{aligned}',
+  answer:'EIR is the market yield/YTM at acquisition. It is not the coupon rate or the current market yield after purchase.'
 };
 let card=cards.find(c=>c.subject===subject&&c.question===item.question);
 if(!card){
