@@ -104,6 +104,35 @@
     }
   }
 
+
+  const pensionFundedStatusQuestion='Pension Funded Status';
+  const pensionFundedStatusLatex='\\text{Funded Status}=\\text{Fair Value of Plan Assets}-\\text{Pension Obligation}';
+  const pensionFundedStatusAnswer='Funded status = fair value of plan assets − pension obligation.';
+  let pensionFundedStatusCard=cards.find(c=>c.subject===SUBJECT&&c.question===pensionFundedStatusQuestion);
+  if(!pensionFundedStatusCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:pensionFundedStatusQuestion,
+      answer:pensionFundedStatusAnswer,
+      latex:pensionFundedStatusLatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:pensionFundedStatusAnswer,
+      latex:pensionFundedStatusLatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(pensionFundedStatusCard[k]!==v){pensionFundedStatusCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
