@@ -327,4 +327,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-de-goodwill-equity-method">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Intercorporate Investments';
+const item={
+  question:'D/E Ratio — Partial vs Full Goodwill & Equity Method',
+  latex:'\\begin{aligned}\\frac{D}{E}_{\\text{Partial Goodwill}}&>\\frac{D}{E}_{\\text{Full Goodwill}}\\\\\\frac{D}{E}_{\\text{Equity Method}}&>\\frac{D}{E}_{\\text{Consolidation}}\\iff \\frac{D_{\\text{Parent}}}{E_{\\text{Parent}}}>\\frac{D_{\\text{Subsidiary}}}{NCI}\\end{aligned}',
+  answer:'Partial goodwill always gives higher D/E than full goodwill. Equity method gives higher D/E only when the parent is more leveraged than the subsidiary contribution.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
