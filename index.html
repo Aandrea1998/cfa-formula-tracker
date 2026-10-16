@@ -482,4 +482,24 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-diluted-eps-unvested-rsus">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Earnings per Share';
+const item={
+  question:'Diluted EPS — Unvested RSUs and Treasury Stock Method',
+  latex:'\\begin{aligned}\\text{Incremental Shares}&=\\text{Unvested RSUs}-\\text{Assumed Shares Repurchased}\\\\\\text{Assumed Shares Repurchased}&=\\frac{\\text{Average Unrecognized Compensation Cost}}{\\text{Average Share Price}}\\end{aligned}',
+  answer:'Unvested RSUs are potentially dilutive and are included using the treasury stock method.'
+};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
