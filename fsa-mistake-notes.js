@@ -249,6 +249,35 @@
     }
   }
 
+
+  const pensionIFRSGAAPQuestion='Pensions — Past Service Cost & Actuarial Gains/Losses';
+  const pensionIFRSGAAPLatex='\\begin{aligned}\\text{Past Service Cost: IFRS}&\\rightarrow\\text{Immediate P\\&L}\\\\\\text{Past Service Cost: US GAAP}&\\rightarrow\\text{OCI initially, then amortized}\\\\\\text{Actuarial Gains/Losses: IFRS}&\\rightarrow\\text{OCI immediately}\\\\\\text{Actuarial Gains/Losses: US GAAP}&\\rightarrow\\text{OCI initially, then amortized}\\end{aligned}';
+  const pensionIFRSGAAPAnswer='IFRS recognizes past service cost immediately in P&L and actuarial gains/losses immediately in OCI. Under US GAAP, both are initially recognized in OCI and then amortized.';
+  let pensionIFRSGAAPCard=cards.find(c=>c.subject===SUBJECT&&c.question===pensionIFRSGAAPQuestion);
+  if(!pensionIFRSGAAPCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:pensionIFRSGAAPQuestion,
+      answer:pensionIFRSGAAPAnswer,
+      latex:pensionIFRSGAAPLatex,
+      subject:SUBJECT,
+      topic:'Employee Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:pensionIFRSGAAPAnswer,
+      latex:pensionIFRSGAAPLatex,
+      topic:'Employee Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(pensionIFRSGAAPCard[k]!==v){pensionIFRSGAAPCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
