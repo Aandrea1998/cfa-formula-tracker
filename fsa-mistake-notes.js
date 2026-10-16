@@ -5,44 +5,61 @@
 
   const SUBJECT='Financial Statement Analysis';
   const TOPIC='Equity Method Investments';
-  const QUESTION='Impairment of Associates — IFRS vs US GAAP';
-  const LATEX='\\begin{aligned}&\\text{No separate goodwill impairment test}\\\\&\\text{IFRS: Recoverable amount; reversal allowed}\\\\&\\text{US GAAP: Fair value + permanent decline; no reversal}\\end{aligned}';
-  const ANSWER='No separate goodwill impairment test; IFRS: Recoverable amount, reversal allowed; US GAAP: Fair value + permanent decline, no reversal.';
-
   const tidy=s=>String(s??'').replace(/\s+/g,' ').trim();
   const qkey=s=>tidy(s).toLowerCase().replace(/[^a-z0-9]+/g,'');
 
-  let changed=0,added=0;
-  let card=cards.find(c=>qkey(c.question)===qkey(QUESTION));
-
-  if(!card){
-    const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
-    card={
-      id:nextId,
-      question:QUESTION,
-      answer:ANSWER,
-      latex:LATEX,
-      subject:SUBJECT,
-      topic:TOPIC,
-      status:null,
-      history:[]
-    };
-    cards.push(card);
-    added=1;
-    changed=1;
-  }else{
-    const updates={
-      question:QUESTION,
-      answer:ANSWER,
-      latex:LATEX,
-      subject:SUBJECT,
-      topic:TOPIC
-    };
-    for(const [k,v] of Object.entries(updates)){
-      if(card[k]!==v){card[k]=v;changed=1;}
+  const defs=[
+    {
+      question:'Impairment of Associates — IFRS vs US GAAP',
+      latex:'\\begin{aligned}&\\text{No separate goodwill impairment test}\\\\&\\text{IFRS: Recoverable amount; reversal allowed}\\\\&\\text{US GAAP: Fair value + permanent decline; no reversal}\\end{aligned}',
+      answer:'No separate goodwill impairment test; IFRS: Recoverable amount, reversal allowed; US GAAP: Fair value + permanent decline, no reversal.'
+    },
+    {
+      question:'Upstream Transaction — Unrealized Profit Elimination',
+      latex:'\\begin{aligned}&\\text{Associate}\\rightarrow\\text{Investor}\\\\&\\text{Eliminate: Ownership \\%}\\times\\text{Profit from Equity Income}\\\\&\\text{Investor NI}\\downarrow,\\quad\\text{Investment in Associate}\\downarrow\\end{aligned}',
+      answer:'Associate → Investor. Eliminate ownership % × profit from Equity Income. Investor NI ↓ and Investment in Associate ↓.'
+    },
+    {
+      question:'Downstream Transaction — Unrealized Profit Elimination',
+      latex:'\\begin{aligned}&\\text{Investor}\\rightarrow\\text{Associate}\\\\&\\text{Eliminate: Ownership \\%}\\times\\text{Profit from Investor\'s Own Profit}\\\\&\\text{Investor NI}\\downarrow,\\quad\\text{Investment in Associate}\\downarrow\\end{aligned}',
+      answer:'Investor → Associate. Eliminate ownership % × profit from investor’s own profit. Investor NI ↓ and Investment in Associate ↓.'
     }
-    if(card.formulaImage){delete card.formulaImage;changed=1;}
-    if(!Array.isArray(card.history)){card.history=[];changed=1;}
+  ];
+
+  let changed=0,added=0;
+  for(const def of defs){
+    let card=cards.find(c=>qkey(c.question)===qkey(def.question));
+    if(!card){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      card={
+        id:nextId,
+        question:def.question,
+        answer:def.answer,
+        latex:def.latex,
+        subject:SUBJECT,
+        topic:TOPIC,
+        status:null,
+        history:[]
+      };
+      cards.push(card);
+      added++;
+      changed++;
+    }else{
+      const updates={
+        question:def.question,
+        answer:def.answer,
+        latex:def.latex,
+        subject:SUBJECT,
+        topic:TOPIC
+      };
+      let local=false;
+      for(const [k,v] of Object.entries(updates)){
+        if(card[k]!==v){card[k]=v;local=true;}
+      }
+      if(card.formulaImage){delete card.formulaImage;local=true;}
+      if(!Array.isArray(card.history)){card.history=[];local=true;}
+      if(local)changed++;
+    }
   }
 
   if(changed){
@@ -65,6 +82,7 @@
   window.CFAFSAMistakeNotes={
     version:'2026-10-16',
     added,
-    changed
+    changed,
+    total:defs.length
   };
 })();
