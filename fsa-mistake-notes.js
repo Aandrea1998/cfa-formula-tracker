@@ -75,6 +75,35 @@
     changed=1;
   }
 
+
+  const optionExerciseQuestion='Exercise of Options — Journal Entry';
+  const optionExerciseLatex='\\begin{aligned}\\text{Dr Cash}&=\\text{Options Exercised}\\times\\text{Strike Price}\\\\\\text{Dr SBC Reserve}&=\\text{Options Exercised}\\times\\text{Grant-Date FV}\\\\\\text{Cr Common Stock / APIC}&=\\text{Cash}+\\text{Reserve Transfer}\\end{aligned}';
+  const optionExerciseAnswer='On exercise: debit cash for strike proceeds, debit the share-based compensation reserve, and credit common stock/APIC for the total.';
+  let optionExerciseCard=cards.find(c=>c.subject===SUBJECT&&c.question===optionExerciseQuestion);
+  if(!optionExerciseCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:optionExerciseQuestion,
+      answer:optionExerciseAnswer,
+      latex:optionExerciseLatex,
+      subject:SUBJECT,
+      topic:'Share-Based Compensation',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:optionExerciseAnswer,
+      latex:optionExerciseLatex,
+      topic:'Share-Based Compensation'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(optionExerciseCard[k]!==v){optionExerciseCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
