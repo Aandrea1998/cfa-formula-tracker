@@ -347,16 +347,20 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
-</script><script id="fsa-effective-interest-rate">
+</script><script id="fsa-bond-amortization-core-formulas">
 (function(){
 'use strict';
 if(typeof cards==='undefined'||!Array.isArray(cards))return;
 const subject='Financial Statement Analysis';
 const topic='Financial Assets';
+const oldQuestion='Effective Interest Rate (EIR) — YTM at Acquisition';
+for(let i=cards.length-1;i>=0;i--){
+  if(cards[i]&&cards[i].subject===subject&&cards[i].question===oldQuestion) cards.splice(i,1);
+}
 const item={
-  question:'Effective Interest Rate (EIR) — YTM at Acquisition',
-  latex:'\\begin{aligned}\\text{EIR}&=\\text{YTM at acquisition}\\\\\\text{Price}>\\text{Par}&\\Rightarrow \\text{EIR}<\\text{Coupon Rate}\\\\\\text{Price}<\\text{Par}&\\Rightarrow \\text{EIR}>\\text{Coupon Rate}\\\\\\text{Price}=\\text{Par}&\\Rightarrow \\text{EIR}=\\text{Coupon Rate}\\end{aligned}',
-  answer:'EIR is the market yield/YTM at acquisition. It is not the coupon rate or the current market yield after purchase.'
+  question:'Bond Amortization — Core Formulas',
+  latex:'\\begin{aligned}\\text{Coupon Payment}&=\\text{Par Value}\\times\\text{Coupon Rate}\\\\\\text{Interest Income}&=\\text{Beginning Carrying Amount}\\times\\text{EIR}\\\\\\text{Ending Carrying Amount}&=\\text{Beginning Carrying Amount}\\\\&\\quad+\\text{Interest Income}-\\text{Coupon Payment}\\end{aligned}',
+  answer:'Use the coupon rate on par for cash coupon, and EIR on beginning carrying amount for interest income.'
 };
 let card=cards.find(c=>c.subject===subject&&c.question===item.question);
 if(!card){
