@@ -303,16 +303,20 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Financ
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
-</script><script id="fsa-bank-credit-loss-classification">
+</script><script id="fsa-debt-security-classification">
 (function(){
 'use strict';
 if(typeof cards==='undefined'||!Array.isArray(cards))return;
 const subject='Financial Statement Analysis';
-const topic='Financial Institutions';
+const topic='Financial Assets';
+const oldQuestion='Bank Credit Loss Classification';
+for(let i=cards.length-1;i>=0;i--){
+  if(cards[i]&&cards[i].subject===subject&&cards[i].question===oldQuestion) cards.splice(i,1);
+}
 const item={
-  question:'Bank Credit Loss Classification',
-  latex:'\\begin{aligned}\\text{Provision}&=\\text{Current-period expected-loss expense}\\\\\\text{Allowance}&=\\text{Accumulated loss reserve}\\\\\\text{Net Charge-offs}&=\\text{Charge-offs}-\\text{Recoveries}=\\text{Realized losses}\\end{aligned}',
-  answer:'Provision = flow through P&L. Allowance = balance-sheet reserve. Net charge-offs = realized credit losses after recoveries.'
+  question:'Debt Security Classification — P&L vs OCI',
+  latex:'\\begin{aligned}\\text{Amortized Cost}&\\Rightarrow \\text{Interest + Amortization in P\\&L}\\\\\\text{FVOCI Debt}&\\Rightarrow \\text{Interest + Amortization in P\\&L}\\\\&\\quad + \\text{FV Changes in OCI}\\\\\\text{FVPL}&\\Rightarrow \\text{Overall Fair-Value Effect in P\\&L}\\end{aligned}',
+  answer:'Amortized cost: interest + amortization in P&L. FVOCI debt: interest + amortization in P&L; FV changes in OCI. FVPL: all FV effects in P&L.'
 };
 let card=cards.find(c=>c.subject===subject&&c.question===item.question);
 if(!card){
