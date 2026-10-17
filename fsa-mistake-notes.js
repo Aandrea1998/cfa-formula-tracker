@@ -327,6 +327,25 @@
   }
 
 
+
+  const currentRateRulesQuestion='Current Rate Method — Translation Rates & CTA';
+  const currentRateRulesLatex='\\begin{aligned}\\text{Assets/Liabilities}&\\rightarrow\\text{Current Rate}\\\\\\text{Common Stock/APIC}&\\rightarrow\\text{Historical Rate}\\\\\\text{Revenue/Expenses}&\\rightarrow\\text{Average Rate}\\\\\\text{Dividends}&\\rightarrow\\text{Historical Rate}\\\\\\text{Translation Difference}&\\rightarrow\\text{OCI}\\end{aligned}';
+  const currentRateRulesAnswer='Current method: assets/liabilities use current rate; common stock/APIC and dividends use historical rates; revenue/expenses use average rate; translation difference goes to OCI.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===currentRateRulesQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:currentRateRulesQuestion,
+      answer:currentRateRulesAnswer,
+      latex:currentRateRulesLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
