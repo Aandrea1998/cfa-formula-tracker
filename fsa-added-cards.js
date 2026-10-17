@@ -373,6 +373,25 @@
     changed=1;
   }
 
+
+  const currentVsTemporalALQuestion='Current vs Temporal — Non-Monetary Assets & Liabilities';
+  const currentVsTemporalALLatex='\\begin{aligned}\\text{FC appreciates + N-M Asset}&\\Rightarrow A_{Current}>A_{Temporal}\\\\\\text{FC depreciates + N-M Asset}&\\Rightarrow A_{Current}<A_{Temporal}\\\\\\text{FC appreciates + N-M Liability}&\\Rightarrow L_{Current}>L_{Temporal}\\\\\\text{FC depreciates + N-M Liability}&\\Rightarrow L_{Current}<L_{Temporal}\\end{aligned}';
+  const currentVsTemporalALAnswer='Under the current rate method, non-monetary assets and liabilities use the current rate; under the temporal method, historical-cost non-monetary items use historical rates. Therefore, FC appreciation raises translated non-monetary A/L under Current relative to Temporal; FC depreciation lowers them.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===currentVsTemporalALQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:currentVsTemporalALQuestion,
+      answer:currentVsTemporalALAnswer,
+      latex:currentVsTemporalALLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
