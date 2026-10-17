@@ -14,6 +14,29 @@
 
   let changed=0,added=0;
 
+
+  function migratePrompt(oldQuestion,newQuestion){
+    const oldCard=cards.find(c=>c.subject===SUBJECT&&c.question===oldQuestion);
+    const newCard=cards.find(c=>c.subject===SUBJECT&&c.question===newQuestion);
+    if(!oldCard)return;
+    if(newCard&&newCard!==oldCard){
+      if((!Array.isArray(newCard.history)||!newCard.history.length)&&Array.isArray(oldCard.history)&&oldCard.history.length){
+        newCard.history=oldCard.history;
+      }
+      if(!newCard.status&&oldCard.status)newCard.status=oldCard.status;
+      const oldIndex=cards.indexOf(oldCard);
+      if(oldIndex>=0)cards.splice(oldIndex,1);
+    }else{
+      oldCard.question=newQuestion;
+    }
+    changed=1;
+  }
+
+  migratePrompt('Diluted EPS — Unvested RSUs and Treasury Stock Method','Unvested RSUs — Incremental Shares & Assumed Repurchases');
+  migratePrompt('Equity Method vs Consolidation — ROE','ROE Comparison — Equity Method vs Consolidation (Same Ownership Interest)');
+  migratePrompt('Temporal Method — FX Effect on Inventory & COGS','FIFO vs LIFO — FX Impact on Inventory & COGS');
+
+
   // Roll back the two cards added in the immediately previous version.
   // Remove only those exact cards; leave every other card and review history untouched.
   const rollbackKeys=new Set([
