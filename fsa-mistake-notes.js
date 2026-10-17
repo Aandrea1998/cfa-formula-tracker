@@ -428,10 +428,6 @@
 
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
-    try{if(typeof refresh==='function')refresh();}catch(_e){}
-    setTimeout(()=>{
-      try{if(typeof renderLibrary==='function')renderLibrary();}catch(_e){}
-    },0);
   }
 
   window.CFAFSAMistakeNotes={
