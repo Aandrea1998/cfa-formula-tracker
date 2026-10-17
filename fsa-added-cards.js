@@ -354,6 +354,25 @@
   }
 
 
+
+  const currentVsTemporalNMEQuestion='Current vs Temporal Equity — Net Non-Monetary Exposure & FX';
+  const currentVsTemporalNMELatex='\\begin{aligned}\\text{FC appreciates:}\\quad \\text{Net N-M Asset}&\\Rightarrow E_{Current}>E_{Temporal}\\\\\\text{FC appreciates:}\\quad \\text{Net N-M Liability}&\\Rightarrow E_{Current}<E_{Temporal}\\\\\\text{FC depreciates:}\\quad \\text{Net N-M Asset}&\\Rightarrow E_{Current}<E_{Temporal}\\\\\\text{FC depreciates:}\\quad \\text{Net N-M Liability}&\\Rightarrow E_{Current}>E_{Temporal}\\end{aligned}';
+  const currentVsTemporalNMEAnswer='Compare the net non-monetary position. If the foreign currency appreciates (current rate > historical rate), net non-monetary assets favor higher equity under the current method; net non-monetary liabilities favor lower equity. If the foreign currency depreciates, reverse the signs.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===currentVsTemporalNMEQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:currentVsTemporalNMEQuestion,
+      answer:currentVsTemporalNMEAnswer,
+      latex:currentVsTemporalNMELatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
