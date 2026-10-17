@@ -10,18 +10,6 @@
   const tidy=s=>String(s??'').replace(/\s+/g,' ').trim();
 
   function cardFormulaHtml(c,where='library'){
-    if(c&&c.latex&&window.katex){
-      try{
-        const kh=katex.renderToString(String(c.latex).trim(),{
-          displayMode:true,
-          throwOnError:true,
-          strict:'ignore',
-          trust:false,
-          output:'htmlAndMathml'
-        });
-        return `<div class="formula-math ${where==='review'?'formula-math-review':'formula-math-library'}">${kh}</div>`;
-      }catch(_e){}
-    }
     if(c&&c[IMG_PROP]){
       return `<img class="formula-fidelity-img ${where==='review'?'formula-review-img':'formula-library-img'}" src="${attrEscape(c[IMG_PROP])}" alt="${attrEscape(c.answer||c.question||'Formula')}" loading="lazy">`;
     }
