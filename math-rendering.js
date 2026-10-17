@@ -246,10 +246,10 @@
   }
 
   function formulaHtml(c,where='library'){
+    if(c&&c[IMG_PROP])return `<img class="formula-fidelity-img ${where==='review'?'formula-review-img':'formula-library-img'}" src="${attrEscape(c[IMG_PROP])}" alt="${attrEscape(c.answer||c.question||'Formula')}" loading="lazy">`;
     const latex=c&&c[LATEX_PROP];
     const kh=latex?katexHtml(latex,true):'';
     if(kh)return `<div class="formula-math ${where==='review'?'formula-math-review':'formula-math-library'}">${kh}</div>`;
-    if(c&&c[IMG_PROP])return `<img class="formula-fidelity-img ${where==='review'?'formula-review-img':'formula-library-img'}" src="${attrEscape(c[IMG_PROP])}" alt="${attrEscape(c.answer||c.question||'Formula')}" loading="lazy">`;
     return `<span class="formula-fidelity-text">${htmlEscape(c&&c.answer||'')}</span>`;
   }
 
