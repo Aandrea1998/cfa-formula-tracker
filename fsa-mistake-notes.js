@@ -278,6 +278,35 @@
     }
   }
 
+
+  const fxExposureQuestion='FX Exposure — Importer vs Exporter';
+  const fxExposureLatex='\\begin{aligned}\\text{Importer: Foreign Currency}\\uparrow&\\Rightarrow\\text{Payment Cost}\\uparrow\\Rightarrow\\text{Loss}\\\\\\text{Exporter: Foreign Currency}\\downarrow&\\Rightarrow\\text{Converted Proceeds}\\downarrow\\Rightarrow\\text{Loss}\\end{aligned}';
+  const fxExposureAnswer='Importer loses when the foreign currency strengthens. Exporter loses when the foreign currency weakens.';
+  let fxExposureCard=cards.find(c=>c.subject===SUBJECT&&c.question===fxExposureQuestion);
+  if(!fxExposureCard){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:fxExposureQuestion,
+      answer:fxExposureAnswer,
+      latex:fxExposureLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }else{
+    const updates={
+      answer:fxExposureAnswer,
+      latex:fxExposureLatex,
+      topic:'Multinational Operations'
+    };
+    for(const [k,v] of Object.entries(updates)){
+      if(fxExposureCard[k]!==v){fxExposureCard[k]=v;changed=1;}
+    }
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
