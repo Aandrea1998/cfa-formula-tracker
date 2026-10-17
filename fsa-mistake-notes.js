@@ -365,6 +365,25 @@
     changed=1;
   }
 
+
+  const temporalFXInventoryQuestion='Temporal Method — FX Effect on Inventory & COGS';
+  const temporalFXInventoryLatex='\\begin{aligned}\\text{FIFO, FC}\\uparrow&\\Rightarrow\\text{Ending Inv.}\\uparrow,\\;\\text{COGS}\\downarrow\\\\\\text{FIFO, FC}\\downarrow&\\Rightarrow\\text{Ending Inv.}\\downarrow,\\;\\text{COGS}\\uparrow\\\\\\text{LIFO, FC}\\uparrow&\\Rightarrow\\text{Ending Inv.}\\downarrow,\\;\\text{COGS}\\uparrow\\\\\\text{LIFO, FC}\\downarrow&\\Rightarrow\\text{Ending Inv.}\\uparrow,\\;\\text{COGS}\\downarrow\\end{aligned}';
+  const temporalFXInventoryAnswer='Temporal method: FIFO uses more recent inventory layers; LIFO uses older inventory layers. If FC appreciates, recent-rate translated amounts are higher; if FC depreciates, the effects reverse.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===temporalFXInventoryQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:temporalFXInventoryQuestion,
+      answer:temporalFXInventoryAnswer,
+      latex:temporalFXInventoryLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
