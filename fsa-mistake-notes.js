@@ -346,6 +346,25 @@
     changed=1;
   }
 
+
+  const temporalRatesQuestion='Temporal Method — Translation Rates';
+  const temporalRatesLatex='\\begin{aligned}\\text{Monetary A/L}&\\rightarrow\\text{Current Rate}\\\\\\text{Non-monetary @ Hist. Cost}&\\rightarrow\\text{Historical Rate}\\\\\\text{Non-monetary @ Current Value}&\\rightarrow\\text{Rate at Valuation Date}\\\\\\text{Stockholders\' Equity}&\\rightarrow\\text{Historical Rate}\\\\\\text{Revenue/Expenses}&\\rightarrow\\text{Transaction / Average Rate}\\\\\\text{COGS, D\\&A, Amortization}&\\rightarrow\\text{Rate of Related Asset}\\end{aligned}';
+  const temporalRatesAnswer='Temporal method: monetary items use current rates; historical-cost non-monetary items and equity use historical rates; current-value non-monetary items use the valuation-date rate; revenue/expenses use transaction or average rates; COGS, D&A, and amortization use the rate of the related asset.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===temporalRatesQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:temporalRatesQuestion,
+      answer:temporalRatesAnswer,
+      latex:temporalRatesLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
