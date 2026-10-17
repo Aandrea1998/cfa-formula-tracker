@@ -6,6 +6,22 @@
 
   let normalizing=false;
 
+
+  function restoreTextFallbackMath(){
+    if(typeof cards==='undefined'||!Array.isArray(cards)||!window.CFAMath||typeof window.CFAMath.formulaHtml!=='function')return;
+    root.querySelectorAll('tbody tr').forEach(row=>{
+      const id=Number(row.children[0]?.textContent);
+      if(!id)return;
+      const card=cards.find(c=>+c.id===id);
+      const cell=row.querySelector('.formula-cell')||row.children[2];
+      if(!card||!cell||card.formulaImage||!card.latex)return;
+      const marker='latex:'+card.latex;
+      if(cell.dataset.mathFinalized===marker)return;
+      cell.innerHTML=window.CFAMath.formulaHtml(card,'library');
+      cell.dataset.mathFinalized=marker;
+    });
+  }
+
   function updateLibraryCopy(){
     const subtitle=document.querySelector('#formulasView .topbar .subtitle');
     if(subtitle)subtitle.textContent='Browse formulas by CFA topic.';
@@ -98,7 +114,7 @@
     const out=baseRender.apply(this,arguments);
     updateLibraryCopy();
     unifyLibrary();
-    requestAnimationFrame(unifyLibrary);
+    requestAnimationFrame(()=>{unifyLibrary();restoreTextFallbackMath();});
     setTimeout(unifyLibrary,50);
     return out;
   };
@@ -113,6 +129,7 @@
 
   updateLibraryCopy();
   unifyLibrary();
+  restoreTextFallbackMath();
 
   window.CFAUnifiedTopicLibrary={unify:unifyLibrary};
 })();
