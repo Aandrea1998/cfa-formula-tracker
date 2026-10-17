@@ -407,6 +407,25 @@
     changed=1;
   }
 
+
+  const ias29RestatementQuestion='IAS 29 — Hyperinflation Restatement Factors';
+  const ias29RestatementLatex='\\begin{aligned}\\text{Monetary A/L}&\\rightarrow\\text{No Restatement}\\\\\\text{Non-monetary @ Hist. Cost}&\\rightarrow\\frac{GPI_{Closing}}{GPI_{Acquisition}}\\\\\\text{Non-monetary @ Revalued Amount}&\\rightarrow\\frac{GPI_{Closing}}{GPI_{Revaluation}}\\\\\\text{Stockholders\' Equity}&\\rightarrow\\frac{GPI_{Closing}}{GPI_{Beginning/Contribution}}\\\\\\text{Income Statement}&\\rightarrow\\frac{GPI_{Closing}}{GPI_{Average}}\\\\\\text{Net Monetary Gain/Loss}&\\rightarrow\\text{Net Income}\\end{aligned}';
+  const ias29RestatementAnswer='IAS 29: restate non-monetary items, equity, and income-statement items into closing purchasing power. Monetary items are not restated; the resulting purchasing-power gain/loss is recognized in net income.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===ias29RestatementQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:ias29RestatementQuestion,
+      answer:ias29RestatementAnswer,
+      latex:ias29RestatementLatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
