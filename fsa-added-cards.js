@@ -392,6 +392,37 @@
     changed=1;
   }
 
+
+  // Repair cards already stored in localStorage from older versions.
+  // Preserve id/status/history and any legacy formula image; only restore the
+  // canonical answer + LaTeX so the Formula Library can render them correctly.
+  function syncAddedCard(question,answer,latex){
+    const card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+    if(!card)return;
+    if(card.answer!==answer){card.answer=answer;changed=1;}
+    if(card.latex!==latex){card.latex=latex;changed=1;}
+    if(!Array.isArray(card.history)){card.history=[];changed=1;}
+  }
+
+  [
+    [optionExerciseQuestion,optionExerciseAnswer,optionExerciseLatex],
+    [pensionFundedStatusQuestion,pensionFundedStatusAnswer,pensionFundedStatusLatex],
+    [dboNetInterestQuestion,dboNetInterestAnswer,dboNetInterestLatex],
+    [expectedReturnPlanAssetsQuestion,expectedReturnPlanAssetsAnswer,expectedReturnPlanAssetsLatex],
+    [ifrsPensionOCIQuestion,ifrsPensionOCIAnswer,ifrsPensionOCILatex],
+    [ifrsPensionISQuestion,ifrsPensionISAnswer,ifrsPensionISLatex],
+    [pensionIFRSGAAPQuestion,pensionIFRSGAAPAnswer,pensionIFRSGAAPLatex],
+    [fxExposureQuestion,fxExposureAnswer,fxExposureLatex],
+    [currentMethodREQuestion,currentMethodREAnswer,currentMethodRELatex],
+    [currentRateRulesQuestion,currentRateRulesAnswer,currentRateRulesLatex],
+    [temporalRatesQuestion,temporalRatesAnswer,temporalRatesLatex],
+    [temporalFXInventoryQuestion,temporalFXInventoryAnswer,temporalFXInventoryLatex],
+    [ias29RestatementQuestion,ias29RestatementAnswer,ias29RestatementLatex],
+    [currentVsTemporalNMEQuestion,currentVsTemporalNMEAnswer,currentVsTemporalNMELatex],
+    [currentVsTemporalALQuestion,currentVsTemporalALAnswer,currentVsTemporalALLatex]
+  ].forEach(args=>syncAddedCard(...args));
+
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
