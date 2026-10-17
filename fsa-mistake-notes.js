@@ -307,6 +307,26 @@
     }
   }
 
+
+  const currentMethodREQuestion='Retained Earnings — Current Method Translation';
+  const currentMethodRELatex='\\begin{aligned}\\text{Ending RE}&=\\text{Prior translated RE}\\\\&\\quad+\\text{Translated NI}\\\\&\\quad-\\text{Translated Dividends}\\end{aligned}';
+  const currentMethodREAnswer='Ending RE = prior translated RE + translated NI - translated dividends.';
+  if(!cards.some(card=>card.subject===SUBJECT&&card.question===currentMethodREQuestion)){
+    cards.push({
+      id:cards.reduce((m,card)=>Math.max(m,+card.id||0),0)+1,
+      question:currentMethodREQuestion,
+      answer:currentMethodREAnswer,
+      latex:currentMethodRELatex,
+      subject:SUBJECT,
+      topic:'Multinational Operations',
+      status:null,
+      history:[]
+    });
+    added++;
+    changed=1;
+  }
+
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
