@@ -554,4 +554,20 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-tier2-components">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={"question":"Tier 2 Capital — Components","latex":"\\begin{gathered}\\begin{aligned}\\text{Tier 2}&=\\text{Qualifying subordinated debt}\\\\&\\quad+\\text{Eligible loan-loss provisions}\\\\&\\quad-\\text{Applicable deductions}\\end{aligned}\\\\[6pt]\\text{Debt: original maturity }\\geq 5\\text{ years;}\\\\\\text{recognition reduced in the final 5 years.}\\end{gathered}","answer":"Tier 2 = Qualifying subordinated debt + Eligible loan-loss provisions − Applicable deductions (simplified CFA study formula). Qualifying debt is subordinated to depositors and general creditors and has an original maturity of at least five years. Regulatory recognition is progressively reduced in the final five years before maturity. Eligible provisions are subject to regulatory limits and the applicable credit-risk approach; not all loan-loss provisions qualify. Exam trap: AT1 must be perpetual, whereas qualifying Tier 2 debt can have a fixed maturity."};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
