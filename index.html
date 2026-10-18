@@ -522,4 +522,20 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-cet1-components">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Analysis of Financial Institutions';
+const item={"question":"Common Equity Tier 1 (CET1) — Components","latex":"\\begin{aligned}\\mathrm{CET1}&=\\text{Common stock}+\\text{Share premium}\\\\&\\quad+\\text{Retained earnings}+\\text{AOCI}\\\\&\\quad-\\text{Regulatory deductions}\\end{aligned}","answer":"CET1 = Common stock + Share premium + Retained earnings + Accumulated other comprehensive income (AOCI) − Regulatory deductions. Share premium is issuance surplus related to common stock. Deductions include goodwill, other intangible assets and certain deferred tax assets. Exam trap: retained earnings and AOCI are included; intangible assets are deducted."};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
