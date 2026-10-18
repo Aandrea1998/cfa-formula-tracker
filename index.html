@@ -538,4 +538,20 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-at1-components">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={"question":"Additional Tier 1 (AT1) — Components","latex":"\\begin{gathered}\\begin{aligned}\\mathrm{AT1}&=\\text{Qualifying perpetual preferred shares}\\\\&\\quad+\\text{Other qualifying AT1 instruments}\\\\&\\quad-\\text{Applicable deductions}\\end{aligned}\\\\[6pt]\\text{Other qualifying: perpetual, subordinated;}\\\\\\text{dividends/coupons fully discretionary.}\\end{gathered}","answer":"AT1 = Qualifying perpetual preferred shares + Other qualifying AT1 instruments − Applicable deductions. Other qualifying AT1 instruments meet regulatory eligibility requirements, including no fixed maturity, subordination to depositors and general creditors, and dividends/coupons that the bank can cancel entirely at its discretion. These are key conditions, not an exhaustive eligibility checklist. Exam trap: subordination alone is insufficient; a fixed-maturity instrument does not qualify as AT1."};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
