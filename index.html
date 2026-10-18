@@ -570,4 +570,20 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-highly-liquid-assets-ratio">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={"question":"Highly Liquid Assets Ratio — HSBC Balance-Sheet Example","latex":"\\text{Highly liquid assets ratio}=\\frac{\\begin{gathered}\\text{Cash and central bank balances}\\\\+\\text{Items in collection from other banks}\\\\+\\text{Government certificates of indebtedness}\\end{gathered}}{\\text{Total assets}}\\times100","answer":"Highly liquid assets ratio (%) = (Cash and central bank balances + Items in collection from other banks + Government certificates of indebtedness) / Total assets × 100. These are the highly liquid asset categories used in the HSBC exercise. A higher ratio indicates greater balance-sheet liquidity. HSBC: 5.5% in 2015 and 6.9% in 2016, so liquidity increased. This is not the regulatory LCR: the denominator here is total assets, not 30-day stressed net cash outflows."};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
