@@ -604,4 +604,20 @@ delete card.formulaImage;
 });
 save();refresh();
 })();
+</script><script id="fsa-provision-earnings-contribution">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const item={"question":"When pretax income rises and credit loss provisions fall, what percentage of the pretax income increase is explained by the reduction in provision expense?","latex":"\\begin{gathered}\\text{Contribution (\\%)}=\\frac{-\\Delta\\text{Credit loss provisions}}{\\Delta\\text{Pretax income}}\\times100\\\\[6pt]\\text{Lower provisions}\\rightarrow\\text{lower expense}\\\\\\rightarrow\\text{higher pretax income.}\\end{gathered}","answer":"Contribution (%) = −Change in credit loss provision expense / Change in pretax income × 100. Change means current period minus prior period. Applies when pretax income increases and provisions decrease: the minus sign converts the provision decrease into a positive earnings contribution. Use the change in the income-statement provision expense, not the balance-sheet allowance. Example: −(−2.815) / 11.637 × 100 = 24.2%."};
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
