@@ -104,6 +104,35 @@
     },
 
     {
+      topic:'Duration & Convexity',
+      question:'What is the formula for effective duration from bond prices after equal upward and downward yield shifts?',
+      aliases:['Effective Duration — Formula','Effective Duration (Price-Based Formula)'],
+      latex:'D_{\\mathrm{eff}}=\\frac{P_{-}-P_{+}}{2P_0\\Delta y}',
+      notation:[
+        ['P_{-}','Bond price when the benchmark yield curve shifts down by Δy'],
+        ['P_{+}','Bond price when the benchmark yield curve shifts up by Δy'],
+        ['P_0','Initial bond price, before the yield-curve shifts'],
+        ['\\Delta y','Magnitude of the yield shift, expressed as a decimal']
+      ],
+      interpretation:'Effective duration estimates the first-order percentage price sensitivity to equal up and down shifts in the benchmark yield curve.',
+      memoryRule:'Duration: price difference (down-shift price minus up-shift price), divided by 2 × initial price × Δy.'
+    },
+    {
+      topic:'Duration & Convexity',
+      question:'What is the formula for effective convexity from bond prices after equal upward and downward yield shifts?',
+      aliases:['Effective Convexity — Formula','Effective Convexity (Price-Based Formula)'],
+      latex:'C_{\\mathrm{eff}}=\\frac{P_{-}+P_{+}-2P_0}{P_0(\\Delta y)^2}',
+      notation:[
+        ['P_{-}','Bond price when the benchmark yield curve shifts down by Δy'],
+        ['P_{+}','Bond price when the benchmark yield curve shifts up by Δy'],
+        ['P_0','Initial bond price, before the yield-curve shifts'],
+        ['\\Delta y','Magnitude of the yield shift, expressed as a decimal']
+      ],
+      interpretation:'Effective convexity measures the curvature of the price–yield relationship, correcting the linear approximation from duration.',
+      memoryRule:'Convexity: sum both shifted prices, subtract 2 × initial price, divide by initial price × (Δy)².'
+    },
+
+    {
       topic:'Credit Spread Benchmarks & Spread Measures',
       question:'Treasury Benchmark Spread',
       latex:'\\begin{aligned}\\text{Bond Yield}&=\\text{Treasury Yield}+\\text{Spread}\\\\\\text{Spread}&=\\text{Bond Yield}-\\text{Treasury Yield}\\end{aligned}',
@@ -845,7 +874,7 @@
   }
 
   window.CFAFixedIncomeFormulaSheet={
-    version:'2026-10-09',
+    version:'2026-10-18',
     source:SOURCE,
     added,
     removed,
