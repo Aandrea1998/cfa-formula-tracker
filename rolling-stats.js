@@ -113,7 +113,7 @@
     select.onchange=()=>{
       librarySort=select.value;
       localStorage.setItem(SORT_KEY,librarySort);
-      renderLibraryRolling();
+      renderLibrary();
     };
   }
 
@@ -133,7 +133,7 @@
 
     const subjects=['All',...TOPICS];
     $('topicTabs').innerHTML=subjects.map(t=>{const n=t==='All'?cards.length:cards.filter(c=>c.subject===t).length;return `<button class="topic-chip ${librarySubject===t?'active':''}" data-subject="${attr(t)}">${esc(t)} · ${n}</button>`}).join('');
-    document.querySelectorAll('.topic-chip').forEach(b=>b.onclick=()=>{librarySubject=b.dataset.subject;renderLibraryRolling()});
+    document.querySelectorAll('.topic-chip').forEach(b=>b.onclick=()=>{librarySubject=b.dataset.subject;renderLibrary()});
     const visible=librarySubject==='All'?cards:cards.filter(c=>c.subject===librarySubject);
     $('formulaCountPill').textContent=`${visible.length} formula${visible.length===1?'':'s'}`;
     if(!visible.length){$('libraryContent').innerHTML=`<div class="empty">No formulas in <strong>${esc(librarySubject)}</strong> yet. Use Upload chapter to add some.</div>`;return;}
@@ -193,7 +193,7 @@
       return `<div class="subject-mini"><span>${esc(t)}</span><span>${acc===null?'—':acc+'%'} · ${attempted.length}/${subset.length}</span></div>`;
     }).join('');
 
-    renderLibraryRolling();
+    renderLibrary();
     save();
   }
 
