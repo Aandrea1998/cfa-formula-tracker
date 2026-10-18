@@ -586,4 +586,22 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="fsa-asf-rsf-components">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const subject='Financial Statement Analysis';
+const topic='Financial Institutions';
+const additions=[{"question":"Available Stable Funding (ASF) — Main Components","latex":"\\begin{gathered}\\begin{aligned}ASF&=\\text{Equity capital}\\times w_E\\\\&\\quad+\\text{Long-term debt}\\times w_D\\\\&\\quad+\\text{Retail deposits}\\times w_R\\\\&\\quad+\\text{Other funding}\\times w_O\\end{aligned}\\\\[6pt]\\text{Each }w\\text{ is the applicable ASF factor.}\\\\\\text{More stable funding}\\Rightarrow\\text{higher weight.}\\end{gathered}","answer":"ASF measures funding expected to remain available over a one-year horizon. Main components: equity capital, long-term debt, retail deposits and other funding, each multiplied by its applicable ASF factor. Equity and long-term debt generally provide stable funding. Stable retail deposits receive higher factors than less stable deposits; short-term wholesale funding generally receives lower factors. The formula groups categories for study: split each group further whenever different factors apply. ASF describes how the bank finances itself and is the numerator of NSFR."},{"question":"Required Stable Funding (RSF) — Main Components","latex":"\\begin{gathered}\\begin{aligned}RSF&=\\text{Cash}\\times w_C\\\\&\\quad+\\text{Government bonds}\\times w_G\\\\&\\quad+\\text{Loans}\\times w_L\\\\&\\quad+\\text{Other assets}\\times w_O\\\\&\\quad+\\text{Off-balance-sheet requirement}\\end{aligned}\\\\[6pt]\\text{Each }w\\text{ is the applicable RSF factor.}\\\\\\text{Cash: zero; highly liquid govt bonds: low;}\\\\\\text{long-term illiquid loans: high.}\\end{gathered}","answer":"RSF is the stable funding needed to support assets and certain off-balance-sheet exposures over a one-year horizon. Main components: cash, government bonds, loans and other assets, each multiplied by its applicable RSF factor, plus the weighted funding requirement for off-balance-sheet exposures. Cash needs no stable funding; highly liquid government bonds generally need little; long-term illiquid corporate loans need more because funds remain tied up. Factors depend on liquidity, residual maturity, encumbrance and other regulatory characteristics. Split broad categories when factors differ. RSF describes how the bank uses its funds and is the denominator of NSFR."}];
+additions.forEach(item=>{
+let card=cards.find(c=>c.subject===subject&&c.question===item.question);
+if(!card){
+  card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject,topic,status:null,history:[]};
+  cards.push(card);
+}
+Object.assign(card,item,{subject,topic});
+delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
