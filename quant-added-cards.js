@@ -104,6 +104,31 @@
     if(!Array.isArray(fStatCard.history)){fStatCard.history=[];changed=1;}
   }
 
+
+  const aicBicQuestion='AIC vs BIC — Model Selection';
+  const aicBicLatex='\\begin{aligned}\\mathrm{AIC}&\\rightarrow\\text{Prediction purposes}\\\\\\mathrm{BIC}&\\rightarrow\\text{Best goodness of fit}\\\\\\text{Choose}&\\rightarrow\\text{Lower relative value}\\\\\\text{Absolute value}&\\rightarrow\\text{Meaningless alone}\\end{aligned}';
+  const aicBicAnswer='AIC is preferred for prediction purposes; BIC is preferred when best goodness of fit is desired. Compare relative values across candidate models with the same dependent variable; lower is preferred. Absolute AIC/BIC values alone are not meaningful.';
+  let aicBicCard=cards.find(c=>c.subject===SUBJECT&&c.question===aicBicQuestion);
+  if(!aicBicCard){
+    aicBicCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:aicBicQuestion,
+      answer:aicBicAnswer,
+      latex:aicBicLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(aicBicCard);
+    changed=1;
+  }else{
+    if(aicBicCard.answer!==aicBicAnswer){aicBicCard.answer=aicBicAnswer;changed=1;}
+    if(aicBicCard.latex!==aicBicLatex){aicBicCard.latex=aicBicLatex;changed=1;}
+    if(aicBicCard.topic!=='Multiple Linear Regression'){aicBicCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(aicBicCard.history)){aicBicCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
