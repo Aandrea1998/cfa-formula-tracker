@@ -607,6 +607,31 @@
     if(!Array.isArray(optionDeltaDividendCard.history)){optionDeltaDividendCard.history=[];changed=1;}
   }
 
+
+  const deltaHedgeContractsQuestion='Delta Hedging — Number of Hedge Contracts';
+  const deltaHedgeContractsLatex='\\begin{aligned}N_H&=-\\frac{\\text{Portfolio Delta}}{\\Delta_H}\\end{aligned}';
+  const deltaHedgeContractsAnswer='Number of hedge contracts = − Portfolio Delta / Delta of the hedging instrument. The minus sign means take the opposite delta exposure to make the total portfolio delta approximately zero.';
+  let deltaHedgeContractsCard=cards.find(c=>c.subject===SUBJECT&&c.question===deltaHedgeContractsQuestion);
+  if(!deltaHedgeContractsCard){
+    deltaHedgeContractsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:deltaHedgeContractsQuestion,
+      answer:deltaHedgeContractsAnswer,
+      latex:deltaHedgeContractsLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(deltaHedgeContractsCard);
+    changed=1;
+  }else{
+    if(deltaHedgeContractsCard.answer!==deltaHedgeContractsAnswer){deltaHedgeContractsCard.answer=deltaHedgeContractsAnswer;changed=1;}
+    if(deltaHedgeContractsCard.latex!==deltaHedgeContractsLatex){deltaHedgeContractsCard.latex=deltaHedgeContractsLatex;changed=1;}
+    if(deltaHedgeContractsCard.topic!=='Options'){deltaHedgeContractsCard.topic='Options';changed=1;}
+    if(!Array.isArray(deltaHedgeContractsCard.history)){deltaHedgeContractsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
