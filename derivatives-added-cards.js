@@ -682,6 +682,31 @@
     if(!Array.isArray(deltaGammaApproxCard.history)){deltaGammaApproxCard.history=[];changed=1;}
   }
 
+
+  const historicalVsImpliedVolQuestion='Historical vs Implied Volatility';
+  const historicalVsImpliedVolLatex='\\begin{array}{c|c}\\textbf{Historical Volatility}&\\textbf{Implied Volatility}\\\\\\hline\\text{Past}&\\text{Future expectation}\\\\\\text{Observable from returns}&\\text{Inferred from option prices}\\\\\\text{Backward-looking}&\\text{Forward-looking}\\end{array}';
+  const historicalVsImpliedVolAnswer='Historical volatility is based on past observed returns and is backward-looking. Implied volatility is backed out from option prices and reflects the market’s forward-looking volatility expectation.';
+  let historicalVsImpliedVolCard=cards.find(c=>c.subject===SUBJECT&&c.question===historicalVsImpliedVolQuestion);
+  if(!historicalVsImpliedVolCard){
+    historicalVsImpliedVolCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:historicalVsImpliedVolQuestion,
+      answer:historicalVsImpliedVolAnswer,
+      latex:historicalVsImpliedVolLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(historicalVsImpliedVolCard);
+    changed=1;
+  }else{
+    if(historicalVsImpliedVolCard.answer!==historicalVsImpliedVolAnswer){historicalVsImpliedVolCard.answer=historicalVsImpliedVolAnswer;changed=1;}
+    if(historicalVsImpliedVolCard.latex!==historicalVsImpliedVolLatex){historicalVsImpliedVolCard.latex=historicalVsImpliedVolLatex;changed=1;}
+    if(historicalVsImpliedVolCard.topic!=='Options'){historicalVsImpliedVolCard.topic='Options';changed=1;}
+    if(!Array.isArray(historicalVsImpliedVolCard.history)){historicalVsImpliedVolCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
