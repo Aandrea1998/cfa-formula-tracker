@@ -179,6 +179,31 @@
     if(!Array.isArray(modelSpecCard.history)){modelSpecCard.history=[];changed=1;}
   }
 
+
+  const functionalFormQuestion='Regression Functional Form — Misspecifications';
+  const functionalFormLatex='\\begin{aligned}1.&\\ \\text{Omitted variables}\\\\2.&\\ \\text{Inappropriate form}\\\\3.&\\ \\text{Variable scaling}\\\\4.&\\ \\text{Data pooling}\\end{aligned}';
+  const functionalFormAnswer='Omitted variables; inappropriate form; variable scaling; data pooling.';
+  let functionalFormCard=cards.find(c=>c.subject===SUBJECT&&c.question===functionalFormQuestion);
+  if(!functionalFormCard){
+    functionalFormCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:functionalFormQuestion,
+      answer:functionalFormAnswer,
+      latex:functionalFormLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(functionalFormCard);
+    changed=1;
+  }else{
+    if(functionalFormCard.answer!==functionalFormAnswer){functionalFormCard.answer=functionalFormAnswer;changed=1;}
+    if(functionalFormCard.latex!==functionalFormLatex){functionalFormCard.latex=functionalFormLatex;changed=1;}
+    if(functionalFormCard.topic!=='Multiple Linear Regression'){functionalFormCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(functionalFormCard.history)){functionalFormCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
