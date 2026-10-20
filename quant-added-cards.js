@@ -383,6 +383,31 @@
     if(!Array.isArray(logitCard.history)){logitCard.history=[];changed=1;}
   }
 
+
+  const arResidualQuestion='AR Model — Residual Autocorrelation Test';
+  const arResidualLatex='\\begin{aligned}SE(\\hat\\rho_k)&\\approx\\frac{1}{\\sqrt{n}}\\\\t_k&=\\frac{\\hat\\rho_k}{SE(\\hat\\rho_k)}\\\\|t_k|>t_{crit}&\\Rightarrow\\text{Significant residual autocorrelation}\\\\|t_k|\\le t_{crit}&\\Rightarrow\\text{No significant residual autocorrelation}\\end{aligned}';
+  const arResidualAnswer='For each lag k in an AR model: SE(ρ̂_k) ≈ 1/√n and t_k = ρ̂_k/SE(ρ̂_k). Compare |t_k| with the critical t-value. Significant residual autocorrelation suggests model misspecification.';
+  let arResidualCard=cards.find(c=>c.subject===SUBJECT&&c.question===arResidualQuestion);
+  if(!arResidualCard){
+    arResidualCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:arResidualQuestion,
+      answer:arResidualAnswer,
+      latex:arResidualLatex,
+      subject:SUBJECT,
+      topic:'Time Series Analysis',
+      status:null,
+      history:[]
+    };
+    cards.push(arResidualCard);
+    changed=1;
+  }else{
+    if(arResidualCard.answer!==arResidualAnswer){arResidualCard.answer=arResidualAnswer;changed=1;}
+    if(arResidualCard.latex!==arResidualLatex){arResidualCard.latex=arResidualLatex;changed=1;}
+    if(arResidualCard.topic!=='Time Series Analysis'){arResidualCard.topic='Time Series Analysis';changed=1;}
+    if(!Array.isArray(arResidualCard.history)){arResidualCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
