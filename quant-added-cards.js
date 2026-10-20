@@ -283,6 +283,31 @@
     if(!Array.isArray(dwBgCard.history)){dwBgCard.history=[];changed=1;}
   }
 
+
+  const vifQuestion='VIF — Multicollinearity';
+  const vifLatex='\\begin{aligned}VIF_j&=\\frac{1}{1-R_j^2}\\\\VIF=1&\\Rightarrow\\text{No multicollinearity}\\\\VIF>5&\\Rightarrow\\text{Investigate}\\\\VIF>10&\\Rightarrow\\text{Serious multicollinearity}\\end{aligned}';
+  const vifAnswer='VIF_j = 1/(1−R_j²). VIF = 1 means no multicollinearity; VIF > 5 warrants investigation; VIF > 10 indicates serious multicollinearity.';
+  let vifCard=cards.find(c=>c.subject===SUBJECT&&c.question===vifQuestion);
+  if(!vifCard){
+    vifCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:vifQuestion,
+      answer:vifAnswer,
+      latex:vifLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(vifCard);
+    changed=1;
+  }else{
+    if(vifCard.answer!==vifAnswer){vifCard.answer=vifAnswer;changed=1;}
+    if(vifCard.latex!==vifLatex){vifCard.latex=vifLatex;changed=1;}
+    if(vifCard.topic!=='Multiple Linear Regression'){vifCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(vifCard.history)){vifCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
