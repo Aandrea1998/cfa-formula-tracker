@@ -458,6 +458,31 @@
     if(!Array.isArray(rmseCard.history)){rmseCard.history=[];changed=1;}
   }
 
+
+  const dfQuestion='Dickey–Fuller Test — Unit Root';
+  const dfLatex='\\begin{aligned}\\Delta x_t&=b_0+\\gamma_1x_{t-1}+\\varepsilon_t\\\\\\gamma_1&=b_1-1\\\\H_0:\\gamma_1=0&\\Leftrightarrow b_1=1\\Rightarrow\\text{Unit root / nonstationary}\\\\H_a:\\gamma_1<0&\\Leftrightarrow b_1<1\\Rightarrow\\text{Stationary}\\\\t_{DF}<CV_{DF}&\\Rightarrow\\text{Reject }H_0\\end{aligned}';
+  const dfAnswer='Dickey–Fuller unit-root test: Δx_t = b₀ + γ₁x_{t−1} + ε_t, with γ₁ = b₁−1. H₀: γ₁=0 (b₁=1) ⇒ unit root/nonstationary. Hₐ: γ₁<0 ⇒ stationary. Reject H₀ when the DF test statistic is more negative than the Dickey–Fuller critical value.';
+  let dfCard=cards.find(c=>c.subject===SUBJECT&&c.question===dfQuestion);
+  if(!dfCard){
+    dfCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:dfQuestion,
+      answer:dfAnswer,
+      latex:dfLatex,
+      subject:SUBJECT,
+      topic:'Time Series Analysis',
+      status:null,
+      history:[]
+    };
+    cards.push(dfCard);
+    changed=1;
+  }else{
+    if(dfCard.answer!==dfAnswer){dfCard.answer=dfAnswer;changed=1;}
+    if(dfCard.latex!==dfLatex){dfCard.latex=dfLatex;changed=1;}
+    if(dfCard.topic!=='Time Series Analysis'){dfCard.topic='Time Series Analysis';changed=1;}
+    if(!Array.isArray(dfCard.history)){dfCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
