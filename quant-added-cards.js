@@ -256,8 +256,8 @@
 
 
   const dwBgQuestion='Serial Correlation Tests — DW vs BG';
-  const dwBgLatex='\\begin{aligned}\\mathrm{DW}&:\\ \\text{No lagged }Y\\text{ (no AR term), first-order only}\\\\\\mathrm{BG}&:\\ \\text{Lagged }Y\\text{ allowed, serial correlation up to order }p\\end{aligned}';
-  const dwBgAnswer='Durbin–Watson: use when no lagged dependent variable is included; tests first-order serial correlation only. Breusch–Godfrey: can be used with lagged dependent variables and can test serial correlation up to order p.';
+  const dwBgLatex='\\begin{aligned}\\mathrm{DW}&\\approx2(1-\\rho)\\\\\\mathrm{DW}\\approx2&\\Rightarrow\\text{No serial correlation}\\\\0<\\mathrm{DW}<2&\\Rightarrow\\text{Positive serial correlation}\\\\2<\\mathrm{DW}<4&\\Rightarrow\\text{Negative serial correlation}\\\\\\mathrm{DW}\\approx0&\\Rightarrow\\text{Strong positive serial correlation}\\\\\\mathrm{DW}\\approx4&\\Rightarrow\\text{Strong negative serial correlation}\\\\\\mathrm{DW}&:\\ \\text{Use only with no lagged }Y\\text{ (no AR term)}\\\\\\mathrm{BG}&:\\ \\text{Use with lagged }Y\\text{ / higher-order correlation}\\end{aligned}';
+  const dwBgAnswer='DW ranges from 0 to 4: about 2 means no serial correlation; below 2 indicates positive serial correlation; above 2 indicates negative serial correlation. Values near 0 imply strong positive correlation and near 4 strong negative correlation. Use DW only when there is no lagged dependent variable (no AR term); BG is used when lagged Y is present or higher-order serial correlation is tested.';
   let dwBgCard=cards.find(c=>c.subject===SUBJECT&&c.question===dwBgQuestion);
   if(!dwBgCard){
     dwBgCard={
