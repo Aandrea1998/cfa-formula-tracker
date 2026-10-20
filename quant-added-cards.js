@@ -129,6 +129,31 @@
     if(!Array.isArray(aicBicCard.history)){aicBicCard.history=[];changed=1;}
   }
 
+
+  const restrictedFQuestion='F-Test — Restricted vs Unrestricted Model';
+  const restrictedFLatex='\\begin{aligned}F&=\\frac{(SSE_R-SSE_U)/q}{SSE_U/(n-k-1)}\\\\q&=\\text{number of restrictions (variables omitted in the restricted model)}\\end{aligned}';
+  const restrictedFAnswer='Use the restricted-vs-unrestricted F-test for joint restrictions: F = [(SSE_R − SSE_U)/q] / [SSE_U/(n−k−1)]. Here q is the number of restrictions, i.e. the number of variables omitted from the restricted model relative to the unrestricted model.';
+  let restrictedFCard=cards.find(c=>c.subject===SUBJECT&&c.question===restrictedFQuestion);
+  if(!restrictedFCard){
+    restrictedFCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:restrictedFQuestion,
+      answer:restrictedFAnswer,
+      latex:restrictedFLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(restrictedFCard);
+    changed=1;
+  }else{
+    if(restrictedFCard.answer!==restrictedFAnswer){restrictedFCard.answer=restrictedFAnswer;changed=1;}
+    if(restrictedFCard.latex!==restrictedFLatex){restrictedFCard.latex=restrictedFLatex;changed=1;}
+    if(restrictedFCard.topic!=='Multiple Linear Regression'){restrictedFCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(restrictedFCard.history)){restrictedFCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
