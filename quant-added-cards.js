@@ -433,6 +433,31 @@
     if(!Array.isArray(meanRevCard.history)){meanRevCard.history=[];changed=1;}
   }
 
+
+  const rmseQuestion='RMSE — Out-of-Sample Forecast Accuracy';
+  const rmseLatex='\\begin{aligned}RMSE&=\\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(Y_i-\\hat Y_i)^2}\\\\\\text{Lower RMSE}&\\Rightarrow\\text{More accurate forecast}\\end{aligned}';
+  const rmseAnswer='RMSE = sqrt[(1/n)Σ(Yᵢ−Ŷᵢ)²]. It measures out-of-sample forecast error; lower RMSE means better forecasting accuracy.';
+  let rmseCard=cards.find(c=>c.subject===SUBJECT&&c.question===rmseQuestion);
+  if(!rmseCard){
+    rmseCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:rmseQuestion,
+      answer:rmseAnswer,
+      latex:rmseLatex,
+      subject:SUBJECT,
+      topic:'Time Series Analysis',
+      status:null,
+      history:[]
+    };
+    cards.push(rmseCard);
+    changed=1;
+  }else{
+    if(rmseCard.answer!==rmseAnswer){rmseCard.answer=rmseAnswer;changed=1;}
+    if(rmseCard.latex!==rmseLatex){rmseCard.latex=rmseLatex;changed=1;}
+    if(rmseCard.topic!=='Time Series Analysis'){rmseCard.topic='Time Series Analysis';changed=1;}
+    if(!Array.isArray(rmseCard.history)){rmseCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
