@@ -632,6 +632,31 @@
     if(!Array.isArray(deltaHedgeContractsCard.history)){deltaHedgeContractsCard.history=[];changed=1;}
   }
 
+
+  const optionGammaQuestion='Option Gamma — Call and Put';
+  const optionGammaLatex='\\begin{aligned}\\Gamma_c&=\\Gamma_p=\\frac{e^{-\\delta T}n(d_1)}{S_0\\sigma\\sqrt{T}}\\end{aligned}';
+  const optionGammaAnswer='Call and put gamma are identical: Γ = e^{-δT} n(d₁) / (S₀σ√T). Here n(d₁) is the standard normal PDF.';
+  let optionGammaCard=cards.find(c=>c.subject===SUBJECT&&c.question===optionGammaQuestion);
+  if(!optionGammaCard){
+    optionGammaCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:optionGammaQuestion,
+      answer:optionGammaAnswer,
+      latex:optionGammaLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(optionGammaCard);
+    changed=1;
+  }else{
+    if(optionGammaCard.answer!==optionGammaAnswer){optionGammaCard.answer=optionGammaAnswer;changed=1;}
+    if(optionGammaCard.latex!==optionGammaLatex){optionGammaCard.latex=optionGammaLatex;changed=1;}
+    if(optionGammaCard.topic!=='Options'){optionGammaCard.topic='Options';changed=1;}
+    if(!Array.isArray(optionGammaCard.history)){optionGammaCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
