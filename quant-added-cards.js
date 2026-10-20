@@ -229,6 +229,31 @@
     if(!Array.isArray(bpCard.history)){bpCard.history=[];changed=1;}
   }
 
+
+  const serialCorrQuestion='Serial Correlation — Impact on Coefficients & Standard Errors';
+  const serialCorrLatex='\\begin{aligned}\\text{No lagged }Y&:\\quad \\beta\\text{ estimates valid},\\ SE\\text{ invalid}\\\\\\text{Lagged }Y&:\\quad \\beta\\text{ estimates invalid},\\ SE\\text{ invalid}\\end{aligned}';
+  const serialCorrAnswer='With serial correlation: if no lagged dependent variable is included, coefficient estimates remain valid but standard errors are invalid. If a lagged dependent variable is included, both coefficient estimates and standard errors are invalid.';
+  let serialCorrCard=cards.find(c=>c.subject===SUBJECT&&c.question===serialCorrQuestion);
+  if(!serialCorrCard){
+    serialCorrCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:serialCorrQuestion,
+      answer:serialCorrAnswer,
+      latex:serialCorrLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(serialCorrCard);
+    changed=1;
+  }else{
+    if(serialCorrCard.answer!==serialCorrAnswer){serialCorrCard.answer=serialCorrAnswer;changed=1;}
+    if(serialCorrCard.latex!==serialCorrLatex){serialCorrCard.latex=serialCorrLatex;changed=1;}
+    if(serialCorrCard.topic!=='Multiple Linear Regression'){serialCorrCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(serialCorrCard.history)){serialCorrCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
