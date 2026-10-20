@@ -82,6 +82,31 @@
     if(!Array.isArray(forwardValueCard.history)){forwardValueCard.history=[];changed=1;}
   }
 
+
+  const forwardCarryQuestion='Forward Price — Income, Carry Costs & Carry Benefits';
+  const forwardCarryLatex='\\begin{aligned}F_0&=FV\\left(S_0-PV(D)\\right)\\\\&=FV(S_0)-FV(D)\\\\[6pt]F_0&=S_0e^{(r_c+CC-CB)T}\\end{aligned}';
+  const forwardCarryAnswer='Known income/dividends: F₀ = FV[S₀ − PV(D)] = FV(S₀) − FV(D). With continuous carry: F₀ = S₀e^((r_c + CC − CB)T), where CC = carrying costs and CB = carrying benefits.';
+  let forwardCarryCard=cards.find(c=>c.subject===SUBJECT&&c.question===forwardCarryQuestion);
+  if(!forwardCarryCard){
+    forwardCarryCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:forwardCarryQuestion,
+      answer:forwardCarryAnswer,
+      latex:forwardCarryLatex,
+      subject:SUBJECT,
+      topic:'Forwards',
+      status:null,
+      history:[]
+    };
+    cards.push(forwardCarryCard);
+    changed=1;
+  }else{
+    if(forwardCarryCard.answer!==forwardCarryAnswer){forwardCarryCard.answer=forwardCarryAnswer;changed=1;}
+    if(forwardCarryCard.latex!==forwardCarryLatex){forwardCarryCard.latex=forwardCarryLatex;changed=1;}
+    if(forwardCarryCard.topic!=='Forwards'){forwardCarryCard.topic='Forwards';changed=1;}
+    if(!Array.isArray(forwardCarryCard.history)){forwardCarryCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
