@@ -535,7 +535,7 @@
 
   const bsmStockQuestion='Black-Scholes-Merton — European Stock Call & Put';
   const bsmStockLatex='\\begin{aligned}c&=S_0N(d_1)-Xe^{-rT}N(d_2)\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\end{aligned}';
-  const bsmStockAnswer='Call = weighted stock value − weighted PV of strike. Put = weighted PV of strike − weighted stock value. N(d) denotes the standard normal CDF.';
+  const bsmStockAnswer='Call = weighted stock value − weighted PV of strike. Put = weighted PV of strike − weighted stock value. N(d₁) = option delta. N(d₂) ≈ risk-neutral probability that the call finishes in the money.';
   let bsmStockCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmStockQuestion);
   if(!bsmStockCard){
     bsmStockCard={
