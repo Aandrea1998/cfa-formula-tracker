@@ -232,6 +232,31 @@
     if(!Array.isArray(bondFuturesQuotedPriceCard.history)){bondFuturesQuotedPriceCard.history=[];changed=1;}
   }
 
+
+  const swapRateQuestion='Swap Rate — Core Definition';
+  const swapRateLatex='\\begin{aligned}PV(\\text{Floating Leg})&=PV(\\text{Fixed Leg})\\end{aligned}';
+  const swapRateAnswer='The swap rate is the fixed rate that makes the present value of the fixed leg equal to the present value of the floating leg at initiation.';
+  let swapRateCard=cards.find(c=>c.subject===SUBJECT&&c.question===swapRateQuestion);
+  if(!swapRateCard){
+    swapRateCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:swapRateQuestion,
+      answer:swapRateAnswer,
+      latex:swapRateLatex,
+      subject:SUBJECT,
+      topic:'Swaps',
+      status:null,
+      history:[]
+    };
+    cards.push(swapRateCard);
+    changed=1;
+  }else{
+    if(swapRateCard.answer!==swapRateAnswer){swapRateCard.answer=swapRateAnswer;changed=1;}
+    if(swapRateCard.latex!==swapRateLatex){swapRateCard.latex=swapRateLatex;changed=1;}
+    if(swapRateCard.topic!=='Swaps'){swapRateCard.topic='Swaps';changed=1;}
+    if(!Array.isArray(swapRateCard.history)){swapRateCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
