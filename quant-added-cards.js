@@ -254,6 +254,31 @@
     if(!Array.isArray(serialCorrCard.history)){serialCorrCard.history=[];changed=1;}
   }
 
+
+  const dwBgQuestion='Serial Correlation Tests — DW vs BG';
+  const dwBgLatex='\\begin{aligned}\\mathrm{DW}&:\\ \\text{No lagged }Y\\text{ (no AR term), first-order only}\\\\\\mathrm{BG}&:\\ \\text{Lagged }Y\\text{ allowed, serial correlation up to order }p\\end{aligned}';
+  const dwBgAnswer='Durbin–Watson: use when no lagged dependent variable is included; tests first-order serial correlation only. Breusch–Godfrey: can be used with lagged dependent variables and can test serial correlation up to order p.';
+  let dwBgCard=cards.find(c=>c.subject===SUBJECT&&c.question===dwBgQuestion);
+  if(!dwBgCard){
+    dwBgCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:dwBgQuestion,
+      answer:dwBgAnswer,
+      latex:dwBgLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(dwBgCard);
+    changed=1;
+  }else{
+    if(dwBgCard.answer!==dwBgAnswer){dwBgCard.answer=dwBgAnswer;changed=1;}
+    if(dwBgCard.latex!==dwBgLatex){dwBgCard.latex=dwBgLatex;changed=1;}
+    if(dwBgCard.topic!=='Multiple Linear Regression'){dwBgCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(dwBgCard.history)){dwBgCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
