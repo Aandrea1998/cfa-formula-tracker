@@ -284,8 +284,8 @@
 
 
   const swapValueRateDiffQuestion='Interest Rate Swap Value from Fixed-Rate Difference';
-  const swapValueRateDiffLatex='\\begin{aligned}V&=NA(FS_0-FS_t)\\left(\\frac{1}{AP}\\right)\\sum_i PV_i\\end{aligned}';
-  const swapValueRateDiffAnswer='Swap value = NA × (FS₀ − FS_t) × (1/AP) × ΣPV_i. Here FS₀ is the contractual fixed swap rate, FS_t is the current market fixed swap rate for the remaining swap, AP is the number of settlement periods per year, and PV_i are the discount factors for the remaining payment dates. Sign shown is for receive-fixed/pay-floating; reverse the sign for pay-fixed.';
+  const swapValueRateDiffLatex='\\begin{aligned}V&=NA(FS_0-FS_t)\\,AP\\sum_i PV_i\\end{aligned}';
+  const swapValueRateDiffAnswer='Swap value = NA × (FS₀ − FS_t) × AP × ΣPV_i. Here FS₀ is the contractual fixed swap rate, FS_t is the current market fixed swap rate for the remaining swap, AP is the accrual period per settlement, and PV_i are the discount factors for the remaining payment dates. Sign shown is for receive-fixed/pay-floating; reverse the sign for pay-fixed.';
   let swapValueRateDiffCard=cards.find(c=>c.subject===SUBJECT&&c.question===swapValueRateDiffQuestion);
   if(!swapValueRateDiffCard){
     swapValueRateDiffCard={
