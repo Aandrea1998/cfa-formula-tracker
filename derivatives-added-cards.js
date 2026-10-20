@@ -257,6 +257,31 @@
     if(!Array.isArray(swapRateCard.history)){swapRateCard.history=[];changed=1;}
   }
 
+
+  const swapFixedRateQuestion='Fixed Swap Rate from Discount Factors';
+  const swapFixedRateLatex='\\begin{aligned}r_{FIX}&=\\frac{1-P_{V_n}(1)}{\\sum_{i=1}^{n}P_{V_i}(1)}\\times\\frac{1}{AP}\\end{aligned}';
+  const swapFixedRateAnswer='Fixed swap rate = [1 − PV_n(1)] / [Σ_{i=1}^n PV_i(1)] × 1/AP. PV_i(1) is the discount factor for payment date i; AP is the number of settlement periods per year (so 1/AP is the accrual fraction).';
+  let swapFixedRateCard=cards.find(c=>c.subject===SUBJECT&&c.question===swapFixedRateQuestion);
+  if(!swapFixedRateCard){
+    swapFixedRateCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:swapFixedRateQuestion,
+      answer:swapFixedRateAnswer,
+      latex:swapFixedRateLatex,
+      subject:SUBJECT,
+      topic:'Swaps',
+      status:null,
+      history:[]
+    };
+    cards.push(swapFixedRateCard);
+    changed=1;
+  }else{
+    if(swapFixedRateCard.answer!==swapFixedRateAnswer){swapFixedRateCard.answer=swapFixedRateAnswer;changed=1;}
+    if(swapFixedRateCard.latex!==swapFixedRateLatex){swapFixedRateCard.latex=swapFixedRateLatex;changed=1;}
+    if(swapFixedRateCard.topic!=='Swaps'){swapFixedRateCard.topic='Swaps';changed=1;}
+    if(!Array.isArray(swapFixedRateCard.history)){swapFixedRateCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
