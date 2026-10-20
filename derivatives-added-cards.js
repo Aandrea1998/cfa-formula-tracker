@@ -657,6 +657,31 @@
     if(!Array.isArray(optionGammaCard.history)){optionGammaCard.history=[];changed=1;}
   }
 
+
+  const deltaGammaApproxQuestion='Delta-Gamma Approximation — Option Value';
+  const deltaGammaApproxLatex='\\begin{aligned}\\hat{c}&=c+\\Delta_c(\\hat{S}-S)+\\frac{\\Gamma_c}{2}(\\hat{S}-S)^2\\end{aligned}';
+  const deltaGammaApproxAnswer='Delta-gamma approximation for a call: estimated new option value = current value + delta effect + one-half gamma times the squared stock-price change. More generally: ΔV ≈ Δ·ΔS + 1/2 Γ(ΔS)^2.';
+  let deltaGammaApproxCard=cards.find(c=>c.subject===SUBJECT&&c.question===deltaGammaApproxQuestion);
+  if(!deltaGammaApproxCard){
+    deltaGammaApproxCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:deltaGammaApproxQuestion,
+      answer:deltaGammaApproxAnswer,
+      latex:deltaGammaApproxLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(deltaGammaApproxCard);
+    changed=1;
+  }else{
+    if(deltaGammaApproxCard.answer!==deltaGammaApproxAnswer){deltaGammaApproxCard.answer=deltaGammaApproxAnswer;changed=1;}
+    if(deltaGammaApproxCard.latex!==deltaGammaApproxLatex){deltaGammaApproxCard.latex=deltaGammaApproxLatex;changed=1;}
+    if(deltaGammaApproxCard.topic!=='Options'){deltaGammaApproxCard.topic='Options';changed=1;}
+    if(!Array.isArray(deltaGammaApproxCard.history)){deltaGammaApproxCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
