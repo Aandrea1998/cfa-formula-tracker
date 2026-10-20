@@ -33,7 +33,7 @@
 
   const carryQuestion='Forward Arbitrage — Cash-and-Carry vs Reverse Cash-and-Carry';
   const carryLatex='\\begin{aligned}\\text{Cash-and-Carry: }&\\text{Long Asset + Short Bond + Short Forward}=0\\\\\\text{Reverse Cash-and-Carry: }&\\text{Short Asset + Long Bond + Long Forward}=0\\\\\\text{Short Forward}&\\Rightarrow\\text{Cash-and-Carry}\\\\\\text{Long Forward}&\\Rightarrow\\text{Reverse Cash-and-Carry}\\end{aligned}';
-  const carryAnswer='Cash-and-carry: long asset + short bond + short forward. Reverse cash-and-carry: short asset + long bond + long forward. Each creates a zero-arbitrage payoff at maturity.';
+  const carryAnswer='Cash-and-carry: long asset + short bond + short forward. Reverse cash-and-carry: short asset + long bond + long forward. Memory check: reverse cash-and-carry = LONG forward, not short forward.';
   let carryCard=cards.find(c=>c.subject===SUBJECT&&c.question===carryQuestion);
   if(!carryCard){
     carryCard={
@@ -53,6 +53,31 @@
     if(carryCard.latex!==carryLatex){carryCard.latex=carryLatex;changed=1;}
     if(carryCard.topic!=='Forwards'){carryCard.topic='Forwards';changed=1;}
     if(!Array.isArray(carryCard.history)){carryCard.history=[];changed=1;}
+  }
+
+
+  const forwardValueQuestion='Forward Contract Value at Time t — Long Position';
+  const forwardValueLatex='\\begin{aligned}V_t&=S_t-PV(F_0)\\\\&=S_t-\\frac{F_0}{(1+r)^{T-t}}\\end{aligned}';
+  const forwardValueAnswer='For a long forward with no interim income: V_t = S_t − PV(F_0) = S_t − F_0/(1+r)^(T−t). Here F_0 is the delivery price fixed when the contract was initiated, S_t is the current spot price, r is the relevant discount rate, and T−t is the remaining time to maturity. Equivalent form: V_t = PV(F_t − F_0). For a short forward, reverse the sign.';
+  let forwardValueCard=cards.find(c=>c.subject===SUBJECT&&c.question===forwardValueQuestion);
+  if(!forwardValueCard){
+    forwardValueCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:forwardValueQuestion,
+      answer:forwardValueAnswer,
+      latex:forwardValueLatex,
+      subject:SUBJECT,
+      topic:'Forwards',
+      status:null,
+      history:[]
+    };
+    cards.push(forwardValueCard);
+    changed=1;
+  }else{
+    if(forwardValueCard.answer!==forwardValueAnswer){forwardValueCard.answer=forwardValueAnswer;changed=1;}
+    if(forwardValueCard.latex!==forwardValueLatex){forwardValueCard.latex=forwardValueLatex;changed=1;}
+    if(forwardValueCard.topic!=='Forwards'){forwardValueCard.topic='Forwards';changed=1;}
+    if(!Array.isArray(forwardValueCard.history)){forwardValueCard.history=[];changed=1;}
   }
 
   if(changed){
