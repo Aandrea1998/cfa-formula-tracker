@@ -31,10 +31,11 @@
   }
 
 
-  const carryQuestion='Forward Arbitrage — Cash-and-Carry vs Reverse Cash-and-Carry';
-  const carryLatex='\\begin{aligned}\\text{Cash-and-Carry: }&\\text{Long Asset + Short Bond + Short Forward}=0\\\\\\text{Reverse Cash-and-Carry: }&\\text{Short Asset + Long Bond + Long Forward}=0\\\\\\text{Short Forward}&\\Rightarrow\\text{Cash-and-Carry}\\\\\\text{Long Forward}&\\Rightarrow\\text{Reverse Cash-and-Carry}\\end{aligned}';
-  const carryAnswer='Cash-and-carry: long asset + short bond + short forward. Reverse cash-and-carry: short asset + long bond + long forward. Memory check: reverse cash-and-carry = LONG forward, not short forward.';
-  let carryCard=cards.find(c=>c.subject===SUBJECT&&c.question===carryQuestion);
+  const oldCarryQuestion='Forward Arbitrage — Cash-and-Carry vs Reverse Cash-and-Carry';
+  const carryQuestion='Forward Arbitrage — Carry Arbitrage vs Reverse Carry Arbitrage';
+  const carryLatex='\\begin{aligned}\\text{Carry Arbitrage: }&\\text{Long Asset + Short Bond + Short Forward}=0\\\\\\text{Reverse Carry Arbitrage: }&\\text{Short Asset + Long Bond + Long Forward}=0\\\\\\text{Short Forward}&\\Rightarrow\\text{Carry Arbitrage}\\\\\\text{Long Forward}&\\Rightarrow\\text{Reverse Carry Arbitrage}\\end{aligned}';
+  const carryAnswer='Carry arbitrage: long asset + short bond + short forward. Reverse carry arbitrage: short asset + long bond + long forward.';
+  let carryCard=cards.find(c=>c.subject===SUBJECT&&(c.question===carryQuestion||c.question===oldCarryQuestion));
   if(!carryCard){
     carryCard={
       id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
@@ -49,6 +50,7 @@
     cards.push(carryCard);
     changed=1;
   }else{
+    if(carryCard.question!==carryQuestion){carryCard.question=carryQuestion;changed=1;}
     if(carryCard.answer!==carryAnswer){carryCard.answer=carryAnswer;changed=1;}
     if(carryCard.latex!==carryLatex){carryCard.latex=carryLatex;changed=1;}
     if(carryCard.topic!=='Forwards'){carryCard.topic='Forwards';changed=1;}
