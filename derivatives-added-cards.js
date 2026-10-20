@@ -532,6 +532,31 @@
     if(!Array.isArray(bsmAssumptionsCard.history)){bsmAssumptionsCard.history=[];changed=1;}
   }
 
+
+  const bsmStockQuestion='Black-Scholes-Merton — European Stock Call & Put';
+  const bsmStockLatex='\\begin{aligned}c&=S_0N(d_1)-Xe^{-rT}N(d_2)\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\end{aligned}';
+  const bsmStockAnswer='Call = weighted stock value − weighted PV of strike. Put = weighted PV of strike − weighted stock value. N(d) denotes the standard normal CDF.';
+  let bsmStockCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmStockQuestion);
+  if(!bsmStockCard){
+    bsmStockCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:bsmStockQuestion,
+      answer:bsmStockAnswer,
+      latex:bsmStockLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(bsmStockCard);
+    changed=1;
+  }else{
+    if(bsmStockCard.answer!==bsmStockAnswer){bsmStockCard.answer=bsmStockAnswer;changed=1;}
+    if(bsmStockCard.latex!==bsmStockLatex){bsmStockCard.latex=bsmStockLatex;changed=1;}
+    if(bsmStockCard.topic!=='Options'){bsmStockCard.topic='Options';changed=1;}
+    if(!Array.isArray(bsmStockCard.history)){bsmStockCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
