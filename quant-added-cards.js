@@ -333,6 +333,31 @@
     if(!Array.isArray(highLeverageCard.history)){highLeverageCard.history=[];changed=1;}
   }
 
+
+  const studentizedQuestion='Studentized Residuals — Outlier Rule';
+  const studentizedLatex='\\begin{aligned}|t_i^*|&>3\\Rightarrow\\text{Flag as outlier}\\\\|t_i^*|&>t_{crit}(n-k-2)\\Rightarrow\\text{Potentially influential outlier}\\end{aligned}';
+  const studentizedAnswer='Studentized residual rule: |t_i*| > 3 flags an observation as an outlier. If |t_i*| exceeds the critical t-value with n−k−2 degrees of freedom, flag it as potentially influential.';
+  let studentizedCard=cards.find(c=>c.subject===SUBJECT&&c.question===studentizedQuestion);
+  if(!studentizedCard){
+    studentizedCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:studentizedQuestion,
+      answer:studentizedAnswer,
+      latex:studentizedLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(studentizedCard);
+    changed=1;
+  }else{
+    if(studentizedCard.answer!==studentizedAnswer){studentizedCard.answer=studentizedAnswer;changed=1;}
+    if(studentizedCard.latex!==studentizedLatex){studentizedCard.latex=studentizedLatex;changed=1;}
+    if(studentizedCard.topic!=='Multiple Linear Regression'){studentizedCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(studentizedCard.history)){studentizedCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
