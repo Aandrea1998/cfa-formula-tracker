@@ -204,6 +204,31 @@
     if(!Array.isArray(functionalFormCard.history)){functionalFormCard.history=[];changed=1;}
   }
 
+
+  const bpQuestion='Breusch–Pagan Test — Conditional Heteroskedasticity';
+  const bpLatex='\\begin{aligned}\\chi^2_{BP,k}&=nR^2\\\\H_0&:\\text{No conditional heteroskedasticity}\\\\H_a&:\\text{At least one }a_j\\neq0\\\\&\\text{Right-tailed test}\\end{aligned}';
+  const bpAnswer='Breusch–Pagan: regress squared residuals on the regressors, then use χ² = nR². H₀: no conditional heteroskedasticity; Hₐ: at least one coefficient ≠ 0. Right-tailed test.';
+  let bpCard=cards.find(c=>c.subject===SUBJECT&&c.question===bpQuestion);
+  if(!bpCard){
+    bpCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:bpQuestion,
+      answer:bpAnswer,
+      latex:bpLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(bpCard);
+    changed=1;
+  }else{
+    if(bpCard.answer!==bpAnswer){bpCard.answer=bpAnswer;changed=1;}
+    if(bpCard.latex!==bpLatex){bpCard.latex=bpLatex;changed=1;}
+    if(bpCard.topic!=='Multiple Linear Regression'){bpCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(bpCard.history)){bpCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
