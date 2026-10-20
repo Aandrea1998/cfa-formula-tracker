@@ -157,6 +157,31 @@
     if(!Array.isArray(fraSettlementCard.history)){fraSettlementCard.history=[];changed=1;}
   }
 
+
+  const fraGeneralValueQuestion='FRA Value at Any Valuation Date t ≤ T₁';
+  const fraGeneralValueLatex='\\begin{aligned}V_t&=N\\,\\tau\\,[F_t(T_1,T_2)-K]\\,P(t,T_2)\\end{aligned}';
+  const fraGeneralValueAnswer='For receive-floating/pay-fixed: V_t = N × τ × [F_t(T₁,T₂) − K] × P(t,T₂). N = notional; K = contractual FRA rate; F_t(T₁,T₂) = forward rate observed at valuation date t for T₁→T₂; τ = accrual factor for T₁→T₂; P(t,T₂) = discount factor from T₂ directly to valuation date t.';
+  let fraGeneralValueCard=cards.find(c=>c.subject===SUBJECT&&c.question===fraGeneralValueQuestion);
+  if(!fraGeneralValueCard){
+    fraGeneralValueCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:fraGeneralValueQuestion,
+      answer:fraGeneralValueAnswer,
+      latex:fraGeneralValueLatex,
+      subject:SUBJECT,
+      topic:'FRAs',
+      status:null,
+      history:[]
+    };
+    cards.push(fraGeneralValueCard);
+    changed=1;
+  }else{
+    if(fraGeneralValueCard.answer!==fraGeneralValueAnswer){fraGeneralValueCard.answer=fraGeneralValueAnswer;changed=1;}
+    if(fraGeneralValueCard.latex!==fraGeneralValueLatex){fraGeneralValueCard.latex=fraGeneralValueLatex;changed=1;}
+    if(fraGeneralValueCard.topic!=='FRAs'){fraGeneralValueCard.topic='FRAs';changed=1;}
+    if(!Array.isArray(fraGeneralValueCard.history)){fraGeneralValueCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
