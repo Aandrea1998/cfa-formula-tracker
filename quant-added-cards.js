@@ -154,6 +154,31 @@
     if(!Array.isArray(restrictedFCard.history)){restrictedFCard.history=[];changed=1;}
   }
 
+
+  const modelSpecQuestion='Proper Regression Model Specification — Principles';
+  const modelSpecLatex='\\begin{aligned}1.&\\ \\text{Grounded in economic reasoning}\\\\2.&\\ \\text{Parsimonious}\\\\3.&\\ \\text{Performs well out of sample}\\\\4.&\\ \\text{Appropriate functional form}\\\\5.&\\ \\text{Satisfies regression assumptions}\\end{aligned}';
+  const modelSpecAnswer='Grounded in economic reasoning; parsimonious; performs well out of sample; appropriate functional form; satisfies regression assumptions.';
+  let modelSpecCard=cards.find(c=>c.subject===SUBJECT&&c.question===modelSpecQuestion);
+  if(!modelSpecCard){
+    modelSpecCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:modelSpecQuestion,
+      answer:modelSpecAnswer,
+      latex:modelSpecLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(modelSpecCard);
+    changed=1;
+  }else{
+    if(modelSpecCard.answer!==modelSpecAnswer){modelSpecCard.answer=modelSpecAnswer;changed=1;}
+    if(modelSpecCard.latex!==modelSpecLatex){modelSpecCard.latex=modelSpecLatex;changed=1;}
+    if(modelSpecCard.topic!=='Multiple Linear Regression'){modelSpecCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(modelSpecCard.history)){modelSpecCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
