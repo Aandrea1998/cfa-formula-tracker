@@ -432,6 +432,31 @@
     if(!Array.isArray(binomialReplicatingValueCard.history)){binomialReplicatingValueCard.history=[];changed=1;}
   }
 
+
+  const binomialExpectationsQuestion='Binomial Option Pricing — Expectations Approach';
+  const binomialExpectationsLatex='\\begin{aligned}c_0&=PV\\left[\\pi c^{+}+(1-\\pi)c^{-}\\right]\\\\p_0&=PV\\left[\\pi p^{+}+(1-\\pi)p^{-}\\right]\\\\\\pi&=\\frac{FV(1)-d}{u-d}\\end{aligned}';
+  const binomialExpectationsAnswer='Expectations approach: discount the risk-neutral expected option payoff. For both calls and puts, use the same risk-neutral up probability π = [FV(1) − d]/(u − d), where u and d are the up/down stock return multipliers.';
+  let binomialExpectationsCard=cards.find(c=>c.subject===SUBJECT&&c.question===binomialExpectationsQuestion);
+  if(!binomialExpectationsCard){
+    binomialExpectationsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:binomialExpectationsQuestion,
+      answer:binomialExpectationsAnswer,
+      latex:binomialExpectationsLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(binomialExpectationsCard);
+    changed=1;
+  }else{
+    if(binomialExpectationsCard.answer!==binomialExpectationsAnswer){binomialExpectationsCard.answer=binomialExpectationsAnswer;changed=1;}
+    if(binomialExpectationsCard.latex!==binomialExpectationsLatex){binomialExpectationsCard.latex=binomialExpectationsLatex;changed=1;}
+    if(binomialExpectationsCard.topic!=='Options'){binomialExpectationsCard.topic='Options';changed=1;}
+    if(!Array.isArray(binomialExpectationsCard.history)){binomialExpectationsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
