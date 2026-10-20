@@ -332,6 +332,31 @@
     if(!Array.isArray(currencySwapValueBCard.history)){currencySwapValueBCard.history=[];changed=1;}
   }
 
+
+  const equitySwapReceiveEquityQuestion='Equity Swap — Receive Equity / Pay Fixed';
+  const equitySwapReceiveEquityLatex='\\begin{aligned}V_t&=PV(\\text{Equity Leg})-PV(\\text{Fixed Leg})\\\\S_i&=NA_E R_{E,i}\\\\FS_i&=NA_E\\,AP_{\\text{FIX}}\\,r_{\\text{FIX}}\\end{aligned}';
+  const equitySwapReceiveEquityAnswer='For a receive-equity/pay-fixed swap: V_t = PV(Equity Leg) − PV(Fixed Leg). Per period: equity cash flow S_i = NA_E × R_{E,i}; fixed cash flow FS_i = NA_E × AP_FIX × r_FIX.';
+  let equitySwapReceiveEquityCard=cards.find(c=>c.subject===SUBJECT&&c.question===equitySwapReceiveEquityQuestion);
+  if(!equitySwapReceiveEquityCard){
+    equitySwapReceiveEquityCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:equitySwapReceiveEquityQuestion,
+      answer:equitySwapReceiveEquityAnswer,
+      latex:equitySwapReceiveEquityLatex,
+      subject:SUBJECT,
+      topic:'Swaps',
+      status:null,
+      history:[]
+    };
+    cards.push(equitySwapReceiveEquityCard);
+    changed=1;
+  }else{
+    if(equitySwapReceiveEquityCard.answer!==equitySwapReceiveEquityAnswer){equitySwapReceiveEquityCard.answer=equitySwapReceiveEquityAnswer;changed=1;}
+    if(equitySwapReceiveEquityCard.latex!==equitySwapReceiveEquityLatex){equitySwapReceiveEquityCard.latex=equitySwapReceiveEquityLatex;changed=1;}
+    if(equitySwapReceiveEquityCard.topic!=='Swaps'){equitySwapReceiveEquityCard.topic='Swaps';changed=1;}
+    if(!Array.isArray(equitySwapReceiveEquityCard.history)){equitySwapReceiveEquityCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
