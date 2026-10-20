@@ -255,10 +255,14 @@
   }
 
 
-  const dwBgQuestion='Serial Correlation Tests — DW vs BG';
-  const dwBgLatex='\\begin{aligned}\\mathrm{DW}&\\approx2(1-\\rho)\\\\\\mathrm{DW}\\approx2&\\Rightarrow\\text{No serial correlation}\\\\0<\\mathrm{DW}<2&\\Rightarrow\\text{Positive serial correlation}\\\\2<\\mathrm{DW}<4&\\Rightarrow\\text{Negative serial correlation}\\\\\\mathrm{DW}&:\\ \\text{Use only with no lagged }Y\\text{ (no AR term)}\\\\\\mathrm{BG}&:\\ \\text{Higher }p\\text{-value preferred}\\\\\\mathrm{BG}&:\\ \\text{Use with lagged }Y\\text{ / higher-order correlation}\\end{aligned}';
-  const dwBgAnswer='DW: about 2 means no serial correlation; below 2 indicates positive serial correlation; above 2 indicates negative serial correlation. Use DW only when there is no lagged dependent variable (no AR term). For BG, a higher p-value is preferred because it means less evidence of serial correlation; BG can be used with lagged Y and for higher-order serial correlation.';
+  const dwBgQuestion='Serial Correlation — Durbin–Watson vs Breusch–Godfrey';
+  const dwBgLatex='\\begin{aligned}\\mathrm{DW}\\approx2&\\Rightarrow\\text{No serial correlation}\\\\\\mathrm{DW}<2&\\Rightarrow\\text{Positive serial correlation}\\\\\\mathrm{DW}>2&\\Rightarrow\\text{Negative serial correlation}\\\\\\mathrm{DW}&:\\ \\text{No lagged }Y\\text{ / first-order only}\\\\\\mathrm{BG}&:\\ \\text{Low statistic + high }p\\text{-value preferred}\\end{aligned}';
+  const dwBgAnswer='DW ≈ 2: no serial correlation; DW < 2: positive serial correlation; DW > 2: negative serial correlation. DW: no lagged Y / first-order only. BG: low statistic + high p-value preferred.';
   let dwBgCard=cards.find(c=>c.subject===SUBJECT&&c.question===dwBgQuestion);
+  if(!dwBgCard){
+    dwBgCard=cards.find(c=>c.subject===SUBJECT&&c.question==='Serial Correlation Tests — DW vs BG');
+    if(dwBgCard){dwBgCard.question=dwBgQuestion;changed=1;}
+  }
   if(!dwBgCard){
     dwBgCard={
       id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
