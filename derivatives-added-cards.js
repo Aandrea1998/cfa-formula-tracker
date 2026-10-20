@@ -207,6 +207,31 @@
     if(!Array.isArray(fraForwardRateCard.history)){fraForwardRateCard.history=[];changed=1;}
   }
 
+
+  const bondFuturesQuotedPriceQuestion='Bond Futures — Conversion-Factor-Adjusted Quoted Futures Price';
+  const bondFuturesQuotedPriceLatex='\\begin{aligned}Q_0&=\\frac{1}{CF}\\left\\{FV(B_0+AI_0)-AI_T-FVCI\\right\\}\\end{aligned}';
+  const bondFuturesQuotedPriceAnswer='Quoted futures price = [FV(B₀ + AI₀) − AI_T − FVCI] / CF. B₀ = current clean bond price; AI₀ = accrued interest today; AI_T = accrued interest at delivery; FVCI = future value of coupon income received before delivery; CF = conversion factor.';
+  let bondFuturesQuotedPriceCard=cards.find(c=>c.subject===SUBJECT&&c.question===bondFuturesQuotedPriceQuestion);
+  if(!bondFuturesQuotedPriceCard){
+    bondFuturesQuotedPriceCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:bondFuturesQuotedPriceQuestion,
+      answer:bondFuturesQuotedPriceAnswer,
+      latex:bondFuturesQuotedPriceLatex,
+      subject:SUBJECT,
+      topic:'Futures',
+      status:null,
+      history:[]
+    };
+    cards.push(bondFuturesQuotedPriceCard);
+    changed=1;
+  }else{
+    if(bondFuturesQuotedPriceCard.answer!==bondFuturesQuotedPriceAnswer){bondFuturesQuotedPriceCard.answer=bondFuturesQuotedPriceAnswer;changed=1;}
+    if(bondFuturesQuotedPriceCard.latex!==bondFuturesQuotedPriceLatex){bondFuturesQuotedPriceCard.latex=bondFuturesQuotedPriceLatex;changed=1;}
+    if(bondFuturesQuotedPriceCard.topic!=='Futures'){bondFuturesQuotedPriceCard.topic='Futures';changed=1;}
+    if(!Array.isArray(bondFuturesQuotedPriceCard.history)){bondFuturesQuotedPriceCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
