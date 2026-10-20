@@ -482,6 +482,31 @@
     if(!Array.isArray(americanCallDividendCard.history)){americanCallDividendCard.history=[];changed=1;}
   }
 
+
+  const binomialVsBSMQuestion='Binomial Model vs Black-Scholes Model';
+  const binomialVsBSMLatex='\\begin{array}{c|c}\\textbf{Binomial Model}&\\textbf{Black-Scholes Model}\\\\\\hline\\text{Discrete time steps}&\\text{Continuous time}\\\\\\text{Stock price jumps}&\\text{Stock moves continuously}\\\\\\text{Finite number of nodes}&\\text{Infinite possible paths}\\\\\\text{Intuitive / flexible tree}&\\text{Closed-form pricing formula}\\\\\\text{As steps}\\to\\infty,\\;\\text{converges to BSM}&\\text{Continuous-time limit}\\end{array}';
+  const binomialVsBSMAnswer='Binomial uses discrete steps and a finite tree; Black-Scholes is continuous-time with infinitely many paths and a closed-form solution. As the number of binomial steps increases, the binomial value converges to the Black-Scholes value under consistent assumptions.';
+  let binomialVsBSMCard=cards.find(c=>c.subject===SUBJECT&&c.question===binomialVsBSMQuestion);
+  if(!binomialVsBSMCard){
+    binomialVsBSMCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:binomialVsBSMQuestion,
+      answer:binomialVsBSMAnswer,
+      latex:binomialVsBSMLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(binomialVsBSMCard);
+    changed=1;
+  }else{
+    if(binomialVsBSMCard.answer!==binomialVsBSMAnswer){binomialVsBSMCard.answer=binomialVsBSMAnswer;changed=1;}
+    if(binomialVsBSMCard.latex!==binomialVsBSMLatex){binomialVsBSMLatex=binomialVsBSMLatex;changed=1;}
+    if(binomialVsBSMCard.topic!=='Options'){binomialVsBSMCard.topic='Options';changed=1;}
+    if(!Array.isArray(binomialVsBSMCard.history)){binomialVsBSMCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
