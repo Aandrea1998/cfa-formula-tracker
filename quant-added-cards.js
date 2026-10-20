@@ -483,6 +483,31 @@
     if(!Array.isArray(dfCard.history)){dfCard.history=[];changed=1;}
   }
 
+
+  const maqQuestion='MA(q) Model — Formula';
+  const maqLatex='\\begin{aligned}y_t&=\\mu+\\varepsilon_t+\\theta_1\\varepsilon_{t-1}+\\theta_2\\varepsilon_{t-2}+\\cdots+\\theta_q\\varepsilon_{t-q}\\\\q&=\\text{number of past shocks included}\\end{aligned}';
+  const maqAnswer='MA(q): y_t = μ + ε_t + θ₁ε_{t−1} + … + θ_qε_{t−q}. Current value depends on the mean, today’s shock, and q past shocks weighted by θ.';
+  let maqCard=cards.find(c=>c.subject===SUBJECT&&c.question===maqQuestion);
+  if(!maqCard){
+    maqCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:maqQuestion,
+      answer:maqAnswer,
+      latex:maqLatex,
+      subject:SUBJECT,
+      topic:'Time Series Analysis',
+      status:null,
+      history:[]
+    };
+    cards.push(maqCard);
+    changed=1;
+  }else{
+    if(maqCard.answer!==maqAnswer){maqCard.answer=maqAnswer;changed=1;}
+    if(maqCard.latex!==maqLatex){maqCard.latex=maqLatex;changed=1;}
+    if(maqCard.topic!=='Time Series Analysis'){maqCard.topic='Time Series Analysis';changed=1;}
+    if(!Array.isArray(maqCard.history)){maqCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
