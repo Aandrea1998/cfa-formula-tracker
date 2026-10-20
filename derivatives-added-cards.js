@@ -534,7 +534,7 @@
 
 
   const bsmStockQuestion='Black-Scholes-Merton — European Stock Call & Put';
-  const bsmStockLatex='\\begin{aligned}c&=S_0N(d_1)-Xe^{-rT}N(d_2)\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\end{aligned}';
+  const bsmStockLatex='\\begin{aligned}c&=S_0N(d_1)-\\underbrace{Xe^{-rT}N(d_2)}_{\\text{bond component}}\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\\\N(d_1)&=\\text{option delta}\\end{aligned}';
   const bsmStockAnswer='Call = weighted stock value − weighted PV of strike. Put = weighted PV of strike − weighted stock value. N(d₁) = option delta. N(d₂) ≈ risk-neutral probability that the call finishes in the money. The term Xe^{-rT}N(d₂) is the bond component (short borrowing) in the call-replicating portfolio.';
   let bsmStockCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmStockQuestion);
   if(!bsmStockCard){
