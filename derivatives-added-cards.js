@@ -182,6 +182,31 @@
     if(!Array.isArray(fraGeneralValueCard.history)){fraGeneralValueCard.history=[];changed=1;}
   }
 
+
+  const fraForwardRateQuestion='FRA Forward Rate from Spot MRRs';
+  const fraForwardRateLatex='\\begin{aligned}[1+L_h t_h][1+FRA_0 t_m]&=[1+L_T t_T]\\\\FRA_0&=\\frac{\\frac{1+L_T t_T}{1+L_h t_h}-1}{t_m}\\end{aligned}';
+  const fraForwardRateAnswer='Use no-arbitrage between investing to T directly and investing to h then locking the h→T rate. L_h = spot MRR to h; L_T = spot MRR to T; t_h = time 0→h; t_m = time h→T; t_T = t_h + t_m.';
+  let fraForwardRateCard=cards.find(c=>c.subject===SUBJECT&&c.question===fraForwardRateQuestion);
+  if(!fraForwardRateCard){
+    fraForwardRateCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:fraForwardRateQuestion,
+      answer:fraForwardRateAnswer,
+      latex:fraForwardRateLatex,
+      subject:SUBJECT,
+      topic:'FRAs',
+      status:null,
+      history:[]
+    };
+    cards.push(fraForwardRateCard);
+    changed=1;
+  }else{
+    if(fraForwardRateCard.answer!==fraForwardRateAnswer){fraForwardRateCard.answer=fraForwardRateAnswer;changed=1;}
+    if(fraForwardRateCard.latex!==fraForwardRateLatex){fraForwardRateCard.latex=fraForwardRateLatex;changed=1;}
+    if(fraForwardRateCard.topic!=='FRAs'){fraForwardRateCard.topic='FRAs';changed=1;}
+    if(!Array.isArray(fraForwardRateCard.history)){fraForwardRateCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
