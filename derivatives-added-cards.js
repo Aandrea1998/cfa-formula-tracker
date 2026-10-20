@@ -30,6 +30,31 @@
     if(!Array.isArray(card.history)){card.history=[];changed=1;}
   }
 
+
+  const carryQuestion='Forward Arbitrage — Cash-and-Carry vs Reverse Cash-and-Carry';
+  const carryLatex='\\begin{aligned}\\text{Cash-and-Carry: }&\\text{Long Asset + Short Bond + Short Forward}=0\\\\\\text{Reverse Cash-and-Carry: }&\\text{Short Asset + Long Bond + Long Forward}=0\\\\\\text{Short Forward}&\\Rightarrow\\text{Cash-and-Carry}\\\\\\text{Long Forward}&\\Rightarrow\\text{Reverse Cash-and-Carry}\\end{aligned}';
+  const carryAnswer='Cash-and-carry: long asset + short bond + short forward. Reverse cash-and-carry: short asset + long bond + long forward. Each creates a zero-arbitrage payoff at maturity.';
+  let carryCard=cards.find(c=>c.subject===SUBJECT&&c.question===carryQuestion);
+  if(!carryCard){
+    carryCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:carryQuestion,
+      answer:carryAnswer,
+      latex:carryLatex,
+      subject:SUBJECT,
+      topic:'Forwards',
+      status:null,
+      history:[]
+    };
+    cards.push(carryCard);
+    changed=1;
+  }else{
+    if(carryCard.answer!==carryAnswer){carryCard.answer=carryAnswer;changed=1;}
+    if(carryCard.latex!==carryLatex){carryCard.latex=carryLatex;changed=1;}
+    if(carryCard.topic!=='Forwards'){carryCard.topic='Forwards';changed=1;}
+    if(!Array.isArray(carryCard.history)){carryCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
