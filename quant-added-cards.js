@@ -55,6 +55,55 @@
     if(!Array.isArray(adjustedR2Card.history)){adjustedR2Card.history=[];changed=1;}
   }
 
+
+  const r2Question='R² — Goodness of Fit';
+  const r2Latex='\\begin{aligned}R^2&=\\frac{SSR}{SST}\\\\&=\\frac{\\sum_{i=1}^{n}(\\hat Y_i-\\bar Y)^2}{\\sum_{i=1}^{n}(Y_i-\\bar Y)^2}\\end{aligned}';
+  const r2Answer='R² measures goodness of fit: the proportion of total variation in Y explained by the regression. R² = SSR/SST = Σ(Ŷᵢ−Ȳ)² / Σ(Yᵢ−Ȳ)².';
+  let r2Card=cards.find(c=>c.subject===SUBJECT&&c.question===r2Question);
+  if(!r2Card){
+    r2Card={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:r2Question,
+      answer:r2Answer,
+      latex:r2Latex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(r2Card);
+    changed=1;
+  }else{
+    if(r2Card.answer!==r2Answer){r2Card.answer=r2Answer;changed=1;}
+    if(r2Card.latex!==r2Latex){r2Card.latex=r2Latex;changed=1;}
+    if(r2Card.topic!=='Multiple Linear Regression'){r2Card.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(r2Card.history)){r2Card.history=[];changed=1;}
+  }
+
+  const fStatQuestion='F-Statistic — Overall Model Significance';
+  const fStatLatex='\\begin{aligned}F&=\\frac{MSR}{MSE}\\\\&=\\frac{SSR/k}{SSE/(n-k-1)}\\\\&=\\frac{R^2/k}{(1-R^2)/(n-k-1)}\\end{aligned}';
+  const fStatAnswer='The F-statistic tests whether the regression is useful overall: H₀: β₁ = β₂ = … = βₖ = 0. F = MSR/MSE = (SSR/k)/(SSE/(n−k−1)) = (R²/k)/[(1−R²)/(n−k−1)].';
+  let fStatCard=cards.find(c=>c.subject===SUBJECT&&c.question===fStatQuestion);
+  if(!fStatCard){
+    fStatCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:fStatQuestion,
+      answer:fStatAnswer,
+      latex:fStatLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(fStatCard);
+    changed=1;
+  }else{
+    if(fStatCard.answer!==fStatAnswer){fStatCard.answer=fStatAnswer;changed=1;}
+    if(fStatCard.latex!==fStatLatex){fStatCard.latex=fStatLatex;changed=1;}
+    if(fStatCard.topic!=='Multiple Linear Regression'){fStatCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(fStatCard.history)){fStatCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
