@@ -557,6 +557,31 @@
     if(!Array.isArray(bsmStockCard.history)){bsmStockCard.history=[];changed=1;}
   }
 
+
+  const irOptionBlackQuestion='Interest Rate Options — Black Model Call & Put';
+  const irOptionBlackLatex='\\begin{aligned}c&=(AP)e^{-r(t_{j-1}+t_m)}\\left[FRA(0,t_{j-1},t_m)N(d_1)-R_XN(d_2)\\right]\\\\p&=(AP)e^{-r(t_{j-1}+t_m)}\\left[R_XN(-d_2)-FRA(0,t_{j-1},t_m)N(-d_1)\\right]\\end{aligned}';
+  const irOptionBlackAnswer='Black model for interest-rate options: discount the option payoff on the forward/FRA rate to the payment date. AP is the accrual period; R_X is the exercise/strike rate; FRA(0,t_{j-1},t_m) is the current forward rate for the underlying period.';
+  let irOptionBlackCard=cards.find(c=>c.subject===SUBJECT&&c.question===irOptionBlackQuestion);
+  if(!irOptionBlackCard){
+    irOptionBlackCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:irOptionBlackQuestion,
+      answer:irOptionBlackAnswer,
+      latex:irOptionBlackLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(irOptionBlackCard);
+    changed=1;
+  }else{
+    if(irOptionBlackCard.answer!==irOptionBlackAnswer){irOptionBlackCard.answer=irOptionBlackAnswer;changed=1;}
+    if(irOptionBlackCard.latex!==irOptionBlackLatex){irOptionBlackCard.latex=irOptionBlackLatex;changed=1;}
+    if(irOptionBlackCard.topic!=='Options'){irOptionBlackCard.topic='Options';changed=1;}
+    if(!Array.isArray(irOptionBlackCard.history)){irOptionBlackCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
