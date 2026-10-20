@@ -382,6 +382,31 @@
     if(!Array.isArray(forwardDividendRelationCard.history)){forwardDividendRelationCard.history=[];changed=1;}
   }
 
+
+  const binomialHedgeRatioQuestion='Binomial Option Pricing — Hedge Ratio';
+  const binomialHedgeRatioLatex='\\begin{aligned}h&=\\frac{c^{+}-c^{-}}{S^{+}-S^{-}}\\ge 0\\end{aligned}';
+  const binomialHedgeRatioAnswer='Hedge ratio (option delta) in a one-period binomial model: h = (c⁺ − c⁻)/(S⁺ − S⁻). It gives the number of shares needed per option in the replicating portfolio.';
+  let binomialHedgeRatioCard=cards.find(c=>c.subject===SUBJECT&&c.question===binomialHedgeRatioQuestion);
+  if(!binomialHedgeRatioCard){
+    binomialHedgeRatioCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:binomialHedgeRatioQuestion,
+      answer:binomialHedgeRatioAnswer,
+      latex:binomialHedgeRatioLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(binomialHedgeRatioCard);
+    changed=1;
+  }else{
+    if(binomialHedgeRatioCard.answer!==binomialHedgeRatioAnswer){binomialHedgeRatioCard.answer=binomialHedgeRatioAnswer;changed=1;}
+    if(binomialHedgeRatioCard.latex!==binomialHedgeRatioLatex){binomialHedgeRatioCard.latex=binomialHedgeRatioLatex;changed=1;}
+    if(binomialHedgeRatioCard.topic!=='Options'){binomialHedgeRatioCard.topic='Options';changed=1;}
+    if(!Array.isArray(binomialHedgeRatioCard.history)){binomialHedgeRatioCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
