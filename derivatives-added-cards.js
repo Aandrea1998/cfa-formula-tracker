@@ -282,6 +282,31 @@
     if(!Array.isArray(swapFixedRateCard.history)){swapFixedRateCard.history=[];changed=1;}
   }
 
+
+  const swapValueRateDiffQuestion='Interest Rate Swap Value from Fixed-Rate Difference';
+  const swapValueRateDiffLatex='\\begin{aligned}V&=NA(FS_0-FS_t)\\left(\\frac{1}{AP}\\right)\\sum_i PV_i\\end{aligned}';
+  const swapValueRateDiffAnswer='Swap value = NA × (FS₀ − FS_t) × (1/AP) × ΣPV_i. Here FS₀ is the contractual fixed swap rate, FS_t is the current market fixed swap rate for the remaining swap, AP is the number of settlement periods per year, and PV_i are the discount factors for the remaining payment dates. Sign shown is for receive-fixed/pay-floating; reverse the sign for pay-fixed.';
+  let swapValueRateDiffCard=cards.find(c=>c.subject===SUBJECT&&c.question===swapValueRateDiffQuestion);
+  if(!swapValueRateDiffCard){
+    swapValueRateDiffCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:swapValueRateDiffQuestion,
+      answer:swapValueRateDiffAnswer,
+      latex:swapValueRateDiffLatex,
+      subject:SUBJECT,
+      topic:'Swaps',
+      status:null,
+      history:[]
+    };
+    cards.push(swapValueRateDiffCard);
+    changed=1;
+  }else{
+    if(swapValueRateDiffCard.answer!==swapValueRateDiffAnswer){swapValueRateDiffCard.answer=swapValueRateDiffAnswer;changed=1;}
+    if(swapValueRateDiffCard.latex!==swapValueRateDiffLatex){swapValueRateDiffCard.latex=swapValueRateDiffLatex;changed=1;}
+    if(swapValueRateDiffCard.topic!=='Swaps'){swapValueRateDiffCard.topic='Swaps';changed=1;}
+    if(!Array.isArray(swapValueRateDiffCard.history)){swapValueRateDiffCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
