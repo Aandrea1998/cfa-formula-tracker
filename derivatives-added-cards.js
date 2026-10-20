@@ -407,6 +407,31 @@
     if(!Array.isArray(binomialHedgeRatioCard.history)){binomialHedgeRatioCard.history=[];changed=1;}
   }
 
+
+  const binomialReplicatingValueQuestion='Binomial Option Value — General Replicating Portfolio Formula';
+  const binomialReplicatingValueLatex='\\begin{aligned}V_0&=hS_0+PV\\left(V^{-}-hS^{-}\\right)\\\\&=hS_0+PV\\left(V^{+}-hS^{+}\\right)\\\\h&=\\frac{V^{+}-V^{-}}{S^{+}-S^{-}}\\end{aligned}';
+  const binomialReplicatingValueAnswer='General one-period binomial formula for either a call or a put: option value = stock position hS₀ + PV of the risk-free payoff. Either the up-state or down-state expression can be used because h equalizes the two state payoffs.';
+  let binomialReplicatingValueCard=cards.find(c=>c.subject===SUBJECT&&c.question===binomialReplicatingValueQuestion);
+  if(!binomialReplicatingValueCard){
+    binomialReplicatingValueCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:binomialReplicatingValueQuestion,
+      answer:binomialReplicatingValueAnswer,
+      latex:binomialReplicatingValueLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(binomialReplicatingValueCard);
+    changed=1;
+  }else{
+    if(binomialReplicatingValueCard.answer!==binomialReplicatingValueAnswer){binomialReplicatingValueCard.answer=binomialReplicatingValueAnswer;changed=1;}
+    if(binomialReplicatingValueCard.latex!==binomialReplicatingValueLatex){binomialReplicatingValueCard.latex=binomialReplicatingValueLatex;changed=1;}
+    if(binomialReplicatingValueCard.topic!=='Options'){binomialReplicatingValueCard.topic='Options';changed=1;}
+    if(!Array.isArray(binomialReplicatingValueCard.history)){binomialReplicatingValueCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
