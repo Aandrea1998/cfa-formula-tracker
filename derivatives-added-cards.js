@@ -357,6 +357,31 @@
     if(!Array.isArray(equitySwapReceiveEquityCard.history)){equitySwapReceiveEquityCard.history=[];changed=1;}
   }
 
+
+  const forwardDividendRelationQuestion='Equity Forward Value — Effect of a Newly Announced Dividend';
+  const forwardDividendRelationLatex='\\begin{aligned}\\text{Dividend announced} &\\Rightarrow F_t\\downarrow\\\\V_t^{\\text{long}}&=PV(F_t-F_0)\\downarrow\\end{aligned}';
+  const forwardDividendRelationAnswer='For an existing long equity forward, the contractual forward price F₀ is fixed. A newly announced dividend lowers the current fair forward price F_t, so the long forward value decreases, assuming the underlying spot price does not change.';
+  let forwardDividendRelationCard=cards.find(c=>c.subject===SUBJECT&&c.question===forwardDividendRelationQuestion);
+  if(!forwardDividendRelationCard){
+    forwardDividendRelationCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:forwardDividendRelationQuestion,
+      answer:forwardDividendRelationAnswer,
+      latex:forwardDividendRelationLatex,
+      subject:SUBJECT,
+      topic:'Forwards',
+      status:null,
+      history:[]
+    };
+    cards.push(forwardDividendRelationCard);
+    changed=1;
+  }else{
+    if(forwardDividendRelationCard.answer!==forwardDividendRelationAnswer){forwardDividendRelationCard.answer=forwardDividendRelationAnswer;changed=1;}
+    if(forwardDividendRelationCard.latex!==forwardDividendRelationLatex){forwardDividendRelationCard.latex=forwardDividendRelationLatex;changed=1;}
+    if(forwardDividendRelationCard.topic!=='Forwards'){forwardDividendRelationCard.topic='Forwards';changed=1;}
+    if(!Array.isArray(forwardDividendRelationCard.history)){forwardDividendRelationCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
