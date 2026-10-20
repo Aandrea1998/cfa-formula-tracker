@@ -457,6 +457,31 @@
     if(!Array.isArray(binomialExpectationsCard.history)){binomialExpectationsCard.history=[];changed=1;}
   }
 
+
+  const americanCallDividendQuestion='American vs European Call — Dividend-Paying Stock';
+  const americanCallDividendLatex='\\begin{aligned}C_{Am}&\\ge C_{Eu}\\\\\\text{Usually, if dividends are paid: }\\quad C_{Am}&>C_{Eu}\\end{aligned}';
+  const americanCallDividendAnswer='For a dividend-paying stock, an American call is worth at least as much as a European call and is usually worth more because early exercise just before the ex-dividend date can be optimal.';
+  let americanCallDividendCard=cards.find(c=>c.subject===SUBJECT&&c.question===americanCallDividendQuestion);
+  if(!americanCallDividendCard){
+    americanCallDividendCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:americanCallDividendQuestion,
+      answer:americanCallDividendAnswer,
+      latex:americanCallDividendLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(americanCallDividendCard);
+    changed=1;
+  }else{
+    if(americanCallDividendCard.answer!==americanCallDividendAnswer){americanCallDividendCard.answer=americanCallDividendAnswer;changed=1;}
+    if(americanCallDividendCard.latex!==americanCallDividendLatex){americanCallDividendCard.latex=americanCallDividendLatex;changed=1;}
+    if(americanCallDividendCard.topic!=='Options'){americanCallDividendCard.topic='Options';changed=1;}
+    if(!Array.isArray(americanCallDividendCard.history)){americanCallDividendCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
