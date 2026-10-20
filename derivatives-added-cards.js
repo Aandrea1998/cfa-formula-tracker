@@ -507,6 +507,31 @@
     if(!Array.isArray(binomialVsBSMCard.history)){binomialVsBSMCard.history=[];changed=1;}
   }
 
+
+  const bsmAssumptionsQuestion='Black-Scholes-Merton Assumptions — Keywords';
+  const bsmAssumptionsLatex='\\begin{gathered}\\textbf{GBM / lognormal prices}\\\\\\textbf{Continuous prices + continuous trading}\\\\\\textbf{Liquid underlying}\\\\\\textbf{Short selling allowed}\\\\\\textbf{No frictions / taxes / constraints}\\\\\\textbf{No arbitrage}\\\\\\textbf{European options only}\\Rightarrow\\textbf{ no early exercise}\\\\\\textbf{Known constant }r_f\\textbf{ (continuous compounding)}\\\\\\textbf{Known constant volatility }\\sigma\\\\\\textbf{Known constant continuous yield }q\\textbf{, if any}\\end{gathered}';
+  const bsmAssumptionsAnswer='Keywords: GBM; continuous prices/trading; liquid; short selling; no frictions/taxes; no arbitrage; European only; constant known risk-free rate; constant known volatility; constant known continuous yield if applicable.';
+  let bsmAssumptionsCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmAssumptionsQuestion);
+  if(!bsmAssumptionsCard){
+    bsmAssumptionsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:bsmAssumptionsQuestion,
+      answer:bsmAssumptionsAnswer,
+      latex:bsmAssumptionsLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(bsmAssumptionsCard);
+    changed=1;
+  }else{
+    if(bsmAssumptionsCard.answer!==bsmAssumptionsAnswer){bsmAssumptionsCard.answer=bsmAssumptionsAnswer;changed=1;}
+    if(bsmAssumptionsCard.latex!==bsmAssumptionsLatex){bsmAssumptionsCard.latex=bsmAssumptionsLatex;changed=1;}
+    if(bsmAssumptionsCard.topic!=='Options'){bsmAssumptionsCard.topic='Options';changed=1;}
+    if(!Array.isArray(bsmAssumptionsCard.history)){bsmAssumptionsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
