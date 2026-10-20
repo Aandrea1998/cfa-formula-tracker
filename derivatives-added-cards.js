@@ -582,6 +582,31 @@
     if(!Array.isArray(irOptionBlackCard.history)){irOptionBlackCard.history=[];changed=1;}
   }
 
+
+  const optionDeltaDividendQuestion='Option Delta with Continuous Dividend Yield';
+  const optionDeltaDividendLatex='\\begin{aligned}\\Delta_c&=e^{-\\delta T}N(d_1)\\\\\\Delta_p&=-e^{-\\delta T}N(-d_1)\\end{aligned}';
+  const optionDeltaDividendAnswer='With continuous dividend yield δ: call delta = e^{-δT}N(d₁); put delta = −e^{-δT}N(−d₁). If δ = 0, these reduce to Δ_c = N(d₁) and Δ_p = −N(−d₁).';
+  let optionDeltaDividendCard=cards.find(c=>c.subject===SUBJECT&&c.question===optionDeltaDividendQuestion);
+  if(!optionDeltaDividendCard){
+    optionDeltaDividendCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:optionDeltaDividendQuestion,
+      answer:optionDeltaDividendAnswer,
+      latex:optionDeltaDividendLatex,
+      subject:SUBJECT,
+      topic:'Options',
+      status:null,
+      history:[]
+    };
+    cards.push(optionDeltaDividendCard);
+    changed=1;
+  }else{
+    if(optionDeltaDividendCard.answer!==optionDeltaDividendAnswer){optionDeltaDividendCard.answer=optionDeltaDividendAnswer;changed=1;}
+    if(optionDeltaDividendCard.latex!==optionDeltaDividendLatex){optionDeltaDividendCard.latex=optionDeltaDividendLatex;changed=1;}
+    if(optionDeltaDividendCard.topic!=='Options'){optionDeltaDividendCard.topic='Options';changed=1;}
+    if(!Array.isArray(optionDeltaDividendCard.history)){optionDeltaDividendCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
