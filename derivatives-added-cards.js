@@ -307,6 +307,31 @@
     if(!Array.isArray(swapValueRateDiffCard.history)){swapValueRateDiffCard.history=[];changed=1;}
   }
 
+
+  const currencySwapValueBQuestion='Currency Swap Value in Currency b — Currency a is Foreign';
+  const currencySwapValueBLatex='\\begin{aligned}V_{CS}^{(b)}&=S_tN A_a\\left[AP\\,r_{\\text{Fix},a}\\sum_{i=1}^{n}PV_{a,i}+PV_{a,n}\\right]\\\\&\\quad-N A_b\\left[AP\\,r_{\\text{Fix},b}\\sum_{i=1}^{n}PV_{b,i}+PV_{b,n}\\right]\\end{aligned}';
+  const currencySwapValueBAnswer='If currency a is foreign and the swap value is required in currency b: convert the entire a-leg into b using spot S_t, then subtract the b-leg. Assumes S_t is quoted as b per 1 unit of a.';
+  let currencySwapValueBCard=cards.find(c=>c.subject===SUBJECT&&c.question===currencySwapValueBQuestion);
+  if(!currencySwapValueBCard){
+    currencySwapValueBCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:currencySwapValueBQuestion,
+      answer:currencySwapValueBAnswer,
+      latex:currencySwapValueBLatex,
+      subject:SUBJECT,
+      topic:'Swaps',
+      status:null,
+      history:[]
+    };
+    cards.push(currencySwapValueBCard);
+    changed=1;
+  }else{
+    if(currencySwapValueBCard.answer!==currencySwapValueBAnswer){currencySwapValueBCard.answer=currencySwapValueBAnswer;changed=1;}
+    if(currencySwapValueBCard.latex!==currencySwapValueBLatex){currencySwapValueBCard.latex=currencySwapValueBLatex;changed=1;}
+    if(currencySwapValueBCard.topic!=='Swaps'){currencySwapValueBCard.topic='Swaps';changed=1;}
+    if(!Array.isArray(currencySwapValueBCard.history)){currencySwapValueBCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
