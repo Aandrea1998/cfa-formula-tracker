@@ -132,6 +132,31 @@
     if(!Array.isArray(futuresForwardRelationCard.history)){futuresForwardRelationCard.history=[];changed=1;}
   }
 
+
+  const fraSettlementQuestion='FRA Settlement at Expiration — Advanced Set, Advanced Settled';
+  const fraSettlementLatex='\\begin{aligned}\\text{Long / receive-floating: }\\quad\\text{Settlement}_h&=NA\\times\\frac{(L_m-FRA_0)t_m}{1+D_m t_m}\\\\\\text{Short / receive-fixed: }\\quad\\text{Settlement}_h&=NA\\times\\frac{(FRA_0-L_m)t_m}{1+D_m t_m}\\end{aligned}';
+  const fraSettlementAnswer='FRA settlement is paid at h, so the interest differential for the underlying m-period is discounted back from h+m to h. D_m is the annualized discount rate for that m-period (from FRA expiration h to underlying maturity h+m); in the standard setup at h, L_m = D_m.';
+  let fraSettlementCard=cards.find(c=>c.subject===SUBJECT&&c.question===fraSettlementQuestion);
+  if(!fraSettlementCard){
+    fraSettlementCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:fraSettlementQuestion,
+      answer:fraSettlementAnswer,
+      latex:fraSettlementLatex,
+      subject:SUBJECT,
+      topic:'FRAs',
+      status:null,
+      history:[]
+    };
+    cards.push(fraSettlementCard);
+    changed=1;
+  }else{
+    if(fraSettlementCard.answer!==fraSettlementAnswer){fraSettlementCard.answer=fraSettlementAnswer;changed=1;}
+    if(fraSettlementCard.latex!==fraSettlementLatex){fraSettlementCard.latex=fraSettlementLatex;changed=1;}
+    if(fraSettlementCard.topic!=='FRAs'){fraSettlementCard.topic='FRAs';changed=1;}
+    if(!Array.isArray(fraSettlementCard.history)){fraSettlementCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
