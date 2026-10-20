@@ -408,6 +408,31 @@
     if(!Array.isArray(arResidualCard.history)){arResidualCard.history=[];changed=1;}
   }
 
+
+  const meanRevQuestion='AR(1) — Mean-Reverting Level';
+  const meanRevLatex='\\begin{aligned}x_{t+1}&=b_0+b_1x_t\\\\x^*&=\\frac{b_0}{1-b_1}\\\\x_t>x^*&\\Rightarrow\\text{Tends to fall}\\\\x_t<x^*&\\Rightarrow\\text{Tends to rise}\\end{aligned}';
+  const meanRevAnswer='For AR(1), x_{t+1}=b₀+b₁x_t. The mean-reverting level is x* = b₀/(1−b₁). Above x* the series tends to fall; below x* it tends to rise.';
+  let meanRevCard=cards.find(c=>c.subject===SUBJECT&&c.question===meanRevQuestion);
+  if(!meanRevCard){
+    meanRevCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:meanRevQuestion,
+      answer:meanRevAnswer,
+      latex:meanRevLatex,
+      subject:SUBJECT,
+      topic:'Time Series Analysis',
+      status:null,
+      history:[]
+    };
+    cards.push(meanRevCard);
+    changed=1;
+  }else{
+    if(meanRevCard.answer!==meanRevAnswer){meanRevCard.answer=meanRevAnswer;changed=1;}
+    if(meanRevCard.latex!==meanRevLatex){meanRevCard.latex=meanRevLatex;changed=1;}
+    if(meanRevCard.topic!=='Time Series Analysis'){meanRevCard.topic='Time Series Analysis';changed=1;}
+    if(!Array.isArray(meanRevCard.history)){meanRevCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
