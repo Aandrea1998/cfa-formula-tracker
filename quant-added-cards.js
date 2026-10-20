@@ -308,6 +308,31 @@
     if(!Array.isArray(vifCard.history)){vifCard.history=[];changed=1;}
   }
 
+
+  const highLeverageQuestion='High Leverage — Influential Point Rule';
+  const highLeverageLatex='\\begin{aligned}h_{ii}&>\\frac{3(k+1)}{n}\\\\&\\Rightarrow\\text{Potentially influential / high leverage point}\\end{aligned}';
+  const highLeverageAnswer='A point is potentially influential (high leverage) if h_ii > 3(k+1)/n.';
+  let highLeverageCard=cards.find(c=>c.subject===SUBJECT&&c.question===highLeverageQuestion);
+  if(!highLeverageCard){
+    highLeverageCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:highLeverageQuestion,
+      answer:highLeverageAnswer,
+      latex:highLeverageLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(highLeverageCard);
+    changed=1;
+  }else{
+    if(highLeverageCard.answer!==highLeverageAnswer){highLeverageCard.answer=highLeverageAnswer;changed=1;}
+    if(highLeverageCard.latex!==highLeverageLatex){highLeverageCard.latex=highLeverageLatex;changed=1;}
+    if(highLeverageCard.topic!=='Multiple Linear Regression'){highLeverageCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(highLeverageCard.history)){highLeverageCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
