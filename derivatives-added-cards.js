@@ -107,6 +107,31 @@
     if(!Array.isArray(forwardCarryCard.history)){forwardCarryCard.history=[];changed=1;}
   }
 
+
+  const futuresForwardRelationQuestion='Futures vs Forward Prices — Effect of Interest Rate Correlation';
+  const futuresForwardRelationLatex='\\begin{aligned}\\text{Rates constant/independent of price} &\\Rightarrow F_{\\text{futures}}=F_{\\text{forward}}\\\\\\text{Positive rates + price increasing with rates} &\\Rightarrow F_{\\text{futures}}>F_{\\text{forward}}\\\\\\text{Positive rates + price decreasing with rates} &\\Rightarrow F_{\\text{futures}}<F_{\\text{forward}}\\end{aligned}';
+  const futuresForwardRelationAnswer='If interest rates are constant or uncorrelated with the underlying price, futures = forward. With positive rates: positive price-rate correlation => futures > forward; negative correlation => futures < forward.';
+  let futuresForwardRelationCard=cards.find(c=>c.subject===SUBJECT&&c.question===futuresForwardRelationQuestion);
+  if(!futuresForwardRelationCard){
+    futuresForwardRelationCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:futuresForwardRelationQuestion,
+      answer:futuresForwardRelationAnswer,
+      latex:futuresForwardRelationLatex,
+      subject:SUBJECT,
+      topic:'Futures',
+      status:null,
+      history:[]
+    };
+    cards.push(futuresForwardRelationCard);
+    changed=1;
+  }else{
+    if(futuresForwardRelationCard.answer!==futuresForwardRelationAnswer){futuresForwardRelationCard.answer=futuresForwardRelationAnswer;changed=1;}
+    if(futuresForwardRelationCard.latex!==futuresForwardRelationLatex){futuresForwardRelationCard.latex=futuresForwardRelationLatex;changed=1;}
+    if(futuresForwardRelationCard.topic!=='Futures'){futuresForwardRelationCard.topic='Futures';changed=1;}
+    if(!Array.isArray(futuresForwardRelationCard.history)){futuresForwardRelationCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
