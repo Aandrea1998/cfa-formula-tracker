@@ -358,6 +358,31 @@
     if(!Array.isArray(studentizedCard.history)){studentizedCard.history=[];changed=1;}
   }
 
+
+  const logitQuestion='Logistic Regression — Log-Odds & Probability';
+  const logitLatex='\\begin{aligned}\\ln\\left(\\frac{P}{1-P}\\right)&=b_0+b_1X_1+\\cdots+b_kX_k\\\\P&=\\frac{1}{1+\\exp[-(b_0+b_1X_1+\\cdots+b_kX_k)]}\\end{aligned}';
+  const logitAnswer='Logit: ln[P/(1−P)] = b₀ + b₁X₁ + … + bₖXₖ. Event probability: P = 1 / {1 + exp[−(b₀ + b₁X₁ + … + bₖXₖ)]}.';
+  let logitCard=cards.find(c=>c.subject===SUBJECT&&c.question===logitQuestion);
+  if(!logitCard){
+    logitCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:logitQuestion,
+      answer:logitAnswer,
+      latex:logitLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(logitCard);
+    changed=1;
+  }else{
+    if(logitCard.answer!==logitAnswer){logitCard.answer=logitAnswer;changed=1;}
+    if(logitCard.latex!==logitLatex){logitCard.latex=logitLatex;changed=1;}
+    if(logitCard.topic!=='Multiple Linear Regression'){logitCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(logitCard.history)){logitCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
