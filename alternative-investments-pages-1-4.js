@@ -12,7 +12,7 @@
     {topic:'Commodity Markets',page:1,question:'Commodity Futures Calendar Spread',latex:'\\text{Calendar Spread}=F_{\\text{near}}-F_{\\text{far}}'},
     {topic:'Commodity Markets',page:1,question:'Commodity Futures Roll Return',latex:'\\begin{aligned}\\text{Roll Return}&=\\frac{F_{\\text{near, close}}-F_{\\text{far, close}}}{F_{\\text{near, close}}}\\times\\%\\text{ Position Rolled}\\\\\\text{Full Roll}&=\\frac{F_{\\text{near}}-F_{\\text{far}}}{F_{\\text{near}}}\\end{aligned}'},
     {topic:'Commodity Markets',page:1,question:'Commodity Total Return',latex:'\\text{Total Return}=\\text{Spot Return}+\\text{Roll Return}+\\text{Collateral Return}'},
-    {topic:'Commodity Markets',page:1,question:'Commodity Index Performance — Upward-Trending Market',latex:'\\begin{aligned}\\text{Upward-trending market + backwardation}&\\Rightarrow\\text{positive roll return}\\\\\\text{Upward-trending market + contango}&\\Rightarrow\\text{negative roll return}\\\\\\text{With similar weights/rebalancing: }R_{\\text{backwardation index}}&>R_{\\text{contango index}}\\end{aligned}'},
+    {topic:'Commodity Markets',page:1,question:'Contango vs Backwardation — Roll Return',latex:'\\begin{aligned}\\text{Backwardation}&\\Rightarrow\\text{typically positive roll return}\\\\\\text{Contango}&\\Rightarrow\\text{typically negative roll return}\\\\[3pt]\\textbf{In an upward-trending market, ceteris paribus:}\\\\R_{\\text{index, backwardation}}&>R_{\\text{index, contango}}\\end{aligned}'},
     {topic:'Commodity Markets',page:1,question:'Commodity Basis Swap — Basis Differential',latex:'\\mathrm{Basis}=P_A-P_B'},
     {topic:'Commodity Markets',page:1,question:'Commodity Basis Swap — Net Settlement',latex:'\\text{Net Settlement}=(\\text{Actual Basis}-\\text{Fixed Basis})Q'},
 
@@ -82,6 +82,20 @@
   }
 
   defs.forEach(upsert);
+
+  // Remove obsolete duplicate commodity-index cards from earlier versions.
+  const obsoleteCommodityQuestions=new Set([
+    'Contango vs Backwardation — Roll Return (Ceteris Paribus)',
+    'Commodity Index Performance — Upward-Trending Market'
+  ]);
+  for(let i=cards.length-1;i>=0;i--){
+    const c=cards[i];
+    if(c&&c.subject===SUBJECT&&obsoleteCommodityQuestions.has(c.question)){
+      const replacement=cards.find(x=>x.subject===SUBJECT&&x.question==='Contango vs Backwardation — Roll Return');
+      if(replacement&&replacement!==c)mergeHistory(replacement,c);
+      cards.splice(i,1);removed++;changed++;
+    }
+  }
 
   // Remove exact formula duplicates inside Alternative Investments while preserving history.
   const seen=new Map();
