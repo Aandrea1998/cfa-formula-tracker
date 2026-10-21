@@ -45,7 +45,8 @@
     {topic:'Real Estate & REITs',page:4,question:'REIT Operating Real Estate Value',latex:'\\text{Operating Real Estate Value}=\\frac{\\text{Expected Cash NOI}}{\\text{Cap Rate}}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Gross Asset Value (GAV)',latex:'\\begin{aligned}\\mathrm{GAV}&=\\text{Operating Real Estate Value}+\\text{Cash}+\\text{Development Land}\\\\&\\quad+\\text{Receivables}+\\text{Other Assets}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Net Asset Value (NAV)',latex:'\\begin{aligned}\\mathrm{NAV}&=\\mathrm{GAV}-\\text{Debt}-\\text{Other Liabilities}\\\\&=\\mathrm{FV}(\\text{Assets})-\\mathrm{FV}(\\text{Liabilities})\\end{aligned}'},
-    {topic:'Real Estate & REITs',page:4,question:'REIT Valuation Method 1 — NAV',latex:'\\begin{aligned}\\text{Operating RE Value}&=\\frac{\\text{Estimated Cash NOI}}{\\text{Cap Rate}}\\\\[4pt]\\mathrm{NAV}&=\\text{Operating RE Value}\\\\&\\quad+\\text{Cash \\& Equivalents}\\\\&\\quad+\\text{Accounts Receivable}\\\\&\\quad-\\text{Debt \\& Other Liabilities}\\end{aligned}'}
+    {topic:'Real Estate & REITs',page:4,question:'REIT Valuation Method 1 — NAV',latex:'\\begin{aligned}\\text{Operating RE Value}&=\\frac{\\text{Estimated Cash NOI}}{\\text{Cap Rate}}\\\\[4pt]\\mathrm{NAV}&=\\text{Operating RE Value}\\\\&\\quad+\\text{Cash \\& Equivalents}\\\\&\\quad+\\text{Accounts Receivable}\\\\&\\quad-\\text{Debt \\& Other Liabilities}\\end{aligned}'},
+    {topic:'Real Estate & REITs',page:4,question:'REIT NAV — CapEx Treatment',latex:'\\begin{aligned}\\textbf{Do not subtract CapEx from NOI for NAV.}\\\\\\text{Cash NOI}&=\\text{Reported NOI}-\\text{Noncash Rent}\\\\\\text{Operating RE Value}&=\\frac{\\text{Next-12M Cash NOI}}{\\text{Cap Rate}}\\end{aligned}'}
   ];
 
   let changed=0,added=0,removed=0;
