@@ -35,6 +35,7 @@
     {topic:'Real Estate & REITs',page:3,question:'Cost Approach — Property Value',latex:'\\begin{aligned}\\text{Property Value}&=\\text{Cost New}-\\text{Accumulated Depreciation}\\\\&=\\text{Land Value}+\\text{Depreciated Value of Improvements}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:3,question:'Real Estate Holding Period Return (HPR)',latex:'\\begin{aligned}\\mathrm{HPR}&=\\frac{\\mathrm{NOI}-\\mathrm{CapEx}+(\\text{Ending Value}-\\text{Beginning Value})}{\\text{Beginning Value}}\\\\\\mathrm{HPR}&=\\text{Income Return}+\\text{Capital Appreciation Return}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:3,question:'Smoothed Appraisal Return',latex:'R_t^{*}=\\alpha R_t+(1-\\alpha)R_{t-1}^{*}'},
+    {topic:'Real Estate & REITs',page:3,question:'Appraisal-Based Real Estate Index — Main Takeaway',latex:'\\begin{aligned}\\text{Appraisal lag / smoothing}&\\Rightarrow\\text{Volatility understated}\\\\&\\Rightarrow\\text{Correlation understated}\\\\&\\Rightarrow\\text{Sharpe ratio overstated}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:3,question:'Unsmoothing Appraisal Return',latex:'R_t=\\frac{R_t^{*}-(1-\\alpha)R_{t-1}^{*}}{\\alpha}'},
     {topic:'Real Estate & REITs',page:3,question:'REIT Adjusted Funds From Operations (AFFO)',latex:'\\mathrm{AFFO}=\\mathrm{FFO}-\\text{Noncash Rent}-\\text{Recurring CapEx}'},
 
