@@ -45,7 +45,7 @@
     {topic:'Real Estate & REITs',page:4,question:'REIT Operating Real Estate Value',latex:'\\text{Operating Real Estate Value}=\\frac{\\text{Expected Cash NOI}}{\\text{Cap Rate}}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Gross Asset Value (GAV)',latex:'\\begin{aligned}\\mathrm{GAV}&=\\text{Operating Real Estate Value}+\\text{Cash}+\\text{Development Land}\\\\&\\quad+\\text{Receivables}+\\text{Other Assets}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Net Asset Value (NAV)',latex:'\\begin{aligned}\\mathrm{NAV}&=\\mathrm{GAV}-\\text{Debt}-\\text{Other Liabilities}\\\\&=\\mathrm{FV}(\\text{Assets})-\\mathrm{FV}(\\text{Liabilities})\\end{aligned}'},
-    {topic:'Real Estate & REITs',page:4,question:'REIT NAV per Share',latex:'\\begin{aligned}\\mathrm{NAV}&=\\text{Appraised Operating Properties}+\\text{Cash \\& Equivalents}+\\text{Land Held for Development}-\\text{Total Debt}\\\\\\mathrm{NAVPS}&=\\frac{\\mathrm{NAV}}{\\text{Shares Outstanding}}\\end{aligned}'}
+    {topic:'Real Estate & REITs',page:4,question:'REIT Valuation Method 1 — NAV',latex:'\\begin{aligned}\\text{Operating RE Value}&=\\frac{\\text{Estimated Cash NOI}}{\\text{Cap Rate}}\\\\[4pt]\\mathrm{NAV}&=\\text{Operating RE Value}\\\\&\\quad+\\text{Cash \\& Equivalents}\\\\&\\quad+\\text{Accounts Receivable}\\\\&\\quad-\\text{Debt \\& Other Liabilities}\\end{aligned}'}
   ];
 
   let changed=0,added=0,removed=0;
@@ -93,6 +93,18 @@
     if(c&&c.subject===SUBJECT&&obsoleteCommodityQuestions.has(c.question)){
       const replacement=cards.find(x=>x.subject===SUBJECT&&x.question==='Contango vs Backwardation — Roll Return');
       if(replacement&&replacement!==c)mergeHistory(replacement,c);
+      cards.splice(i,1);removed++;changed++;
+    }
+  }
+
+  // Migrate the older REIT NAV-per-share card into the compact Method 1 NAV card.
+  const obsoleteNavQuestion='REIT NAV per Share';
+  const navMethodQuestion='REIT Valuation Method 1 — NAV';
+  const navMethodCard=cards.find(c=>c.subject===SUBJECT&&c.question===navMethodQuestion);
+  for(let i=cards.length-1;i>=0;i--){
+    const c=cards[i];
+    if(c&&c.subject===SUBJECT&&c.question===obsoleteNavQuestion){
+      if(navMethodCard&&navMethodCard!==c)mergeHistory(navMethodCard,c);
       cards.splice(i,1);removed++;changed++;
     }
   }
