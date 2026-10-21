@@ -43,7 +43,7 @@
     {topic:'Real Estate & REITs',page:4,question:'REIT Operating Real Estate Value',latex:'\\text{Operating Real Estate Value}=\\frac{\\text{Expected Cash NOI}}{\\text{Cap Rate}}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Gross Asset Value (GAV)',latex:'\\begin{aligned}\\mathrm{GAV}&=\\text{Operating Real Estate Value}+\\text{Cash}+\\text{Development Land}\\\\&\\quad+\\text{Receivables}+\\text{Other Assets}\\end{aligned}'},
     {topic:'Real Estate & REITs',page:4,question:'REIT Net Asset Value (NAV)',latex:'\\begin{aligned}\\mathrm{NAV}&=\\mathrm{GAV}-\\text{Debt}-\\text{Other Liabilities}\\\\&=\\mathrm{FV}(\\text{Assets})-\\mathrm{FV}(\\text{Liabilities})\\end{aligned}'},
-    {topic:'Real Estate & REITs',page:4,question:'REIT NAV per Share',latex:'\\mathrm{NAVPS}=\\frac{\\mathrm{NAV}}{\\text{Shares Outstanding}}'}
+    {topic:'Real Estate & REITs',page:4,question:'REIT NAV per Share',latex:'\\begin{aligned}\\mathrm{NAV}&=\\text{Appraised Operating Properties}+\\text{Cash \\& Equivalents}+\\text{Land Held for Development}-\\text{Total Debt}\\\\\\mathrm{NAVPS}&=\\frac{\\mathrm{NAV}}{\\text{Shares Outstanding}}\\end{aligned}'}
   ];
 
   let changed=0,added=0,removed=0;
