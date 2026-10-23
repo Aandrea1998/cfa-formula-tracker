@@ -558,6 +558,31 @@
     if(!Array.isArray(multicollinearitySolutionsCard.history)){multicollinearitySolutionsCard.history=[];changed=1;}
   }
 
+
+  const typeErrorsQuestion='Hypothesis Testing — Type I vs Type II Error';
+  const typeErrorsLatex='\\begin{aligned}\\text{Type I error }(\\alpha)&:\\quad\\text{Reject a true }H_0\\\\\\text{Type II error }(\\beta)&:\\quad\\text{Fail to reject a false }H_0\\end{aligned}';
+  const typeErrorsAnswer='Type I (α): reject H₀ when H₀ is true = false positive. Type II (β): fail to reject H₀ when H₀ is false = false negative.';
+  let typeErrorsCard=cards.find(c=>c.subject===SUBJECT&&c.question===typeErrorsQuestion);
+  if(!typeErrorsCard){
+    typeErrorsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:typeErrorsQuestion,
+      answer:typeErrorsAnswer,
+      latex:typeErrorsLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(typeErrorsCard);
+    changed=1;
+  }else{
+    if(typeErrorsCard.answer!==typeErrorsAnswer){typeErrorsCard.answer=typeErrorsAnswer;changed=1;}
+    if(typeErrorsCard.latex!==typeErrorsLatex){typeErrorsCard.latex=typeErrorsLatex;changed=1;}
+    if(typeErrorsCard.topic!=='Multiple Linear Regression'){typeErrorsCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(typeErrorsCard.history)){typeErrorsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
