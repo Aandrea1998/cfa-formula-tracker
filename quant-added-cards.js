@@ -583,6 +583,31 @@
     if(!Array.isArray(typeErrorsCard.history)){typeErrorsCard.history=[];changed=1;}
   }
 
+
+  const logitInterpretationQuestion='Logistic Regression — Intercept & Slope Interpretation';
+  const logitInterpretationLatex='\\begin{aligned}\\beta_0&=\\log(\\text{odds})\\quad\\text{when }X_1=\\cdots=X_k=0\\\\\\beta_j&=\\text{change in log-odds for a 1-unit increase in }X_j\\\\&\\quad\\text{holding all other variables constant}\\end{aligned}';
+  const logitInterpretationAnswer='Intercept β₀: log-odds of the event when all independent variables equal 0. Slope βⱼ: change in log-odds for a 1-unit increase in Xⱼ, holding all other variables constant.';
+  let logitInterpretationCard=cards.find(c=>c.subject===SUBJECT&&c.question===logitInterpretationQuestion);
+  if(!logitInterpretationCard){
+    logitInterpretationCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:logitInterpretationQuestion,
+      answer:logitInterpretationAnswer,
+      latex:logitInterpretationLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(logitInterpretationCard);
+    changed=1;
+  }else{
+    if(logitInterpretationCard.answer!==logitInterpretationAnswer){logitInterpretationCard.answer=logitInterpretationAnswer;changed=1;}
+    if(logitInterpretationCard.latex!==logitInterpretationLatex){logitInterpretationCard.latex=logitInterpretationLatex;changed=1;}
+    if(logitInterpretationCard.topic!=='Multiple Linear Regression'){logitInterpretationCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(logitInterpretationCard.history)){logitInterpretationCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
