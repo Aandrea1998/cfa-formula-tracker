@@ -508,6 +508,31 @@
     if(!Array.isArray(maqCard.history)){maqCard.history=[];changed=1;}
   }
 
+
+  const forecastErrorQuestion='Forecast Error > Regression Standard Error — Sources';
+  const forecastErrorLatex='\\begin{aligned}\\text{Forecast error larger than regression SE}\\\\\\Rightarrow\\text{Model error and/or Sampling error}\\end{aligned}';
+  const forecastErrorAnswer='If the realized forecast error is larger than the regression standard error, possible sources include model error and sampling error.';
+  let forecastErrorCard=cards.find(c=>c.subject===SUBJECT&&c.question===forecastErrorQuestion);
+  if(!forecastErrorCard){
+    forecastErrorCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:forecastErrorQuestion,
+      answer:forecastErrorAnswer,
+      latex:forecastErrorLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(forecastErrorCard);
+    changed=1;
+  }else{
+    if(forecastErrorCard.answer!==forecastErrorAnswer){forecastErrorCard.answer=forecastErrorAnswer;changed=1;}
+    if(forecastErrorCard.latex!==forecastErrorLatex){forecastErrorCard.latex=forecastErrorLatex;changed=1;}
+    if(forecastErrorCard.topic!=='Multiple Linear Regression'){forecastErrorCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(forecastErrorCard.history)){forecastErrorCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
