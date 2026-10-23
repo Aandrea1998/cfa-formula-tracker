@@ -585,8 +585,8 @@
 
 
   const logitInterpretationQuestion='Logistic Regression — Intercept & Slope Interpretation';
-  const logitInterpretationLatex='\\begin{aligned}\\beta_0&=\\log(\\text{odds})\\quad\\text{when }X_1=\\cdots=X_k=0\\\\\\beta_j&=\\text{change in log-odds for a 1-unit increase in }X_j\\\\&\\quad\\text{holding all other variables constant}\\end{aligned}';
-  const logitInterpretationAnswer='Intercept β₀: log-odds of the event when all independent variables equal 0. Slope βⱼ: change in log-odds for a 1-unit increase in Xⱼ, holding all other variables constant.';
+  const logitInterpretationLatex='\\begin{aligned}\\beta_0&:\\quad\\text{baseline log-odds when all }X=0\\\\\\beta_j&:\\quad\\text{how much log-odds change when }X_j\\text{ rises by 1}\\\\&\\quad\\text{with all other }X\\text{ unchanged}\\end{aligned}';
+  const logitInterpretationAnswer='Intercept β₀ = the baseline log-odds of the event when every independent variable is 0. Coefficient βⱼ = how much the event’s log-odds change when Xⱼ increases by 1, keeping all other variables fixed.';
   let logitInterpretationCard=cards.find(c=>c.subject===SUBJECT&&c.question===logitInterpretationQuestion);
   if(!logitInterpretationCard){
     logitInterpretationCard={
