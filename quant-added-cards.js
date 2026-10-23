@@ -533,6 +533,31 @@
     if(!Array.isArray(forecastErrorCard.history)){forecastErrorCard.history=[];changed=1;}
   }
 
+
+  const multicollinearitySolutionsQuestion='Multicollinearity — Possible Solutions';
+  const multicollinearitySolutionsLatex='\\begin{aligned}1.&\\ \\text{Remove one or more correlated regressors}\\\\2.&\\ \\text{Use a different proxy}\\\\3.&\\ \\text{Increase sample size}\\end{aligned}';
+  const multicollinearitySolutionsAnswer='Possible remedies for multicollinearity: exclude one or more correlated explanatory variables, use a different proxy for a variable, or increase the sample size.';
+  let multicollinearitySolutionsCard=cards.find(c=>c.subject===SUBJECT&&c.question===multicollinearitySolutionsQuestion);
+  if(!multicollinearitySolutionsCard){
+    multicollinearitySolutionsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:multicollinearitySolutionsQuestion,
+      answer:multicollinearitySolutionsAnswer,
+      latex:multicollinearitySolutionsLatex,
+      subject:SUBJECT,
+      topic:'Multiple Linear Regression',
+      status:null,
+      history:[]
+    };
+    cards.push(multicollinearitySolutionsCard);
+    changed=1;
+  }else{
+    if(multicollinearitySolutionsCard.answer!==multicollinearitySolutionsAnswer){multicollinearitySolutionsCard.answer=multicollinearitySolutionsAnswer;changed=1;}
+    if(multicollinearitySolutionsCard.latex!==multicollinearitySolutionsLatex){multicollinearitySolutionsCard.latex=multicollinearitySolutionsLatex;changed=1;}
+    if(multicollinearitySolutionsCard.topic!=='Multiple Linear Regression'){multicollinearitySolutionsCard.topic='Multiple Linear Regression';changed=1;}
+    if(!Array.isArray(multicollinearitySolutionsCard.history)){multicollinearitySolutionsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
