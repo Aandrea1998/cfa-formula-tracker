@@ -210,7 +210,7 @@
 
   const bondFuturesQuotedPriceQuestion='Bond Futures — Conversion-Factor-Adjusted Quoted Futures Price';
   const bondFuturesQuotedPriceLatex='\\begin{aligned}Q_0&=\\frac{1}{CF}\\left\\{FV(B_0+AI_0)-AI_T-FVCI\\right\\}\\end{aligned}';
-  const bondFuturesQuotedPriceAnswer='Quoted futures price = [FV(B₀ + AI₀) − AI_T − FVCI] / CF. B₀ = current clean bond price; AI₀ = accrued interest today; AI_T = accrued interest at delivery; FVCI = future value of coupon income received before delivery; CF = conversion factor.';
+  const bondFuturesQuotedPriceAnswer='Quoted futures price = [FV(B₀ + AI₀) − AI_T − FVCI] / CF. B₀ = current clean bond price; AI₀ = accrued interest today; AI_T = accrued interest at delivery; FVCI = future value of coupon income received before delivery; CF = conversion factor. Arbitrage profit today = |CF × (Q_market − Q_fair)| / (1+r)^T (discount the delivery-price mispricing to today).';
   let bondFuturesQuotedPriceCard=cards.find(c=>c.subject===SUBJECT&&c.question===bondFuturesQuotedPriceQuestion);
   if(!bondFuturesQuotedPriceCard){
     bondFuturesQuotedPriceCard={
