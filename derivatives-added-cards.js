@@ -707,6 +707,31 @@
     if(!Array.isArray(historicalVsImpliedVolCard.history)){historicalVsImpliedVolCard.history=[];changed=1;}
   }
 
+
+  const forwardFuturesValueQuestion='Forward vs Futures Value — Long Position After Price Increase';
+  const forwardFuturesValueLatex='\\begin{aligned}\\text{Long + underlying price rises:}\\\\V_{\\text{forward}}&>V_{\\text{futures}}\\\\\\text{Futures: daily MTM}&\\Rightarrow\\text{gains paid out + value reset}\\end{aligned}';
+  const forwardFuturesValueAnswer='If you are long and the underlying price has risen, the outstanding forward usually has a higher value than the equivalent futures contract. Futures gains are settled daily through mark-to-market, so the futures contract value is reset toward zero.';
+  let forwardFuturesValueCard=cards.find(c=>c.subject===SUBJECT&&c.question===forwardFuturesValueQuestion);
+  if(!forwardFuturesValueCard){
+    forwardFuturesValueCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:forwardFuturesValueQuestion,
+      answer:forwardFuturesValueAnswer,
+      latex:forwardFuturesValueLatex,
+      subject:SUBJECT,
+      topic:'Futures',
+      status:null,
+      history:[]
+    };
+    cards.push(forwardFuturesValueCard);
+    changed=1;
+  }else{
+    if(forwardFuturesValueCard.answer!==forwardFuturesValueAnswer){forwardFuturesValueCard.answer=forwardFuturesValueAnswer;changed=1;}
+    if(forwardFuturesValueCard.latex!==forwardFuturesValueLatex){forwardFuturesValueCard.latex=forwardFuturesValueLatex;changed=1;}
+    if(forwardFuturesValueCard.topic!=='Futures'){forwardFuturesValueCard.topic='Futures';changed=1;}
+    if(!Array.isArray(forwardFuturesValueCard.history)){forwardFuturesValueCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
