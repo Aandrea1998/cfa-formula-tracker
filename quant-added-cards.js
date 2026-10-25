@@ -882,6 +882,31 @@
     if(!Array.isArray(treePruningCard.history)){treePruningCard.history=[];changed=1;}
   }
 
+
+  const ensembleQuestion='Ensemble Learning — Core Concepts';
+  const ensembleLatex='\\begin{aligned}1.&\\ \\text{Combine multiple models into one final prediction}\\\\2.&\\ \\text{Regression: average model predictions}\\\\\\hat y_{ens}&=\\frac{\\hat y_1+\\hat y_2+\\cdots+\\hat y_M}{M}\\end{aligned}';
+  const ensembleAnswer='Ensemble learning combines predictions from multiple models to produce one final prediction. In regression, the final prediction is commonly the average of the individual model predictions.';
+  let ensembleCard=cards.find(c=>c.subject===SUBJECT&&c.question===ensembleQuestion);
+  if(!ensembleCard){
+    ensembleCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:ensembleQuestion,
+      answer:ensembleAnswer,
+      latex:ensembleLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(ensembleCard);
+    changed=1;
+  }else{
+    if(ensembleCard.answer!==ensembleAnswer){ensembleCard.answer=ensembleAnswer;changed=1;}
+    if(ensembleCard.latex!==ensembleLatex){ensembleCard.latex=ensembleLatex;changed=1;}
+    if(ensembleCard.topic!=='Machine Learning'){ensembleCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(ensembleCard.history)){ensembleCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
