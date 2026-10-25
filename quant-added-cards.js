@@ -932,6 +932,31 @@
     if(!Array.isArray(baggingVsKFoldCard.history)){baggingVsKFoldCard.history=[];changed=1;}
   }
 
+
+  const votingClassifierQuestion='Voting Classifier — Core Idea';
+  const votingClassifierLatex='\\begin{aligned}\\text{Voting Classifier}&=\\text{multiple classifiers}\\\\&\\Rightarrow\\text{majority vote}\\end{aligned}';
+  const votingClassifierAnswer='A voting classifier combines predictions from multiple classification models and assigns the class receiving the majority of votes.';
+  let votingClassifierCard=cards.find(c=>c.subject===SUBJECT&&c.question===votingClassifierQuestion);
+  if(!votingClassifierCard){
+    votingClassifierCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:votingClassifierQuestion,
+      answer:votingClassifierAnswer,
+      latex:votingClassifierLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(votingClassifierCard);
+    changed=1;
+  }else{
+    if(votingClassifierCard.answer!==votingClassifierAnswer){votingClassifierCard.answer=votingClassifierAnswer;changed=1;}
+    if(votingClassifierCard.latex!==votingClassifierLatex){votingClassifierCard.latex=votingClassifierLatex;changed=1;}
+    if(votingClassifierCard.topic!=='Machine Learning'){votingClassifierCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(votingClassifierCard.history)){votingClassifierCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
