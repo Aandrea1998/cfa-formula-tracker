@@ -709,8 +709,8 @@
 
 
   const biasVarianceQuestion='Machine Learning — Underfitting vs Overfitting';
-  const biasVarianceLatex='\\begin{aligned}\\text{Underfitting}&\\Rightarrow\\text{High Bias}\\\\\\text{Overfitting}&\\Rightarrow\\text{High Variance}\\end{aligned}';
-  const biasVarianceAnswer='Underfitting = high bias: the model is too simple and misses the underlying pattern. Overfitting = high variance: the model fits the training data too closely and generalizes poorly.';
+  const biasVarianceLatex='\\begin{aligned}\\text{Underfitting}&\\Rightarrow\\text{High Bias}\\\\\\text{Overfitting}&\\Rightarrow\\text{High Variance}\\\\\\text{Model Error}&=\\text{Bias Error}+\\text{Variance Error}\\end{aligned}';
+  const biasVarianceAnswer='Underfitting = high bias; overfitting = high variance. Model error reflects the bias–variance trade-off: Bias Error + Variance Error (ignoring irreducible noise).';
   let biasVarianceCard=cards.find(c=>c.subject===SUBJECT&&c.question===biasVarianceQuestion);
   if(!biasVarianceCard){
     biasVarianceCard={
