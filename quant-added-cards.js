@@ -832,6 +832,31 @@
     if(!Array.isArray(svmCard.history)){svmCard.history=[];changed=1;}
   }
 
+
+  const knnQuestion='K-Nearest Neighbors (KNN) — Key Characteristics';
+  const knnLatex='\\begin{aligned}\\textbf{Use:}&\\quad\\text{predict from similarity to nearest observations}\\\\[3pt]\\textbf{Pros:}&\\quad\\text{non-parametric; no distribution assumptions}\\\\&\\quad\\text{multi-class classification}\\\\[3pt]\\textbf{Cons:}&\\quad\\text{must define distance / similarity}\\\\&\\quad\\text{sensitive to irrelevant + correlated features}\\\\&\\quad\\text{works best with few features}\\\\[3pt]k\\text{ too low}&\\Rightarrow\\text{high variance / outlier sensitivity}\\\\k\\text{ too high}&\\Rightarrow\\text{too much averaging}\\end{aligned}';
+  const knnAnswer='KNN predicts using the nearest observations. Pros: non-parametric and supports multi-class classification. Cons: requires a distance metric, is sensitive to irrelevant/correlated features, and works best with relatively few features. Small k = high variance/outlier sensitivity; large k = excessive averaging.';
+  let knnCard=cards.find(c=>c.subject===SUBJECT&&c.question===knnQuestion);
+  if(!knnCard){
+    knnCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:knnQuestion,
+      answer:knnAnswer,
+      latex:knnLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(knnCard);
+    changed=1;
+  }else{
+    if(knnCard.answer!==knnAnswer){knnCard.answer=knnAnswer;changed=1;}
+    if(knnCard.latex!==knnLatex){knnCard.latex=knnLatex;changed=1;}
+    if(knnCard.topic!=='Machine Learning'){knnCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(knnCard.history)){knnCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
