@@ -982,6 +982,31 @@
     if(!Array.isArray(randomForestCard.history)){randomForestCard.history=[];changed=1;}
   }
 
+
+  const classificationMetricsQuestion='Classification Metrics — Which One to Use?';
+  const classificationMetricsLatex='\\begin{aligned}\\text{False Negatives concern}&\\Rightarrow\\text{Recall}\\\\\\text{False Positives concern}&\\Rightarrow\\text{Precision}\\\\\\text{Need balance}&\\Rightarrow F1\\end{aligned}';
+  const classificationMetricsAnswer='If false negatives are the main concern, prioritize recall. If false positives are the main concern, prioritize precision. If you need a balance between precision and recall, use the F1 score.';
+  let classificationMetricsCard=cards.find(c=>c.subject===SUBJECT&&c.question===classificationMetricsQuestion);
+  if(!classificationMetricsCard){
+    classificationMetricsCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:classificationMetricsQuestion,
+      answer:classificationMetricsAnswer,
+      latex:classificationMetricsLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(classificationMetricsCard);
+    changed=1;
+  }else{
+    if(classificationMetricsCard.answer!==classificationMetricsAnswer){classificationMetricsCard.answer=classificationMetricsAnswer;changed=1;}
+    if(classificationMetricsCard.latex!==classificationMetricsLatex){classificationMetricsCard.latex=classificationMetricsLatex;changed=1;}
+    if(classificationMetricsCard.topic!=='Machine Learning'){classificationMetricsCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(classificationMetricsCard.history)){classificationMetricsCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
