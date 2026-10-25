@@ -609,9 +609,9 @@
   }
 
 
-  const supervisedSplitQuestion='Supervised Learning — Regression vs Classification';
+  const supervisedSplitQuestion='Supervised ML — Regression vs Classification';
   const supervisedSplitLatex='\\begin{aligned}\\text{Continuous target }Y&\\Rightarrow\\text{Regression}\\\\\\text{Categorical target }Y&\\Rightarrow\\text{Classification}\\\\\\text{Ordinal target }Y&\\Rightarrow\\text{Classification}\\end{aligned}';
-  const supervisedSplitAnswer='Supervised learning: use regression when the target variable is continuous. Use classification when the target is categorical or ordinal (ranked categories).';
+  const supervisedSplitAnswer='In supervised machine learning: use regression when the target variable is continuous. Use classification when the target is categorical or ordinal (ranked categories).';
   let supervisedSplitCard=cards.find(c=>c.subject===SUBJECT&&c.question===supervisedSplitQuestion);
   if(!supervisedSplitCard){
     supervisedSplitCard={
