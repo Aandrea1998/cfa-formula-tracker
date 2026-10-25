@@ -757,6 +757,31 @@
     if(!Array.isArray(kFoldCard.history)){kFoldCard.history=[];changed=1;}
   }
 
+
+  const lassoQuestion='LASSO Regression — Objective & Feature Selection';
+  const lassoLatex='\\begin{aligned}\\min_{\\beta}\\quad &\\sum_{i=1}^{n}(Y_i-\\hat Y_i)^2+\\lambda\\sum_{k=1}^{K}|\\hat\\beta_k|\\\\\\lambda\\uparrow&\\Rightarrow\\text{stronger penalty / more shrinkage}\\\\\\text{LASSO}&\\Rightarrow\\text{can set coefficients to }0\\Rightarrow\\text{feature selection}\\end{aligned}';
+  const lassoAnswer='LASSO minimizes squared errors plus an L1 penalty, λΣ|β_k|. A larger λ means more shrinkage. Because some coefficients can be driven exactly to zero, LASSO performs automatic feature selection.';
+  let lassoCard=cards.find(c=>c.subject===SUBJECT&&c.question===lassoQuestion);
+  if(!lassoCard){
+    lassoCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:lassoQuestion,
+      answer:lassoAnswer,
+      latex:lassoLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(lassoCard);
+    changed=1;
+  }else{
+    if(lassoCard.answer!==lassoAnswer){lassoCard.answer=lassoAnswer;changed=1;}
+    if(lassoCard.latex!==lassoLatex){lassoCard.latex=lassoLatex;changed=1;}
+    if(lassoCard.topic!=='Machine Learning'){lassoCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(lassoCard.history)){lassoCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
