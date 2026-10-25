@@ -1007,6 +1007,31 @@
     if(!Array.isArray(classificationMetricsCard.history)){classificationMetricsCard.history=[];changed=1;}
   }
 
+
+  const pcaQuestion='Principal Components Analysis (PCA) — Core Idea';
+  const pcaLatex='\\begin{aligned}\\text{PCA}&\\Rightarrow\\text{transform highly correlated features}\\\\&\\Rightarrow\\text{few main uncorrelated components}\\end{aligned}';
+  const pcaAnswer='PCA summarizes or transforms highly correlated features into a smaller set of main, uncorrelated composite variables (principal components).';
+  let pcaCard=cards.find(c=>c.subject===SUBJECT&&c.question===pcaQuestion);
+  if(!pcaCard){
+    pcaCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:pcaQuestion,
+      answer:pcaAnswer,
+      latex:pcaLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(pcaCard);
+    changed=1;
+  }else{
+    if(pcaCard.answer!==pcaAnswer){pcaCard.answer=pcaAnswer;changed=1;}
+    if(pcaCard.latex!==pcaLatex){pcaCard.latex=pcaLatex;changed=1;}
+    if(pcaCard.topic!=='Machine Learning'){pcaCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(pcaCard.history)){pcaCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
