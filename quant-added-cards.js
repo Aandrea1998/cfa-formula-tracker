@@ -707,6 +707,31 @@
     if(!Array.isArray(trainValTestCard.history)){trainValTestCard.history=[];changed=1;}
   }
 
+
+  const biasVarianceQuestion='Machine Learning — Underfitting vs Overfitting';
+  const biasVarianceLatex='\\begin{aligned}\\text{Underfitting}&\\Rightarrow\\text{High Bias}\\\\\\text{Overfitting}&\\Rightarrow\\text{High Variance}\\end{aligned}';
+  const biasVarianceAnswer='Underfitting = high bias: the model is too simple and misses the underlying pattern. Overfitting = high variance: the model fits the training data too closely and generalizes poorly.';
+  let biasVarianceCard=cards.find(c=>c.subject===SUBJECT&&c.question===biasVarianceQuestion);
+  if(!biasVarianceCard){
+    biasVarianceCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:biasVarianceQuestion,
+      answer:biasVarianceAnswer,
+      latex:biasVarianceLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(biasVarianceCard);
+    changed=1;
+  }else{
+    if(biasVarianceCard.answer!==biasVarianceAnswer){biasVarianceCard.answer=biasVarianceAnswer;changed=1;}
+    if(biasVarianceCard.latex!==biasVarianceLatex){biasVarianceCard.latex=biasVarianceLatex;changed=1;}
+    if(biasVarianceCard.topic!=='Machine Learning'){biasVarianceCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(biasVarianceCard.history)){biasVarianceCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
