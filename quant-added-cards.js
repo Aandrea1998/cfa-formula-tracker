@@ -633,6 +633,55 @@
     if(!Array.isArray(supervisedSplitCard.history)){supervisedSplitCard.history=[];changed=1;}
   }
 
+
+  const mlGuideSupervisedQuestion='ML Algorithms Guide — Supervised Learning';
+  const mlGuideSupervisedLatex='\\begin{aligned}\\textbf{Continuous target: Regression}\\\\&\\text{Linear; Penalized/LASSO; Logistic}\\\\&\\text{CART; Random Forest}\\\\[4pt]\\textbf{Categorical target: Classification}\\\\&\\text{Logistic; SVM; KNN; CART}\\\\[4pt]\\textbf{Continuous or categorical}\\\\&\\text{Neural Networks; Deep Learning; Reinforcement Learning}\\end{aligned}';
+  const mlGuideSupervisedAnswer='Supervised ML: continuous target → regression methods; categorical target → classification methods. Neural networks, deep learning, and reinforcement learning can handle continuous or categorical settings.';
+  let mlGuideSupervisedCard=cards.find(c=>c.subject===SUBJECT&&c.question===mlGuideSupervisedQuestion);
+  if(!mlGuideSupervisedCard){
+    mlGuideSupervisedCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:mlGuideSupervisedQuestion,
+      answer:mlGuideSupervisedAnswer,
+      latex:mlGuideSupervisedLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(mlGuideSupervisedCard);
+    changed=1;
+  }else{
+    if(mlGuideSupervisedCard.answer!==mlGuideSupervisedAnswer){mlGuideSupervisedCard.answer=mlGuideSupervisedAnswer;changed=1;}
+    if(mlGuideSupervisedCard.latex!==mlGuideSupervisedLatex){mlGuideSupervisedCard.latex=mlGuideSupervisedLatex;changed=1;}
+    if(mlGuideSupervisedCard.topic!=='Machine Learning'){mlGuideSupervisedCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(mlGuideSupervisedCard.history)){mlGuideSupervisedCard.history=[];changed=1;}
+  }
+
+  const mlGuideUnsupervisedQuestion='ML Algorithms Guide — Unsupervised Learning';
+  const mlGuideUnsupervisedLatex='\\begin{aligned}\\textbf{Continuous variables}\\\\&\\text{Dimension Reduction: PCA}\\\\&\\text{Clustering: K-Means; Hierarchical}\\\\[4pt]\\textbf{Categorical variables}\\\\&\\text{Dimension Reduction: PCA}\\\\&\\text{Clustering: K-Means; Hierarchical}\\\\[4pt]\\textbf{Continuous or categorical}\\\\&\\text{Neural Networks; Deep Learning; Reinforcement Learning}\\end{aligned}';
+  const mlGuideUnsupervisedAnswer='Unsupervised ML has no target variable. Main methods: dimension reduction (PCA) and clustering (K-means, hierarchical). Neural networks, deep learning, and reinforcement learning can also apply.';
+  let mlGuideUnsupervisedCard=cards.find(c=>c.subject===SUBJECT&&c.question===mlGuideUnsupervisedQuestion);
+  if(!mlGuideUnsupervisedCard){
+    mlGuideUnsupervisedCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:mlGuideUnsupervisedQuestion,
+      answer:mlGuideUnsupervisedAnswer,
+      latex:mlGuideUnsupervisedLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(mlGuideUnsupervisedCard);
+    changed=1;
+  }else{
+    if(mlGuideUnsupervisedCard.answer!==mlGuideUnsupervisedAnswer){mlGuideUnsupervisedCard.answer=mlGuideUnsupervisedAnswer;changed=1;}
+    if(mlGuideUnsupervisedCard.latex!==mlGuideUnsupervisedLatex){mlGuideUnsupervisedCard.latex=mlGuideUnsupervisedLatex;changed=1;}
+    if(mlGuideUnsupervisedCard.topic!=='Machine Learning'){mlGuideUnsupervisedCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(mlGuideUnsupervisedCard.history)){mlGuideUnsupervisedCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
