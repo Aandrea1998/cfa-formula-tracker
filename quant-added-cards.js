@@ -1107,6 +1107,31 @@
     if(!Array.isArray(neuralNodeCard.history)){neuralNodeCard.history=[];changed=1;}
   }
 
+
+  const dnnQuestion='Deep Neural Network (DNN) — Definition';
+  const dnnLatex='\\begin{aligned}\\text{DNN}&=\\text{Neural Network with many hidden layers}\\\\&\\approx\\text{at least 2 hidden layers}\\end{aligned}';
+  const dnnAnswer='A Deep Neural Network is a neural network with multiple hidden layers; a common rule of thumb is two or more hidden layers.';
+  let dnnCard=cards.find(c=>c.subject===SUBJECT&&c.question===dnnQuestion);
+  if(!dnnCard){
+    dnnCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:dnnQuestion,
+      answer:dnnAnswer,
+      latex:dnnLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(dnnCard);
+    changed=1;
+  }else{
+    if(dnnCard.answer!==dnnAnswer){dnnCard.answer=dnnAnswer;changed=1;}
+    if(dnnCard.latex!==dnnLatex){dnnCard.latex=dnnLatex;changed=1;}
+    if(dnnCard.topic!=='Machine Learning'){dnnCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(dnnCard.history)){dnnCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
