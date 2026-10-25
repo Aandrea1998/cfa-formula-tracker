@@ -1032,6 +1032,31 @@
     if(!Array.isArray(pcaCard.history)){pcaCard.history=[];changed=1;}
   }
 
+
+  const kMeansQuestion='K-Means Clustering — Key Characteristics';
+  const kMeansLatex='\\begin{aligned}\\textbf{Pros:}&\\quad\\text{Fast; works well with large datasets}\\\\[3pt]\\textbf{Cons:}&\\quad\\text{Final clusters depend on initial centroids}\\\\&\\quad\\text{Must choose }k\\text{ in advance}\\end{aligned}';
+  const kMeansAnswer='K-means is fast and scales well to large datasets. Main drawbacks: results depend on the initial centroid selection, and the number of clusters k must be chosen in advance.';
+  let kMeansCard=cards.find(c=>c.subject===SUBJECT&&c.question===kMeansQuestion);
+  if(!kMeansCard){
+    kMeansCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:kMeansQuestion,
+      answer:kMeansAnswer,
+      latex:kMeansLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(kMeansCard);
+    changed=1;
+  }else{
+    if(kMeansCard.answer!==kMeansAnswer){kMeansCard.answer=kMeansAnswer;changed=1;}
+    if(kMeansCard.latex!==kMeansLatex){kMeansCard.latex=kMeansLatex;changed=1;}
+    if(kMeansCard.topic!=='Machine Learning'){kMeansCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(kMeansCard.history)){kMeansCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
