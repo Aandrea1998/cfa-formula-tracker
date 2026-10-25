@@ -1057,6 +1057,31 @@
     if(!Array.isArray(kMeansCard.history)){kMeansCard.history=[];changed=1;}
   }
 
+
+  const neuralNetworkLayersQuestion='Neural Networks — Three Types of Layers';
+  const neuralNetworkLayersLatex='\\begin{aligned}1.&\\ \\text{Input layer: one node per feature}\\\\2.&\\ \\text{Hidden layers: learning / processing occurs here}\\\\3.&\\ \\text{Output layer: produces the target / final prediction}\\end{aligned}';
+  const neuralNetworkLayersAnswer='Neural networks have three layer types: input layer (receives features), hidden layers (learn/process patterns), and output layer (produces the target or final prediction).';
+  let neuralNetworkLayersCard=cards.find(c=>c.subject===SUBJECT&&c.question===neuralNetworkLayersQuestion);
+  if(!neuralNetworkLayersCard){
+    neuralNetworkLayersCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:neuralNetworkLayersQuestion,
+      answer:neuralNetworkLayersAnswer,
+      latex:neuralNetworkLayersLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(neuralNetworkLayersCard);
+    changed=1;
+  }else{
+    if(neuralNetworkLayersCard.answer!==neuralNetworkLayersAnswer){neuralNetworkLayersCard.answer=neuralNetworkLayersAnswer;changed=1;}
+    if(neuralNetworkLayersCard.latex!==neuralNetworkLayersLatex){neuralNetworkLayersCard.latex=neuralNetworkLayersLatex;changed=1;}
+    if(neuralNetworkLayersCard.topic!=='Machine Learning'){neuralNetworkLayersCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(neuralNetworkLayersCard.history)){neuralNetworkLayersCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
