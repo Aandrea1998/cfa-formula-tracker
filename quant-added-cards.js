@@ -1084,8 +1084,8 @@
 
 
   const neuralNodeQuestion='Neural Network Node — How It Works';
-  const neuralNodeLatex='\\begin{aligned}z&=\\sum_{i=1}^{n}w_ix_i\\\\\\text{Output}&=f(z)\\\\\\text{Flow: }&\\text{Inputs}\\to\\text{weights}\\to\\text{sum}\\to\\text{activation}\\to\\text{output}\\\\\\text{ReLU}(z)&=\\max(0,z)\\end{aligned}';
-  const neuralNodeAnswer='A node multiplies each input by its weight, sums the weighted inputs to get the net input z, then passes z through an activation function to produce the output. Example: ReLU(z)=max(0,z).';
+  const neuralNodeLatex='\\begin{aligned}\\textbf{Summation operator:}&\\quad\\text{multiplies each input by its weight}\\\\&\\quad\\text{and sums them to form the total net input}\\\\[4pt]\\textbf{Activation function:}&\\quad\\text{transforms the total net input}\\\\&\\quad\\text{into the node output}\\end{aligned}';
+  const neuralNodeAnswer='Summation operator: multiplies each input by its respective weight and sums the weighted values to obtain the total net input. Activation function: transforms that total net input into the final output of the node.';
   let neuralNodeCard=cards.find(c=>c.subject===SUBJECT&&c.question===neuralNodeQuestion);
   if(!neuralNodeCard){
     neuralNodeCard={
