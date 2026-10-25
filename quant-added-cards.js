@@ -807,6 +807,31 @@
     if(!Array.isArray(regularizationCard.history)){regularizationCard.history=[];changed=1;}
   }
 
+
+  const svmQuestion='Support Vector Machine (SVM) — Best Use Case';
+  const svmLatex='\\begin{aligned}\\text{SVM}&\\Rightarrow\\text{small/medium sample}\\\\&\\quad+\\text{many features}\\\\&\\quad+\\text{classification}\\end{aligned}';
+  const svmAnswer='SVM is particularly suited to small-to-medium samples with many features, especially classification problems.';
+  let svmCard=cards.find(c=>c.subject===SUBJECT&&c.question===svmQuestion);
+  if(!svmCard){
+    svmCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:svmQuestion,
+      answer:svmAnswer,
+      latex:svmLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(svmCard);
+    changed=1;
+  }else{
+    if(svmCard.answer!==svmAnswer){svmCard.answer=svmAnswer;changed=1;}
+    if(svmCard.latex!==svmLatex){svmCard.latex=svmLatex;changed=1;}
+    if(svmCard.topic!=='Machine Learning'){svmCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(svmCard.history)){svmCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
