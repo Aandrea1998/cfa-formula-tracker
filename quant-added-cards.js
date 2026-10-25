@@ -1009,8 +1009,8 @@
 
 
   const pcaQuestion='Principal Components Analysis (PCA) — Core Idea';
-  const pcaLatex='\\begin{aligned}\\text{PCA}&\\Rightarrow\\text{transform highly correlated features}\\\\&\\Rightarrow\\text{few main uncorrelated components}\\end{aligned}';
-  const pcaAnswer='PCA summarizes or transforms highly correlated features into a smaller set of main, uncorrelated composite variables (principal components).';
+  const pcaLatex='\\begin{aligned}\\text{PCA}&\\Rightarrow\\text{correlated features}\\to\\text{few uncorrelated components}\\\\\\text{Eigenvectors}&\\Rightarrow\\text{new uncorrelated composite variables}\\\\\\text{Eigenvalues}&\\Rightarrow\\text{variance explained by each eigenvector}\\end{aligned}';
+  const pcaAnswer='PCA transforms highly correlated features into a few uncorrelated principal components. Eigenvectors define the new composite variables; eigenvalues measure the proportion of total variance explained by each eigenvector.';
   let pcaCard=cards.find(c=>c.subject===SUBJECT&&c.question===pcaQuestion);
   if(!pcaCard){
     pcaCard={
