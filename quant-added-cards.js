@@ -1082,6 +1082,31 @@
     if(!Array.isArray(neuralNetworkLayersCard.history)){neuralNetworkLayersCard.history=[];changed=1;}
   }
 
+
+  const neuralNodeQuestion='Neural Network Node — How It Works';
+  const neuralNodeLatex='\\begin{aligned}z&=\\sum_{i=1}^{n}w_ix_i\\\\\\text{Output}&=f(z)\\\\\\text{Flow: }&\\text{Inputs}\\to\\text{weights}\\to\\text{sum}\\to\\text{activation}\\to\\text{output}\\\\\\text{ReLU}(z)&=\\max(0,z)\\end{aligned}';
+  const neuralNodeAnswer='A node multiplies each input by its weight, sums the weighted inputs to get the net input z, then passes z through an activation function to produce the output. Example: ReLU(z)=max(0,z).';
+  let neuralNodeCard=cards.find(c=>c.subject===SUBJECT&&c.question===neuralNodeQuestion);
+  if(!neuralNodeCard){
+    neuralNodeCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:neuralNodeQuestion,
+      answer:neuralNodeAnswer,
+      latex:neuralNodeLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(neuralNodeCard);
+    changed=1;
+  }else{
+    if(neuralNodeCard.answer!==neuralNodeAnswer){neuralNodeCard.answer=neuralNodeAnswer;changed=1;}
+    if(neuralNodeCard.latex!==neuralNodeLatex){neuralNodeCard.latex=neuralNodeLatex;changed=1;}
+    if(neuralNodeCard.topic!=='Machine Learning'){neuralNodeCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(neuralNodeCard.history)){neuralNodeCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
