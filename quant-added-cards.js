@@ -957,6 +957,31 @@
     if(!Array.isArray(votingClassifierCard.history)){votingClassifierCard.history=[];changed=1;}
   }
 
+
+  const randomForestQuestion='Random Forest — Core Idea';
+  const randomForestLatex='\\begin{aligned}\\text{Random Forest}&=\\text{Bagging}+\\text{Random Feature Selection}\\end{aligned}';
+  const randomForestAnswer='Random Forest extends bagging by training many decision trees on bootstrap samples while also randomly selecting a subset of features at each split.';
+  let randomForestCard=cards.find(c=>c.subject===SUBJECT&&c.question===randomForestQuestion);
+  if(!randomForestCard){
+    randomForestCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:randomForestQuestion,
+      answer:randomForestAnswer,
+      latex:randomForestLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(randomForestCard);
+    changed=1;
+  }else{
+    if(randomForestCard.answer!==randomForestAnswer){randomForestCard.answer=randomForestAnswer;changed=1;}
+    if(randomForestCard.latex!==randomForestLatex){randomForestCard.latex=randomForestLatex;changed=1;}
+    if(randomForestCard.topic!=='Machine Learning'){randomForestCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(randomForestCard.history)){randomForestCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
