@@ -608,6 +608,31 @@
     if(!Array.isArray(logitInterpretationCard.history)){logitInterpretationCard.history=[];changed=1;}
   }
 
+
+  const supervisedSplitQuestion='Supervised Learning — Regression vs Classification';
+  const supervisedSplitLatex='\\begin{aligned}\\text{Continuous target }Y&\\Rightarrow\\text{Regression}\\\\\\text{Categorical target }Y&\\Rightarrow\\text{Classification}\\\\\\text{Ordinal target }Y&\\Rightarrow\\text{Classification}\\end{aligned}';
+  const supervisedSplitAnswer='Supervised learning: use regression when the target variable is continuous. Use classification when the target is categorical or ordinal (ranked categories).';
+  let supervisedSplitCard=cards.find(c=>c.subject===SUBJECT&&c.question===supervisedSplitQuestion);
+  if(!supervisedSplitCard){
+    supervisedSplitCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:supervisedSplitQuestion,
+      answer:supervisedSplitAnswer,
+      latex:supervisedSplitLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(supervisedSplitCard);
+    changed=1;
+  }else{
+    if(supervisedSplitCard.answer!==supervisedSplitAnswer){supervisedSplitCard.answer=supervisedSplitAnswer;changed=1;}
+    if(supervisedSplitCard.latex!==supervisedSplitLatex){supervisedSplitCard.latex=supervisedSplitLatex;changed=1;}
+    if(supervisedSplitCard.topic!=='Machine Learning'){supervisedSplitCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(supervisedSplitCard.history)){supervisedSplitCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
