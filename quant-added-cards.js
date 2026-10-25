@@ -782,6 +782,31 @@
     if(!Array.isArray(lassoCard.history)){lassoCard.history=[];changed=1;}
   }
 
+
+  const regularizationQuestion='Regularization — Meaning';
+  const regularizationLatex='\\begin{aligned}\\text{Regularization}&\\Rightarrow\\text{shrink coefficients toward }0\\\\&\\Rightarrow\\text{lower model complexity}\\\\&\\Rightarrow\\text{lower variance / less overfitting}\\end{aligned}';
+  const regularizationAnswer='Regularization reduces statistical variability by shrinking coefficient estimates toward zero. This simplifies the model and helps reduce overfitting.';
+  let regularizationCard=cards.find(c=>c.subject===SUBJECT&&c.question===regularizationQuestion);
+  if(!regularizationCard){
+    regularizationCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:regularizationQuestion,
+      answer:regularizationAnswer,
+      latex:regularizationLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(regularizationCard);
+    changed=1;
+  }else{
+    if(regularizationCard.answer!==regularizationAnswer){regularizationCard.answer=regularizationAnswer;changed=1;}
+    if(regularizationCard.latex!==regularizationLatex){regularizationCard.latex=regularizationLatex;changed=1;}
+    if(regularizationCard.topic!=='Machine Learning'){regularizationCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(regularizationCard.history)){regularizationCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
