@@ -732,6 +732,31 @@
     if(!Array.isArray(biasVarianceCard.history)){biasVarianceCard.history=[];changed=1;}
   }
 
+
+  const kFoldQuestion='Machine Learning — k-Fold Cross-Validation';
+  const kFoldLatex='\\begin{aligned}\\text{Split data into }k\\text{ folds}\\\\\\text{Each observation: }&\\text{training }k-1\\text{ times}\\\\&\\text{validation once}\\\\\\text{Mean Validation Error}&=\\frac{E_1+E_2+\\cdots+E_k}{k}\\\\&\\approx\\text{out-of-sample error}\\end{aligned}';
+  const kFoldAnswer='k-fold cross-validation: split data into k folds. Each observation is used for training k−1 times and validation once. Average the k validation errors to estimate out-of-sample error. Unlike holdout, almost all observations are repeatedly used for training.';
+  let kFoldCard=cards.find(c=>c.subject===SUBJECT&&c.question===kFoldQuestion);
+  if(!kFoldCard){
+    kFoldCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:kFoldQuestion,
+      answer:kFoldAnswer,
+      latex:kFoldLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(kFoldCard);
+    changed=1;
+  }else{
+    if(kFoldCard.answer!==kFoldAnswer){kFoldCard.answer=kFoldAnswer;changed=1;}
+    if(kFoldCard.latex!==kFoldLatex){kFoldCard.latex=kFoldLatex;changed=1;}
+    if(kFoldCard.topic!=='Machine Learning'){kFoldCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(kFoldCard.history)){kFoldCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
