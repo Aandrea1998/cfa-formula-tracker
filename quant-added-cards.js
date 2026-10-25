@@ -857,6 +857,31 @@
     if(!Array.isArray(knnCard.history)){knnCard.history=[];changed=1;}
   }
 
+
+  const treePruningQuestion='Decision Trees — Pre-Pruning vs Post-Pruning';
+  const treePruningLatex='\\begin{aligned}\\text{Pre-pruning / constraints}&:\\quad\\text{during training}\\\\&\\Rightarrow\\text{stop tree from growing too large}\\\\[4pt]\\text{Post-pruning}&:\\quad\\text{after training}\\\\&\\Rightarrow\\text{remove low-value branches}\\end{aligned}';
+  const treePruningAnswer='Pre-pruning applies constraints during training to prevent the tree from becoming too large. Post-pruning occurs after training and removes branches that add little value.';
+  let treePruningCard=cards.find(c=>c.subject===SUBJECT&&c.question===treePruningQuestion);
+  if(!treePruningCard){
+    treePruningCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:treePruningQuestion,
+      answer:treePruningAnswer,
+      latex:treePruningLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(treePruningCard);
+    changed=1;
+  }else{
+    if(treePruningCard.answer!==treePruningAnswer){treePruningCard.answer=treePruningAnswer;changed=1;}
+    if(treePruningCard.latex!==treePruningLatex){treePruningCard.latex=treePruningLatex;changed=1;}
+    if(treePruningCard.topic!=='Machine Learning'){treePruningCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(treePruningCard.history)){treePruningCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
