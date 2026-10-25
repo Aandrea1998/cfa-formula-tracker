@@ -682,6 +682,31 @@
     if(!Array.isArray(mlGuideUnsupervisedCard.history)){mlGuideUnsupervisedCard.history=[];changed=1;}
   }
 
+
+  const trainValTestQuestion='Machine Learning — Training vs Validation vs Test Set';
+  const trainValTestLatex='\\begin{aligned}\\textbf{Training set}&:\\quad\\text{Learn / fit the model}\\\\\\textbf{Validation set}&:\\quad\\text{Tune / select hyperparameters}\\\\\\textbf{Test set}&:\\quad\\text{Measure final out-of-sample performance}\\end{aligned}';
+  const trainValTestAnswer='Training = learn the model. Validation = tune/select the model. Test = evaluate final performance on unseen data.';
+  let trainValTestCard=cards.find(c=>c.subject===SUBJECT&&c.question===trainValTestQuestion);
+  if(!trainValTestCard){
+    trainValTestCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:trainValTestQuestion,
+      answer:trainValTestAnswer,
+      latex:trainValTestLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(trainValTestCard);
+    changed=1;
+  }else{
+    if(trainValTestCard.answer!==trainValTestAnswer){trainValTestCard.answer=trainValTestAnswer;changed=1;}
+    if(trainValTestCard.latex!==trainValTestLatex){trainValTestCard.latex=trainValTestLatex;changed=1;}
+    if(trainValTestCard.topic!=='Machine Learning'){trainValTestCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(trainValTestCard.history)){trainValTestCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
