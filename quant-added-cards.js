@@ -907,6 +907,31 @@
     if(!Array.isArray(ensembleCard.history)){ensembleCard.history=[];changed=1;}
   }
 
+
+  const baggingVsKFoldQuestion='Bagging vs K-Fold Cross-Validation';
+  const baggingVsKFoldLatex='\\begin{aligned}\\text{Bagging}&=\\text{prediction technique}\\\\\\text{K-fold CV}&=\\text{evaluation / selection technique}\\end{aligned}';
+  const baggingVsKFoldAnswer='Bagging combines multiple trained models to make the final prediction. K-fold cross-validation trains models repeatedly to estimate validation performance and select/tune a model.';
+  let baggingVsKFoldCard=cards.find(c=>c.subject===SUBJECT&&c.question===baggingVsKFoldQuestion);
+  if(!baggingVsKFoldCard){
+    baggingVsKFoldCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:baggingVsKFoldQuestion,
+      answer:baggingVsKFoldAnswer,
+      latex:baggingVsKFoldLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(baggingVsKFoldCard);
+    changed=1;
+  }else{
+    if(baggingVsKFoldCard.answer!==baggingVsKFoldAnswer){baggingVsKFoldCard.answer=baggingVsKFoldAnswer;changed=1;}
+    if(baggingVsKFoldCard.latex!==baggingVsKFoldLatex){baggingVsKFoldCard.latex=baggingVsKFoldLatex;changed=1;}
+    if(baggingVsKFoldCard.topic!=='Machine Learning'){baggingVsKFoldCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(baggingVsKFoldCard.history)){baggingVsKFoldCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
