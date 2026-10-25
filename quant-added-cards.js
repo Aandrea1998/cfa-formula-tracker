@@ -1009,8 +1009,8 @@
 
 
   const pcaQuestion='Principal Components Analysis (PCA) — Core Idea';
-  const pcaLatex='\\begin{aligned}\\text{PCA}&\\Rightarrow\\text{correlated features}\\to\\text{few uncorrelated components}\\\\\\text{Eigenvectors}&\\Rightarrow\\text{new uncorrelated composite variables}\\\\\\text{Eigenvalues}&\\Rightarrow\\text{variance explained by each eigenvector}\\end{aligned}';
-  const pcaAnswer='PCA transforms highly correlated features into a few uncorrelated principal components. Eigenvectors define the new composite variables; eigenvalues measure the proportion of total variance explained by each eigenvector.';
+  const pcaLatex='\\begin{aligned}\\text{PCA}&\\Rightarrow\\text{correlated features}\\to\\text{few uncorrelated components}\\\\\\text{Eigenvectors}&\\Rightarrow\\text{new uncorrelated composite variables}\\\\\\text{Eigenvalues}&\\Rightarrow\\text{variance explained by each eigenvector}\\\\\\text{Projection error}&=\\text{distance from observation to its projection on the PC}\\end{aligned}';
+  const pcaAnswer='PCA transforms highly correlated features into a few uncorrelated principal components. Eigenvectors define the new composite variables; eigenvalues measure the proportion of total variance explained by each eigenvector. Projection error is the distance between an observation and its projection onto the principal component; PCA seeks to minimize this error while capturing maximum variance.';
   let pcaCard=cards.find(c=>c.subject===SUBJECT&&c.question===pcaQuestion);
   if(!pcaCard){
     pcaCard={
