@@ -809,8 +809,8 @@
 
 
   const svmQuestion='Support Vector Machine (SVM) — Best Use Case';
-  const svmLatex='\\begin{aligned}\\text{SVM}&\\Rightarrow\\text{small/medium sample}\\\\&\\quad+\\text{many features}\\\\&\\quad+\\text{classification}\\end{aligned}';
-  const svmAnswer='SVM is particularly suited to small-to-medium samples with many features, especially classification problems.';
+  const svmLatex='\\begin{aligned}\\text{SVM}&\\Rightarrow\\text{small/medium sample}\\\\&\\quad+\\text{many features}\\\\&\\quad+\\text{classification}\\\\&\\quad+\\text{resilient to correlated features}\\end{aligned}';
+  const svmAnswer='SVM is particularly suited to small-to-medium samples with many features, especially classification problems, and is relatively resilient to correlated features.';
   let svmCard=cards.find(c=>c.subject===SUBJECT&&c.question===svmQuestion);
   if(!svmCard){
     svmCard={
