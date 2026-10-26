@@ -36,8 +36,8 @@
     },
     {
       page:2,
-      question:'Cash-Financed Share Repurchase — Effect on BVPS',
-      latex:'\\begin{cases}P_{\\text{buyback}}>\\mathrm{BVPS}\\Rightarrow\\mathrm{BVPS}\\downarrow\\\\P_{\\text{buyback}}<\\mathrm{BVPS}\\Rightarrow\\mathrm{BVPS}\\uparrow\\\\P_{\\text{buyback}}=\\mathrm{BVPS}\\Rightarrow\\mathrm{BVPS}\\text{ unchanged}\\end{cases}'
+      question:'Cash-Financed Share Repurchase — New BVPS',
+      latex:'\\begin{aligned}\\mathrm{BVPS}_{new}&=\\frac{\\mathrm{BVPS}_0N_0-C}{N_0-C/P_{rep}}\\\\P_{rep}<\\mathrm{BVPS}_0&\\Rightarrow\\mathrm{BVPS}\\uparrow\\\\P_{rep}>\\mathrm{BVPS}_0&\\Rightarrow\\mathrm{BVPS}\\downarrow\\end{aligned}'
     },
     {
       page:2,
