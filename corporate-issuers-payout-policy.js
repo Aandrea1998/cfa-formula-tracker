@@ -41,6 +41,11 @@
     },
     {
       page:2,
+      question:'Dividend Reinvestment — New Share Ownership',
+      latex:'\\begin{aligned}P_{ex}&=P_0-D\\\\\\text{New Shares}&=N_0+\\frac{N_0D}{P_{ex}}\\\\&=N_0\\left(1+\\frac{D}{P_0-D}\\right)\\end{aligned}'
+    },
+    {
+      page:2,
       question:'FCFE Coverage Ratio',
       latex:'\\mathrm{FCFE\\ Coverage\\ Ratio}=\\frac{\\mathrm{FCFE}}{\\text{Dividends}+\\text{Share Repurchases}}'
     }
