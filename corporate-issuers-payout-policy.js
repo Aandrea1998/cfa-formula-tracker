@@ -46,6 +46,11 @@
     },
     {
       page:2,
+      question:'Share Repurchase Method — Tender vs Negotiated',
+      latex:'\\begin{aligned}\\text{Fixed-price tender offer}&\\Rightarrow\\text{typically at a premium to market}\\\\\\text{Negotiated repurchase}&\\Rightarrow\\text{may occur below market price}\\end{aligned}'
+    },
+    {
+      page:2,
       question:'FCFE Coverage Ratio',
       latex:'\\mathrm{FCFE\\ Coverage\\ Ratio}=\\frac{\\mathrm{FCFE}}{\\text{Dividends}+\\text{Share Repurchases}}'
     }
