@@ -25,7 +25,8 @@
     {page:4,question:'Required Return on Equity — International CAPM',latex:'E(r_e)=r_f+\\beta_G\\left[E(r_{GM})-r_f\\right]+\\beta_C\\left[E(r_C)-r_f\\right]'},
     {page:4,question:'Private Company Required Return — Build-Up Approach',latex:'r_e=r_f+\\mathrm{ERP}+\\mathrm{SP}+\\mathrm{IP}+\\mathrm{SCRP}'},
     {page:4,question:'Local Equity Risk Premium — Country Spread Model',latex:'\\mathrm{ERP}_{\\text{local}}=\\mathrm{ERP}_{\\text{developed}}+\\lambda(\\mathrm{CRP})'},
-    {page:4,question:'Country Risk Premium — Volatility-Adjusted Sovereign Spread',latex:'\\mathrm{CRP}=\\text{Sovereign Yield Spread}\\times\\frac{\\sigma_{\\text{Equity}}}{\\sigma_{\\text{Bond}}}'}
+    {page:4,question:'Country Risk Premium — Volatility-Adjusted Sovereign Spread',latex:'\\mathrm{CRP}=\\text{Sovereign Yield Spread}\\times\\frac{\\sigma_{\\text{Equity}}}{\\sigma_{\\text{Bond}}}'},
+    {page:4,question:'ESG Factor Identification — Main Limitation by Approach',latex:'\\begin{aligned}\\text{Company-specific public ESG data}&\\Rightarrow\\text{inconsistent reporting / metrics}\\\\\\text{ESG data vendors / scores}&\\Rightarrow\\text{subjective scoring / rankings}\\\\\\text{Standardized frameworks}&\\Rightarrow\\text{uneven adoption / disclosure comparability}\\end{aligned}'}
   ];
 
   let changed=0,added=0,removed=0;
