@@ -90,6 +90,19 @@
       if(uipCard.topic!=='Currency Exchange Rates'){uipCard.topic='Currency Exchange Rates';changed++;}
     }
 
+    const fxReservesQuestion='FX Reserves — EM vs DM Exchange Rate Influence';
+    const fxReservesLatex='\\begin{aligned}\\text{EM countries: }&\\frac{\\text{FX reserves}}{\\text{average daily FX turnover}}\\text{ is relatively high}\\\\&\\Rightarrow\\text{central banks can influence currency supply/demand more effectively}\\\\\\text{DM countries: }&\\text{ratio is generally much smaller}\\end{aligned}';
+    let fxReservesCard=cards.find(c=>c.subject==='Economics'&&c.question===fxReservesQuestion);
+    if(!fxReservesCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:fxReservesQuestion,answer:fxReservesLatex,latex:fxReservesLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(fxReservesCard.answer!==fxReservesLatex){fxReservesCard.answer=fxReservesLatex;changed++;}
+      if(fxReservesCard.latex!==fxReservesLatex){fxReservesCard.latex=fxReservesLatex;changed++;}
+      if(fxReservesCard.topic!=='Currency Exchange Rates'){fxReservesCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const fxQuestion='FX Bid–Offer Spread — Main Drivers';
     const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid currency pair, favorable timing, larger/relationship trade}\\\\&\\text{lower market volatility}\\\\\\text{Spot FX: }&\\text{company credit rating is usually less important}\\end{aligned}';
     let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
