@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const uipQuestion='Uncovered Interest Rate Parity (UIP) — Carry Trade Takeaway';
+    const uipLatex='\\begin{aligned}\\text{UIP holds: }&\\text{FX appreciation/depreciation offsets the interest-rate differential}\\\\\\text{Carry trade profits: }&\\text{UIP tends not to hold in the short/medium term}\\\\&\\Rightarrow\\text{high-yield currencies often do not depreciate enough}\\end{aligned}';
+    let uipCard=cards.find(c=>c.subject==='Economics'&&c.question===uipQuestion);
+    if(!uipCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:uipQuestion,answer:uipLatex,latex:uipLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(uipCard.answer!==uipLatex){uipCard.answer=uipLatex;changed++;}
+      if(uipCard.latex!==uipLatex){uipCard.latex=uipLatex;changed++;}
+      if(uipCard.topic!=='Currency Exchange Rates'){uipCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const fxQuestion='FX Bid–Offer Spread — Main Drivers';
     const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid currency pair, favorable timing, larger/relationship trade}\\\\&\\text{lower market volatility}\\\\\\text{Spot FX: }&\\text{company credit rating is usually less important}\\end{aligned}';
     let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
