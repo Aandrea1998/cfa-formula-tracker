@@ -104,7 +104,7 @@
     }
 
     const fxForwardMtmQuestion='FX Forward MTM — Short Base Currency';
-    const fxForwardMtmLatex='\\begin{aligned}V_t&=\\frac{N(F_0-F_t)}{1+r_q(\\tau/360)}\\\\N&=\\text{notional in base currency}\\\\F_0&=\\text{original forward rate (quote/base)}\\\\F_t&=\\text{current forward rate for remaining maturity (quote/base)}\\\\r_q&=\\text{risk-free / money-market rate of the quote currency}\\end{aligned}';
+    const fxForwardMtmLatex='\\begin{aligned}V_t&=\\frac{N(F_0-F_t)}{1+r_q(\\tau/360)}\\\\N&=\\text{notional in base currency}\\\\F_0,F_t&=\\text{forward rates (quote/base)}\\\\r_q&=\\text{risk-free / money-market rate of quote currency}\\\\\\text{Units: }&\\text{base}\\times\\frac{\\text{quote}}{\\text{base}}=\\text{quote}\\\\\\text{Example: }&5{,}000{,}000\\,\\mathrm{AUD}(0.8940-0.90296)\\frac{\\mathrm{USD}}{\\mathrm{AUD}}=-44{,}800\\,\\mathrm{USD}\\end{aligned}';
     let fxForwardMtmCard=cards.find(c=>c.subject==='Economics'&&c.question===fxForwardMtmQuestion);
     if(!fxForwardMtmCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
