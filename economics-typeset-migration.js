@@ -103,6 +103,19 @@
       if(fxReservesCard.topic!=='Currency Exchange Rates'){fxReservesCard.topic='Currency Exchange Rates';changed++;}
     }
 
+    const fxForwardMtmQuestion='FX Forward MTM — Short Base Currency';
+    const fxForwardMtmLatex='\\begin{aligned}V_t&=\\frac{N(F_0-F_t)}{1+r_q(\\tau/360)}\\\\N&=\\text{notional in base currency}\\\\F_0&=\\text{original forward rate (quote/base)}\\\\F_t&=\\text{current forward rate for remaining maturity (quote/base)}\\\\r_q&=\\text{risk-free / money-market rate of the quote currency}\\end{aligned}';
+    let fxForwardMtmCard=cards.find(c=>c.subject==='Economics'&&c.question===fxForwardMtmQuestion);
+    if(!fxForwardMtmCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:fxForwardMtmQuestion,answer:fxForwardMtmLatex,latex:fxForwardMtmLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(fxForwardMtmCard.answer!==fxForwardMtmLatex){fxForwardMtmCard.answer=fxForwardMtmLatex;changed++;}
+      if(fxForwardMtmCard.latex!==fxForwardMtmLatex){fxForwardMtmCard.latex=fxForwardMtmLatex;changed++;}
+      if(fxForwardMtmCard.topic!=='Currency Exchange Rates'){fxForwardMtmCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const fxQuestion='FX Bid–Offer Spread — Main Drivers';
     const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid currency pair, favorable timing, larger/relationship trade}\\\\&\\text{lower market volatility}\\\\\\text{Spot FX: }&\\text{company credit rating is usually less important}\\end{aligned}';
     let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
