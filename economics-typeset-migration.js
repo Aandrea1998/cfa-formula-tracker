@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const fxQuestion='FX Bid–Offer Spread — Main Drivers';
+    const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid currency pair, favorable timing, larger/relationship trade}\\\\&\\text{lower market volatility}\\\\\\text{Spot FX: }&\\text{company credit rating is usually less important}\\end{aligned}';
+    let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
+    if(!fxCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:fxQuestion,answer:fxLatex,latex:fxLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(fxCard.answer!==fxLatex){fxCard.answer=fxLatex;changed++;}
+      if(fxCard.latex!==fxLatex){fxCard.latex=fxLatex;changed++;}
+      if(fxCard.topic!=='Currency Exchange Rates'){fxCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     if(changed){
       if(typeof save==='function')save();
       if(typeof refresh==='function')refresh();
