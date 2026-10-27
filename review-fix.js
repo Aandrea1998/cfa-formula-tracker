@@ -39,14 +39,34 @@
   function activePool(){return reviewMode==='subject'?subjectCards():cards;}
   function signature(){return reviewMode==='subject'?`subject:${reviewSubject}`:'random:all';}
 
+  function poolFullyReviewed(pool=activePool()){
+    return pool.length>0&&pool.every(c=>cardInfo(c).attempts>0);
+  }
+
+  function latestResult(c){
+    const h=Array.isArray(c.history)?c.history:[];
+    if(h.length){
+      const x=h[h.length-1];
+      return typeof x==='string'?x:x&&x.result;
+    }
+    return c.status||null;
+  }
+
   function adaptivePriority(c){
     const r=cardInfo(c);
+    if(!r.attempts)return 70+Math.random()*4;
+
     let priority;
-    if(!r.attempts)priority=76;
-    else if(r.accuracy<60)priority=112;
-    else if(r.accuracy<80)priority=82;
-    else priority=Math.max(18,46-r.attempts*4);
-    return priority+Math.random()*24;
+    if(r.accuracy<60)priority=130;
+    else if(r.accuracy<80)priority=95;
+    else priority=Math.max(18,50-r.attempts*4);
+
+    const latest=latestResult(c);
+    if(latest==='missed')priority+=28;
+    else if(latest==='difficult')priority+=12;
+
+    // Keep only a small random tie-breaker: weakness should dominate shuffle order.
+    return priority+Math.random()*5;
   }
 
   function adaptiveOrder(pool){
@@ -142,8 +162,13 @@
   }
 
   function restore(){
-    const allowed=new Set(activePool().map(c=>c.id));
+    const pool=activePool();
+    const allowed=new Set(pool.map(c=>c.id));
     const savedSig=localStorage.getItem(QUEUE_SIG_KEY);
+
+    // If every card in the active pool has already been reviewed historically,
+    // skip a fresh coverage pass and go straight to weakness-first adaptive review.
+    coverageComplete=poolFullyReviewed(pool);
 
     if(!reviewIds.length&&savedSig===signature()){
       try{
@@ -231,9 +256,9 @@
   }
 
   function startNew(){
-    coverageComplete=false;
     clearSessionQueue();
-    reviewIds=coverageQueue();
+    coverageComplete=poolFullyReviewed();
+    reviewIds=coverageComplete?adaptiveBaseQueue():coverageQueue();
     reviewPos=0;
     persist();
     render();
@@ -294,18 +319,14 @@
 
   function setMode(mode){
     reviewMode=mode;
-    coverageComplete=false;
     clearSessionQueue();
-    persist();
     startNew();
   }
 
   function setSubject(subject){
     reviewSubject=subject;
     reviewMode='subject';
-    coverageComplete=false;
     clearSessionQueue();
-    persist();
     startNew();
   }
 
