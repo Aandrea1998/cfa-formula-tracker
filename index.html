@@ -642,4 +642,14 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Econom
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="economics-steady-state-saving-investment">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Steady-State Equilibrium — Saving Equals Required Investment per Worker","latex":"\\begin{gathered}sy=\\left[\\frac{\\theta}{1-\\alpha}+\\delta+n\\right]k\\\\[6pt]\\theta=g_A,\\quad y=\\frac YL,\\quad k=\\frac KL\\\\s=\\text{saving rate},\\quad\\delta=\\text{depreciation rate},\\quad n=g_L\\\\[6pt]\\text{Saving funds depreciation and capital growth}\\\\\\text{needed to maintain the balanced growth path.}\\end{gathered}","answer":"Steady-state saving/investment equation: sy = [θ/(1−α) + δ + n]k. s = saving rate; y = output per worker; k = capital per worker; θ = TFP growth; α = capital income share; δ = depreciation; n = worker growth. Derived from gk = sy/k − δ − n and the balanced-growth condition gk* = θ/(1−α). Gross investment per worker covers depreciation, additional workers and capital deepening associated with technological progress."};
+let card=cards.find(c=>c.subject==='Economics'&&(c.question===item.question||c.question==='Steady-State Required Investment per Worker'));
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
