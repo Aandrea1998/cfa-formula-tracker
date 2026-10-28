@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const fiscalTwoStageQuestion='Expansionary Fiscal Policy — Short Run vs Long Run';
+    const fiscalTwoStageLatex='\\begin{aligned}\\text{1. Mundell–Fleming (high mobility): }&G\\uparrow\\text{ or }T\\downarrow\\Rightarrow Y\\uparrow\\Rightarrow i\\uparrow\\\\&\\Rightarrow\\text{capital inflows}\\uparrow\\Rightarrow\\text{currency appreciates}\\\\\\text{2. Portfolio Balance Approach: }&\\text{persistent deficits}\\Rightarrow\\text{public debt}\\uparrow\\\\&\\Rightarrow\\text{debt/monetization risk}\\uparrow\\Rightarrow\\pi^e\\uparrow\\\\&\\Rightarrow\\text{currency depreciation risk}\\end{aligned}';
+    let fiscalTwoStageCard=cards.find(c=>c.subject==='Economics'&&c.question===fiscalTwoStageQuestion);
+    if(!fiscalTwoStageCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:fiscalTwoStageQuestion,answer:fiscalTwoStageLatex,latex:fiscalTwoStageLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(fiscalTwoStageCard.answer!==fiscalTwoStageLatex){fiscalTwoStageCard.answer=fiscalTwoStageLatex;changed++;}
+      if(fiscalTwoStageCard.latex!==fiscalTwoStageLatex){fiscalTwoStageCard.latex=fiscalTwoStageLatex;changed++;}
+      if(fiscalTwoStageCard.topic!=='Currency Exchange Rates'){fiscalTwoStageCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const dornbuschQuestion='Dornbusch Model — Currency Overshooting';
     const dornbuschLatex='\\begin{aligned}M\\uparrow&\\Rightarrow i\\downarrow\\Rightarrow\\text{capital outflow}\\\\&\\Rightarrow\\text{currency overshoots downward}\\\\P\\uparrow&\\Rightarrow\\text{currency appreciates toward long-run equilibrium}\\end{aligned}';
     let dornbuschCard=cards.find(c=>c.subject==='Economics'&&c.question===dornbuschQuestion);
