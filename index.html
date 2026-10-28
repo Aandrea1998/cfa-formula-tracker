@@ -620,4 +620,16 @@ Object.assign(card,item,{subject,topic});
 delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="economics-aggregate-output-capital-growth">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const items=[{"question":"Aggregate GDP Growth — Labor Productivity and Labor Force Growth","latex":"\\begin{gathered}Y=yL,\\qquad y=\\frac{Y}{L}\\\\g_Y\\approx g_y+n\\\\[6pt]\\text{GDP growth = labor productivity growth + labor force growth.}\\end{gathered}","answer":"gY ≈ gy + n. Y = total real GDP; y = Y/L = real output per worker (labor productivity); n = gL = growth of the labor force, assuming stable employment and hours per worker. Derived from Y = yL. Exact for log growth rates; an approximation for ordinary percentage growth rates. TFP is already included in labor productivity growth."},{"question":"Aggregate Capital Growth — Capital per Worker and Labor Force Growth","latex":"\\begin{gathered}K=kL,\\qquad k=\\frac{K}{L}\\\\g_K\\approx g_k+n\\\\[6pt]\\text{Capital growth = capital-per-worker growth + labor force growth.}\\end{gathered}","answer":"gK ≈ gk + n. K = aggregate capital stock; k = K/L = capital per worker; n = gL = growth of workers (proxied by labor force growth with stable employment). Derived from K = kL. Exact for log growth rates; an approximation for ordinary percentage growth rates."}];
+items.forEach(item=>{
+let card=cards.find(c=>c.subject==='Economics'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+});
+save();refresh();
+})();
 </script></body></html>
