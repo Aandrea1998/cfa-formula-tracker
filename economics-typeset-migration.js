@@ -130,7 +130,7 @@
     }
 
     const caChannelsQuestion='Current Account Imbalances — Three Exchange Rate Channels';
-    const caChannelsLatex='\\begin{aligned}1.&\\;\\text{Flow Supply/Demand Channel}\\\\2.&\\;\\text{Portfolio Balance Channel}\\\\3.&\\;\\text{Debt Sustainability Channel}\\end{aligned}';
+    const caChannelsLatex='\\begin{gathered}\\textbf{Current Account Deficit: Why USD Depreciates}\\\\[5pt]\\begin{aligned}\\textbf{Flow Supply/Demand: }&\\text{Net USD supply rises}\\\\&\\Rightarrow\\text{USD depreciates}\\\\[5pt]\\textbf{Portfolio Approach: }&\\text{Relative demand for US assets falls}\\\\&\\Rightarrow\\text{USD depreciates}\\\\[5pt]\\textbf{Debt Sustainability: }&\\text{Persistent deficits raise external debt}\\\\&\\Rightarrow\\text{Expected future adjustment}\\\\&\\Rightarrow\\text{Long-run USD value falls}\\end{aligned}\\end{gathered}';
     let caChannelsCard=cards.find(c=>c.subject==='Economics'&&c.question===caChannelsQuestion);
     if(!caChannelsCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
