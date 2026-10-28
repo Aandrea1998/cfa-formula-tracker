@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const fiscalMobilityQuestion='Expansionary Fiscal Policy — Capital Mobility';
+    const fiscalMobilityLatex='\\begin{aligned}\\text{Expansionary fiscal: }&G\\uparrow\\;\\text{or}\\;T\\downarrow\\\\\\text{Low mobility: }&Y\\uparrow\\rightarrow\\text{Imports}\\uparrow\\rightarrow CA\\downarrow\\\\&\\rightarrow\\text{Currency depreciation}\\\\\\text{High mobility: }&Y\\uparrow\\rightarrow i\\uparrow\\rightarrow\\text{Capital inflows}\\uparrow\\\\&\\rightarrow\\text{Currency appreciation}\\end{aligned}';
+    let fiscalMobilityCard=cards.find(c=>c.subject==='Economics'&&c.question===fiscalMobilityQuestion);
+    if(!fiscalMobilityCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:fiscalMobilityQuestion,answer:fiscalMobilityLatex,latex:fiscalMobilityLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(fiscalMobilityCard.answer!==fiscalMobilityLatex){fiscalMobilityCard.answer=fiscalMobilityLatex;changed++;}
+      if(fiscalMobilityCard.latex!==fiscalMobilityLatex){fiscalMobilityCard.latex=fiscalMobilityLatex;changed++;}
+      if(fiscalMobilityCard.topic!=='Currency Exchange Rates'){fiscalMobilityCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const caChannelsQuestion='Current Account Imbalances — Three Exchange Rate Channels';
     const caChannelsLatex='\\begin{aligned}1.&\\;\\text{Flow Supply/Demand Channel}\\\\2.&\\;\\text{Portfolio Balance Channel}\\\\3.&\\;\\text{Debt Sustainability Channel}\\end{aligned}';
     let caChannelsCard=cards.find(c=>c.subject==='Economics'&&c.question===caChannelsQuestion);
