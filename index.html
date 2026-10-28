@@ -672,4 +672,14 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Econom
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="economics-open-economy-capital-flows-takeaways">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Opening an Economy — How Do Net Capital Flows Affect Transitional Growth and the Trade Balance?","latex":"\\begin{gathered}\n\\textbf{1. Transitional growth (neoclassical convergence)}\\\\\n\\text{Capital exporter: }g_y<g_y^*\\\\\n\\text{Capital recipient: }g_y>g_y^*\\\\\ng_y=\\theta+\\alpha\\left(\\frac{I}{K}-\\delta-n\\right),\n\\qquad g_y^*=\\frac{\\theta}{1-\\alpha}\\\\[8pt]\n\\textbf{2. Trade balance}\\\\\nNX=S-I\\\\\n\\text{Net capital exports}\\Rightarrow S>I\\Rightarrow NX>0\\\\\n\\text{Net capital inflows}\\Rightarrow I>S\\Rightarrow NX<0\\\\[6pt]\n\\text{Financial flows finance investment in physical capital.}\n\\end{gathered}","answer":"In the textbook neoclassical convergence setting, opening the economy sends financial capital from capital-rich countries to capital-poor countries. (1) During adjustment, net capital exporters have lower domestic investment and per-worker growth below the balanced-growth rate; recipients have higher domestic investment and growth above that rate. Use gk = I/K − δ − n and gy = θ + αgk, with gy* = θ/(1−α). In an open economy domestic investment I need not equal national saving S = sY. These above/below-steady-state statements describe the exercise's convergence process, not a universal consequence of any observed capital flow. (2) From Y = C + I + G + NX and S = Y − C − G, NX = S − I. Thus net capital exporters run trade surpluses and net capital recipients run trade deficits in this simplified model. In full international accounts, net lending corresponds to the current-account balance, which also includes net income and transfers. K means physical productive capital; cross-border capital flows mean financing that supports domestic investment, not necessarily shipping machines abroad."};
+let card=cards.find(c=>c.subject==='Economics'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
