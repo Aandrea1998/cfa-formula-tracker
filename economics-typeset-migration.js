@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const mfQuestion='Mundell–Fleming Model — Policy Effectiveness';
+    const mfLatex='\\begin{aligned}\\text{Floating FX: }&\\text{monetary policy strong; fiscal policy weaker}\\\\\\text{Fixed FX: }&\\text{fiscal policy strong; monetary policy ineffective}\\end{aligned}';
+    let mfCard=cards.find(c=>c.subject==='Economics'&&c.question===mfQuestion);
+    if(!mfCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:mfQuestion,answer:mfLatex,latex:mfLatex,subject:'Economics',topic:'Monetary and Fiscal Policies',status:null,history:[]});
+      changed++;
+    }else{
+      if(mfCard.answer!==mfLatex){mfCard.answer=mfLatex;changed++;}
+      if(mfCard.latex!==mfLatex){mfCard.latex=mfLatex;changed++;}
+      if(mfCard.topic!=='Monetary and Fiscal Policies'){mfCard.topic='Monetary and Fiscal Policies';changed++;}
+    }
+
     const uipQuestion='Uncovered Interest Rate Parity (UIP) — Carry Trade Takeaway';
     const uipLatex='\\begin{aligned}\\text{UIP holds: }&\\text{FX move offsets yield differential}\\\\\\text{Carry trade: }&\\text{UIP often fails short/medium term}\\\\&\\Rightarrow\\text{high-yield FX may not depreciate enough}\\end{aligned}';
     let uipCard=cards.find(c=>c.subject==='Economics'&&c.question===uipQuestion);
