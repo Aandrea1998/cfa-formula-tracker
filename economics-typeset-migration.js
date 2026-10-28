@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const dornbuschQuestion='Dornbusch Model — Currency Overshooting';
+    const dornbuschLatex='\\begin{aligned}M\\uparrow&\\Rightarrow i\\downarrow\\Rightarrow\\text{capital outflow}\\\\&\\Rightarrow\\text{currency overshoots downward}\\\\P\\uparrow&\\Rightarrow\\text{currency appreciates toward long-run equilibrium}\\end{aligned}';
+    let dornbuschCard=cards.find(c=>c.subject==='Economics'&&c.question===dornbuschQuestion);
+    if(!dornbuschCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:dornbuschQuestion,answer:dornbuschLatex,latex:dornbuschLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(dornbuschCard.answer!==dornbuschLatex){dornbuschCard.answer=dornbuschLatex;changed++;}
+      if(dornbuschCard.latex!==dornbuschLatex){dornbuschCard.latex=dornbuschLatex;changed++;}
+      if(dornbuschCard.topic!=='Currency Exchange Rates'){dornbuschCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const moneyModelCompareQuestion='Monetary Model vs Mundell–Fleming — Money Supply & FX';
     const moneyModelCompareLatex='\\begin{aligned}\\text{Monetary Model: }&M\\uparrow\\Rightarrow P\\uparrow\\Rightarrow\\pi\\uparrow\\Rightarrow\\text{FX depreciates}\\\\&M\\downarrow\\Rightarrow P\\downarrow\\Rightarrow\\pi\\downarrow\\Rightarrow\\text{FX appreciates}\\\\\\text{Mundell–Fleming: }&M\\uparrow\\Rightarrow i\\downarrow\\Rightarrow\\text{capital outflow}\\\\&\\Rightarrow\\text{FX depreciates}\\\\\\text{Key: }&\\text{same result, different channel}\\end{aligned}';
     let moneyModelCompareCard=cards.find(c=>c.subject==='Economics'&&c.question===moneyModelCompareQuestion);
