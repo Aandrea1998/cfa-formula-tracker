@@ -194,6 +194,13 @@
       if(fxForwardMtmCard.topic!=='Currency Exchange Rates'){fxForwardMtmCard.topic='Currency Exchange Rates';changed++;}
     }
 
+    const debtWhyQ='Debt Sustainability — Why Investors Expect Depreciation';
+    const debtWhyA='Persistent CA deficit → rising net external debt → unsustainable path → future CA adjustment needed → weaker currency helps exports and discourages imports → investors anticipate lower long-run FX value today (if trade volumes respond).';
+    const debtWhyL='\\begin{aligned}\\text{Persistent CA deficit}&\\Rightarrow\\text{External debt}\\uparrow\\\\&\\Rightarrow\\text{Future CA adjustment needed}\\\\&\\Rightarrow\\text{Expected depreciation}\\\\&\\Rightarrow\\text{Long-run FX value revised down}\\end{aligned}';
+    let debtWhyCard=cards.find(c=>c.subject==='Economics'&&c.question===debtWhyQ);
+    if(!debtWhyCard){debtWhyCard={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]};cards.push(debtWhyCard);}
+    Object.assign(debtWhyCard,{question:debtWhyQ,answer:debtWhyA,latex:debtWhyL});changed++;
+
     const fxQuestion='FX Bid–Offer Spread — Main Drivers';
     const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid pair + good timing}\\\\&\\text{larger/relationship trade + low volatility}\\\\\\text{Spot FX: }&\\text{credit rating usually less important}\\end{aligned}';
     let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
