@@ -662,4 +662,14 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Econom
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="economics-solow-parameter-comparative-statics">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Solow Model — How Do Saving, Labor Growth, Depreciation and TFP Growth Affect the Balanced Growth Path?","latex":"\\begin{gathered}\nsy=\\left[\\delta+n+\\frac{\\theta}{1-\\alpha}\\right]k\\\\[6pt]\ns\\uparrow\\ \\Rightarrow\\ k^*\\uparrow,\\ y^*\\uparrow\\\\\nn\\uparrow\\ \\Rightarrow\\ k^*\\downarrow,\\ y^*\\downarrow\\\\\n\\delta\\uparrow\\ \\Rightarrow\\ k^*\\downarrow,\\ y^*\\downarrow\\\\\n\\theta\\uparrow\\ \\Rightarrow\\ k^*\\downarrow,\\ y^*\\downarrow\n\\quad\\text{(at the same TFP level)}\\\\[6pt]\ng_y^*=g_k^*=\\frac{\\theta}{1-\\alpha}\\\\\n\\text{Higher }s:\\text{ higher levels; unchanged long-run per-worker growth.}\\\\\n\\text{Higher }\\theta:\\text{ lower conditional levels; faster long-run growth.}\n\\end{gathered}","answer":"Holding other parameters constant, with 0 < α < 1: a higher saving rate s raises investment and the balanced-path levels of capital per worker k and output per worker y. Higher labor growth n or depreciation δ raises required investment and lowers these levels. Higher TFP growth θ also raises required investment and lowers balanced-path k and y when compared at the same current TFP level A (and labor input for aggregate comparisons), while increasing long-run per-worker growth to θ/(1−α). This is a conditional level comparison, not a claim that faster TFP growth always lowers future output per worker. Changes in s, n or δ do not change long-run per-worker growth; n does affect aggregate growth gY* = n + θ/(1−α). Here k = K/L, y = Y/L, θ = gA and α is the capital income share. With technological progress, k and y grow on the balanced growth path; they are constant only when normalized by effective labor. Graphically: s shifts the saving/investment curve upward; n, δ and θ steepen the required-investment line."};
+let card=cards.find(c=>c.subject==='Economics'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
