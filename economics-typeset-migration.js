@@ -78,7 +78,7 @@
     });
 
     const uipQuestion='Uncovered Interest Rate Parity (UIP) — Carry Trade Takeaway';
-    const uipLatex='\\begin{aligned}\\text{UIP holds: }&\\text{FX appreciation/depreciation offsets the interest-rate differential}\\\\\\text{Carry trade profits: }&\\text{UIP tends not to hold in the short/medium term}\\\\&\\Rightarrow\\text{high-yield currencies often do not depreciate enough}\\end{aligned}';
+    const uipLatex='\\begin{aligned}\\text{UIP holds: }&\\text{FX move offsets yield differential}\\\\\\text{Carry trade: }&\\text{UIP often fails short/medium term}\\\\&\\Rightarrow\\text{high-yield FX may not depreciate enough}\\end{aligned}';
     let uipCard=cards.find(c=>c.subject==='Economics'&&c.question===uipQuestion);
     if(!uipCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
@@ -91,7 +91,7 @@
     }
 
     const fxReservesQuestion='FX Reserves — EM vs DM Exchange Rate Influence';
-    const fxReservesLatex='\\begin{aligned}\\text{EM countries: }&\\frac{\\text{FX reserves}}{\\text{average daily FX turnover}}\\text{ is relatively high}\\\\&\\Rightarrow\\text{central banks can influence currency supply/demand more effectively}\\\\\\text{DM countries: }&\\text{ratio is generally much smaller}\\end{aligned}';
+    const fxReservesLatex='\\begin{aligned}\\text{EM: }&\\frac{\\text{FX reserves}}{\\text{daily FX turnover}}\\text{ relatively high}\\\\&\\Rightarrow\\text{greater ability to influence FX}\\\\\\text{DM: }&\\text{ratio much smaller}\\end{aligned}';
     let fxReservesCard=cards.find(c=>c.subject==='Economics'&&c.question===fxReservesQuestion);
     if(!fxReservesCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
@@ -104,7 +104,7 @@
     }
 
     const fxForwardMtmQuestion='FX Forward MTM — Short Base Currency';
-    const fxForwardMtmLatex='\\begin{aligned}V_t&=\\frac{N(F_0-F_t)}{1+r_q(\\tau/360)}\\\\N&=\\text{notional in base currency}\\\\F_0,F_t&=\\text{forward rates (quote/base)}\\\\r_q&=\\text{risk-free / money-market rate of quote currency}\\\\\\text{Units: }&\\text{base}\\times\\frac{\\text{quote}}{\\text{base}}=\\text{quote}\\\\\\text{Example: }&5{,}000{,}000\\,\\mathrm{AUD}(0.8940-0.90296)\\frac{\\mathrm{USD}}{\\mathrm{AUD}}=-44{,}800\\,\\mathrm{USD}\\end{aligned}';
+    const fxForwardMtmLatex='\\begin{aligned}V_t&=\\frac{N(F_0-F_t)}{1+r_q(\\tau/360)}\\\\N&=\\text{notional in base}\\\\F_0,F_t&=\\text{forward rates (quote/base)}\\\\r_q&=\\text{quote-currency money-market rate}\\\\\\text{Units: }&\\text{base}\\times\\frac{\\text{quote}}{\\text{base}}=\\text{quote}\\\\\\text{Example: }&5{,}000{,}000(0.8940-0.90296)\\\\&=-44{,}800\\,\\mathrm{USD}\\end{aligned}';
     let fxForwardMtmCard=cards.find(c=>c.subject==='Economics'&&c.question===fxForwardMtmQuestion);
     if(!fxForwardMtmCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
@@ -117,7 +117,7 @@
     }
 
     const fxQuestion='FX Bid–Offer Spread — Main Drivers';
-    const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid currency pair, favorable timing, larger/relationship trade}\\\\&\\text{lower market volatility}\\\\\\text{Spot FX: }&\\text{company credit rating is usually less important}\\end{aligned}';
+    const fxLatex='\\begin{aligned}\\text{Narrower spread: }&\\text{liquid pair + good timing}\\\\&\\text{larger/relationship trade + low volatility}\\\\\\text{Spot FX: }&\\text{credit rating usually less important}\\end{aligned}';
     let fxCard=cards.find(c=>c.subject==='Economics'&&c.question===fxQuestion);
     if(!fxCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
