@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const moneyModelCompareQuestion='Monetary Model vs Mundell–Fleming — Money Supply & FX';
+    const moneyModelCompareLatex='\\begin{aligned}\\text{Monetary Model: }&M\\uparrow\\Rightarrow P\\uparrow\\Rightarrow\\pi\\uparrow\\Rightarrow\\text{FX depreciates}\\\\&M\\downarrow\\Rightarrow P\\downarrow\\Rightarrow\\pi\\downarrow\\Rightarrow\\text{FX appreciates}\\\\\\text{Mundell–Fleming: }&M\\uparrow\\Rightarrow i\\downarrow\\Rightarrow\\text{capital outflow}\\\\&\\Rightarrow\\text{FX depreciates}\\\\\\text{Key: }&\\text{same result, different channel}\\end{aligned}';
+    let moneyModelCompareCard=cards.find(c=>c.subject==='Economics'&&c.question===moneyModelCompareQuestion);
+    if(!moneyModelCompareCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:moneyModelCompareQuestion,answer:moneyModelCompareLatex,latex:moneyModelCompareLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(moneyModelCompareCard.answer!==moneyModelCompareLatex){moneyModelCompareCard.answer=moneyModelCompareLatex;changed++;}
+      if(moneyModelCompareCard.latex!==moneyModelCompareLatex){moneyModelCompareCard.latex=moneyModelCompareLatex;changed++;}
+      if(moneyModelCompareCard.topic!=='Currency Exchange Rates'){moneyModelCompareCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const fiscalMobilityQuestion='Expansionary Fiscal Policy — Capital Mobility';
     const fiscalMobilityLatex='\\begin{aligned}\\text{Expansionary fiscal: }&G\\uparrow\\;\\text{or}\\;T\\downarrow\\\\\\text{Low mobility: }&Y\\uparrow\\rightarrow\\text{Imports}\\uparrow\\rightarrow CA\\downarrow\\\\&\\rightarrow\\text{Currency depreciation}\\\\\\text{High mobility: }&Y\\uparrow\\rightarrow i\\uparrow\\rightarrow\\text{Capital inflows}\\uparrow\\\\&\\rightarrow\\text{Currency appreciation}\\end{aligned}';
     let fiscalMobilityCard=cards.find(c=>c.subject==='Economics'&&c.question===fiscalMobilityQuestion);
