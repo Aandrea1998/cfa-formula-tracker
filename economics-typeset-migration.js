@@ -77,8 +77,8 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
-    const mfQuestion='Mundell–Fleming Model — Policy Effectiveness';
-    const mfLatex='\\begin{aligned}\\text{Floating FX: }&\\text{monetary policy strong; fiscal policy weaker}\\\\\\text{Fixed FX: }&\\text{fiscal policy strong; monetary policy ineffective}\\end{aligned}';
+    const mfQuestion='Exchange Rate Determination — Three Main Models';
+    const mfLatex='\\begin{aligned}1.&\\;\\text{Mundell–Fleming Model}\\\\2.&\\;\\text{Monetary Models of Exchange Rate Determination}\\\\3.&\\;\\text{Portfolio Balance Approach}\\end{aligned}';
     let mfCard=cards.find(c=>c.subject==='Economics'&&c.question===mfQuestion);
     if(!mfCard){
       const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
