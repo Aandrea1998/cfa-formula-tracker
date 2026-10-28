@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const outputGapQuestion='Potential GDP vs Short-Term GDP — Market Implications';
+    const outputGapLatex='\\begin{aligned}\\text{Potential GDP growth}\\uparrow&\\Rightarrow\\text{expected long-term equity returns}\\uparrow\\\\\\text{Short-term GDP growth}\\downarrow&\\Rightarrow\\text{expected short-term inflation}\\downarrow\\\\\\text{Wider output gap: }&g_{potential}\\uparrow,\\;g_{short-run}\\downarrow\\end{aligned}';
+    let outputGapCard=cards.find(c=>c.subject==='Economics'&&c.question===outputGapQuestion);
+    if(!outputGapCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:outputGapQuestion,answer:outputGapLatex,latex:outputGapLatex,subject:'Economics',topic:'Economic Growth',status:null,history:[]});
+      changed++;
+    }else{
+      if(outputGapCard.answer!==outputGapLatex){outputGapCard.answer=outputGapLatex;changed++;}
+      if(outputGapCard.latex!==outputGapLatex){outputGapCard.latex=outputGapLatex;changed++;}
+      if(outputGapCard.topic!=='Economic Growth'){outputGapCard.topic='Economic Growth';changed++;}
+    }
+
     const fiscalTwoStageQuestion='Expansionary Fiscal Policy — Short Run vs Long Run';
     const fiscalTwoStageLatex='\\begin{aligned}\\text{1. Mundell–Fleming (high mobility): }&G\\uparrow\\text{ or }T\\downarrow\\Rightarrow Y\\uparrow\\Rightarrow i\\uparrow\\\\&\\Rightarrow\\text{capital inflows}\\uparrow\\Rightarrow\\text{currency appreciates}\\\\\\text{2. Portfolio Balance Approach: }&\\text{persistent deficits}\\Rightarrow\\text{public debt}\\uparrow\\\\&\\Rightarrow\\text{debt/monetization risk}\\uparrow\\Rightarrow\\pi^e\\uparrow\\\\&\\Rightarrow\\text{currency depreciation risk}\\end{aligned}';
     let fiscalTwoStageCard=cards.find(c=>c.subject==='Economics'&&c.question===fiscalTwoStageQuestion);
