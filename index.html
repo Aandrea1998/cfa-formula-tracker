@@ -652,4 +652,14 @@ if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Econom
 Object.assign(card,item);delete card.formulaImage;
 save();refresh();
 })();
+</script><script id="economics-output-per-worker-expanded">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"Output per Worker Growth — Expanded","latex":"\\begin{gathered}g_y=\\theta+\\alpha s\\frac{Y}{K}-\\alpha(\\delta+n)\\\\[6pt]g_y=\\theta+\\alpha g_k,\\qquad g_k=s\\frac{Y}{K}-\\delta-n\\\\[6pt]\\theta=\\text{TFP growth},\\quad\\alpha=\\text{capital income share}\\\\s=\\text{saving rate},\\quad\\delta=\\text{depreciation},\\quad n=g_L\\end{gathered}","answer":"Output per worker growth: gy = θ + αs(Y/K) − α(δ+n). Derived by substituting gk = s(Y/K) − δ − n into gy = θ + αgk. y = Y/L; θ = TFP growth; α = capital income share; s = saving rate; δ = depreciation; n = labor growth; Y/K = aggregate output-to-capital ratio. Continuous-time/log growth notation."};
+let card=cards.find(c=>c.subject==='Economics'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
