@@ -632,4 +632,14 @@ Object.assign(card,item);delete card.formulaImage;
 for(let i=cards.length-1;i>=0;i--){if(cards[i]!==card&&cards[i].subject==='Economics'&&priorQuestions.includes(cards[i].question))cards.splice(i,1);}
 save();refresh();
 })();
+</script><script id="economics-growth-accounting-equivalence">
+(function(){
+'use strict';
+if(typeof cards==='undefined'||!Array.isArray(cards))return;
+const item={"question":"GDP Growth — Equivalence of Growth Accounting and Labor Productivity Growth","latex":"\\begin{aligned}g_Y&\\approx g_A+\\alpha g_K+(1-\\alpha)n\\\\&=g_A+\\alpha(g_K-n)+n\\\\g_y&\\approx g_A+\\alpha(g_K-n)\\\\\\therefore\\quad g_Y&\\approx g_y+n\\\\[6pt]\\alpha(g_K-n)&=2.3\\%-1.5\\%=0.8\\%\\\\g_Y&\\approx1.5\\%+0.8\\%+0.5\\%=2.8\\%\\end{aligned}","answer":"The growth accounting and labor productivity equations give the same GDP growth: gY ≈ gA + αgK + (1−α)n = [gA + α(gK−n)] + n ≈ gy + n. A = TFP; α = capital income share; n = gL; y = Y/L. Labor productivity growth already includes TFP and the weighted capital-deepening contribution. Example: gy = 2.3%, gA = 1.5%, n = 0.5%; α(gK−n) = 0.8%, so gY ≈ 2.8%. The 0.8% is the weighted capital-deepening contribution, not aggregate capital growth gK. Assumes Cobb–Douglas with constant returns and consistent labor measures; additive formulas are exact for log growth rates."};
+let card=cards.find(c=>c.subject==='Economics'&&c.question===item.question);
+if(!card){card={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,subject:'Economics',topic:'Economic Growth',status:null,history:[]};cards.push(card);}
+Object.assign(card,item);delete card.formulaImage;
+save();refresh();
+})();
 </script></body></html>
