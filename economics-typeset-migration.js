@@ -77,6 +77,19 @@
       if(prompt&&c.question!==prompt){c.question=prompt;changed++;}
     });
 
+    const caChannelsQuestion='Current Account Imbalances — Three Exchange Rate Channels';
+    const caChannelsLatex='\\begin{aligned}1.&\\;\\text{Flow Supply/Demand Channel}\\\\2.&\\;\\text{Portfolio Balance Channel}\\\\3.&\\;\\text{Debt Sustainability Channel}\\end{aligned}';
+    let caChannelsCard=cards.find(c=>c.subject==='Economics'&&c.question===caChannelsQuestion);
+    if(!caChannelsCard){
+      const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+      cards.push({id:nextId,question:caChannelsQuestion,answer:caChannelsLatex,latex:caChannelsLatex,subject:'Economics',topic:'Currency Exchange Rates',status:null,history:[]});
+      changed++;
+    }else{
+      if(caChannelsCard.answer!==caChannelsLatex){caChannelsCard.answer=caChannelsLatex;changed++;}
+      if(caChannelsCard.latex!==caChannelsLatex){caChannelsCard.latex=caChannelsLatex;changed++;}
+      if(caChannelsCard.topic!=='Currency Exchange Rates'){caChannelsCard.topic='Currency Exchange Rates';changed++;}
+    }
+
     const mfQuestion='Exchange Rate Determination — Three Main Models';
     const mfLatex='\\begin{aligned}1.&\\;\\text{Mundell–Fleming Model}\\\\2.&\\;\\text{Monetary Models of Exchange Rate Determination}\\\\3.&\\;\\text{Portfolio Balance Approach}\\end{aligned}';
     let mfCard=cards.find(c=>c.subject==='Economics'&&c.question===mfQuestion);
