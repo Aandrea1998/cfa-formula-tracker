@@ -56,6 +56,11 @@
       latex:'\\begin{aligned}y_{LT}&\\approx\\text{avg. expected future short rates}+\\text{term/risk premium}\\\\\\text{Upward slope: }&y_{LT}>y_{ST}\\\\&\\Rightarrow\\text{rates may be expected to rise}\\\\&\\text{or term premium may simply be positive}\\\\\\therefore\\;&\\text{future rate direction is indeterminate}\\end{aligned}'
     },
     {
+      question:'Closet Index — Key Metrics',
+      aliases:['Closet Index Identification'],
+      latex:'\\begin{aligned}\\text{Closet index: }&\\text{active risk very low}\\\\&\\text{Sharpe ratio }\\approx\\text{ benchmark Sharpe}\\\\\\text{Information ratio: }&\\text{may be small, negative, or indeterminate}\\\\&\\text{because active return and active risk are both tiny}\\end{aligned}'
+    },
+    {
       question:'Yield Curve Shape — Policy Rates, Inflation Premium & Bond Risk Premium',
       aliases:['Yield Curve Shape Drivers'],
       latex:'\\begin{aligned}\\text{Policy-rate expectations: }&E(i_{future})\\uparrow\\Rightarrow\\text{steeper/upward curve}\\\\&E(i_{future})\\downarrow\\Rightarrow\\text{flatter/inverted curve}\\\\\\text{Inflation premium: }&\\pi_{prem,LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\\\\\text{Bond risk premium: }&RP_{LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\end{aligned}'
