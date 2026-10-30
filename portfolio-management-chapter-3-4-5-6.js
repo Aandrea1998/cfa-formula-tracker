@@ -21,6 +21,11 @@
       latex:'\\begin{aligned}\\text{Total ETF Costs}&=\\text{One-Time Trading Costs}+\\text{Ongoing Holding Costs}\\\\\\text{Trading Costs}&=\\text{Commissions}+\\text{Bid-Ask Spread}+\\text{Premium/Discount to NAV}\\\\\\text{Holding Costs}&=\\text{Management Fees}+\\text{Turnover Costs}+\\text{Tracking Error}+\\text{Taxes}+\\text{Security Lending Effects}\\end{aligned}'
     },
     {
+      question:'ETF Applications — Liquidity, Completion & Transition',
+      aliases:['ETF Applications','ETF Portfolio Applications'],
+      latex:'\\begin{aligned}\\text{Liquidity management: }&\\text{quickly invest inflows / meet redemptions}\\\\\\text{Portfolio completion: }&\\text{fill temporary exposure gaps}\\\\\\text{Transition management: }&\\text{maintain exposure while changing managers/allocations}\\end{aligned}'
+    },
+    {
       question:'ETF Bid-Ask Spread — Main Components',
       aliases:['ETF Bid-Ask Spread Components'],
       latex:'\\begin{aligned}\\text{ETF Spread}&\\approx\\text{Creation/Redemption Costs}+\\text{Underlying Securities Spreads}\\\\&\\quad+\\text{Hedging/Inventory Compensation}+\\text{Market Maker Profit Spread}\\\\&\\quad-\\text{Offsetting-Order Discount}\\end{aligned}'
