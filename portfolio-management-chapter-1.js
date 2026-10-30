@@ -56,6 +56,11 @@
       latex:'\\begin{aligned}y_{LT}&\\approx\\text{avg. expected future short rates}+\\text{term/risk premium}\\\\\\text{Upward slope: }&y_{LT}>y_{ST}\\\\&\\Rightarrow\\text{rates may be expected to rise}\\\\&\\text{or term premium may simply be positive}\\\\\\therefore\\;&\\text{future rate direction is indeterminate}\\end{aligned}'
     },
     {
+      question:'Yield Curve Shape — Policy Rates, Inflation Premium & Bond Risk Premium',
+      aliases:['Yield Curve Shape Drivers'],
+      latex:'\\begin{aligned}\\text{Policy-rate expectations: }&E(i_{future})\\uparrow\\Rightarrow\\text{steeper/upward curve}\\\\&E(i_{future})\\downarrow\\Rightarrow\\text{flatter/inverted curve}\\\\\\text{Inflation premium: }&\\pi_{prem,LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\\\\\text{Bond risk premium: }&RP_{LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\end{aligned}'
+    },
+    {
       question:'Yield Curve — Main Drivers',
       aliases:['Yield Curve Drivers'],
       latex:'\\text{Yield Curve}=\\text{Expected Future Short Rates}+\\text{Inflation Expectations}+\\text{Term/Risk Premium}'
