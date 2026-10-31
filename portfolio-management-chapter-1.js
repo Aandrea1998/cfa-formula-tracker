@@ -66,6 +66,11 @@
       latex:'\\begin{aligned}y_{LT}&\\approx\\text{avg. expected future short rates}+\\text{term/risk premium}\\\\\\text{Upward slope: }&y_{LT}>y_{ST}\\\\&\\Rightarrow\\text{rates may be expected to rise}\\\\&\\text{or term premium may simply be positive}\\\\\\therefore\\;&\\text{future rate direction is indeterminate}\\end{aligned}'
     },
     {
+      question:'Breadth Overestimation — Two Main Sources',
+      aliases:['Breadth Overestimation'],
+      latex:'\\begin{aligned}\\text{Cross-sectional dependence: }&\\text{many stocks }\\neq\\text{ many independent bets}\\\\&\\text{if stocks share sector/style drivers}\\\\\\text{Time-series dependence: }&\\text{many periods }\\neq\\text{ many independent bets}\\\\&\\text{if the same view persists over time}\\\\\\text{Result: }&\\text{effective breadth}\\downarrow\\Rightarrow IR\\text{ / active return overstated}\\end{aligned}'
+    },
+    {
       question:'Information Coefficient (IC) vs Information Ratio (IR)',
       aliases:['IC vs IR'],
       latex:'\\begin{aligned}\\text{IC: }&\\text{forecasting skill}\\\\\\text{IR: }&\\text{realized active-management skill}\\end{aligned}'
