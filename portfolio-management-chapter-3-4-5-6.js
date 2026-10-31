@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Stress Testing — Sensitivity Measures vs Full Revaluation',
+      aliases:['Full Revaluation vs Sensitivity Measures'],
+      latex:'\\begin{aligned}\\text{Small/moderate move: }&\\text{use sensitivity measures}\\\\&\\text{(duration, convexity, delta, gamma)}\\\\\\text{Extreme stress: }&\\text{use full revaluation}\\\\\\text{Especially: }&\\text{extreme stress + option-embedded securities}\\\\&\\Rightarrow\\text{full revaluation preferred}\\end{aligned}'
+    },
+    {
       question:'Historical Scenario Analysis — Bonds',
       aliases:['Historical Scenario Analysis for Bonds'],
       latex:'\\begin{aligned}\\text{Historical scenario analysis: }&\\text{use historical yields}\\\\&\\text{apply historical yield shocks to current bond holdings}\\end{aligned}'
