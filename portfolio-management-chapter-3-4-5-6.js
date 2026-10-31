@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Risk Budgeting vs Scenario Limit vs Stop-Loss Limit',
+      aliases:['Risk Limits Comparison'],
+      latex:'\\begin{aligned}\\text{Risk budgeting: }&\\text{set total risk limit and/or allocate it across sources}\\\\\\text{Scenario limit: }&\\text{maximum loss allowed under a specified scenario}\\\\\\text{Stop-loss limit: }&\\text{action triggered once actual loss reaches a threshold}\\end{aligned}'
+    },
+    {
       question:'Risk Categories by Institutional Investor Type',
       aliases:['Institutional Investor Risk Categories'],
       latex:'\\begin{aligned}\\text{Liquidity Gap: }&\\text{Bank}\\\\\\text{VaR: }&\\text{Bank / Hedge Fund / Pension Plan}\\\\\\text{Tracking Error: }&\\text{Not a primary focus here}\\\\\\text{Leverage: }&\\text{Bank / Hedge Fund}\\\\\\text{Scenario Analysis: }&\\text{Bank / Hedge Fund / Pension Plan}\\\\\\text{Key Rate Duration: }&\\text{Bank / Pension Plan}\\\\\\text{Active Share: }&\\text{Not a primary focus here}\\\\\\text{Operational Risk Capital: }&\\text{Bank}\\end{aligned}'
