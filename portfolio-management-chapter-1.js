@@ -51,6 +51,11 @@
       latex:'\\begin{aligned}\\mathrm{BEI}&=y_{\\text{Nominal}}-y_{\\text{Real}}\\\\&=E(\\pi)+\\text{Inflation Risk Premium}\\end{aligned}'
     },
     {
+      question:'Covariance of Future Asset Price and Inter-Temporal Rate of Substitution',
+      aliases:['Asset Price and SDF Covariance'],
+      latex:'\\begin{aligned}\\operatorname{Cov}(P_{t+1},m_{t,1}):\\quad&\\text{future asset price vs inter-temporal rate of substitution}\\\\\\text{1-period real risk-free bond: }&\\operatorname{Cov}=0\\\\\\text{Longer-term safe recession hedge: }&\\operatorname{Cov}>0\\\\\\text{Typical risky/procyclical asset: }&\\operatorname{Cov}<0\\end{aligned}'
+    },
+    {
       question:'Real Risk-Free Rate — Expected Growth & Growth Uncertainty',
       aliases:['Expected Growth Growth Uncertainty and Real Rates'],
       latex:'\\begin{aligned}E(g)\\uparrow&\\Rightarrow\\text{future wealth}\\uparrow\\Rightarrow\\text{consume/borrow more today}\\\\&\\Rightarrow r_f^{real}\\uparrow\\\\\\sigma(g)\\uparrow&\\Rightarrow\\text{higher required compensation}\\\\&\\Rightarrow r_f^{real}\\uparrow\\end{aligned}'
