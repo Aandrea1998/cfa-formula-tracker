@@ -83,7 +83,7 @@
     {
       question:'Risk Budgeting vs Scenario Limit vs Stop-Loss Limit',
       aliases:['Risk Limits Comparison'],
-      latex:'\\begin{aligned}\\text{Risk budgeting: }&\\text{set total risk limit and/or allocate it across sources}\\\\\\text{Scenario limit: }&\\text{maximum loss allowed under a specified scenario}\\\\\\text{Stop-loss limit: }&\\text{action triggered once actual loss reaches a threshold}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{Risk budgeting: }&\\text{set total risk limit and/or allocate it across sources}\\\\\\text{Scenario limit: }&\\text{set a limit/trigger for a specified stress scenario}\\\\&\\text{breach}\\Rightarrow\\text{corrective action}\\\\\\text{Stop-loss limit: }&\\text{action triggered once actual loss reaches a threshold}\\end{aligned}'
     },
     {
       question:'Risk Categories by Institutional Investor Type',
