@@ -68,6 +68,14 @@
     const portfolioReturnLatex='E(R_P)=\\sum_{i=1}^{N}w_iE(R_i)';
     if(setCard(portfolioReturnCard,'Portfolio Expected Return — Weighted Average',portfolioReturnLatex))changed++;
 
+    // Remove obsolete duplicate card kept in localStorage from the earlier two-method version.
+    for(const card of [...cards]){
+      if(card.subject===SUBJECT&&norm(card.question)===norm('Historical Simulation vs Monte Carlo — Use of Past Data')){
+        const i=cards.indexOf(card);
+        if(i>=0){cards.splice(i,1);changed++;}
+      }
+    }
+
     const fitFixes=[
       ['Historical vs Hypothetical vs Stress Test — Number of Risk Factors',
        '\\begin{aligned}\\text{Historical: }&\\text{many factors; real past event}\\\\\\text{Hypothetical: }&\\text{many factors; custom plausible mix}\\\\\\text{Stress test: }&\\text{one/few factors; extreme shocks}\\end{aligned}'],
