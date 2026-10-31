@@ -111,6 +111,11 @@
       latex:'\\begin{aligned}&\\text{Shock impact: two methods}\\\\&\\text{Sensitivity: fixed initial betas/sensitivities}\\\\&\\text{Full revaluation: full repricing}\\\\&\\text{Betas/sensitivities adjust with factors}\\end{aligned}'
     },
     {
+      question:'Economic Capital — Tail Loss Coverage',
+      aliases:['Economic Capital'],
+      latex:'\\text{Economic capital}=\\text{capital needed to cover extreme/tail losses}'
+    },
+    {
       question:'Reverse Stress Testing — Work Backward from Failure',
       aliases:['Reverse Stress Test'],
       latex:'\\begin{aligned}\\text{Stress test: }&\\text{Given a shock, what happens to the portfolio?}\\\\\\text{Reverse stress test: }&\\text{Given a bad outcome, what shocks could cause it?}\\\\&\\text{Start with failure}\\rightarrow\\text{identify scenarios that produce it}\\\\\\text{Basis risk: }&\\text{hedge and exposure do not offset as expected}\\end{aligned}'
