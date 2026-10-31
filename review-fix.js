@@ -310,7 +310,14 @@
     const c=cards.find(x=>x.id===reviewIds[reviewPos]);
     if(!c)return;
 
+    // Persist the actual review attempt here, rather than relying on a separate
+    // button wrapper. This keeps status, rolling accuracy and "reviewed" counts
+    // synchronized even if other scripts rebind the rating buttons.
+    if(!Array.isArray(c.history))c.history=[];
+    c.history.push({result:status,ts:Date.now()});
+    c.history=c.history.slice(-5);
     c.status=status;
+
     save();
     refresh();
     scheduleRepeat(c,status);
