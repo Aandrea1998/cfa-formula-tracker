@@ -95,11 +95,18 @@
 
   const baseRender=renderLibrary;
   renderLibrary=function(){
+    const y=window.scrollY;
+    const active=document.activeElement;
     const out=baseRender.apply(this,arguments);
     updateLibraryCopy();
     unifyLibrary();
+    // Rebuilding libraryContent can make the browser clamp/shift scroll.
+    // Restore the user's position immediately, without delayed scroll forcing.
+    if(Math.abs(window.scrollY-y)>1)window.scrollTo({top:y,left:window.scrollX,behavior:'auto'});
+    if(active&&typeof active.focus==='function'&&document.contains(active)){
+      try{active.focus({preventScroll:true});}catch(_e){}
+    }
     requestAnimationFrame(unifyLibrary);
-    setTimeout(unifyLibrary,50);
     return out;
   };
 
