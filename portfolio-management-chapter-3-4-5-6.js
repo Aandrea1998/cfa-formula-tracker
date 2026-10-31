@@ -103,7 +103,7 @@
     {
       question:'Impact of Risk-Factor Shocks — Sensitivity vs Full Revaluation',
       aliases:['Sensitivity Measures vs Full Revaluation — Betas'],
-      latex:'\\begin{aligned}\\text{Shock impact: two methods}\\\\\\text{Sensitivity: }&\\text{fixed initial betas/sensitivities}\\\\\\text{Full revaluation: }&\\text{full repricing}\\\\&\\text{betas/sensitivities adjust with factors}\\end{aligned}'
+      latex:'\\begin{aligned}&\\text{Shock impact: two methods}\\\\&\\text{Sensitivity: fixed initial betas/sensitivities}\\\\&\\text{Full revaluation: full repricing}\\\\&\\text{Betas/sensitivities adjust with factors}\\end{aligned}'
     },
     {
       question:'Stress Testing — Sensitivity Measures vs Full Revaluation',
