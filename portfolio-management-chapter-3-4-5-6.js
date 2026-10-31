@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Relative VaR vs Surplus at Risk vs Maximum Drawdown',
+      aliases:['Relative VaR Surplus at Risk Maximum Drawdown Comparison'],
+      latex:'\\begin{aligned}\\text{Relative VaR: }&\\text{future underperformance vs benchmark}\\\\&\\text{best for benchmark-relative portfolios}\\\\\\text{Surplus at Risk: }&\\text{risk of assets relative to liabilities}\\\\&\\text{best for pension / liability-driven portfolios}\\\\\\text{Maximum Drawdown: }&\\text{worst peak-to-trough decline}\\\\&\\text{useful for absolute-return / hedge-fund downside risk}\\end{aligned}'
+    },
+    {
       question:'Hedge Fund vs Traditional Manager — Key Risk Measures',
       aliases:['Hedge Fund Risk Measures vs Active Share'],
       latex:'\\begin{aligned}\\text{Hedge fund risk: }&\\text{VaR + Gross Exposure}\\\\\\text{Traditional benchmarked manager: }&\\text{Active Share}\\end{aligned}'
