@@ -22,7 +22,7 @@
       const points=reviewed.reduce((n,c)=>n+info(c).points,0);
       const accuracy=attempts?Math.round(points/attempts*100):null;
       const weak=reviewed.filter(c=>info(c).accuracy<60).length;
-      const coverage=subset.length?Math.round(reviewed.length/subset.length*100):0;
+      const barPct=accuracy===null?0:accuracy;
       el.style.setProperty('--subject-accent',accents[i%accents.length]);
       el.innerHTML=`
         <div class="subject-mini-top">
@@ -30,7 +30,7 @@
           <span class="subject-acc ${gradeClass(accuracy)}">${accuracy===null?'—':accuracy+'%'}</span>
         </div>
         <div class="subject-meta">${reviewed.length}/${subset.length} reviewed · ${weak} weak</div>
-        <div class="subject-progress"><span style="width:${coverage}%"></span></div>`;
+        <div class="subject-progress" title="Accuracy"><span style="width:${barPct}%"></span></div>`;
     });
   }
 
