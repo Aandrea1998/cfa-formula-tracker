@@ -100,7 +100,7 @@
 
   let attempts=0;
   (function enforceRepair(){
-    applyRepair();
-    if(attempts++<100)setTimeout(enforceRepair,100);
+    const ready=applyRepair();
+    if(!ready&&attempts++<20)setTimeout(enforceRepair,100);
   })();
 })();
