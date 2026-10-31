@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Risk Measures — What Each Metric Focuses On',
+      aliases:['Risk Measure Focus','VaR Stress Test Scenario Analysis Comparison'],
+      latex:'\\begin{aligned}\\text{CVaR: }&\\text{average loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{impact of extreme specified shocks}\\\\\\text{Scenario analysis: }&\\text{portfolio impact under coherent hypothetical/historical scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{loss distribution from simulated market paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from adding/removing a position}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; sensitivity to a small position change}\\end{aligned}'
+    },
+    {
       question:'Conditional VaR (CVaR) — Expected Tail Loss',
       aliases:['Conditional VaR (CVaR)','Expected Tail Loss','Expected Shortfall'],
       latex:'CVaR_{\\alpha}=E[L\\mid L>VaR_{\\alpha}]'
