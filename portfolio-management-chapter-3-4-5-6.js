@@ -131,6 +131,11 @@
       latex:'\\begin{aligned}\\text{March uses May earnings} &\\Rightarrow\\text{Look-ahead}\\\\\\text{June still uses old earnings} &\\Rightarrow\\text{Stale data}\\\\\\text{Look-ahead: }&\\text{info used too early}\\\\\\text{Stale data: }&\\text{info used too late}\\end{aligned}'
     },
     {
+      question:'Historical Simulation vs Monte Carlo — Use of Past Data',
+      aliases:['Historical vs Monte Carlo Past Data'],
+      latex:'\\begin{aligned}\\text{Historical simulation: }&\\text{reuse actual past observations directly}\\\\\\text{Monte Carlo: }&\\text{use past data to estimate model parameters}\\\\&\\text{then simulate new artificial observations}\\end{aligned}'
+    },
+    {
       question:'Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
       aliases:['Sensitivity Bootstrapping Inverse Transformation'],
       latex:'\\begin{aligned}\\text{Sensitivity: }&\\text{test alternative assumptions/distributions}\\\\\\text{Bootstrapping: }&\\text{resample history with replacement}\\\\\\text{Inverse transform: }&\\text{generate draws from chosen distribution}\\end{aligned}'
