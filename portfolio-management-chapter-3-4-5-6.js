@@ -111,6 +111,11 @@
       latex:'\\begin{aligned}&\\text{Shock impact: two methods}\\\\&\\text{Sensitivity: fixed initial betas/sensitivities}\\\\&\\text{Full revaluation: full repricing}\\\\&\\text{Betas/sensitivities adjust with factors}\\end{aligned}'
     },
     {
+      question:'Reverse Stress Testing — Work Backward from Failure',
+      aliases:['Reverse Stress Test'],
+      latex:'\\begin{aligned}\\text{Stress test: }&\\text{Given a shock, what happens to the portfolio?}\\\\\\text{Reverse stress test: }&\\text{Given a bad outcome, what shocks could cause it?}\\\\&\\text{Start with failure}\\rightarrow\\text{identify scenarios that produce it}\\end{aligned}'
+    },
+    {
       question:'Stress Testing — Sensitivity Measures vs Full Revaluation',
       aliases:['Full Revaluation vs Sensitivity Measures'],
       latex:'\\begin{aligned}\\text{Small/moderate move: }&\\text{use sensitivity measures}\\\\&\\text{(duration, convexity, delta, gamma)}\\\\\\text{Extreme stress: }&\\text{use full revaluation}\\\\\\text{Especially: }&\\text{extreme stress + option-embedded securities}\\\\&\\Rightarrow\\text{full revaluation preferred}\\end{aligned}'
