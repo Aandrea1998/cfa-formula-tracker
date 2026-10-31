@@ -204,22 +204,7 @@
   window.cfaRollingInfo=info;
   window.cfaRollingWindow=WINDOW;
 
-  function wrapRatingButton(id,result){
-    const btn=$(id);
-    if(!btn||btn.dataset.rollingWrapped==='1')return;
-    const original=btn.onclick;
-    btn.onclick=function(e){
-      if(reviewIds.length){
-        const c=cards.find(x=>x.id===reviewIds[reviewPos]);
-        if(c)appendAttempt(c,result);
-      }
-      return original?original.call(this,e):undefined;
-    };
-    btn.dataset.rollingWrapped='1';
-  }
-
-  wrapRatingButton('markWrong','missed');
-  wrapRatingButton('markDifficult','difficult');
-  wrapRatingButton('markKnown','known');
+  // Review attempts are persisted by review-fix.js. Do not wrap the rating
+  // buttons here as well, otherwise one click can be counted twice.
   refreshRolling();
 })();
