@@ -78,7 +78,9 @@
       ['Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
        '\\begin{aligned}\\text{Sensitivity: }&\\text{test assumptions/distributions}\\\\\\text{Bootstrapping: }&\\text{resample history with replacement}\\\\\\text{Inverse transform: }&\\text{draw from chosen distribution}\\end{aligned}'],
       ['Risk Measures — What Each Metric Focuses On',
-       '\\begin{aligned}\\text{CVaR: }&\\text{avg loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{extreme shocks}\\\\\\text{Scenario: }&\\text{portfolio impact under scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{losses from simulated paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from add/remove}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; small position change}\\end{aligned}']
+       '\\begin{aligned}\\text{CVaR: }&\\text{avg loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{extreme shocks}\\\\\\text{Scenario: }&\\text{portfolio impact under scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{losses from simulated paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from add/remove}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; small position change}\\end{aligned}'],
+      ['Impact of Risk-Factor Shocks — Sensitivity vs Full Revaluation',
+       '\\begin{aligned}&\\text{Shock impact: two methods}\\\\&\\text{Sensitivity: fixed initial betas/sensitivities}\\\\&\\text{Full revaluation: full repricing}\\\\&\\text{Betas/sensitivities adjust with factors}\\end{aligned}']
     ];
     for(const [q,latex] of fitFixes){
       const card=cards.find(x=>x.subject===SUBJECT&&norm(x.question)===norm(q));
