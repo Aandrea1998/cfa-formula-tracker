@@ -1132,6 +1132,30 @@
     if(!Array.isArray(dnnCard.history)){dnnCard.history=[];changed=1;}
   }
 
+  const dataShoppingQuestion='Data Shopping — Definition & Fix';
+  const dataShoppingLatex='\\begin{aligned}\\text{Data shopping: }&\\text{search across data/models until a favorable or significant result appears}\\\\&\\Rightarrow\\text{false positives + poor out-of-sample performance}\\\\\\text{Fix: }&\\text{higher statistical hurdle + cross-validation}\\end{aligned}';
+  const dataShoppingAnswer='Data shopping means repeatedly searching across datasets, variables, or models until a favorable/statistically significant result appears. This increases false-positive risk and weakens out-of-sample performance. Main protections: use a higher statistical hurdle and cross-validation.';
+  let dataShoppingCard=cards.find(c=>c.subject===SUBJECT&&c.question===dataShoppingQuestion);
+  if(!dataShoppingCard){
+    dataShoppingCard={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question:dataShoppingQuestion,
+      answer:dataShoppingAnswer,
+      latex:dataShoppingLatex,
+      subject:SUBJECT,
+      topic:'Machine Learning',
+      status:null,
+      history:[]
+    };
+    cards.push(dataShoppingCard);
+    changed=1;
+  }else{
+    if(dataShoppingCard.answer!==dataShoppingAnswer){dataShoppingCard.answer=dataShoppingAnswer;changed=1;}
+    if(dataShoppingCard.latex!==dataShoppingLatex){dataShoppingCard.latex=dataShoppingLatex;changed=1;}
+    if(dataShoppingCard.topic!=='Machine Learning'){dataShoppingCard.topic='Machine Learning';changed=1;}
+    if(!Array.isArray(dataShoppingCard.history)){dataShoppingCard.history=[];changed=1;}
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
   }
