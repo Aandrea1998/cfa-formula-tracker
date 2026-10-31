@@ -16,6 +16,11 @@
 
   const SPECS=[
     {
+      question:'Good Benchmark — Key Qualities',
+      aliases:['Benchmark Qualities','Choice of Benchmark'],
+      latex:'\\begin{aligned}\\text{Representative: }&\\text{matches the investment universe}\\\\\\text{Replicable: }&\\text{can be implemented at low cost}\\\\\\text{Ex ante: }&\\text{weights are verifiable}\\\\\\text{Ex post: }&\\text{return data are timely}\\end{aligned}'
+    },
+    {
       question:'Benchmark Portfolio Return',
       aliases:['Benchmark Return'],
       latex:'R_B=\\sum_{i=1}^{N}w_{B,i}R_i'
