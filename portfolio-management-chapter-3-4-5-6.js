@@ -91,6 +91,11 @@
       latex:'\\begin{aligned}\\text{Small/moderate move: }&\\text{use sensitivity measures}\\\\&\\text{(duration, convexity, delta, gamma)}\\\\\\text{Extreme stress: }&\\text{use full revaluation}\\\\\\text{Especially: }&\\text{extreme stress + option-embedded securities}\\\\&\\Rightarrow\\text{full revaluation preferred}\\end{aligned}'
     },
     {
+      question:'Historical vs Hypothetical vs Stress Test — Number of Risk Factors',
+      aliases:['Scenario Analysis vs Stress Test — Number of Risk Factors'],
+      latex:'\\begin{aligned}\\text{Historical scenario: }&\\text{many risk factors from a real past event}\\\\\\text{Hypothetical scenario: }&\\text{many risk factors in a custom plausible combination}\\\\\\text{Stress test: }&\\text{usually one/few key risk factors pushed to extremes}\\end{aligned}'
+    },
+    {
       question:'Historical Scenario Analysis — Bonds',
       aliases:['Historical Scenario Analysis for Bonds'],
       latex:'\\begin{aligned}\\text{Historical scenario analysis: }&\\text{use historical yields}\\\\&\\text{apply historical yield shocks to current bond holdings}\\end{aligned}'
