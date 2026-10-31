@@ -51,6 +51,11 @@
       latex:'\\begin{aligned}\\mathrm{BEI}&=y_{\\text{Nominal}}-y_{\\text{Real}}\\\\&=E(\\pi)+\\text{Inflation Risk Premium}\\end{aligned}'
     },
     {
+      question:'Real Risk-Free Rate — Expected Growth & Growth Uncertainty',
+      aliases:['Expected Growth Growth Uncertainty and Real Rates'],
+      latex:'\\begin{aligned}E(g)\\uparrow&\\Rightarrow\\text{future wealth}\\uparrow\\Rightarrow\\text{consume/borrow more today}\\\\&\\Rightarrow r_f^{real}\\uparrow\\\\\\sigma(g)\\uparrow&\\Rightarrow\\text{higher required compensation}\\\\&\\Rightarrow r_f^{real}\\uparrow\\end{aligned}'
+    },
+    {
       question:'Upward-Sloping Yield Curve — Expectations vs Term Premium',
       aliases:['Upward-Sloping Yield Curve Interpretation'],
       latex:'\\begin{aligned}y_{LT}&\\approx\\text{avg. expected future short rates}+\\text{term/risk premium}\\\\\\text{Upward slope: }&y_{LT}>y_{ST}\\\\&\\Rightarrow\\text{rates may be expected to rise}\\\\&\\text{or term premium may simply be positive}\\\\\\therefore\\;&\\text{future rate direction is indeterminate}\\end{aligned}'
