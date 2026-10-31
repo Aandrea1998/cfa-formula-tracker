@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Hedge Fund vs Traditional Manager — Key Risk Measures',
+      aliases:['Hedge Fund Risk Measures vs Active Share'],
+      latex:'\\begin{aligned}\\text{Hedge fund risk: }&\\text{VaR + Gross Exposure}\\\\\\text{Traditional benchmarked manager: }&\\text{Active Share}\\end{aligned}'
+    },
+    {
       question:'Active Share vs Tracking Error',
       aliases:['Active Share and Tracking Error'],
       latex:'\\begin{aligned}\\text{Active Share: }&\\text{how different are portfolio holdings from benchmark?}\\\\\\text{Tracking Error: }&\\text{how different are portfolio returns from benchmark?}\\end{aligned}'
