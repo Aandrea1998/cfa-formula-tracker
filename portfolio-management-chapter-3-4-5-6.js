@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Active Share vs Tracking Error',
+      aliases:['Active Share and Tracking Error'],
+      latex:'\\begin{aligned}\\text{Active Share: }&\\text{how different are portfolio holdings from benchmark?}\\\\\\text{Tracking Error: }&\\text{how different are portfolio returns from benchmark?}\\end{aligned}'
+    },
+    {
       question:'Stress Testing — Sensitivity Measures vs Full Revaluation',
       aliases:['Full Revaluation vs Sensitivity Measures'],
       latex:'\\begin{aligned}\\text{Small/moderate move: }&\\text{use sensitivity measures}\\\\&\\text{(duration, convexity, delta, gamma)}\\\\\\text{Extreme stress: }&\\text{use full revaluation}\\\\\\text{Especially: }&\\text{extreme stress + option-embedded securities}\\\\&\\Rightarrow\\text{full revaluation preferred}\\end{aligned}'
