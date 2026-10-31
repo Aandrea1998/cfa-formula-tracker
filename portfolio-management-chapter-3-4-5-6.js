@@ -116,6 +116,11 @@
       latex:'\\begin{aligned}\\text{Historical scenario analysis: }&\\text{use historical yields}\\\\&\\text{apply historical yield shocks to current bond holdings}\\end{aligned}'
     },
     {
+      question:'Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
+      aliases:['Sensitivity Bootstrapping Inverse Transformation'],
+      latex:'\\begin{aligned}\\text{Sensitivity analysis: }&\\text{test alternative assumptions / distributions}\\\\\\text{Bootstrapping: }&\\text{resample historical data with replacement}\\\\\\text{Inverse transformation: }&\\text{generate random observations from a chosen distribution}\\end{aligned}'
+    },
+    {
       question:'Risk Measures — What Each Metric Focuses On',
       aliases:['Risk Measure Focus','VaR Stress Test Scenario Analysis Comparison'],
       latex:'\\begin{aligned}\\text{CVaR: }&\\text{average loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{impact of extreme specified shocks}\\\\\\text{Scenario analysis: }&\\text{portfolio impact under coherent hypothetical/historical scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{loss distribution from simulated market paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from adding/removing a position}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; sensitivity to a small position change}\\end{aligned}'
