@@ -68,6 +68,23 @@
     const portfolioReturnLatex='E(R_P)=\\sum_{i=1}^{N}w_iE(R_i)';
     if(setCard(portfolioReturnCard,'Portfolio Expected Return — Weighted Average',portfolioReturnLatex))changed++;
 
+    const fitFixes=[
+      ['Historical vs Hypothetical vs Stress Test — Number of Risk Factors',
+       '\\begin{aligned}\\text{Historical: }&\\text{many factors; real past event}\\\\\\text{Hypothetical: }&\\text{many factors; custom plausible mix}\\\\\\text{Stress test: }&\\text{one/few factors; extreme shocks}\\end{aligned}'],
+      ['Historical Scenario Analysis — Bonds',
+       '\\begin{aligned}\\text{Historical scenario: }&\\text{use historical yields}\\\\&\\text{apply yield shocks to current bonds}\\end{aligned}'],
+      ['Look-Ahead Bias vs Stale Data',
+       '\\begin{aligned}\\text{March uses May earnings} &\\Rightarrow\\text{Look-ahead}\\\\\\text{June uses old earnings} &\\Rightarrow\\text{Stale data}\\\\\\text{Look-ahead: }&\\text{info too early}\\\\\\text{Stale: }&\\text{info too late}\\end{aligned}'],
+      ['Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
+       '\\begin{aligned}\\text{Sensitivity: }&\\text{test assumptions/distributions}\\\\\\text{Bootstrapping: }&\\text{resample history with replacement}\\\\\\text{Inverse transform: }&\\text{draw from chosen distribution}\\end{aligned}'],
+      ['Risk Measures — What Each Metric Focuses On',
+       '\\begin{aligned}\\text{CVaR: }&\\text{avg loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{extreme shocks}\\\\\\text{Scenario: }&\\text{portfolio impact under scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{losses from simulated paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from add/remove}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; small position change}\\end{aligned}']
+    ];
+    for(const [q,latex] of fitFixes){
+      const card=cards.find(x=>x.subject===SUBJECT&&norm(x.question)===norm(q));
+      if(setCard(card,q,latex))changed++;
+    }
+
     if(changed){
       try{if(typeof save==='function')save();}catch(_e){}
       try{if(typeof refresh==='function')refresh();}catch(_e){}
