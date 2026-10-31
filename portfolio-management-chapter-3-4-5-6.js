@@ -116,6 +116,11 @@
       latex:'\\begin{aligned}\\text{Historical scenario analysis: }&\\text{use historical yields}\\\\&\\text{apply historical yield shocks to current bond holdings}\\end{aligned}'
     },
     {
+      question:'Look-Ahead Bias vs Stale Data',
+      aliases:['Look Ahead Bias and Stale Data'],
+      latex:'\\begin{aligned}\\text{Example: }&\\text{May earnings used in March backtest}\\Rightarrow\\text{Look-ahead bias}\\\\&\\text{May earnings available, but June still uses old data}\\Rightarrow\\text{Stale data}\\\\\\text{Look-ahead bias: }&\\text{information used too early}\\\\\\text{Stale data: }&\\text{information used too late}\\end{aligned}'
+    },
+    {
       question:'Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
       aliases:['Sensitivity Bootstrapping Inverse Transformation'],
       latex:'\\begin{aligned}\\text{Sensitivity analysis: }&\\text{test alternative assumptions / distributions}\\\\\\text{Bootstrapping: }&\\text{resample historical data with replacement}\\\\\\text{Inverse transformation: }&\\text{generate random observations from a chosen distribution}\\end{aligned}'
