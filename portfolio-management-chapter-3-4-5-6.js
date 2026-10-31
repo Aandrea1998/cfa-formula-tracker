@@ -113,7 +113,7 @@
     {
       question:'Reverse Stress Testing — Work Backward from Failure',
       aliases:['Reverse Stress Test'],
-      latex:'\\begin{aligned}\\text{Stress test: }&\\text{Given a shock, what happens to the portfolio?}\\\\\\text{Reverse stress test: }&\\text{Given a bad outcome, what shocks could cause it?}\\\\&\\text{Start with failure}\\rightarrow\\text{identify scenarios that produce it}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{Stress test: }&\\text{Given a shock, what happens to the portfolio?}\\\\\\text{Reverse stress test: }&\\text{Given a bad outcome, what shocks could cause it?}\\\\&\\text{Start with failure}\\rightarrow\\text{identify scenarios that produce it}\\\\\\text{Basis risk: }&\\text{hedge and exposure do not offset as expected}\\end{aligned}'
     },
     {
       question:'Stress Testing — Sensitivity Measures vs Full Revaluation',
