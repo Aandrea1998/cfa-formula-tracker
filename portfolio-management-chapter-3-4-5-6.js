@@ -108,27 +108,27 @@
     {
       question:'Historical vs Hypothetical vs Stress Test — Number of Risk Factors',
       aliases:['Scenario Analysis vs Stress Test — Number of Risk Factors'],
-      latex:'\\begin{aligned}\\text{Historical scenario: }&\\text{many risk factors from a real past event}\\\\\\text{Hypothetical scenario: }&\\text{many risk factors in a custom plausible combination}\\\\\\text{Stress test: }&\\text{usually one/few key risk factors pushed to extremes}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{Historical: }&\\text{many factors; real past event}\\\\\\text{Hypothetical: }&\\text{many factors; custom plausible mix}\\\\\\text{Stress test: }&\\text{one/few factors; extreme shocks}\\end{aligned}'
     },
     {
       question:'Historical Scenario Analysis — Bonds',
       aliases:['Historical Scenario Analysis for Bonds'],
-      latex:'\\begin{aligned}\\text{Historical scenario analysis: }&\\text{use historical yields}\\\\&\\text{apply historical yield shocks to current bond holdings}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{Historical scenario: }&\\text{use historical yields}\\\\&\\text{apply yield shocks to current bonds}\\end{aligned}'
     },
     {
       question:'Look-Ahead Bias vs Stale Data',
       aliases:['Look Ahead Bias and Stale Data'],
-      latex:'\\begin{aligned}\\text{Example: }&\\text{May earnings used in March backtest}\\Rightarrow\\text{Look-ahead bias}\\\\&\\text{May earnings available, but June still uses old data}\\Rightarrow\\text{Stale data}\\\\\\text{Look-ahead bias: }&\\text{information used too early}\\\\\\text{Stale data: }&\\text{information used too late}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{March uses May earnings} &\\Rightarrow\\text{Look-ahead}\\\\\\text{June still uses old earnings} &\\Rightarrow\\text{Stale data}\\\\\\text{Look-ahead: }&\\text{info used too early}\\\\\\text{Stale data: }&\\text{info used too late}\\end{aligned}'
     },
     {
       question:'Simulation Techniques — Sensitivity vs Bootstrapping vs Inverse Transformation',
       aliases:['Sensitivity Bootstrapping Inverse Transformation'],
-      latex:'\\begin{aligned}\\text{Sensitivity analysis: }&\\text{test alternative assumptions / distributions}\\\\\\text{Bootstrapping: }&\\text{resample historical data with replacement}\\\\\\text{Inverse transformation: }&\\text{generate random observations from a chosen distribution}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{Sensitivity: }&\\text{test alternative assumptions/distributions}\\\\\\text{Bootstrapping: }&\\text{resample history with replacement}\\\\\\text{Inverse transform: }&\\text{generate draws from chosen distribution}\\end{aligned}'
     },
     {
       question:'Risk Measures — What Each Metric Focuses On',
       aliases:['Risk Measure Focus','VaR Stress Test Scenario Analysis Comparison'],
-      latex:'\\begin{aligned}\\text{CVaR: }&\\text{average loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{impact of extreme specified shocks}\\\\\\text{Scenario analysis: }&\\text{portfolio impact under coherent hypothetical/historical scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{loss distribution from simulated market paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from adding/removing a position}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; sensitivity to a small position change}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{CVaR: }&\\text{avg loss beyond VaR; tail risk}\\\\\\text{Stress test: }&\\text{extreme specified shocks}\\\\\\text{Scenario analysis: }&\\text{portfolio impact under scenarios}\\\\\\text{Monte Carlo VaR: }&\\text{losses from simulated paths}\\\\\\text{Incremental VaR: }&\\Delta VaR\\text{ from add/remove position}\\\\\\text{Marginal VaR: }&\\frac{\\partial VaR}{\\partial x_i}\\text{; small position change}\\end{aligned}'
     },
     {
       question:'Conditional VaR (CVaR) — Expected Tail Loss',
