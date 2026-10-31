@@ -71,6 +71,11 @@
       latex:'\\begin{aligned}\\text{Closet index: }&\\text{active risk very low}\\\\&\\text{Sharpe ratio }\\approx\\text{ benchmark Sharpe}\\\\\\text{Information ratio: }&\\text{may be small, negative, or indeterminate}\\\\&\\text{because active return and active risk are both tiny}\\end{aligned}'
     },
     {
+      question:'Government Bond Risk Premium — Key Relationships',
+      aliases:['Government Bond Risk Premium Relationships'],
+      latex:'\\begin{aligned}\\text{Government bond risk premium: }&>0\\\\\\text{Consumption hedging benefit}\\uparrow&\\Rightarrow\\text{risk premium}\\downarrow\\quad(\\text{negative relation})\\\\\\text{Bond maturity}\\uparrow&\\Rightarrow\\text{risk premium}\\uparrow\\\\&\\Rightarrow\\text{normal yield curve tends to slope upward}\\end{aligned}'
+    },
+    {
       question:'Yield Curve Shape — Policy Rates, Inflation Premium & Bond Risk Premium',
       aliases:['Yield Curve Shape Drivers'],
       latex:'\\begin{aligned}\\text{Policy-rate expectations: }&E(i_{future})\\uparrow\\Rightarrow\\text{steeper/upward curve}\\\\&E(i_{future})\\downarrow\\Rightarrow\\text{flatter/inverted curve}\\\\\\text{Inflation premium: }&\\pi_{prem,LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\\\\\text{Bond risk premium: }&RP_{LT}\\uparrow\\Rightarrow y_{LT}\\uparrow\\Rightarrow\\text{steeper curve}\\end{aligned}'
