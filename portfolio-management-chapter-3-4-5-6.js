@@ -81,6 +81,11 @@
       latex:'\\begin{aligned}R_P^{(j)}&=\\sum_{i=1}^{N}w_iR_i^{(j)}\\\\R_{VaR,\\alpha}&=\\alpha\\text{-percentile of simulated portfolio returns}\\end{aligned}'
     },
     {
+      question:'Risk Categories by Institutional Investor Type',
+      aliases:['Institutional Investor Risk Categories'],
+      latex:'\\begin{aligned}\\text{Liquidity Gap: }&\\text{Bank}\\\\\\text{VaR: }&\\text{Bank / Hedge Fund / Pension Plan}\\\\\\text{Tracking Error: }&\\text{Not a primary focus here}\\\\\\text{Leverage: }&\\text{Bank / Hedge Fund}\\\\\\text{Scenario Analysis: }&\\text{Bank / Hedge Fund / Pension Plan}\\\\\\text{Key Rate Duration: }&\\text{Bank / Pension Plan}\\\\\\text{Active Share: }&\\text{Not a primary focus here}\\\\\\text{Operational Risk Capital: }&\\text{Bank}\\end{aligned}'
+    },
+    {
       question:'Relative VaR vs Surplus at Risk vs Maximum Drawdown',
       aliases:['Relative VaR Surplus at Risk Maximum Drawdown Comparison'],
       latex:'\\begin{aligned}\\text{Relative VaR: }&\\text{future underperformance vs benchmark}\\\\&\\text{best for benchmark-relative portfolios}\\\\\\text{Surplus at Risk: }&\\text{risk of assets relative to liabilities}\\\\&\\text{best for pension / liability-driven portfolios}\\\\\\text{Maximum Drawdown: }&\\text{worst peak-to-trough decline}\\\\&\\text{useful for absolute-return / hedge-fund downside risk}\\end{aligned}'
