@@ -98,30 +98,6 @@
     });
   }
 
-  function visibleAnchor(){
-    if(!root||document.getElementById('formulasView')?.style.display==='none')return null;
-    const rows=[...root.querySelectorAll('tbody tr')];
-    const topOffset=8;
-    let best=null;
-    for(const row of rows){
-      const r=row.getBoundingClientRect();
-      if(r.bottom<=topOffset)continue;
-      best=row;
-      break;
-    }
-    if(!best)return null;
-    const id=(best.children[0]?.textContent||'').trim();
-    return id?{id,top:best.getBoundingClientRect().top}:null;
-  }
-
-  function restoreAnchor(anchor){
-    if(!anchor||!root)return;
-    const row=[...root.querySelectorAll('tbody tr')].find(r=>(r.children[0]?.textContent||'').trim()===anchor.id);
-    if(!row)return;
-    const delta=row.getBoundingClientRect().top-anchor.top;
-    if(Math.abs(delta)>0.5)window.scrollBy({top:delta,left:0,behavior:'auto'});
-  }
-
   function normalizeLibrary(){
     if(!root)return;
     root.querySelectorAll('table').forEach(alignTable);
@@ -132,15 +108,9 @@
   const scheduleLibrary=()=>{
     if(libraryQueued)return;
     libraryQueued=true;
-    const anchor=visibleAnchor();
     requestAnimationFrame(()=>{
       libraryQueued=false;
       normalizeLibrary();
-      restoreAnchor(anchor);
-      setTimeout(()=>{
-        normalizeLibrary();
-        restoreAnchor(anchor);
-      },60);
     });
   };
 
