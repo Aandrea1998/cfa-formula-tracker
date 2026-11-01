@@ -61,6 +61,11 @@
       latex:'\\begin{aligned}\\frac{P_0}{S_0}&=\\left(\\frac{E_0}{S_0}\\right)\\frac{(1-b)(1+g)}{r-g}\\\\&=\\text{Profit Margin}\\times\\text{Justified Trailing }P/E\\end{aligned}'
     },
     {
+      question:'Sustainable Growth Model — Key Assumptions',
+      aliases:['Sustainable Growth Model Assumptions'],
+      latex:'\\begin{aligned}\\text{Growth financed by: }&\\text{debt + retained earnings}\\\\\\text{New common equity: }&\\text{none}\\\\\\text{Capital structure: }&\\text{target maintained}\\\\ROE:&\\text{ constant}\\end{aligned}'
+    },
+    {
       question:'Sustainable Growth — DuPont Decomposition',
       aliases:['Sustainable growth decomposition'],
       latex:'g=b\\times PM_0\\times\\frac{\\text{Sales}}{\\text{Total Assets}}\\times\\frac{\\text{Total Assets}}{\\text{Shareholders\' Equity}}'
