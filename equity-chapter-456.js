@@ -43,7 +43,7 @@
     {
       question:'P/B Valuation — When It Is Most Useful',
       aliases:['Price-to-Book — Appropriate Uses','P/B — Appropriate Situations'],
-      latex:'\\begin{aligned}\\text{P/B useful when: }&\\text{company may not remain a going concern}\\\\&\\text{asset values are central / liquidation matters}\\\\&\\text{firm is asset-heavy (e.g. banks, insurers)}\\\\&\\text{EPS is negative or highly volatile}\\end{aligned}'
+      latex:'\\begin{aligned}\\text{P/B useful when: }&\\text{company may not remain a going concern}\\\\&\\text{assets are mostly liquid and reliably valued}\\\\&\\text{e.g. banks, insurers, investment firms}\\\\&\\text{EPS is negative or highly volatile}\\end{aligned}'
     },
     {
       question:'Justified P/B — Forecasted Fundamentals',
