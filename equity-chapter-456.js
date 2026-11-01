@@ -41,6 +41,11 @@
       latex:'\\begin{aligned}\\text{Total Equity}&=\\text{Assets}-\\text{Liabilities}\\\\\\text{Common Equity}&=\\text{Total Shareholders\' Equity}-\\text{Senior Equity Claims}\\\\BVPS&=\\frac{\\text{Common Shareholders\' Equity}}{\\text{Common Shares Outstanding}}\\end{aligned}'
     },
     {
+      question:'P/B Valuation — When It Is Most Useful',
+      aliases:['Price-to-Book — Appropriate Uses','P/B — Appropriate Situations'],
+      latex:'\\begin{aligned}\\text{P/B useful when: }&\\text{company may not remain a going concern}\\\\&\\text{asset values are central / liquidation matters}\\\\&\\text{firm is asset-heavy (e.g. banks, insurers)}\\\\&\\text{EPS is negative or highly volatile}\\end{aligned}'
+    },
+    {
       question:'Justified P/B — Forecasted Fundamentals',
       aliases:['Justified P/B – Forecasted Fundamentals'],
       latex:'\\begin{aligned}\\frac{P_0}{B_0}&=\\frac{ROE-g}{r-g}\\\\g&=b\\times ROE\\end{aligned}'
