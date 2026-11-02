@@ -108,6 +108,31 @@
     if(payoutCard.formulaImage){delete payoutCard.formulaImage;changed=true;}
   }
 
+
+  // Residual income: book-value adjustments. Content-only review card.
+  const riBVPrompt='Residual Income — What Adjustments Change Book Value?';
+  const riBVLatex='\\begin{aligned}B_0^{adj}&=B_0+\\Delta FV(\\text{Assets})-\\Delta FV(\\text{Liabilities})\\\\\\text{Fair-value remeasurement: }&\\Delta B_0=\\Delta A-\\Delta L\\\\\\text{Operating lease capitalization: }&\\Delta A\\approx\\Delta L\\Rightarrow\\Delta B_0\\approx0\\\\\\text{Nonrecurring items already in }B_0:&\\text{ no BV adjustment; normalize future RI}\\end{aligned}';
+
+  let riBVCard=cards.find(c=>
+    c.subject==='Equity Valuation' &&
+    norm(c.question)===norm(riBVPrompt)
+  );
+
+  if(!riBVCard){
+    const nextId=cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1;
+    cards.push({
+      id:nextId,
+      question:riBVPrompt,
+      answer:riBVLatex,
+      latex:riBVLatex,
+      subject:'Equity Valuation',
+      topic:'Chapter 4-5-6',
+      status:null,
+      history:[]
+    });
+    changed=true;
+  }
+
   if(changed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
