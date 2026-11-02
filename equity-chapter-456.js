@@ -151,6 +151,11 @@
       latex:'V_0=B_0+\\sum_{t=1}^{T-1}\\frac{E_t-rB_{t-1}}{(1+r)^t}+\\frac{E_T-rB_{T-1}}{(1+r-\\omega)(1+r)^{T-1}}'
     },
     {
+      question:'Private Company Terminal Value — CCM vs EEM vs Market Multiple',
+      aliases:['CCM vs EEM vs Market Multiple','Private Company Terminal Value Methods'],
+      latex:'\\begin{aligned}\\text{CCM: }&\\text{capitalize sustainable cash flow}\\rightarrow\\text{whole business}\\\\\\text{EEM: }&\\text{value excess earnings/intangibles}\\rightarrow\\text{specific intangible assets}\\\\\\text{Market multiple: }&\\text{apply comparable-company multiple}\\rightarrow\\text{whole business}\\end{aligned}'
+    },
+    {
       question:'Private Company FCFF DCF — Forecast and Terminal Value',
       aliases:['Private Company – Key Areas','Free Cash Flow Valuation','Private Company FCFF DCF'],
       latex:'V_0=\\sum_{t=1}^{n}\\frac{FCFF_t}{(1+WACC)^t}+\\frac{TV_n}{(1+WACC)^n}'
