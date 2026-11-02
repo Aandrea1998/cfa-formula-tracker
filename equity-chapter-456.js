@@ -168,7 +168,7 @@
     {
       question:'Private Company Required Return — CAPM, Expanded CAPM and Build-Up',
       aliases:['Private Company – Required Return, Discounts & Premiums','Expanded CAPM','Build-Up Approach'],
-      latex:'\\begin{aligned}r_e&=r_f+\\beta(R_m-r_f)\\\\r_e&=r_f+\\beta(R_m-r_f)+SP+CSRP\\\\r_e&=r_f+ERP+SP+IRP+CSRP\\\\\\text{Expected inflation: }&\\text{do not add separately; already embedded in nominal }r_f\\end{aligned}'
+      latex:'\\begin{aligned}r_e&=r_f+\\beta(R_m-r_f)\\\\r_e&=r_f+\\beta(R_m-r_f)+SP+CSRP\\\\r_e&=r_f+ERP+SP+IRP+CSRP\\\\\\text{CAPM limitation for private firms: }&\\text{assumes well-diversified investors}\\\\&\\Rightarrow\\text{may omit relevant company-specific risk}\\\\\\text{Expected inflation: }&\\text{do not add separately; already embedded in nominal }r_f\\end{aligned}'
     },
     {
       question:'Private Company Discounts — DLOC, DLOM and Combined Discount',
