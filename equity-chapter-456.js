@@ -151,6 +151,11 @@
       latex:'V_0=B_0+\\sum_{t=1}^{T-1}\\frac{E_t-rB_{t-1}}{(1+r)^t}+\\frac{E_T-rB_{T-1}}{(1+r-\\omega)(1+r)^{T-1}}'
     },
     {
+      question:'Excess Earnings Method (EEM) — Key Takeaways',
+      aliases:['EEM — Key Takeaways','Excess Earnings Method — Private Company Use'],
+      latex:'\\begin{aligned}1.&\\ \\text{Rarely used to value entire private businesses; mainly small firms}\\\\2.&\\ \\text{Required returns on WC, tangible assets and residual income can be subjective}\\\\3.&\\ \\text{Residual income is widely accepted for intangible-asset valuation in financial reporting}\\end{aligned}'
+    },
+    {
       question:'Private Company Terminal Value — CCM vs EEM vs Market Multiple',
       aliases:['CCM vs EEM vs Market Multiple','Private Company Terminal Value Methods'],
       latex:'\\begin{aligned}\\text{CCM: }&\\text{capitalize sustainable cash flow}\\rightarrow\\text{whole business}\\\\\\text{EEM: }&\\text{value excess earnings/intangibles}\\rightarrow\\text{specific intangible assets}\\\\\\text{Market multiple: }&\\text{apply comparable-company multiple}\\rightarrow\\text{whole business}\\end{aligned}'
