@@ -166,6 +166,11 @@
       latex:'\\text{Normalized Earnings}=\\text{Reported Earnings}\\pm\\text{Normalization Adjustments}'
     },
     {
+      question:'Private Company Discount Rate — Key Selection Takeaways',
+      aliases:['Private Company Discount Rate Selection','Private Company WACC Takeaways'],
+      latex:'\\begin{aligned}\\text{Less access to debt: }&\\Rightarrow\\text{more equity financing}\\Rightarrow\\text{WACC may be higher}\\\\\\text{Acquisition valuation: }&\\text{use target capital structure/risk, not buyer cost of capital}\\\\\\text{Managerial inexperience: }&\\text{no automatic premium; any adjustment is judgmental}\\end{aligned}'
+    },
+    {
       question:'Private Company Required Return — CAPM, Expanded CAPM and Build-Up',
       aliases:['Private Company – Required Return, Discounts & Premiums','Expanded CAPM','Build-Up Approach'],
       latex:'\\begin{aligned}r_e&=r_f+\\beta(R_m-r_f)\\\\r_e&=r_f+\\beta(R_m-r_f)+SP+CSRP\\\\r_e&=r_f+ERP+SP+IRP+CSRP\\\\\\text{CAPM limitation for private firms: }&\\text{assumes well-diversified investors}\\\\&\\Rightarrow\\text{may omit relevant company-specific risk}\\\\\\text{Expected inflation: }&\\text{do not add separately; already embedded in nominal }r_f\\end{aligned}'
