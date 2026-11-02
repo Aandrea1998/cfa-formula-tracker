@@ -45,6 +45,14 @@
     added++;
   }else if(setFormula(financingCard,financingQuestion,financingLatex))changed++;
 
+  // Keep the P/B use-case card synchronized in existing browser storage.
+  const pbQuestion='P/B Valuation — When It Is Most Useful';
+  const pbLatex='\\begin{aligned}\\text{P/B useful when: }&\\text{company may not remain a going concern}\\\\&\\text{assets are mostly liquid and reliably valued}\\\\&\\text{e.g. banks, insurers, investment firms}\\\\&\\text{EPS is negative or highly volatile}\\end{aligned}';
+  let pbCard=byQuestion(pbQuestion)||byQuestion('Price-to-Book — Appropriate Uses')||byQuestion('P/B — Appropriate Situations');
+  if(pbCard){
+    if(setFormula(pbCard,pbQuestion,pbLatex))changed++;
+  }
+
   if(changed||added||removed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
