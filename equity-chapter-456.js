@@ -186,6 +186,11 @@
       latex:'\\begin{aligned}RI_t&=\\text{Normalized Income}-(WC\\times r_{WC})-(FA\\times r_{FA})\\\\RV_t&=\\frac{RI_t(1+g)}{r_{RI}-g}\\\\\\text{Firm Value}&=WC+FA+RV_t\\end{aligned}'
     },
     {
+      question:'Excess Earnings Method — Intangibles vs Total Firm Value',
+      aliases:['Excess Earnings — Intangible Value vs Firm Value','EEM — Add Back Tangible Assets'],
+      latex:'\\begin{aligned}\\text{Excess Earnings}&=NI-(WC\\times r_{WC})-(FA\\times r_{FA})\\\\\\text{Value of Intangibles}&=\\frac{\\text{Excess Earnings}(1+g)}{r-g}\\\\\\text{Firm Value}&=\\text{Value of Intangibles}+WC+FA\\\\\\textbf{Key takeaway: }&\\text{capitalized excess earnings value only the intangibles; add tangible assets for total firm value.}\\end{aligned}'
+    },
+    {
       question:'Market-Based Private Company Valuation — Selected Multiples',
       aliases:['Private Company – Market-Based Approaches','Equity Multiple','Enterprise Value Multiple'],
       latex:'\\begin{aligned}\\text{Equity Value}&=(P/E)_{\\text{Selected}}\\times\\text{Subject Earnings}\\\\EV&=(EV/EBITDA)_{\\text{Selected}}\\times EBITDA_{\\text{Subject}}\\\\EV&=(EV/Sales)_{\\text{Selected}}\\times Sales_{\\text{Subject}}\\end{aligned}'
