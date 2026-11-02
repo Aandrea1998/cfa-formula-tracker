@@ -201,6 +201,11 @@
       latex:'\\begin{aligned}\\text{Excess Earnings}&=NI-(WC\\times r_{WC})-(FA\\times r_{FA})\\\\\\text{Value of Intangibles}&=\\frac{\\text{Excess Earnings}(1+g)}{r-g}\\\\\\text{Firm Value}&=\\text{Value of Intangibles}+WC+FA\\\\\\textbf{Key takeaway: }&\\text{capitalized excess earnings value only the intangibles; add tangible assets for total firm value.}\\end{aligned}'
     },
     {
+      question:'Private Company Valuation — Main Takeaways by Method',
+      aliases:['Asset-Based vs Guideline Transactions vs Guideline Public Company'],
+      latex:'\\begin{aligned}\\text{Asset-based: }&\\text{best when assets are saleable/repurposable and asset value is central}\\\\&\\text{especially useful for asset-rich or liquidation-type situations}\\\\\\text{Guideline transactions: }&\\text{use actual private-company transactions}\\\\&\\text{best when transactions are recent, frequent and truly comparable}\\\\\\text{Guideline public company: }&\\text{use multiples from similar listed firms}\\\\&\\text{best when several close public comparables exist and differences can be adjusted}\\end{aligned}'
+    },
+    {
       question:'Private Company Market Approach — Key Characteristics',
       aliases:['Market Approach — Key Characteristics','Private Company Market Approach'],
       latex:'\\begin{aligned}\\text{Market approach: }&\\text{uses public-company and transaction comparables}\\\\&\\text{works best with reliable comparable-market data}\\\\&\\text{especially suitable for stable, mature companies}\\\\&\\text{reflects current market pricing}\\\\&\\text{adjust for size, growth, risk, leverage, control and marketability}\\\\&\\text{sources: guideline public companies or precedent transactions}\\end{aligned}'
