@@ -191,6 +191,11 @@
       latex:'\\begin{aligned}RIR&=\\frac{g}{ROIC}\\\\g&=ROIC\\times RIR\\end{aligned}'
     },
     {
+      question:'Sales-Based FCFE Forecasting — Noncash Charges Limitation',
+      aliases:['Sales-Based FCFE — NNC Limitation','FCFE Forecasting — Noncash Charges'],
+      latex:'\\begin{aligned}\\text{Sales-based FCFE assumes: }&\\text{depreciation is the main noncash charge}\\\\\\text{If significant other NNC exist: }&\\text{FCFE forecast becomes less accurate}\\\\&\\Rightarrow\\text{forecast individual FCFE components instead}\\end{aligned}'
+    },
+    {
       question:'FCFF from Operating Profit — With Reinvestment',
       aliases:['FCFF from Operating Profit'],
       latex:'\\begin{aligned}FCFF_{t+1}&=EBIT_{t+1}(1-T)(1-RIR)\\\\V_t&=\\frac{EBIT_{t+1}(1-T)(1-RIR)}{WACC-g}\\end{aligned}'
