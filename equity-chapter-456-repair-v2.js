@@ -53,6 +53,11 @@
     if(setFormula(pbCard,pbQuestion,pbLatex))changed++;
   }
 
+  const reqReturnQuestion='Private Company Required Return — CAPM, Expanded CAPM and Build-Up';
+  const reqReturnLatex='\\begin{aligned}r_e&=r_f+\\beta(R_m-r_f)\\\\r_e&=r_f+\\beta(R_m-r_f)+SP+CSRP\\\\r_e&=r_f+ERP+SP+IRP+CSRP\\\\\\text{Expected inflation: }&\\text{do not add separately; already embedded in nominal }r_f\\end{aligned}';
+  const reqReturnCard=byQuestion(reqReturnQuestion);
+  if(reqReturnCard&&setFormula(reqReturnCard,reqReturnQuestion,reqReturnLatex))changed++;
+
   if(changed||added||removed){
     try{if(typeof save==='function')save();}catch(_e){}
     try{if(typeof refresh==='function')refresh();}catch(_e){}
