@@ -904,3 +904,26 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='YTM from Spot Rates — Practical Steps';
+  const latex='\\begin{aligned}1.&\\ \\text{Price the bond using the spot rates}\\\\2.&\\ \\text{Enter the price and all bond cash flows in the calculator}\\\\3.&\\ \\text{Compute IRR}\\Rightarrow\\text{YTM}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Yield Curve / Spot Rates',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
