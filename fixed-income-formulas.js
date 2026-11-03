@@ -948,5 +948,28 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='SOFR — Definition and Market Conditions';
+  const latex='\\begin{aligned}\\text{SOFR: }&\\text{overnight cash borrowing rate collateralized by U.S. Treasuries}\\\\&\\text{based on qualifying repo-market transactions}\\\\&\\text{volume-weighted}\\\\&\\text{reflects supply and demand in secured funding markets}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Money Markets / Reference Rates',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
