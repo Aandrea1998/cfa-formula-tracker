@@ -992,6 +992,42 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Yield Curve Risk — Level, Steepness & Curvature';
+  const latex='\\begin{aligned}\\text{Level: }&\\text{parallel shift of the yield curve}\\\\\\text{Steepness: }&\\text{change in slope}\\\\\\text{Curvature: }&\\text{change in shape/bending}\\\\\\text{Risk measure: }&\\text{effective duration }\\rightarrow\\text{ level/parallel shifts only}\\\\&\\text{key rate duration }\\rightarrow\\text{ steepness and curvature changes}\\end{aligned}';
+  const norm=s=>String(s||'').toLowerCase();
+  let card=cards.find(c=>c.subject===SUBJECT&&(
+    c.question===question ||
+    (norm(c.question).includes('level')&&norm(c.question).includes('curv')) ||
+    (norm(c.answer).includes('level')&&norm(c.answer).includes('steep')&&norm(c.answer).includes('curv'))
+  ));
+  let changed=false;
+  if(!card){
+    card={
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Duration & Convexity',
+      status:null,
+      history:[]
+    };
+    cards.push(card);
+    changed=true;
+  }else{
+    if(card.question!==question){card.question=question;changed=true;}
+    if(card.answer!==latex||card.latex!==latex){card.answer=latex;card.latex=latex;changed=true;}
+  }
+  if(changed){
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
