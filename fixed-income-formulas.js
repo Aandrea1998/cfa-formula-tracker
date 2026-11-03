@@ -1188,6 +1188,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Credit Risk Models — Reduced-Form vs Structural';
+  const latex='\\begin{aligned}\\text{Reduced-form: }&\\text{uses historical financial ratios + macro variables}\\\\&\\text{to estimate default intensity}\\\\\\text{Structural: }&\\text{uses option-pricing logic and issuer equity market data}\\\\&\\text{typically requires a traded market for the issuer equity}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Credit Risk',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
