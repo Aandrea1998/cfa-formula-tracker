@@ -1166,6 +1166,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Risk-Neutral Default Probability — One-Period Pricing Formula';
+  const latex='\\begin{aligned}P_0&=\\frac{V_{ND}(1-p^*)+V_Dp^*}{1+r_f}\\\\p^*&=\\frac{V_{ND}-P_0(1+r_f)}{V_{ND}-V_D}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Credit Risk',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
