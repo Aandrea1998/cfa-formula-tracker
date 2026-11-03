@@ -926,4 +926,27 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Swap Curve — When It Is the Better Benchmark';
+  const latex='\\begin{aligned}\\text{Swap curve is especially useful when: }&\\text{government bond market is illiquid or thin}\\\\&\\text{private sector is large relative to the public sector}\\\\&\\text{government yields are therefore a less representative interest-rate benchmark}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Yield Curve / Benchmarks',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
