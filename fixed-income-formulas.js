@@ -1027,6 +1027,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Realized Return vs YTM — Coupon Reinvestment Rule';
+  const latex='\\begin{aligned}\\text{Reinvestment rate}>YTM&\\Rightarrow\\text{Realized return}>YTM\\\\\\text{Reinvestment rate}=YTM&\\Rightarrow\\text{Realized return}=YTM\\\\\\text{Reinvestment rate}<YTM&\\Rightarrow\\text{Realized return}<YTM\\\\\\text{Upward-sloping curve + reinvest at forwards}&\\Rightarrow\\text{realized return may exceed initial YTM}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Yield Curve / YTM',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
