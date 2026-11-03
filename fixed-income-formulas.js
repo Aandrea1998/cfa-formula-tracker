@@ -887,7 +887,7 @@
   if(typeof cards==='undefined'||!Array.isArray(cards))return;
   const SUBJECT='Fixed Income';
   const question='Spot Rate Bootstrapping — General Rule';
-  const latex='\\begin{aligned}P&=\\sum_{t=1}^{n-1}\\frac{CF_t}{(1+z_t)^t}+\\frac{CF_n}{(1+z_n)^n}\\\\\\text{Use known }z_1,\\ldots,z_{n-1}&\\text{ to discount earlier cash flows}\\\\z_n&=\\left(\\frac{CF_n}{P-\\sum_{t=1}^{n-1}CF_t/(1+z_t)^t}\\right)^{1/n}-1\\end{aligned}';
+  const latex='\\begin{aligned}P&=\\sum_{t=1}^{n-1}\\frac{CF_t}{(1+z_t)^t}+\\frac{CF_n}{(1+z_n)^n}\\\\\\text{For a par bond: }&P=100,\\quad C=(\\text{par rate})\\times100\\\\CF_1,\\ldots,CF_{n-1}&=C,\\quad CF_n=100+C\\\\\\text{Use known }z_1,\\ldots,z_{n-1}&\\text{ to discount earlier cash flows}\\\\z_n&=\\left(\\frac{CF_n}{P-\\sum_{t=1}^{n-1}CF_t/(1+z_t)^t}\\right)^{1/n}-1\\end{aligned}';
   let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
   if(!card){
     cards.push({
