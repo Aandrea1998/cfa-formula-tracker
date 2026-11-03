@@ -1078,6 +1078,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Term Structure Models — Equilibrium vs Arbitrage-Free';
+  const latex='\\begin{aligned}\\text{Equilibrium models: }&\\text{factor models driven by fundamental economic variables}\\\\&\\text{describe term-structure dynamics}\\\\\\text{Arbitrage-free models: }&\\text{use observed prices of correctly priced reference instruments}\\\\&\\text{fit/model the current market yield curve}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Term Structure Models',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
