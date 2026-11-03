@@ -1056,6 +1056,29 @@
   try{if(typeof save==='function')save();}catch(_e){}
   try{if(typeof refresh==='function')refresh();}catch(_e){}
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Binomial Interest Rate Tree — Three Required Inputs';
+  const latex='\\begin{aligned}1.&\\ \\text{Current term structure / spot rates}\\\\2.&\\ \\text{Interest-rate volatility assumption}\\\\3.&\\ \\text{Interest-rate model assumption}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Interest Rate Trees',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
