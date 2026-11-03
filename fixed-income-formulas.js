@@ -1144,6 +1144,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Key Rate Duration — Largest Exposure for an Option-Free Bond';
+  const latex='\\begin{aligned}\\text{Option-free bond: }&\\text{largest key rate duration is usually at maturity}\\\\\\text{Reason: }&\\text{largest cash flow occurs at maturity}\\\\&\\text{(final coupon + principal)}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Duration & Convexity',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
