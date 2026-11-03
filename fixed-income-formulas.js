@@ -1031,11 +1031,12 @@
   'use strict';
   if(typeof cards==='undefined'||!Array.isArray(cards))return;
   const SUBJECT='Fixed Income';
-  const question='Realized Return vs YTM — Coupon Reinvestment Rule';
-  const latex='\\begin{aligned}\\text{Reinvestment rate}>YTM&\\Rightarrow\\text{Realized return}>YTM\\\\\\text{Reinvestment rate}=YTM&\\Rightarrow\\text{Realized return}=YTM\\\\\\text{Reinvestment rate}<YTM&\\Rightarrow\\text{Realized return}<YTM\\\\\\text{Upward-sloping curve + reinvest at forwards}&\\Rightarrow\\text{realized return may exceed initial YTM}\\end{aligned}';
-  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  const oldQuestion='Realized Return vs YTM — Coupon Reinvestment Rule';
+  const question='Yield Curve Shape — Realized Return vs YTM';
+  const latex='\\begin{aligned}\\text{Upward-sloping curve}&\\Rightarrow\\text{forward/reinvestment rates tend to exceed YTM}\\Rightarrow\\text{Realized return}>YTM\\\\\\text{Flat curve}&\\Rightarrow\\text{reinvestment rate}\\approx YTM\\Rightarrow\\text{Realized return}\\approx YTM\\\\\\text{Downward-sloping curve}&\\Rightarrow\\text{forward/reinvestment rates tend to be below YTM}\\Rightarrow\\text{Realized return}<YTM\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&(c.question===question||c.question===oldQuestion));
   if(!card){
-    cards.push({
+    card={
       id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
       question,
       answer:latex,
@@ -1044,10 +1045,16 @@
       topic:'Yield Curve / YTM',
       status:null,
       history:[]
-    });
-    try{if(typeof save==='function')save();}catch(_e){}
-    try{if(typeof refresh==='function')refresh();}catch(_e){}
+    };
+    cards.push(card);
+  }else{
+    card.question=question;
+    card.answer=latex;
+    card.latex=latex;
+    card.topic='Yield Curve / YTM';
   }
+  try{if(typeof save==='function')save();}catch(_e){}
+  try{if(typeof refresh==='function')refresh();}catch(_e){}
 })();
 
 
