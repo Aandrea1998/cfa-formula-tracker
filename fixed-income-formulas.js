@@ -1100,6 +1100,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Callable Bond — Call Probability vs Effective Duration';
+  const latex='\\begin{aligned}\\text{Call more likely}&\\Rightarrow\\text{expected repayment sooner}\\Rightarrow\\text{lower effective duration}\\\\\\text{Call less likely}&\\Rightarrow\\text{expected repayment later}\\Rightarrow\\text{higher effective duration}\\\\\\text{Rates}\\uparrow&\\Rightarrow\\text{refinancing less attractive}\\Rightarrow\\text{call less likely}\\Rightarrow D_{eff}\\uparrow\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Duration & Convexity',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
