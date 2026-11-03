@@ -1122,6 +1122,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='One-Sided Duration — Option-Free vs Callable vs Putable';
+  const latex='\\begin{aligned}D_{up}&=\\text{duration when rates move up}\\\\D_{down}&=\\text{duration when rates move down}\\\\\\text{Option-free: }&D_{up}\\approx D_{down}\\\\\\text{Callable: }&D_{up}>D_{down}\\\\\\text{Putable: }&D_{down}>D_{up}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Duration & Convexity',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
