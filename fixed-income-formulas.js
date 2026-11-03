@@ -970,6 +970,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='YTM vs Spot Rates — Three Key Takeaways';
+  const latex='\\begin{aligned}1.&\\ \\text{Bond value from spot rates equals value from YTM only when YTM acts as a weighted average of those spots}\\\\2.&\\ \\text{YTM is a poor expected-return estimate when rates are volatile, the curve is steep, default risk is material, or the bond has embedded options}\\\\&\\text{because realized return depends on coupon reinvestment rates}\\\\3.&\\ \\text{If the yield curve remains flat over the holding period, realized return equals expected return}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Yield Curve / YTM',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
