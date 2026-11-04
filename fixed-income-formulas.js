@@ -1232,6 +1232,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Credit Rating Migration — Key Takeaways';
+  const latex='\\begin{aligned}\\text{Migration probabilities: }&\\text{typically asymmetric around the current rating}\\\\\\text{Expected return: }&\\text{credit migration often reduces expected return}\\\\\\text{Downgrade effect: }&\\text{spread widening usually exceeds spread tightening from upgrades}\\\\&\\Rightarrow\\text{downside from downgrades tends to dominate upside from upgrades}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Credit Risk',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
