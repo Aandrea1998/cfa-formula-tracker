@@ -1320,6 +1320,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Expected Loss on Bond Cash Flows vs CVA';
+  const latex='\\begin{aligned}EL_1&=CF_1\\times LGD\\times PD(0,1)\\\\EL_2&=CF_2\\times LGD\\times PD(0,2)\\\\EL_3&=CF_3\\times LGD\\times PD(0,3)\\\\EL&=\\sum_t CF_t\\times LGD\\times PD(0,t)\\\\\\text{EL: }&\\text{default by cash-flow date }t\\Rightarrow\\text{use cumulative PD}\\\\\\text{CVA: }&\\text{default in specific period }t\\Rightarrow\\text{use marginal PD }\\Delta PD_t\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Credit Risk',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
