@@ -1210,6 +1210,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='Default Probability Measures — Actual vs Risk-Neutral vs Spread-Implied';
+  const latex='\\begin{aligned}\\text{Actual PD }(PD^P):&\\text{ actual/effective probability of default}\\\\\\text{Risk-neutral PD }(PD^Q):&\\text{ default risk + compensation for risk}\\\\\\text{PD from full spread: }&\\text{also loads liquidity and tax effects}\\\\&\\Rightarrow\\text{can overstate pure credit PD}\\\\PD^{actual}&<PD^{risk-neutral}<PD^{spread-implied}\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Credit Risk',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
