@@ -547,6 +547,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='SBC Dilution in DCF — Numerator vs Denominator';
+  const latex='\\begin{aligned}\\text{SBC dilution can be captured via:}\\\\\\text{Numerator: }&\\text{Lower FCF by expensing SBC}\\\\\\text{or Denominator: }&\\text{Increase diluted shares outstanding}\\end{aligned}';
+  const interpretation='Both approaches reduce value per share. Use one consistent treatment to avoid double counting SBC dilution.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Stock-Based Compensation',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
