@@ -451,4 +451,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='DB Pension in DCF — Service Cost vs Net Interest';
+  const latex='\\begin{aligned}\\text{Service cost}&\\rightarrow\\text{operating cost}\\rightarrow\\text{keep in FCF}\\\\\\text{Net interest}&\\rightarrow\\text{financing/time-value effect}\\\\&\\rightarrow\\text{remove from FCF if net pension liability is deducted from EV}\\end{aligned}';
+  const interpretation='Rule: if the net pension liability is deducted from enterprise value, exclude pension net interest from FCF to avoid double counting. Keep service cost in FCF.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Pensions',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
