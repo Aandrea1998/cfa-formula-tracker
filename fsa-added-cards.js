@@ -571,6 +571,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Net Sales Growth vs Organic Sales Growth';
+  const latex='\\begin{aligned}\\text{Net sales growth}&=\\text{Organic sales growth}\\\\&\\quad \\pm\\text{Acquisitions/Divestitures}\\\\&\\quad \\pm\\text{Foreign exchange effects}\\\\\\text{FX translation loss}&\\Rightarrow\\text{Net sales growth}\\downarrow\\end{aligned}';
+  const interpretation='FX translation affects reported net sales growth, but does not reduce organic sales growth or net price realization/mix.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Revenue Analysis',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
