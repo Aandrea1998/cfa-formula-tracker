@@ -475,5 +475,30 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Pension Funded Status in Valuation — Underfunded vs Overfunded';
+  const latex='\\begin{aligned}\\text{Underfunded pension plan}&\\rightarrow\\text{treat funded deficit as debt}\\\\&\\rightarrow\\text{deduct in EV-to-equity bridge}\\\\\\text{Overfunded pension plan}&\\rightarrow\\text{generally ignored in valuation}\\end{aligned}';
+  const interpretation='CFA valuation treatment is asymmetric: an underfunded plan is debt-like, while an overfunded plan is typically not added back as an asset.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Pensions',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
