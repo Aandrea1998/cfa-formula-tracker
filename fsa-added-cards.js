@@ -523,6 +523,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Unvested Share Awards — EPS vs DCF Treatment';
+  const latex='\\begin{aligned}\\text{EPS accounting: }&\\text{Net loss}\\Rightarrow\\text{exclude anti-dilutive awards}\\\\\\text{DCF valuation: }&\\text{Expected future shares}\\Rightarrow\\text{include unvested awards expected to vest}\\end{aligned}';
+  const interpretation='Key distinction: awards can be anti-dilutive for reported EPS but still economically dilutive in valuation.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Stock-Based Compensation',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
