@@ -499,6 +499,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Future SBC Grants vs Future Pension Service Cost — FCFF Treatment';
+  const latex='\\begin{aligned}\\text{Future SBC grants: }&\\text{non-cash}\\Rightarrow\\text{economic cost}\\Rightarrow\\text{deduct from FCFF}\\\\\\text{Future service cost: }&\\text{non-cash}\\Rightarrow\\text{economic cost}\\Rightarrow\\text{deduct from FCFF}\\end{aligned}';
+  const interpretation='Same valuation logic: non-cash does not mean no economic cost. Future SBC grants and future pension service costs should reduce FCFF.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Pensions',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
