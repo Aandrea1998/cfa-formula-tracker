@@ -429,3 +429,26 @@
 
   window.CFAAddedFSACards={added,changed};
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='DB Pension — Salary Growth vs Pension Cost';
+  const latex='\\begin{aligned}\\text{Expected salary growth}\\uparrow&\\Rightarrow\\text{Future pension benefits}\\uparrow\\\\&\\Rightarrow\\text{Service cost}\\uparrow\\Rightarrow\\text{Periodic pension cost}\\uparrow\\\\\\text{Expected salary growth}\\downarrow&\\Rightarrow\\text{Service cost}\\downarrow\\Rightarrow\\text{Earnings}\\uparrow\\end{aligned}';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      subject:SUBJECT,
+      topic:'Pensions',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
