@@ -595,6 +595,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Basel III Liquidity — LCR vs NSFR Horizon';
+  const latex='\\begin{aligned}\\text{LCR}&\\rightarrow\\text{enough HQLA to cover a 30-day liquidity stress scenario}\\\\\\text{NSFR}&\\rightarrow\\text{minimum stable funding relative to liquidity needs over a 1-year horizon}\\end{aligned}';
+  const interpretation='Do not confuse the horizons: 30 days belongs to the Liquidity Coverage Ratio; one year belongs to the Net Stable Funding Ratio.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Banks & Basel III',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
