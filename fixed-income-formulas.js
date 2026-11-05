@@ -1386,6 +1386,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Fixed Income';
+  const question='FVTPL Bond — P&L Components';
+  const latex='\\begin{aligned}\\text{Interest income}&=\\text{Coupon}+\\text{Discount amortisation}\\\\&\\text{(or }-\\text{ Premium amortisation)}\\\\\\text{FVTPL P\\&L}&=\\text{Interest income}+\\text{Residual FV gain/loss}\\\\\\text{Residual FV gain/loss}&=\\Delta FV-\\text{amortisation effect}\\end{aligned}';
+  const interpretation='Coupon and amortisation are classified as interest income. Any fair-value movement beyond the amortisation effect is recognised separately as fair value gain/loss in P&L.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Bond Accounting',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
