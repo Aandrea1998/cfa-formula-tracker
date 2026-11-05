@@ -6,6 +6,7 @@
   const COVERAGE_KEY='cfa_review_coverage_complete';
   const MODE_KEY='cfa_review_mode';
   const SUBJECT_KEY='cfa_review_subject';
+  const POLICY_VERSION='coverage-first-v2';
 
   let reviewMode=localStorage.getItem(MODE_KEY)||'random';
   let reviewSubject=localStorage.getItem(SUBJECT_KEY)||((window.CFA_TOPICS&&window.CFA_TOPICS[0])||'Economics');
@@ -37,7 +38,7 @@
 
   function subjectCards(){return cards.filter(c=>c.subject===reviewSubject);}
   function activePool(){return reviewMode==='subject'?subjectCards():cards;}
-  function signature(){return reviewMode==='subject'?`subject:${reviewSubject}`:'random:all';}
+  function signature(){return (reviewMode==='subject'?`subject:${reviewSubject}`:'random:all')+`:${POLICY_VERSION}`;}
 
   function poolFullyReviewed(pool=activePool()){
     return pool.length>0&&pool.every(c=>cardInfo(c).attempts>0);
@@ -134,7 +135,22 @@
 
   function coverageQueue(){
     const pool=activePool();
-    return reviewMode==='random'?diversifiedRandomOrder(pool):adaptiveOrder(pool);
+    const unreviewed=pool.filter(c=>cardInfo(c).attempts===0);
+    const reviewed=pool.filter(c=>cardInfo(c).attempts>0);
+
+    // Coverage phase: cards never reviewed historically must come first.
+    // Only after every card has at least one attempt do we switch to
+    // weakness-first adaptive ordering.
+    if(reviewMode==='random'){
+      return [
+        ...diversifiedRandomOrder(unreviewed),
+        ...diversifiedRandomOrder(reviewed)
+      ];
+    }
+    return [
+      ...shuffle(unreviewed.map(c=>c.id)),
+      ...shuffle(reviewed.map(c=>c.id))
+    ];
   }
 
   function adaptiveBaseQueue(){
