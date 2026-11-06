@@ -619,6 +619,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Financial Statement Analysis';
+  const question='Quantitative Models for Misreporting — Key Limitations';
+  const latex='\\begin{aligned}\\text{Beneish predictive power}&\\downarrow\\text{ over time as manipulators adapt to detection models}\\\\\\text{Quantitative models}&\\rightarrow\\text{identify associations between variables}\\\\&\\not\\Rightarrow\\text{prove cause-and-effect relationships}\\end{aligned}';
+  const interpretation='Earnings manipulators can change tactics once they understand how models detect manipulation, reducing model effectiveness over time. Quantitative models show association, not causation.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Earnings Quality & Misreporting',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
