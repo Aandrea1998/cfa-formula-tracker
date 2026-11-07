@@ -6,7 +6,7 @@
   const COVERAGE_KEY='cfa_review_coverage_complete';
   const MODE_KEY='cfa_review_mode';
   const SUBJECT_KEY='cfa_review_subject';
-  const POLICY_VERSION='coverage-first-v2';
+  const POLICY_VERSION='weighted-adaptive-v3';
 
   let reviewMode=localStorage.getItem(MODE_KEY)||'random';
   let reviewSubject=localStorage.getItem(SUBJECT_KEY)||((window.CFA_TOPICS&&window.CFA_TOPICS[0])||'Economics');
@@ -71,8 +71,16 @@
   }
 
   function adaptiveOrder(pool){
-    return pool.map(c=>({id:c.id,priority:adaptivePriority(c)}))
-      .sort((a,b)=>b.priority-a.priority)
+    // Weighted shuffle without replacement.
+    // Weak/missed cards are more likely to appear early, but strong cards are
+    // still allowed to surface anywhere in the cycle instead of being pushed
+    // deterministically to the end.
+    return pool.map(c=>{
+      const weight=Math.max(1,adaptivePriority(c));
+      const u=Math.max(Number.EPSILON,Math.random());
+      return {id:c.id,key:-Math.log(u)/weight};
+    })
+      .sort((a,b)=>a.key-b.key)
       .map(x=>x.id);
   }
 
@@ -125,8 +133,16 @@
       if(!available.length)break;
       const alternatives=available.filter(([subject])=>subject!==lastSubject);
       if(alternatives.length)available=alternatives;
-      available.sort((a,b)=>b[1][0].priority-a[1][0].priority);
-      const [subject,items]=available[0];
+      // Weighted subject choice: favor weak cards, but do not force the
+      // strongest card of every subject to the very end of the cycle.
+      const totalWeight=available.reduce((sum,[,items])=>sum+Math.max(1,items[0].priority),0);
+      let draw=Math.random()*totalWeight;
+      let chosen=available[available.length-1];
+      for(const entry of available){
+        draw-=Math.max(1,entry[1][0].priority);
+        if(draw<0){chosen=entry;break;}
+      }
+      const [subject,items]=chosen;
       out.push(items.shift().id);
       lastSubject=subject;
     }
