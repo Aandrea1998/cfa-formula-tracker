@@ -1209,4 +1209,29 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Chi-Square Statistic in Text Classification';
+  const latex='\\begin{aligned}\\chi^2\\uparrow&\\Rightarrow\\text{term strongly associated with a specific class}\\\\\\chi^2\\downarrow&\\Rightarrow\\text{term weakly associated with the class}\\end{aligned}';
+  const interpretation='In text classification, a high chi-square statistic means the token helps distinguish a class; a low value means little class-specific information.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'NLP & Text Classification',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
