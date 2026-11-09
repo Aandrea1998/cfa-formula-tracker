@@ -1257,6 +1257,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Text Pruning — High vs Low Term Frequency';
+  const latex='\\begin{aligned}\\text{Very high TF}&\\Rightarrow\\text{stop words / common tokens}\\Rightarrow\\text{little discriminatory power}\\Rightarrow\\text{underfitting risk}\\\\\\text{Very low TF}&\\Rightarrow\\text{rare tokens}\\Rightarrow\\text{model may chase noise}\\Rightarrow\\text{overfitting risk}\\end{aligned}';
+  const interpretation='For vocabulary pruning, both extremely frequent and extremely rare terms may be removed because they add little useful class-separating information.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'NLP & Text Classification',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
