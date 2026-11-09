@@ -1305,6 +1305,31 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Ground Truth and Training Subsets';
+  const latex='\\begin{aligned}\\text{No ground truth}&\\Rightarrow\\text{no labeled target}\\\\&\\Rightarrow\\text{no supervised training subset}\\\\&\\Rightarrow\\text{Training allocation}=0\\%\\end{aligned}';
+  const interpretation='Without ground-truth labels, the dataset cannot be used for supervised model training in the usual train/validation/test framework.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Machine Learning & Data Splitting',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
 
