@@ -1287,7 +1287,7 @@
   const SUBJECT='Quantitative Methods';
   const question='TF, DF, IDF and TF-IDF — Definitions';
   const latex='\\begin{aligned}TF&=\\frac{\\text{count of term in document}}{\\text{total terms in document}}\\\\DF&=\\text{number of documents containing the term}\\\\IDF&=\\ln\\left(\\frac{N}{DF}\\right)\\\\TF\\text{-}IDF&=TF\\times IDF\\end{aligned}';
-  const interpretation='TF measures importance within a document; DF measures how widespread the term is; IDF rises when the term is rare across the corpus. High TF-IDF = frequent here, uncommon overall.';
+  const interpretation='TF-IDF is NOT TF - DF. Think: local importance × global rarity. TF measures importance within a document; DF measures how widespread the term is; IDF rises when the term is rare across the corpus. High TF-IDF = frequent here, uncommon overall.';
   let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
   if(!card){
     cards.push({
