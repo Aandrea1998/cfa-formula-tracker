@@ -1233,5 +1233,30 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Feature Selection vs Feature Engineering — Model Fit';
+  const latex='\\begin{aligned}\\text{Feature selection}&\\Rightarrow\\text{remove unnecessary features}\\Rightarrow\\text{reduce overfitting}\\\\\\text{Feature engineering}&\\Rightarrow\\text{create better explanatory features}\\Rightarrow\\text{reduce underfitting}\\end{aligned}';
+  const interpretation='Too many features can add noise and overfit the model; too few or weak features can miss important structure and cause underfitting.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Machine Learning & Feature Engineering',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
 
 
