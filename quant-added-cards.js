@@ -1185,3 +1185,28 @@
     try{if(typeof refresh==='function')refresh();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Data Transformation — Extraction vs Conversion vs Aggregation';
+  const latex='\\begin{aligned}\\text{Extraction}&\\rightarrow\\text{create a new derived variable, e.g. a ratio}\\\\\\text{Conversion}&\\rightarrow\\text{change the format or unit of a variable}\\\\\\text{Aggregation}&\\rightarrow\\text{combine multiple observations into a summary measure}\\end{aligned}';
+  const interpretation='Examples: Extraction = create a margin ratio; Conversion = EUR to EUR thousands; Aggregation = sum monthly sales into annual sales.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Data Preparation & Transformation',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
+
