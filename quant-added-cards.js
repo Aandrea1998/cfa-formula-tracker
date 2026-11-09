@@ -1161,3 +1161,27 @@
     try{if(typeof save==='function')save();}catch(_e){}
   }
 })();
+(function(){
+  'use strict';
+  if(typeof cards==='undefined'||!Array.isArray(cards))return;
+  const SUBJECT='Quantitative Methods';
+  const question='Absolute PPP — CFA Exchange-Rate Convention';
+  const latex='\\begin{aligned}S_{A/B}&=\\frac{P_A}{P_B}\\\\\\text{In }S_{A/B}:&\\text{ B is the base currency}\\\\&\\Rightarrow\\text{ units of A per 1 unit of B}\\end{aligned}';
+  const interpretation='Under the CFA price/base convention, S_{A/B} means A per B. Therefore absolute PPP is S_{A/B}=P_A/P_B.';
+  let card=cards.find(c=>c.subject===SUBJECT&&c.question===question);
+  if(!card){
+    cards.push({
+      id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,
+      question,
+      answer:latex,
+      latex,
+      interpretation,
+      subject:SUBJECT,
+      topic:'Currency Exchange Rates & PPP',
+      status:null,
+      history:[]
+    });
+    try{if(typeof save==='function')save();}catch(_e){}
+    try{if(typeof refresh==='function')refresh();}catch(_e){}
+  }
+})();
