@@ -534,8 +534,8 @@
 
 
   const bsmStockQuestion='Black-Scholes-Merton — European Stock Call & Put';
-  const bsmStockLatex='\\begin{aligned}c&=S_0N(d_1)-\\underbrace{Xe^{-rT}N(d_2)}_{\\text{bond component}}\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\\\N(d_1)&=\\text{option delta}\\end{aligned}';
-  const bsmStockAnswer='Call = weighted stock value − weighted PV of strike. Put = weighted PV of strike − weighted stock value. N(d₁) = option delta. N(d₂) ≈ risk-neutral probability that the call finishes in the money. The term Xe^{-rT}N(d₂) is the bond component (short borrowing) in the call-replicating portfolio.';
+  const bsmStockLatex="\\begin{aligned}c&=S_0N(d_1)-\\underbrace{Xe^{-rT}N(d_2)}_{\\text{bond component}}\\\\p&=Xe^{-rT}N(-d_2)-S_0N(-d_1)\\\\\\Delta_c&=N(d_1),\\quad\\Delta_p=-N(-d_1)\\quad(q=0)\\end{aligned}";
+  const bsmStockAnswer="Without dividends: call = weighted stock value minus weighted PV of strike; put = weighted PV of strike minus weighted stock value. Call delta = N(d₁); put delta = −N(−d₁). N(d₂) is the risk-neutral probability that the call expires ITM; N(−d₂) is the risk-neutral probability that the put expires ITM. The term Xe^{−rT}N(d₂) is the bond component (short borrowing) in the call-replicating portfolio.";
   let bsmStockCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmStockQuestion);
   if(!bsmStockCard){
     bsmStockCard={
@@ -557,6 +557,19 @@
     if(!Array.isArray(bsmStockCard.history)){bsmStockCard.history=[];changed=1;}
   }
 
+
+
+  const bsmProbabilityItem={"question": "Black-Scholes-Merton — ITM / OTM Probabilities vs Delta", "latex": "\\begin{gathered}\\textbf{Risk-neutral probabilities at expiry}\\\\[4pt]\\begin{array}{c|cc}&\\text{Call}&\\text{Put}\\\\\\hline\\text{ITM}&N(d_2)&N(-d_2)\\\\\\text{OTM}&N(-d_2)&N(d_2)\\end{array}\\\\[6pt]\\text{Call ITM: }S_T>X,\\quad\\text{Put ITM: }S_T<X\\\\[6pt]\\Delta_c=N(d_1),\\quad\\Delta_p=-N(-d_1)\\quad(q=0)\\\\[4pt]\\textbf{d_1: delta}\\qquad\\textbf{d_2: exercise probability}\\end{gathered}", "answer": "Risk-neutral probabilities at expiry: call ITM = N(d₂), call OTM = N(−d₂); put ITM = N(−d₂), put OTM = N(d₂). Call ITM means S_T > X; put ITM means S_T < X. N(−d₂) = 1 − N(d₂): the minus sign does not itself mean OTM. Delta without dividends: call = N(d₁), put = −N(−d₁), so N(−d₁) is the absolute put delta, not its OTM probability. With continuous dividend yield q, multiply each delta by e^{−qT}. Example: N(d₂)=0.520 and N(−d₂)=0.480 imply call ITM/OTM = 52%/48% and put ITM/OTM = 48%/52%. N(d₁)=0.637 and N(−d₁)=0.363 imply deltas +0.637 and −0.363 when q=0. These are risk-neutral, not real-world, probabilities. Remember: d₁ → delta; d₂ → exercise probability."};
+  let bsmProbabilityCard=cards.find(c=>c.subject===SUBJECT&&c.question===bsmProbabilityItem.question);
+  if(!bsmProbabilityCard){
+    bsmProbabilityCard={id:cards.reduce((m,c)=>Math.max(m,+c.id||0),0)+1,...bsmProbabilityItem,subject:SUBJECT,topic:'Options',status:null,history:[]};
+    cards.push(bsmProbabilityCard);
+    changed=1;
+  }else{
+    for(const key of ['answer','latex']){
+      if(bsmProbabilityCard[key]!==bsmProbabilityItem[key]){bsmProbabilityCard[key]=bsmProbabilityItem[key];changed=1;}
+    }
+  }
 
   const irOptionBlackQuestion='Interest Rate Options — Black Model Call & Put';
   const irOptionBlackLatex='\\begin{aligned}c&=(AP)e^{-r(t_{j-1}+t_m)}\\left[FRA(0,t_{j-1},t_m)N(d_1)-R_XN(d_2)\\right]\\\\p&=(AP)e^{-r(t_{j-1}+t_m)}\\left[R_XN(-d_2)-FRA(0,t_{j-1},t_m)N(-d_1)\\right]\\end{aligned}';
