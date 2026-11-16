@@ -6,7 +6,7 @@
   const COVERAGE_KEY='cfa_review_coverage_complete';
   const MODE_KEY='cfa_review_mode';
   const SUBJECT_KEY='cfa_review_subject';
-  const POLICY_VERSION='weighted-adaptive-v3';
+  const POLICY_VERSION='pure-coverage-v4';
 
   let reviewMode=localStorage.getItem(MODE_KEY)||'random';
   let reviewSubject=localStorage.getItem(SUBJECT_KEY)||((window.CFA_TOPICS&&window.CFA_TOPICS[0])||'Economics');
@@ -151,22 +151,11 @@
 
   function coverageQueue(){
     const pool=activePool();
-    const unreviewed=pool.filter(c=>cardInfo(c).attempts===0);
-    const reviewed=pool.filter(c=>cardInfo(c).attempts>0);
 
-    // Coverage phase: cards never reviewed historically must come first.
-    // Only after every card has at least one attempt do we switch to
-    // weakness-first adaptive ordering.
-    if(reviewMode==='random'){
-      return [
-        ...diversifiedRandomOrder(unreviewed),
-        ...diversifiedRandomOrder(reviewed)
-      ];
-    }
-    return [
-      ...shuffle(unreviewed.map(c=>c.id)),
-      ...shuffle(reviewed.map(c=>c.id))
-    ];
+    // Pure coverage pass: every card in the active pool appears exactly once
+    // before any adaptive repetition or weighting can occur.
+    if(reviewMode==='random') return diversifiedRandomOrder(pool);
+    return shuffle(pool.map(c=>c.id));
   }
 
   function adaptiveBaseQueue(){
@@ -200,7 +189,9 @@
 
     // If every card in the active pool has already been reviewed historically,
     // skip a fresh coverage pass and go straight to weakness-first adaptive review.
-    coverageComplete=poolFullyReviewed(pool);
+    // Do not infer coverage completion from historical attempts: coverage is
+    // session-specific. A fresh Focus Topic session must show every card once.
+    coverageComplete=localStorage.getItem(COVERAGE_KEY)==='1';
 
     if(!reviewIds.length&&savedSig===signature()){
       try{
@@ -289,8 +280,11 @@
 
   function startNew(){
     clearSessionQueue();
-    coverageComplete=poolFullyReviewed();
-    reviewIds=coverageComplete?adaptiveBaseQueue():coverageQueue();
+
+    // A new session always starts with full coverage of the selected pool.
+    // Historical review status does not skip the one-pass coverage cycle.
+    coverageComplete=false;
+    reviewIds=coverageQueue();
     reviewPos=0;
     persist();
     render();
